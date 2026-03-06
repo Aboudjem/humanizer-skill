@@ -44,20 +44,33 @@ Word-swapping tools don't fix these. You need structural transformation. That's 
 
 ## Quick start
 
-### One-line install (global)
+### Install in Claude Code
+
+**Option 1: Clone into your project** (recommended — skill travels with your repo)
 
 ```bash
-mkdir -p ~/.claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o ~/.claude/skills/humanizer/SKILL.md
+git clone https://github.com/Aboudjem/humanizer-skill.git
+cp -r humanizer-skill/skills/humanizer .claude/skills/
+rm -rf humanizer-skill
 ```
 
-### Or clone into any plugin
+**Option 2: Global install** (available in every project)
 
 ```bash
-# Copy into your plugin's skills/ directory
+mkdir -p ~/.claude/skills/humanizer
+curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o ~/.claude/skills/humanizer/SKILL.md
+```
+
+**Option 3: Add to an existing plugin**
+
+```bash
 cp -r skills/humanizer /path/to/your-plugin/skills/
 ```
 
-### Then use it
+That's it. No config. No dependencies. Claude Code picks it up automatically.
+
+### Use it
 
 ```bash
 # Rewrite AI-sounding text (default mode)
@@ -244,19 +257,30 @@ This isn't guesswork. Every technique is grounded in published research:
 
 ## Integration
 
-Works with any Claude Code plugin. Zero dependencies. Just copy the SKILL.md file.
+Works anywhere Claude Code runs. Zero dependencies. One file.
 
 ```bash
+# Project-scoped (lives in your repo, shared with your team)
+your-project/
+  .claude/
+    skills/
+      humanizer/
+        SKILL.md    # <- this is the entire skill
+
+# Global (available in every project)
+~/.claude/
+  skills/
+    humanizer/
+      SKILL.md
+
+# Inside any plugin
 your-plugin/
   skills/
     humanizer/
-      SKILL.md    # <- this is the entire skill
+      SKILL.md
 ```
 
-Compatible with:
-- [VoiceForge](https://github.com/Aboudjem/voiceforge-plugin) — Full writing studio
-- [OpenClaw](https://github.com/Aboudjem/openclaw-plugin) — AI agent OS
-- Any Claude Code plugin with a `skills/` directory
+Compatible with any Claude Code plugin that has a `skills/` directory.
 
 ## Contributing
 
