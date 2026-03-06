@@ -6,10 +6,10 @@ Thanks for helping make AI text more human. Here's how to contribute.
 
 1. Follow the existing format (P1-P30)
 2. Include:
-   - **Trigger words** — what to search for
-   - **What's happening** — why AI does this
-   - **Fix** — how to replace it
-   - **Before/after table** — at least one example
+   - **Trigger words** - what to search for
+   - **What's happening** - why AI does this
+   - **Fix** - how to replace it
+   - **Before/after table** - at least one example
 3. Add to the appropriate category in SKILL.md
 4. Update the pattern count in README.md badges
 
@@ -35,4 +35,4 @@ If the skill flags something that's genuinely human writing, open an issue with:
 
 ## Code of conduct
 
-Be direct. Be helpful. Skip the pleasantries — we're humanizers, not sycophants.
+Be direct. Be helpful. Skip the pleasantries - we're humanizers, not sycophants.

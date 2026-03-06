@@ -1,6 +1,6 @@
 # Humanizer
 
-A standalone Claude Code skill that transforms AI-generated text into natural human writing. Drop it into any plugin — no dependencies, no MCP server, no configuration.
+A standalone Claude Code skill that transforms AI-generated text into natural human writing. Drop it into any plugin - no dependencies, no MCP server, no configuration.
 
 ## What it does
 
@@ -28,7 +28,7 @@ Copy `SKILL.md` into your plugin's `skills/humanizer/` directory. Add to your pl
 # Full rewrite (default)
 /humanizer "Your AI-sounding text goes here"
 
-# Scan only — report patterns without changing text
+# Scan only - report patterns without changing text
 /humanizer "text" --mode detect
 
 # Edit a file in place
@@ -37,7 +37,7 @@ Copy `SKILL.md` into your plugin's `skills/humanizer/` directory. Add to your pl
 # Specify voice
 /humanizer "text" --voice casual
 
-# Aggressive mode — maximum humanization
+# Aggressive mode - maximum humanization
 /humanizer "text" --aggressive
 ```
 
@@ -53,11 +53,11 @@ Copy `SKILL.md` into your plugin's `skills/humanizer/` directory. Add to your pl
 
 ## How it works
 
-1. **Parse** — Extracts text and flags from arguments
-2. **Detect** — Scans for 30 AI patterns across 5 categories (content, language, style, communication, filler)
-3. **Inject** — Applies voice profile, varies sentence length (burstiness), increases word unpredictability (perplexity)
-4. **Verify** — Checks output against detection patterns, sentence variance, and the "who wrote this?" test
-5. **Output** — Clean text with change summary
+1. **Parse** - Extracts text and flags from arguments
+2. **Detect** - Scans for 30 AI patterns across 5 categories (content, language, style, communication, filler)
+3. **Inject** - Applies voice profile, varies sentence length (burstiness), increases word unpredictability (perplexity)
+4. **Verify** - Checks output against detection patterns, sentence variance, and the "who wrote this?" test
+5. **Output** - Clean text with change summary
 
 ## Pattern categories
 

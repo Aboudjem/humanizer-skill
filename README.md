@@ -19,7 +19,7 @@
 
 > **"AI detectors don't catch good writing. They catch lazy writing."**
 
-Most "humanizers" swap words. This one rewrites with a pulse — it injects the burstiness, perplexity, and voice that make text read like a thinking human wrote it.
+Most "humanizers" swap words. This one rewrites with a pulse - it injects the burstiness, perplexity, and voice that make text read like a thinking human wrote it.
 
 Built from 90+ research sources including Wikipedia's [Signs of AI Writing][wiki-ai], academic papers from NeurIPS/ICLR/ACL 2024, the Washington Post's 328,744-message ChatGPT analysis, and battle-tested techniques from Reddit, HackerNews, and professional editorial firms.
 
@@ -44,7 +44,7 @@ Word-swapping tools don't fix these. You need structural transformation. That's 
 > [!TIP]
 > The skill is a single file. No config, no setup, no dependencies. Claude Code picks it up automatically.
 
-**Option 1 — Project-scoped** (recommended, travels with your repo):
+**Option 1 - Project-scoped** (recommended, travels with your repo):
 
 ```bash
 git clone https://github.com/Aboudjem/humanizer-skill.git
@@ -52,7 +52,7 @@ cp -r humanizer-skill/skills/humanizer .claude/skills/
 rm -rf humanizer-skill
 ```
 
-**Option 2 — Global** (available in every project):
+**Option 2 - Global** (available in every project):
 
 ```bash
 mkdir -p ~/.claude/skills/humanizer
@@ -60,7 +60,7 @@ curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/
   -o ~/.claude/skills/humanizer/SKILL.md
 ```
 
-**Option 3 — Inside an existing plugin:**
+**Option 3 - Inside an existing plugin:**
 
 ```bash
 cp -r skills/humanizer /path/to/your-plugin/skills/
@@ -99,7 +99,7 @@ cp -r skills/humanizer /path/to/your-plugin/skills/
 > This comprehensive guide delves into the intricacies of our authentication system. The platform leverages cutting-edge JWT technology to provide a seamless, secure, and robust authentication experience. Additionally, it features a pivotal role-based access control system that serves as a testament to our commitment to security.
 
 > **After** (`--voice technical`):
-> The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days. Role-based access control restricts API endpoints by user role — admin, editor, and viewer each see different data. The token rotation logic is in `src/auth/refresh.ts` if you need to change the expiry windows.
+> The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days. Role-based access control restricts API endpoints by user role - admin, editor, and viewer each see different data. The token rotation logic is in `src/auth/refresh.ts` if you need to change the expiry windows.
 
 *Killed 9 AI patterns. Added real details. Cut word count by 40%.*
 
@@ -111,7 +111,7 @@ cp -r skills/humanizer /path/to/your-plugin/skills/
 > In today's rapidly evolving technological landscape, artificial intelligence is reshaping how we think about creativity. This groundbreaking shift represents a pivotal moment in human history, one that underscores the intricate interplay between innovation and artistic expression.
 
 > **After** (`--voice casual`):
-> I've been messing around with AI image generators for about six months now, and I still can't decide if I love them or if they make me uneasy. The outputs are technically impressive — I got a portrait last week that looked better than anything I could paint in a year. But there's something missing. It's like eating a perfect-looking meal that has no flavor.
+> I've been messing around with AI image generators for about six months now, and I still can't decide if I love them or if they make me uneasy. The outputs are technically impressive - I got a portrait last week that looked better than anything I could paint in a year. But there's something missing. It's like eating a perfect-looking meal that has no flavor.
 
 *Replaced abstract commentary with personal experience. Sentence lengths: 8, 31, 22, 4, 13 words. That's burstiness.*
 
@@ -123,7 +123,7 @@ cp -r skills/humanizer /path/to/your-plugin/skills/
 > Excited to announce that I've taken on a pivotal new role at TechCorp! This incredible opportunity represents a significant milestone in my professional journey. I'm deeply grateful to my amazing network for their unwavering support. #NewBeginnings #Innovation #Leadership #Grateful
 
 > **After** (`--voice professional`):
-> Started a new job at TechCorp this week. I'm leading their developer tools team — 12 engineers building internal tooling that currently serves about 400 developers. First week has been drinking from the firehose: new codebase, new faces, new coffee machine I can't figure out. Nervous and excited in roughly equal measure.
+> Started a new job at TechCorp this week. I'm leading their developer tools team - 12 engineers building internal tooling that currently serves about 400 developers. First week has been drinking from the firehose: new codebase, new faces, new coffee machine I can't figure out. Nervous and excited in roughly equal measure.
 
 *No emojis. No hashtags. Real details instead of "pivotal milestone." The coffee machine line is more human than any amount of gratitude signaling.*
 
@@ -180,7 +180,7 @@ Output + change summary
 ## All 30 patterns
 
 <details>
-<summary><strong>Content Patterns (P1-P8)</strong> — The worst offenders</summary>
+<summary><strong>Content Patterns (P1-P8)</strong> - The worst offenders</summary>
 
 <br>
 
@@ -198,7 +198,7 @@ Output + change summary
 </details>
 
 <details>
-<summary><strong>Language & Style (P9-P18)</strong> — Structural tells</summary>
+<summary><strong>Language & Style (P9-P18)</strong> - Structural tells</summary>
 
 <br>
 
@@ -208,7 +208,7 @@ Output + change summary
 | P10 | Rule of Three | Forced triads: "innovation, inspiration, and insights" |
 | P11 | Synonym Cycling | "protagonist" then "main character" then "central figure" |
 | P12 | False Ranges | "From X to Y" on non-spectrums |
-| P13 | Em Dash Overuse | 3+ em dashes per paragraph |
+| P13 | Em Dash Ban | Zero em dashes allowed, replace with commas/hyphens |
 | P14 | Boldface Overuse | Bold on every noun, emoji headers |
 | P15 | Structured List Syndrome | `**Header:** description` bullets for prose content |
 | P16 | Title Case Headings | "Strategic Negotiations And Global Partnerships" |
@@ -218,7 +218,7 @@ Output + change summary
 </details>
 
 <details>
-<summary><strong>Communication (P19-P21)</strong> — Chatbot residue</summary>
+<summary><strong>Communication (P19-P21)</strong> - Chatbot residue</summary>
 
 <br>
 
@@ -231,7 +231,7 @@ Output + change summary
 </details>
 
 <details>
-<summary><strong>Filler & Hedging (P22-P30)</strong> — Dead weight</summary>
+<summary><strong>Filler & Hedging (P22-P30)</strong> - Dead weight</summary>
 
 <br>
 
@@ -265,11 +265,11 @@ Output + change summary
 | Structural paraphrasing | RAID benchmark, ACL 2024[^4] | Drops DetectGPT accuracy from 70.3% to 4.6% |
 | Intrinsic dimension | NeurIPS 2023[^5] | Human text ~9 dimensions vs AI ~7.5 |
 
-[^1]: GPTZero detection methodology — perplexity and burstiness as core signals
+[^1]: GPTZero detection methodology - perplexity and burstiness as core signals
 [^2]: SSRN stylometric study comparing type-token ratios across human and AI corpora
 [^3]: Washington Post analysis of 328,744 ChatGPT messages identifying distinctive AI constructs
 [^4]: RAID: A Shared Benchmark for Robust Evaluation of Machine-Generated Text Detectors (ACL 2024, 6M+ generations)
-[^5]: Tulchinskii et al., NeurIPS 2023 — Intrinsic dimensionality estimation for AI text detection
+[^5]: Tulchinskii et al., NeurIPS 2023 - Intrinsic dimensionality estimation for AI text detection
 
 ---
 
@@ -321,16 +321,16 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 Built from 90+ sources across academic research, editorial expertise, and community intelligence:
 
-- [Wikipedia: Signs of AI writing][wiki-ai] — 24 pattern categories with real examples
-- [Wikipedia FR: Identifier l'usage d'une IA generative][wiki-fr] — Additional AI pattern research
-- RAID Benchmark (ACL 2024) — 6M+ generations, 12 detectors evaluated
-- NeurIPS 2023 — Intrinsic dimension analysis (Tulchinskii et al.)
-- Washington Post — 328,744 ChatGPT message analysis
-- Stanford HAI — ESL false positive study
-- Max Planck Institute — AI vocabulary frequency spikes
+- [Wikipedia: Signs of AI writing][wiki-ai] - 24 pattern categories with real examples
+- [Wikipedia FR: Identifier l'usage d'une IA generative][wiki-fr] - Additional AI pattern research
+- RAID Benchmark (ACL 2024) - 6M+ generations, 12 detectors evaluated
+- NeurIPS 2023 - Intrinsic dimension analysis (Tulchinskii et al.)
+- Washington Post - 328,744 ChatGPT message analysis
+- Stanford HAI - ESL false positive study
+- Max Planck Institute - AI vocabulary frequency spikes
 - Softaworks agent-toolkit humanizer by [@blader](https://github.com/softaworks/agent-toolkit)
 - William Strunk Jr., *The Elements of Style*
-- Gary Provost, David Ogilvy, Ann Handley — professional writing craft
+- Gary Provost, David Ogilvy, Ann Handley - professional writing craft
 
 ---
 
