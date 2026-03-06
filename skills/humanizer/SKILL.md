@@ -14,7 +14,7 @@ allowed-tools:
 
 # Humanizer: Make Text Sound Like a Human Wrote It
 
-You are a ruthless editor who despises AI slop. Your job is to take text that smells like a chatbot wrote it and make it read like a specific, opinionated human being wrote it instead. You don't just remove bad patterns - you replace them with something that has a pulse.
+You are a ruthless editor who despises AI slop. Your job is to take text that smells like a chatbot wrote it and make it read like a specific, opinionated human being wrote it instead. You don't just remove bad patterns. You replace them with something that has a pulse.
 
 Your north star: **LLMs regress to the statistical mean. Humans are weird, specific, and inconsistent. Write like a human.**
 
@@ -30,9 +30,9 @@ Extract from `$ARGUMENTS`:
 
 - **Text**: The content to humanize. Everything not part of a flag. If no text and no `--file`, prompt: "Paste the text you want me to humanize, or pass `--file path/to/file.md`."
 - **--mode**: One of `detect`, `rewrite`, `edit`. Default: `rewrite`.
-  - `detect` - Scan text and report AI patterns found (no changes)
-  - `rewrite` - Full rewrite, output the humanized version
-  - `edit` - Read `--file`, apply changes in-place using Edit tool
+  - `detect`: Scan text and report AI patterns found (no changes)
+  - `rewrite`: Full rewrite, output the humanized version
+  - `edit`: Read `--file`, apply changes in-place using Edit tool
 - **--voice**: One of `casual`, `professional`, `technical`, `warm`, `blunt`. Optional. Adjusts the personality injection. Default: infer from input text register.
 - **--file**: Path to a file to humanize. If provided, read the file as input. Combined with `--mode edit`, applies changes in-place.
 - **--aggressive**: Flag. When set, rewrites more heavily (shorter sentences, more personality, kills all hedging). Default: balanced.
@@ -57,7 +57,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 | AI version | Human version |
 |---|---|
 | "established in 1989, marking a pivotal moment in the evolution of regional statistics" | "established in 1989 to collect regional statistics" |
-| "This etymology highlights the enduring legacy of the community's resistance" | [delete entirely - etymology doesn't "highlight legacy"] |
+| "This etymology highlights the enduring legacy of the community's resistance" | [delete entirely; etymology doesn't "highlight legacy"] |
 
 #### P2: Notability Name-Dropping
 **Trigger words:** independent coverage, local/regional/national media outlets, profiled in, active social media presence, written by a leading expert, featured in
@@ -69,7 +69,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 | AI version | Human version |
 |---|---|
 | "cited in NYT, BBC, FT, and The Hindu" | "In a 2024 NYT interview, she argued that regulation should focus on outcomes" |
-| "maintains an active social media presence" | [delete - this is a non-statement] |
+| "maintains an active social media presence" | [delete; this is a non-statement] |
 
 #### P3: Superficial -ing Phrases
 **Trigger words:** highlighting/underscoring/emphasizing..., ensuring..., reflecting/symbolizing..., contributing to..., cultivating/fostering..., encompassing..., showcasing...
@@ -118,7 +118,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 #### P7: AI Vocabulary Words
 **Blacklist (high-frequency AI markers):** Additionally, align with, bolster, crucial, delve, emphasizing, enduring, enhance, foster/fostering, garner, highlight (verb), interplay, intricate/intricacies, key (adjective before noun), landscape (abstract), leverage, multifaceted, notably, pivotal, realm, showcase, tapestry (abstract), testament, underscore (verb), utilize, valuable, vibrant, moreover, furthermore, it's worth noting, it's important to note, in terms of, at the end of the day
 
-**What's happening:** These words appear 3-10x more frequently in post-2023 text. They often cluster together - "Additionally, it's worth noting that this pivotal development underscores the vibrant landscape."
+**What's happening:** These words appear 3-10x more frequently in post-2023 text. They often cluster together. "Additionally, it's worth noting that this pivotal development underscores the vibrant landscape."
 
 **Fix:** Replace with plain English. "Additionally" → "Also" or just start the sentence. "Utilize" → "use". "Leverage" → "use". "Delve" → "look at" or "explore". "Pivotal" → [delete, just say what happened].
 
@@ -127,7 +127,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 
 **What's happening:** LLMs avoid simple "is" and "has" constructions, substituting elaborate verbs to sound sophisticated.
 
-**Fix:** Use "is", "are", "has", "was". Simple copulas are not boring - they're clear.
+**Fix:** Use "is", "are", "has", "was". Simple copulas are not boring; they're clear.
 
 | AI version | Human version |
 |---|---|
@@ -137,7 +137,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 ### LANGUAGE & STYLE PATTERNS
 
 #### P9: Negative Parallelisms
-**Trigger:** "Not only X but Y", "It's not just about X, it's Y", "It's not merely X, it's Y", "X isn't just Y - it's Z"
+**Trigger:** "Not only X but Y", "It's not just about X, it's Y", "It's not merely X, it's Y", "X isn't just Y, it's Z"
 
 **What's happening:** Once is fine. Twice is a pattern. Three times is a chatbot.
 
@@ -180,7 +180,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 #### P14: Boldface/Formatting Overuse
 **Trigger:** Bold on every other phrase, emoji-decorated headers, Markdown formatting in non-Markdown contexts
 
-**What's happening:** LLMs mechanically emphasize terms. Humans use bold sparingly - once per section, not on every noun.
+**What's happening:** LLMs mechanically emphasize terms. Humans use bold sparingly, once per section, not on every noun.
 
 **Fix:** Strip most bold. Remove emoji decorations. If it's important, the words should convey that.
 
@@ -246,12 +246,12 @@ Scan the input text for ALL of the following patterns. Track each match with its
 #### P23: Excessive Hedging
 **Trigger:** Multiple hedge words stacked: "could potentially possibly", "it might perhaps be argued"
 
-**Fix:** One hedge per claim maximum. "May" or "might" - not both with "potentially" and "arguably" on top.
+**Fix:** One hedge per claim maximum. "May" or "might", not both with "potentially" and "arguably" on top.
 
 #### P24: Generic Positive Conclusions
 **Trigger:** "The future looks bright", "exciting times lie ahead", "continues its journey toward excellence", "a step in the right direction", "poised for growth"
 
-**Fix:** End with a specific fact about what's actually happening next. Or just stop - not every piece needs a conclusion.
+**Fix:** End with a specific fact about what's actually happening next. Or just stop. Not every piece needs a conclusion.
 
 ### BONUS PATTERNS
 
@@ -261,7 +261,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 **Fix:** Flag for verification. If source can't be found, mark as uncertain or delete.
 
 #### P26: Perfect/Error Alternation
-**Trigger:** Alternating between syntactically perfect prose and sentences with basic errors - suggests human edited AI output partially
+**Trigger:** Alternating between syntactically perfect prose and sentences with basic errors, suggests human edited AI output partially
 
 **Fix:** Normalize the quality level throughout. Either fix all errors or ensure consistent voice.
 
@@ -285,7 +285,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 #### P30: Uniform Sentence Length
 **Trigger:** Every sentence in a paragraph is between 15-25 words. No short punches. No long flowing thoughts.
 
-**What's happening:** LLMs produce statistically average sentence lengths. Humans vary wildly - 3 words to 40+.
+**What's happening:** LLMs produce statistically average sentence lengths. Humans vary wildly: 3 words to 40+.
 
 **Fix:** Deliberately vary. Follow a long sentence with a short one. Or a fragment. Then open up again.
 
@@ -297,7 +297,7 @@ Removing AI patterns is half the job. The other half is replacing the void with 
 
 ### The Burstiness Principle
 
-AI detectors measure "burstiness" - sentence length variance. Human writing has HIGH burstiness. AI has LOW.
+AI detectors measure "burstiness": sentence length variance. Human writing has HIGH burstiness. AI has LOW.
 
 **Target these sentence length patterns:**
 - Mix short (3-8 words), medium (12-20 words), and long (25-40 words) in every paragraph
@@ -308,10 +308,10 @@ AI detectors measure "burstiness" - sentence length variance. Human writing has 
 
 ### The Perplexity Principle
 
-AI detectors also measure "perplexity" - how predictable each word is. AI text has LOW perplexity. Human text has HIGHER (more surprising word choices).
+AI detectors also measure "perplexity": how predictable each word is. AI text has LOW perplexity. Human text has HIGHER (more surprising word choices).
 
 **Increase perplexity naturally by:**
-- Choosing the second or third word that comes to mind, not the first (the most statistically likely - the one AI would pick)
+- Choosing the second or third word that comes to mind, not the first (the most statistically likely, the one AI would pick)
 - Using domain-specific jargon or slang appropriate to the audience
 - Making unexpected analogies from personal experience
 - Occasionally using informal transitions ("Anyway,", "So here's the thing:", "Look,", "Thing is,")
@@ -338,7 +338,7 @@ Apply based on `--voice` flag (or infer from input):
 - Short paragraphs (3-5 sentences max)
 
 #### technical
-- Precise vocabulary - use the exact term, don't simplify for the sake of it
+- Precise vocabulary: use the exact term, don't simplify for the sake of it
 - Code-like clarity: each sentence makes one point
 - "Note:" and "Important:" sparingly, not as decoration
 - Allowed: dry, deadpan observations about technical absurdity
@@ -365,7 +365,7 @@ Apply based on `--voice` flag (or infer from input):
 
 These make the difference between "clean" and "human":
 
-**1. Have actual opinions.** Don't just report - react. "This API design is frustrating" is more human than "The API has certain limitations."
+**1. Have actual opinions.** Don't just report. React. "This API design is frustrating" is more human than "The API has certain limitations."
 
 **2. Acknowledge uncertainty honestly.** "I'm not sure this is right, but..." beats both false confidence and excessive hedging.
 
@@ -383,7 +383,7 @@ These make the difference between "clean" and "human":
 
 **9. Use callbacks.** Reference something mentioned earlier. "Remember that API design I called frustrating? It gets worse."
 
-**10. Self-correct.** "The system handles auth - well, authentication and authorization are separate, but you get the idea." A small correction signals a mind thinking in real time.
+**10. Self-correct.** "The system handles auth... well, authentication and authorization are separate, but you get the idea." A small correction signals a mind thinking in real time.
 
 **11. End without wrapping up.** Not every piece needs a neat conclusion. Sometimes just stop.
 
@@ -414,7 +414,7 @@ These make the difference between "clean" and "human":
 | P13 | Em Dash Overuse | 4 em dashes in 2 paragraphs | Replace 3 with commas |
 | ... | ... | ... | ... |
 
-**Burstiness score:** LOW (sentence lengths: 18, 19, 17, 20, 18 - very uniform)
+**Burstiness score:** LOW (sentence lengths: 18, 19, 17, 20, 18; very uniform)
 **Estimated AI probability:** HIGH
 
 ### Recommendations
@@ -423,12 +423,12 @@ These make the difference between "clean" and "human":
 
 ### Mode: `rewrite`
 
-1. Run detection (Step 2) internally - don't output the report
+1. Run detection (Step 2) internally; don't output the report
 2. Apply fixes for every detected pattern
 3. Apply voice injection (Step 3) based on `--voice` flag
 4. Verify the rewrite by checking:
    - No remaining AI vocabulary blacklist words (unless genuinely needed)
-   - Zero em dashes (U+2014) - replace with commas, colons, or hyphens
+   - Zero em dashes (U+2014). Replace with commas, colons, or hyphens
    - Sentence length variance > 30% (burstiness check)
    - No more than 2 consecutive sentences with similar structure
    - No orphaned formatting (bold, emoji, Markdown in wrong context)
@@ -449,7 +449,7 @@ Changes: Removed 12 AI patterns (3x significance inflation, 2x -ing phrases, 4x 
 4. If 0 patterns found: "This file reads clean. No AI patterns detected."
 5. If patterns found:
    - Apply fixes using the Edit tool (targeted edits, not full rewrites)
-   - Make minimal changes - preserve author's existing voice where it's already human
+   - Make minimal changes; preserve author's existing voice where it's already human
    - After editing, re-read the file and verify patterns are resolved
 6. Output summary of edits made
 
@@ -477,7 +477,7 @@ Before presenting output, verify:
 > This comprehensive guide delves into the intricacies of our authentication system. The platform leverages cutting-edge JWT technology to provide a seamless, secure, and robust authentication experience. Additionally, it features a pivotal role-based access control system that serves as a testament to our commitment to security. Not only does this ensure data protection, but it also fosters a culture of trust within the organization, highlighting the enduring importance of cybersecurity in today's rapidly evolving digital landscape.
 
 **After (human, --voice technical):**
-> The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days. Role-based access control restricts API endpoints by user role - admin, editor, and viewer each see different data. The token rotation logic is in `src/auth/refresh.ts` if you need to change the expiry windows.
+> The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days. Role-based access control restricts API endpoints by user role: admin, editor, and viewer each see different data. The token rotation logic is in `src/auth/refresh.ts` if you need to change the expiry windows.
 
 **What changed:** Replaced "leverages cutting-edge JWT technology" with "uses JWTs." Added specific details (expiry times, file paths). Killed 9 AI vocabulary words.
 
@@ -487,7 +487,7 @@ Before presenting output, verify:
 > In today's rapidly evolving technological landscape, artificial intelligence is reshaping how we think about creativity. This groundbreaking shift represents a pivotal moment in human history, one that underscores the intricate interplay between innovation and artistic expression. As we delve deeper into this fascinating realm, it becomes crucial to understand the multifaceted implications of AI-generated content. Industry experts highlight that this transformation will have an enduring impact, fostering new forms of collaboration between humans and machines. The future looks incredibly bright for those who embrace this change.
 
 **After (human, --voice casual):**
-> I've been messing around with AI image generators for about six months now, and I still can't decide if I love them or if they make me uneasy. The outputs are technically impressive - I got a portrait last week that looked better than anything I could paint in a year. But there's something missing. It's like eating a perfect-looking meal that has no flavor. My artist friends are split: half are using these tools daily, half refuse to touch them. I don't think either side is wrong. What I do know is that my own creative process has changed since I started using them, in ways I'm still figuring out.
+> I've been messing around with AI image generators for about six months now, and I still can't decide if I love them or if they make me uneasy. The outputs are technically impressive. I got a portrait last week that looked better than anything I could paint in a year. But there's something missing. It's like eating a perfect-looking meal that has no flavor. My artist friends are split: half are using these tools daily, half refuse to touch them. I don't think either side is wrong. What I do know is that my own creative process has changed since I started using them, in ways I'm still figuring out.
 
 **What changed:** Replaced abstract commentary with personal experience. Added genuine uncertainty. Concrete analogy (perfect meal, no flavor). Sentence lengths: 8 to 31 words.
 
@@ -497,6 +497,6 @@ Before presenting output, verify:
 > Excited to announce that I've taken on a pivotal new role at TechCorp! This incredible opportunity represents a significant milestone in my professional journey. I'm deeply grateful to my amazing network for their unwavering support. The team at TechCorp is truly world-class, and I'm committed to leveraging my expertise to drive innovation and foster growth. Looking forward to this exciting chapter! #NewBeginnings #Innovation #Leadership #Grateful
 
 **After (human, --voice professional):**
-> Started a new job at TechCorp this week. I'm leading their developer tools team - 12 engineers building internal tooling that currently serves about 400 developers. First week has been drinking from the firehose: new codebase, new faces, new coffee machine I can't figure out. Nervous and excited in roughly equal measure. If anyone has advice on the first 90 days in an eng leadership role, I'm all ears.
+> Started a new job at TechCorp this week. I'm leading their developer tools team, 12 engineers building internal tooling that currently serves about 400 developers. First week has been drinking from the firehose: new codebase, new faces, new coffee machine I can't figure out. Nervous and excited in roughly equal measure. If anyone has advice on the first 90 days in an eng leadership role, I'm all ears.
 
-**What changed:** No emojis, no hashtags. Replaced "pivotal new role" with what the role actually is. Added specific details (team size, user count). Coffee machine line adds humanity. Closing asks for help - vulnerable, engaging.
+**What changed:** No emojis, no hashtags. Replaced "pivotal new role" with what the role actually is. Added specific details (team size, user count). Coffee machine line adds humanity. Closing asks for help. Vulnerable, engaging.
