@@ -1,9 +1,8 @@
 ---
 name: humanizer
-description: Transform AI-generated text into natural human writing. Detects and removes 30+ AI patterns, injects authentic voice, varies rhythm, and adds genuine personality. Reusable across any Claude Code plugin.
-version: 1.0.0
-user_invocable: true
-argument-hint: '"your text" [--mode detect|rewrite|edit] [--voice casual|professional|technical|warm|blunt] [--lang en|fr] [--file path/to/file.md] [--aggressive]'
+description: Transforms AI-generated text into natural human writing by detecting and removing 30 AI patterns, injecting authentic voice, and varying rhythm. Use when text sounds like a chatbot wrote it, when preparing content for publication, or when AI detection scores need to drop.
+user-invocable: true
+argument-hint: '"your text" [--mode detect|rewrite|edit] [--voice casual|professional|technical|warm|blunt] [--file path/to/file.md] [--aggressive]'
 allowed-tools:
   - Read
   - Write
@@ -35,7 +34,6 @@ Extract from `$ARGUMENTS`:
   - `rewrite` — Full rewrite, output the humanized version
   - `edit` — Read `--file`, apply changes in-place using Edit tool
 - **--voice**: One of `casual`, `professional`, `technical`, `warm`, `blunt`. Optional. Adjusts the personality injection. Default: infer from input text register.
-- **--lang**: One of `en`, `fr`. Default: auto-detect from input. Controls which language-specific patterns to check.
 - **--file**: Path to a file to humanize. If provided, read the file as input. Combined with `--mode edit`, applies changes in-place.
 - **--aggressive**: Flag. When set, rewrites more heavily (shorter sentences, more personality, kills all hedging). Default: balanced.
 
@@ -52,7 +50,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 #### P1: Significance Inflation
 **Trigger words:** stands/serves as, is a testament/reminder, vital/significant/crucial/pivotal/key role/moment, underscores/highlights importance, reflects broader, symbolizing ongoing/enduring/lasting, contributing to the, setting the stage, marking/shaping the, represents a shift, key turning point, evolving landscape, focal point, indelible mark, deeply rooted
 
-**What's happening:** LLMs puff up importance by claiming arbitrary facts represent broader trends. The more mundane the subject, the harder the puffing.
+**What's happening:** LLMs puff up importance by claiming arbitrary facts represent broader trends.
 
 **Fix:** State what the thing actually IS or DOES. Cut the commentary about what it "represents."
 
@@ -141,7 +139,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 #### P9: Negative Parallelisms
 **Trigger:** "Not only X but Y", "It's not just about X, it's Y", "It's not merely X, it's Y", "X isn't just Y — it's Z"
 
-**What's happening:** LLMs overuse dramatic contrast structures. Once is fine. Twice is a pattern. Three times is a chatbot.
+**What's happening:** Once is fine. Twice is a pattern. Three times is a chatbot.
 
 **Fix:** State the point directly without the theatrical build-up.
 
@@ -152,9 +150,9 @@ Scan the input text for ALL of the following patterns. Track each match with its
 #### P10: Rule of Three
 **Trigger:** Three-item lists that feel forced, especially with abstract nouns: "innovation, inspiration, and industry insights"
 
-**What's happening:** LLMs have learned that grouping things in threes sounds authoritative. But humans don't always think in triads.
+**What's happening:** LLMs group things in threes to sound authoritative. Humans don't always think in triads.
 
-**Fix:** Use the natural number of items. Sometimes that's one. Sometimes four. Two is underrated.
+**Fix:** Use the natural number. Sometimes one. Sometimes four. Two is underrated.
 
 | AI version | Human version |
 |---|---|
@@ -165,12 +163,10 @@ Scan the input text for ALL of the following patterns. Track each match with its
 
 **What's happening:** Repetition penalty in LLMs causes them to swap "protagonist" → "main character" → "central figure" → "hero" within paragraphs.
 
-**Fix:** Pick the clearest term and repeat it. Humans repeat words. It's fine. It's actually clearer.
+**Fix:** Pick the clearest term and repeat it. Humans repeat words. It's fine.
 
 #### P12: False Ranges
 **Trigger:** "From X to Y" where X and Y aren't on a meaningful spectrum
-
-**What's happening:** LLMs love "from X to Y" constructions even when the endpoints don't define a range.
 
 **Fix:** List the topics directly. Drop the "from/to" framing.
 
@@ -184,14 +180,12 @@ Scan the input text for ALL of the following patterns. Track each match with its
 #### P14: Boldface/Formatting Overuse
 **Trigger:** Bold on every other phrase, emoji-decorated headers, Markdown formatting in non-Markdown contexts
 
-**What's happening:** LLMs mechanically emphasize terms. Humans use bold sparingly, maybe once per section for a key term, not on every noun.
+**What's happening:** LLMs mechanically emphasize terms. Humans use bold sparingly — once per section, not on every noun.
 
-**Fix:** Strip most bold. Remove all emoji decorations from headers. If it's important, the words should convey that, not the formatting.
+**Fix:** Strip most bold. Remove emoji decorations. If it's important, the words should convey that.
 
 #### P15: Structured List Syndrome
 **Trigger:** Bullet lists where items start with `**Bold Header:** description`, excessive bullet points for information that flows naturally as prose
-
-**What's happening:** LLMs default to structured lists because they're "safe." But prose is almost always more engaging and more human.
 
 **Fix:** Convert bullet lists to flowing prose. Keep lists only for genuinely enumerable items (steps, ingredients, CLI flags).
 
@@ -207,23 +201,12 @@ Scan the input text for ALL of the following patterns. Track each match with its
 
 **Fix:** Match the target platform's convention. For code/technical contexts, always straight quotes.
 
-#### P18: French-Specific Patterns (when --lang fr)
-**Trigger (FR):** "Il convient de noter", "force est de constater", "en effet", "par ailleurs", "dans le cadre de", "il est important de souligner", "mettre en oeuvre", "Non seulement... mais aussi"
+#### P18: Formal Register Overuse
+**Trigger:** Text reads like a government memo or academic abstract when the context calls for plain language. Phrases like "it should be noted that", "it is essential to", "in the context of", "the implementation of"
 
-**What's happening:** French LLM output defaults to administrative/formal register. It also produces anglicisms ("faire du sens" instead of "avoir du sens", "adresser un probleme" instead of "regler"), uses Oxford commas (not used in French), and over-formats with em dashes (rare in French writing).
+**What's happening:** LLMs default to the most formal register in any language. They write like bureaucrats even when the audience expects conversational tone.
 
-**Swap list (don't just ban — replace):**
-- "neanmoins/toutefois/cependant" → "mais"
-- "par consequent" → "du coup" or "donc"
-- "en outre/de plus" → "et aussi" or "en plus"
-- "en conclusion/en resume" → "bref" or "en gros"
-- "il convient de/il est essentiel de" → "faut"
-- "dans le cadre de/afin de" → "pour"
-- "nous devons" → "on doit"
-
-**Mandatory discourse markers** (if absent, text reads AI): "du coup", "en vrai", "genre", "bah", "quoi" (sentence-final), "voila", "bon", "bref", "enfin"
-
-**Grammar:** Drop "ne" in negations ("je sais pas" not "je ne sais pas"), use "on" not "nous", contract pronouns ("t'es", "y'a", "j'sais pas").
+**Fix:** Match the register to the audience. Business email ≠ legal brief. Blog post ≠ white paper. When in doubt, one notch less formal than you think.
 
 ### COMMUNICATION PATTERNS
 
@@ -278,7 +261,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 **Fix:** Flag for verification. If source can't be found, mark as uncertain or delete.
 
 #### P26: Perfect/Error Alternation
-**Trigger:** (FR-specific) Alternating between syntactically perfect prose and sentences with basic errors — suggests human edited AI output partially
+**Trigger:** Alternating between syntactically perfect prose and sentences with basic errors — suggests human edited AI output partially
 
 **Fix:** Normalize the quality level throughout. Either fix all errors or ensure consistent voice.
 
@@ -310,28 +293,27 @@ Scan the input text for ALL of the following patterns. Track each match with its
 
 ## Step 3: Inject Human Voice
 
-Removing AI patterns is half the job. The other half is replacing the void with something alive. Sterile, pattern-free text is just as detectable — it reads like a Wikipedia article that's been scrubbed.
+Removing AI patterns is half the job. The other half is replacing the void with something alive.
 
 ### The Burstiness Principle
 
-AI text detectors measure "burstiness" — how much sentence length varies. Human writing has HIGH burstiness. AI writing has LOW burstiness.
+AI detectors measure "burstiness" — sentence length variance. Human writing has HIGH burstiness. AI has LOW.
 
 **Target these sentence length patterns:**
-- Mix short (3-8 words), medium (12-20 words), and long (25-40 words) sentences in every paragraph
+- Mix short (3-8 words), medium (12-20 words), and long (25-40 words) in every paragraph
 - Never have 3+ consecutive sentences of similar length
 - Use fragments. They work. Really.
 - One-word sentences? Occasionally.
-- Let a sentence run long when the thought is complex and needs room to breathe, winding through qualifications and asides before landing on its point
+- Let a sentence run long when the thought needs room to breathe, winding through qualifications before landing
 
 ### The Perplexity Principle
 
-AI detectors also measure "perplexity" — how predictable each word is given the previous words. AI text has LOW perplexity (very predictable). Human text has HIGHER perplexity (more surprising word choices).
+AI detectors also measure "perplexity" — how predictable each word is. AI text has LOW perplexity. Human text has HIGHER (more surprising word choices).
 
 **Increase perplexity naturally by:**
-- Choosing the second or third word that comes to mind, not the first (which is the most statistically likely — the same one AI would pick)
+- Choosing the second or third word that comes to mind, not the first (the most statistically likely — the one AI would pick)
 - Using domain-specific jargon or slang appropriate to the audience
 - Making unexpected analogies from personal experience
-- Starting sentences with words that don't obviously follow from the previous sentence
 - Occasionally using informal transitions ("Anyway,", "So here's the thing:", "Look,", "Thing is,")
 
 ### Voice Profiles
@@ -389,23 +371,21 @@ These make the difference between "clean" and "human":
 
 **3. Use specific sensory/experiential details.** Not "the process is complex" but "debugging this at 2am with a cold cup of coffee and a stack trace that makes no sense."
 
-**4. Reference shared human experiences.** "You know that feeling when..." or "If you've ever tried to..." — these create connection.
+**4. Reference shared human experiences.** "You know that feeling when..." creates connection.
 
-**5. Allow tangents and asides.** A brief digression (that stays relevant) signals a thinking mind, not an algorithm.
+**5. Allow tangents and asides.** A brief digression signals a thinking mind, not an algorithm.
 
-**6. Vary paragraph length dramatically.** One paragraph can be 4 sentences. The next can be one line.
+**6. Vary paragraph length dramatically.** Four sentences, then one line. Like this.
 
-Like this.
+**7. Use the "imperfect start" technique.** Start mid-thought: "So I was looking at the logs and..." or "Here's what nobody tells you about..."
 
-**7. Use the "imperfect start" technique.** Don't begin with the polished thesis statement. Start mid-thought: "So I was looking at the logs and..." or "Here's what nobody tells you about..."
-
-**8. Break parallel structure occasionally.** If you've listed three things with the same grammatical structure, make the fourth different. Humans aren't that consistent.
+**8. Break parallel structure occasionally.** Three items with the same grammar, then make the fourth different. Humans aren't that consistent.
 
 **9. Use callbacks.** Reference something mentioned earlier. "Remember that API design I called frustrating? It gets worse."
 
-**10. Self-correct.** Research shows that making a small mistake then correcting it reads as MORE human than flawless text. "The system handles auth — well, authentication and authorization are separate, but you get the idea." This signals a mind thinking in real time.
+**10. Self-correct.** "The system handles auth — well, authentication and authorization are separate, but you get the idea." A small correction signals a mind thinking in real time.
 
-**11. End without wrapping up.** Not every piece needs a neat conclusion. Sometimes the most human thing is to stop when you've said what you needed to say.
+**11. End without wrapping up.** Not every piece needs a neat conclusion. Sometimes just stop.
 
 ---
 
@@ -446,8 +426,7 @@ Like this.
 1. Run detection (Step 2) internally — don't output the report
 2. Apply fixes for every detected pattern
 3. Apply voice injection (Step 3) based on `--voice` flag
-4. Apply language-specific rules if `--lang` specified
-5. Verify the rewrite by checking:
+4. Verify the rewrite by checking:
    - No remaining AI vocabulary blacklist words (unless genuinely needed)
    - Sentence length variance > 30% (burstiness check)
    - No more than 2 consecutive sentences with similar structure
@@ -498,7 +477,7 @@ Before presenting output, verify:
 **After (human, --voice technical):**
 > The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days. Role-based access control restricts API endpoints by user role — admin, editor, and viewer each see different data. The token rotation logic is in `src/auth/refresh.ts` if you need to change the expiry windows.
 
-**What changed:** Cut 4 sentences of puffery down to the actual technical content. Replaced "leverages cutting-edge JWT technology" with "uses JWTs." Added the specific details that were missing (expiry times, file paths). Killed "delves", "intricacies", "seamless", "robust", "pivotal", "testament", "fosters", "enduring", "evolving landscape."
+**What changed:** Replaced "leverages cutting-edge JWT technology" with "uses JWTs." Added specific details (expiry times, file paths). Killed 9 AI vocabulary words.
 
 ### Example 2: Blog Post
 
@@ -508,7 +487,7 @@ Before presenting output, verify:
 **After (human, --voice casual):**
 > I've been messing around with AI image generators for about six months now, and I still can't decide if I love them or if they make me uneasy. The outputs are technically impressive — I got a portrait last week that looked better than anything I could paint in a year. But there's something missing. It's like eating a perfect-looking meal that has no flavor. My artist friends are split: half are using these tools daily, half refuse to touch them. I don't think either side is wrong. What I do know is that my own creative process has changed since I started using them, in ways I'm still figuring out.
 
-**What changed:** Replaced abstract commentary with personal experience. Killed every AI vocabulary word. Added genuine uncertainty ("still can't decide", "still figuring out"). Used a concrete analogy (perfect meal, no flavor). Mixed sentence lengths from 8 to 31 words. Started with "I've been" instead of "In today's rapidly evolving."
+**What changed:** Replaced abstract commentary with personal experience. Added genuine uncertainty. Concrete analogy (perfect meal, no flavor). Sentence lengths: 8 to 31 words.
 
 ### Example 3: Social Media / LinkedIn
 
@@ -518,4 +497,4 @@ Before presenting output, verify:
 **After (human, --voice professional):**
 > Started a new job at TechCorp this week. I'm leading their developer tools team — 12 engineers building internal tooling that currently serves about 400 developers. First week has been drinking from the firehose: new codebase, new faces, new coffee machine I can't figure out. Nervous and excited in roughly equal measure. If anyone has advice on the first 90 days in an eng leadership role, I'm all ears.
 
-**What changed:** Removed all emojis. Cut hashtags. Replaced "pivotal new role" with what the role actually is. Added specific details (team size, what they build, user count). The coffee machine detail adds humanity. "Nervous and excited in roughly equal measure" is honest in a way AI never is. The closing asks for help — vulnerable, human, engaging.
+**What changed:** No emojis, no hashtags. Replaced "pivotal new role" with what the role actually is. Added specific details (team size, user count). Coffee machine line adds humanity. Closing asks for help — vulnerable, engaging.
