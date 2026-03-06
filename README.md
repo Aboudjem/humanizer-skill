@@ -47,7 +47,7 @@ Word-swapping tools don't fix these. You need structural transformation. That's 
 ### One-line install (global)
 
 ```bash
-mkdir -p ~/.claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/adamboudj/humanizer-skill/main/skills/humanizer/SKILL.md -o ~/.claude/skills/humanizer/SKILL.md
+mkdir -p ~/.claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o ~/.claude/skills/humanizer/SKILL.md
 ```
 
 ### Or clone into any plugin
@@ -254,8 +254,8 @@ your-plugin/
 ```
 
 Compatible with:
-- [VoiceForge](https://github.com/adamboudj/voiceforge-plugin) — Full writing studio
-- [OpenClaw](https://github.com/adamboudj/openclaw-plugin) — AI agent OS
+- [VoiceForge](https://github.com/Aboudjem/voiceforge-plugin) — Full writing studio
+- [OpenClaw](https://github.com/Aboudjem/openclaw-plugin) — AI agent OS
 - Any Claude Code plugin with a `skills/` directory
 
 ## Contributing
