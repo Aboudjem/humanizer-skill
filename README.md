@@ -87,8 +87,6 @@ cp -r skills/humanizer /path/to/your-plugin/skills/
 /humanizer "text" --voice casual
 /humanizer "text" --voice blunt --aggressive
 
-# French support
-/humanizer "votre texte" --lang fr
 ```
 
 ---
@@ -215,7 +213,7 @@ Output + change summary
 | P15 | Structured List Syndrome | `**Header:** description` bullets for prose content |
 | P16 | Title Case Headings | "Strategic Negotiations And Global Partnerships" |
 | P17 | Typographic Tells | Curly quotes, consistent Oxford comma |
-| P18 | French-Specific | "Il convient de noter", "force est de constater" |
+| P18 | Formal Register Overuse | "it should be noted that", "it is essential to" |
 
 </details>
 
@@ -243,7 +241,7 @@ Output + change summary
 | P23 | Excessive Hedging | "could potentially possibly" |
 | P24 | Generic Conclusions | "The future looks bright", "poised for growth" |
 | P25 | Hallucination Markers | Fabricated-feeling dates, phantom citations |
-| P26 | Perfect/Error Alternation | (FR) Inconsistent quality = partial AI edit |
+| P26 | Perfect/Error Alternation | Inconsistent quality = partial AI edit |
 | P27 | Question-Format Titles | "What makes X unique?", "Why is Y important?" |
 | P28 | Markdown Bleeding | `**bold**` in emails, Word docs, social posts |
 | P29 | "Comprehensive Overview" | "This guide delves into...", "Let's dive in" |
@@ -284,7 +282,7 @@ Output + change summary
 | Voice profiles | **5** | 0 | 3 | Manual |
 | Works offline | **Yes** | No | No | No |
 | Burstiness injection | **Yes** | No | Partial | No |
-| Bilingual (EN/FR) | **Yes** | Multi | Multi | Manual |
+| Works in English | **Yes** | Multi | Multi | Manual |
 | File editing mode | **Yes** | No | No | No |
 | Explains changes | **Yes** | No | No | No |
 | Price | **Free** | $20/mo | $10/mo | Free |
@@ -324,7 +322,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 Built from 90+ sources across academic research, editorial expertise, and community intelligence:
 
 - [Wikipedia: Signs of AI writing][wiki-ai] — 24 pattern categories with real examples
-- [Wikipedia FR: Identifier l'usage d'une IA generative][wiki-fr] — French-specific patterns
+- [Wikipedia FR: Identifier l'usage d'une IA generative][wiki-fr] — Additional AI pattern research
 - RAID Benchmark (ACL 2024) — 6M+ generations, 12 detectors evaluated
 - NeurIPS 2023 — Intrinsic dimension analysis (Tulchinskii et al.)
 - Washington Post — 328,744 ChatGPT message analysis

@@ -7,7 +7,6 @@ A standalone Claude Code skill that transforms AI-generated text into natural hu
 - Detects 30+ AI writing patterns (based on Wikipedia's "Signs of AI Writing" + community research)
 - Rewrites text to sound like a specific human wrote it
 - Injects authentic voice using burstiness and perplexity principles
-- Works in English and French
 - Three modes: scan-only, full rewrite, in-place file editing
 
 ## Installation
@@ -35,8 +34,8 @@ Copy `SKILL.md` into your plugin's `skills/humanizer/` directory. Add to your pl
 # Edit a file in place
 /humanizer --mode edit --file src/docs/README.md
 
-# Specify voice and language
-/humanizer "text" --voice casual --lang en
+# Specify voice
+/humanizer "text" --voice casual
 
 # Aggressive mode — maximum humanization
 /humanizer "text" --aggressive
@@ -74,7 +73,6 @@ Copy `SKILL.md` into your plugin's `skills/humanizer/` directory. Add to your pl
 
 Built from research across:
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
-- [Wikipedia FR: Identifier l'usage d'une IA generative](https://fr.wikipedia.org/wiki/Aide:Identifier_l%27usage_d%27une_IA_g%C3%A9n%C3%A9rative)
 - Softaworks agent-toolkit humanizer by @blader
 - Davila7 claude-code-templates (humanizer + writing-clearly-and-concisely)
 - William Strunk Jr., *The Elements of Style* (1918)
