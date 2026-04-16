@@ -35,7 +35,7 @@ jobs:
       - name: Validate SKILL.md structure
         run: |
           SKILL="skills/humanizer/SKILL.md"
-          for section in "## The 30 Patterns" "## Voice Profiles" "## The Pipeline" "## Soul Injection"; do
+          for section in "## Step 2: Detect AI Patterns" "Voice Profiles" "Soul Injection"; do
             if ! grep -q "$section" "$SKILL"; then
               echo "FAIL: Missing section '$section' in SKILL.md"
               exit 1
@@ -45,7 +45,7 @@ jobs:
 
       - name: Check pattern count
         run: |
-          COUNT=$(grep -c '^### P[0-9]' skills/humanizer/SKILL.md || true)
+          COUNT=$(grep -c '^#### P[0-9]' skills/humanizer/SKILL.md || true)
           if [ "$COUNT" -lt 30 ]; then
             echo "FAIL: Expected 30 patterns, found $COUNT"
             exit 1
