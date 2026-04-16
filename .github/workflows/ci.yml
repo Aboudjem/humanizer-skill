@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Skill
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          for file in SKILL.md README.md LICENSE CONTRIBUTING.md CODE_OF_CONDUCT.md SECURITY.md CHANGELOG.md; do
+            if [ ! -f "$file" ]; then
+              echo "FAIL: Missing $file"
+              exit 1
+            fi
+          done
+          echo "All required files present"
+
+      - name: Validate SKILL.md structure
+        run: |
+          # Check for required sections
+          for section in "## The 30 Patterns" "## Voice Profiles" "## The Pipeline" "## Soul Injection"; do
+            if ! grep -q "$section" SKILL.md; then
+              echo "FAIL: Missing section '$section' in SKILL.md"
+              exit 1
+            fi
+          done
+          echo "SKILL.md structure valid"
+
+      - name: Check pattern count
+        run: |
+          COUNT=$(grep -c '^### P[0-9]' SKILL.md || true)
+          if [ "$COUNT" -lt 30 ]; then
+            echo "FAIL: Expected 30 patterns, found $COUNT"
+            exit 1
+          fi
+          echo "Pattern count OK: $COUNT patterns"
+
+      - name: No internal files leaked
+        run: |
+          if find . -path './.planning' -o -path './.deep-research' -o -path './.omc' -o -path './.claude-plugin' 2>/dev/null | grep -q .; then
+            echo "FAIL: Internal dev files found in repo"
+            exit 1
+          fi
+          echo "No internal files leaked"
