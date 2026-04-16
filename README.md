@@ -1,57 +1,172 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.svg">
-  <img alt="Humanizer - open source Claude Code skill that detects 37 AI writing patterns and rewrites text with human rhythm, burstiness, and voice profiles" src=".github/assets/logo-light.svg" width="100%">
+  <img alt="Humanizer" src=".github/assets/logo-light.svg" width="100%">
 </picture>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-8b5cf6?style=flat-square" alt="License"></a>
   <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-37-8b5cf6?style=flat-square" alt="37 AI Patterns"></a>
-  <a href="#-voice-profiles"><img src="https://img.shields.io/badge/voices-5-8b5cf6?style=flat-square" alt="5 Voice Profiles"></a>
+  <a href="#voice-profiles"><img src="https://img.shields.io/badge/voices-5-8b5cf6?style=flat-square" alt="5 Voice Profiles"></a>
   <a href="#"><img src="https://img.shields.io/badge/dependencies-0-8b5cf6?style=flat-square" alt="Zero Dependencies"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Claude_Code-skill-8b5cf6?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6Ii8+PC9zdmc+" alt="Claude Code Skill"></a>
   <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=8b5cf6" alt="Stars"></a>
 </p>
 
-<p align="center">
-  <b>Your writing quality, measured and fixed. Not just word-swapped.</b><br/>
-  <sub>Drop-in Claude Code skill. 37 AI patterns detected. 5 voice profiles. Zero dependencies.</sub>
-</p>
+<p align="center">Your writing quality, measured and fixed. Not just word-swapped.</p>
 
 ---
 
-<br/>
+## Get started
 
-## What is this?
+### Install (one command)
 
-You write with AI. The output sounds like a chatbot. Every sentence is the same length, the vocabulary is predictable, and phrases like "delve into" and "it's important to note" show up everywhere.
-
-**Humanizer** is a Claude Code skill that detects 37 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentence structure, injecting the burstiness and unpredictability that make writing sound like an actual person wrote it.
+Project-scoped (travels with your repo):
 
 ```bash
-# Install (one command, zero config)
 mkdir -p .claude/skills/humanizer && curl -sL \
   https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
   -o .claude/skills/humanizer/SKILL.md
 ```
 
+Global (available in every project):
+
+```bash
+mkdir -p ~/.claude/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o ~/.claude/skills/humanizer/SKILL.md
+```
+
 That's it. No config. No dependencies. Claude Code picks it up automatically.
 
-> [!TIP]
-> This is about **writing quality**, not detection evasion. Good writing doesn't trigger AI detectors because it doesn't exhibit the lazy patterns that detectors look for. Fix the writing, and the detection problem solves itself.
+### Use from your AI editor
 
-<br/>
+Humanizer is a pure Markdown skill file. Add it to your editor's skill directory, then use the `/humanizer` command.
 
-### Key facts
+<details>
+<summary><b>Claude Code</b></summary>
 
-- **What:** Open source Claude Code skill that detects 37 AI writing patterns and rewrites text to sound human-written
-- **Who it's for:** Developers, technical writers, and content creators who use AI for drafts but want output that reads naturally
-- **How it works:** Detects patterns like filler phrases, significance inflation, and predictable sentence structure, then applies structural transformation with burstiness and perplexity injection across 5 voice profiles
-- **Install:** One curl command to copy the skill file. Zero dependencies, zero config
-- **Comparable to:** Unlike synonym-swapping tools (QuillBot), Humanizer rebuilds sentence structure. Research shows structural paraphrasing drops AI detector accuracy from 70.3% to 4.6% (RAID benchmark, ACL 2024)
-- **Unique:** 37 catalogued AI patterns across 5 categories. 5 voice profiles (casual, professional, technical, warm, blunt). Works as a native Claude Code skill with no external APIs
+Already installed with the curl command above. Just use it:
+```
+/humanizer "Your AI-generated text here"
+```
+</details>
 
-<br/>
+<details>
+<summary><b>Cursor</b></summary>
+
+Copy the skill file to your Cursor rules directory:
+```bash
+mkdir -p .cursor/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o .cursor/skills/humanizer/SKILL.md
+```
+</details>
+
+<details>
+<summary><b>VS Code + Copilot</b></summary>
+
+Copy the skill file to your project:
+```bash
+mkdir -p .github/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o .github/skills/humanizer/SKILL.md
+```
+Reference it in your Copilot instructions or paste the content into your system prompt.
+</details>
+
+<details>
+<summary><b>Codex CLI</b></summary>
+
+```bash
+mkdir -p .codex/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o .codex/skills/humanizer/SKILL.md
+```
+</details>
+
+<details>
+<summary><b>Gemini CLI</b></summary>
+
+```bash
+mkdir -p .gemini/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o .gemini/skills/humanizer/SKILL.md
+```
+Reference the file in your Gemini CLI configuration.
+</details>
+
+<details>
+<summary><b>Windsurf</b></summary>
+
+```bash
+mkdir -p .windsurf/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o .windsurf/skills/humanizer/SKILL.md
+```
+Add the skill to your Windsurf rules configuration.
+</details>
+
+<details>
+<summary><b>Continue.dev</b></summary>
+
+```bash
+mkdir -p .continue/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o .continue/skills/humanizer/SKILL.md
+```
+Reference the skill file in your Continue configuration.
+</details>
+
+<details>
+<summary><b>OpenClaw</b></summary>
+
+```bash
+clawhub install humanizer-skill
+```
+
+Or copy manually:
+```bash
+mkdir -p ~/.openclaw/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o ~/.openclaw/skills/humanizer/SKILL.md
+```
+</details>
+
+> **Note:** Claude Code detects skills in `.claude/skills/`, `~/.claude/skills/`, or any plugin's `skills/` directory. No restart needed. Other editors may require referencing the file in their system prompt or configuration.
+
+---
+
+## Usage
+
+```bash
+/humanizer "Your AI-generated text here"              # rewrite with default voice
+/humanizer "text" --voice casual                      # pick a voice profile
+/humanizer "text" --mode detect                       # scan only, no rewrite
+/humanizer --file docs/README.md --voice technical    # edit a file in place
+/humanizer "text" --aggressive                        # maximum transformation
+```
+
+Three modes, each for a different job:
+
+| Mode | What it does | When to use |
+|:-----|:-------------|:------------|
+| `rewrite` | Full transformation with voice injection | Content creation, blog posts, social media |
+| `detect` | Scan-only report with pattern counts | Auditing existing content, learning what to fix |
+| `edit` | In-place file editing with minimal changes | Documentation cleanup, README polishing |
+
+`rewrite` is the default. You don't need to specify it.
+
+---
+
+## What it does
+
+You write with AI. The output sounds like a chatbot. Every sentence is the same length, the vocabulary is predictable, and phrases like "delve into" and "it's important to note" show up everywhere.
+
+Humanizer detects 37 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentence structure, injecting the burstiness and unpredictability that make writing sound like a person wrote it.
+
+> **Tip:** This is about writing quality, not detection evasion. Good writing doesn't trigger AI detectors because it doesn't have the lazy patterns that detectors look for. Fix the writing, and the detection problem solves itself.
+
+---
 
 ## Before and after
 
@@ -85,15 +200,29 @@ That's it. No config. No dependencies. Claude Code picks it up automatically.
 
 *No emojis. No hashtags. Real details instead of "pivotal milestone." The coffee machine line is more human than any amount of gratitude signaling.*
 
-<br/>
+---
+
+## Voice profiles
+
+Every voice changes how the skill rewrites. Not just what words it picks, but the sentence structure, rhythm, and personality it injects.
+
+| Voice | Personality | Best for |
+|:------|:-----------|:---------|
+| `casual` | Contractions, first person, fragments, "And" starters | Blog posts, social media, community docs |
+| `professional` | Selective contractions, dry wit, concrete examples | Business comms, reports, formal docs |
+| `technical` | Precise terms, code-like clarity, deadpan humor | API docs, READMEs, architecture docs |
+| `warm` | "We/our" language, empathy, shorter paragraphs | Tutorials, onboarding, support content |
+| `blunt` | Shortest sentences, no hedging, active voice only | Reviews, internal comms, direct feedback |
+
+---
 
 ## How it works
 
 ```mermaid
 graph LR
-    A["🔎 Detect<br/><sub>Scan for 37 AI patterns<br/>across 5 categories</sub>"] --> B["🧹 Strip<br/><sub>Remove significance inflation,<br/>AI vocabulary, filler</sub>"]
-    B --> C["🎭 Inject<br/><sub>Apply voice profile,<br/>burstiness, perplexity</sub>"]
-    C --> D["✅ Verify<br/><sub>Sentence variance check,<br/>blacklist scan, final test</sub>"]
+    A["Detect<br/><sub>Scan for 37 AI patterns<br/>across 5 categories</sub>"] --> B["Strip<br/><sub>Remove significance inflation,<br/>AI vocabulary, filler</sub>"]
+    B --> C["Inject<br/><sub>Apply voice profile,<br/>burstiness, perplexity</sub>"]
+    C --> D["Verify<br/><sub>Sentence variance check,<br/>blacklist scan, final test</sub>"]
 
     style A fill:#f5f3ff,stroke:#8b5cf6,color:#1e1b4b
     style B fill:#ede9fe,stroke:#8b5cf6,color:#1e1b4b
@@ -101,51 +230,11 @@ graph LR
     style D fill:#8b5cf6,stroke:#7c3aed,color:#ffffff
 ```
 
-Your text goes in. Clean, human-sounding writing comes out. The skill auto-detects which patterns are present and applies the minimum transformation needed to fix them.
+Your text goes in. Clean, human-sounding writing comes out. The skill auto-detects which patterns are present and applies the minimum transformation needed.
 
-<br/>
+---
 
-## 🚀 Quick start
-
-| Step | Action |
-|:----:|:-------|
-| **1** | Install the skill: `mkdir -p .claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o .claude/skills/humanizer/SKILL.md` |
-| **2** | Use it: `/humanizer "Your AI-generated text here"` |
-| **3** | Pick a voice: `/humanizer "text" --voice casual` |
-
-> [!NOTE]
-> Claude Code detects skills in `.claude/skills/`, `~/.claude/skills/`, or any plugin's `skills/` directory. No restart needed.
-
-<br/>
-
-## 🎯 Three modes
-
-| Mode | What it does | When to use |
-|:-----|:-------------|:------------|
-| `rewrite` | Full transformation with voice injection | Content creation, blog posts, social media |
-| `detect` | Scan-only report with pattern counts and severity | Auditing existing content, learning what to fix |
-| `edit` | In-place file editing with minimal changes | Documentation cleanup, README polishing |
-
-> [!IMPORTANT]
-> `rewrite` is the default mode. You don't need to specify it.
-
-<br/>
-
-## 🗣️ Voice profiles
-
-Every voice changes how the skill rewrites, not just what words it picks but the sentence structure, rhythm, and personality it injects.
-
-| Voice | Personality | Best for |
-|:------|:-----------|:---------|
-| 🗨️ `casual` | Contractions, first person, fragments, "And" starters | Blog posts, social media, community docs |
-| 💼 `professional` | Selective contractions, dry wit, concrete examples | Business comms, reports, formal docs |
-| ⌨️ `technical` | Precise terms, code-like clarity, deadpan humor | API docs, READMEs, architecture docs |
-| 🤝 `warm` | "We/our" language, empathy, shorter paragraphs | Tutorials, onboarding, support content |
-| 🔪 `blunt` | Shortest sentences, no hedging, active voice only | Reviews, internal comms, direct feedback |
-
-<br/>
-
-## 🧬 The science
+## The science
 
 AI detectors don't use magic. They measure two things, and both are well-documented in published research.
 
@@ -153,69 +242,38 @@ AI detectors don't use magic. They measure two things, and both are well-documen
 
 **Perplexity** is word predictability. AI picks the most statistically likely next word every time. Humans don't. We use surprising words, odd phrasing, personal references. High perplexity = probably human.
 
-Word-swapping tools like QuillBot change individual words but leave the rhythm and predictability untouched. That's why they fail. You need **structural transformation**, not synonym replacement.
+Word-swapping tools like QuillBot change individual words but leave the rhythm and predictability untouched. That's why they fail. You need structural transformation, not synonym replacement.
 
 | Technique | Source | Finding |
 |:----------|:-------|:--------|
-| ⚡ Burstiness injection | GPTZero[^1] | Human sentence length varies wildly. AI doesn't. |
-| 🎲 Perplexity increase | GPTZero[^1] | AI picks the most statistically likely next word. |
-| 📊 Vocabulary diversity | SSRN stylometric study[^2] | Human TTR: 55.3 vs AI: 45.5 |
-| ❌ Kill negative parallelism | Washington Post[^3] | "It's not X, it's Y" confirmed as #1 AI tell across 328K messages |
-| 🔄 Structural paraphrasing | RAID benchmark, ACL 2024[^4] | Drops DetectGPT accuracy from 70.3% to 4.6% |
-| 📐 Intrinsic dimension | NeurIPS 2023[^5] | Human text ~9 dimensions vs AI ~7.5 |
+| Burstiness injection | GPTZero | Human sentence length varies wildly. AI doesn't. |
+| Perplexity increase | GPTZero | AI picks the most statistically likely next word. |
+| Vocabulary diversity | SSRN stylometric study | Human TTR: 55.3 vs AI: 45.5 |
+| Kill negative parallelism | Washington Post | "It's not X, it's Y" confirmed as #1 AI tell across 328K messages |
+| Structural paraphrasing | RAID benchmark, ACL 2024 | Drops DetectGPT accuracy from 70.3% to 4.6% |
+| Intrinsic dimension | NeurIPS 2023 | Human text ~9 dimensions vs AI ~7.5 |
 
-[^1]: GPTZero detection methodology: perplexity and burstiness as core signals
-[^2]: SSRN stylometric study comparing type-token ratios across human and AI corpora
-[^3]: Washington Post analysis of 328,744 ChatGPT messages identifying distinctive AI constructs
-[^4]: RAID: A Shared Benchmark for Robust Evaluation of Machine-Generated Text Detectors (ACL 2024, 6M+ generations)
-[^5]: Tulchinskii et al., NeurIPS 2023: Intrinsic dimensionality estimation for AI text detection
+---
 
-<br/>
-
-## ⚔️ vs. alternatives
+## vs. alternatives
 
 | Feature | **Humanizer** | QuillBot | Undetectable.ai | Manual editing |
 |:--------|:------------:|:--------:|:----------------:|:--------------:|
-| Open source | ✅ | ❌ | ❌ | N/A |
-| Pattern detection | ✅ **37** | ❌ 0 | ❌ 0 | ❌ 0 |
-| Voice profiles | ✅ **5** | ❌ 0 | ❌ 3 | Manual |
-| Works offline | ✅ | ❌ | ❌ | ✅ |
-| Burstiness injection | ✅ | ❌ | Partial | ❌ |
-| File editing mode | ✅ | ❌ | ❌ | ❌ |
-| Explains changes | ✅ | ❌ | ❌ | ❌ |
-| Price | ✅ **Free** | $20/mo | $10/mo | Free |
+| Open source | Yes | No | No | N/A |
+| Pattern detection | **37** | 0 | 0 | 0 |
+| Voice profiles | **5** | 0 | 3 | Manual |
+| Works offline | Yes | No | No | Yes |
+| Burstiness injection | Yes | No | Partial | No |
+| File editing mode | Yes | No | No | No |
+| Explains changes | Yes | No | No | No |
+| Price | **Free** | $20/mo | $10/mo | Free |
 
-<br/>
+---
 
-## 🤔 Why not just...
-
-**"...use a better prompt?"**
-Prompts help, but they can't enforce 37 specific pattern rules consistently. The skill has a checklist. It catches things you'd miss on your 50th revision.
-
-**"...use QuillBot or Undetectable.ai?"**
-They swap words. The rhythm stays robotic, the sentence lengths stay uniform, the structure stays predictable. Detectors don't care about individual words. They care about patterns.
-
-**"...just edit it myself?"**
-You absolutely can. But do you know all 37 patterns? Can you spot "copula avoidance" or "significance inflation" on sight? This skill is a ruthless editor that never gets tired and never misses a pattern.
-
-<br/>
-
-## 🔒 Trust
-
-No telemetry. No data collection. No API calls. No cloud anything.
-
-The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads locally. Your text never leaves your machine. There's nothing to audit because there's nothing running.
-
-> [!NOTE]
-> Pure markdown skill. No JavaScript, no binaries, no network requests. Read the source yourself: it's one file.
-
-<br/>
-
-## 📋 All 37 patterns
+## All 37 patterns
 
 <details>
-<summary><b>Content Patterns (P1-P8)</b> - the worst offenders</summary>
-<br/>
+<summary><b>Content Patterns (P1-P8)</b></summary>
 
 | # | Pattern | What to look for |
 |:--|:--------|:-----------------|
@@ -231,8 +289,7 @@ The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads l
 </details>
 
 <details>
-<summary><b>Language and Style (P9-P18)</b> - structural tells</summary>
-<br/>
+<summary><b>Language and Style (P9-P18)</b></summary>
 
 | # | Pattern | What to look for |
 |:--|:--------|:-----------------|
@@ -250,8 +307,7 @@ The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads l
 </details>
 
 <details>
-<summary><b>Communication (P19-P21)</b> - chatbot residue</summary>
-<br/>
+<summary><b>Communication (P19-P21)</b></summary>
 
 | # | Pattern | What to look for |
 |:--|:--------|:-----------------|
@@ -262,8 +318,7 @@ The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads l
 </details>
 
 <details>
-<summary><b>Filler and Hedging (P22-P30)</b> - dead weight</summary>
-<br/>
+<summary><b>Filler and Hedging (P22-P30)</b></summary>
 
 | # | Pattern | What to look for |
 |:--|:--------|:-----------------|
@@ -280,79 +335,58 @@ The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads l
 </details>
 
 <details>
-<summary><b>Emerging Patterns (P31-P37)</b> - 2026 Wikipedia research</summary>
-<br/>
+<summary><b>Emerging Patterns (P31-P37)</b></summary>
 
 | # | Pattern | What to look for |
 |:--|:--------|:-----------------|
-| P31 | Elegant Variation (Noun-Phrase Cycling) | "the artist", "the visionary creator", "the non-conformist painter" for the same person |
+| P31 | Elegant Variation | "the artist", "the visionary creator", "the non-conformist painter" for the same person |
 | P32 | Collaborative Communication Leaking | "In this article, we will explore", "Let me walk you through" |
-| P33 | Placeholder Text / Mad Libs Templates | `[Your Name]`, `[INSERT SOURCE URL]`, unfilled brackets |
+| P33 | Placeholder Text / Mad Libs | `[Your Name]`, `[INSERT SOURCE URL]`, unfilled brackets |
 | P34 | Chatbot Reference Markup Leaking | `citeturn0search0`, `oai_citation`, broken footnote refs |
-| P35 | UTM Source Parameters from AI Tools | `utm_source=chatgpt.com`, `utm_source=openai` in URLs |
+| P35 | UTM Source Parameters | `utm_source=chatgpt.com`, `utm_source=openai` in URLs |
 | P36 | Sudden Style/Register Shift | Formal prose suddenly switching to casual, or vice versa |
-| P37 | Overattribution / Source-Listing as Content | "Featured in Wired, Refinery29, and other outlets" without substance |
+| P37 | Overattribution | "Featured in Wired, Refinery29, and other outlets" without substance |
 
 </details>
 
-<br/>
+---
 
-## Install
+## Why not just...
 
-### Claude Code (recommended)
+**"...use a better prompt?"**
+Prompts help, but they can't enforce 37 specific pattern rules consistently. The skill has a checklist. It catches things you'd miss on your 50th revision.
 
-Project-scoped (travels with your repo):
+**"...use QuillBot or Undetectable.ai?"**
+They swap words. The rhythm stays robotic, the sentence lengths stay uniform, the structure stays predictable. Detectors don't care about individual words. They care about patterns.
 
-```bash
-mkdir -p .claude/skills/humanizer && curl -sL \
-  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
-  -o .claude/skills/humanizer/SKILL.md
-```
+**"...just edit it myself?"**
+You absolutely can. But do you know all 37 patterns? Can you spot "copula avoidance" or "significance inflation" on sight? This skill is a ruthless editor that never gets tired and never misses a pattern.
 
-Global (available in every project):
+---
 
-```bash
-mkdir -p ~/.claude/skills/humanizer && curl -sL \
-  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
-  -o ~/.claude/skills/humanizer/SKILL.md
-```
+## Trust
 
-> [!NOTE]
-> Claude Code detects skills in `.claude/skills/`, `~/.claude/skills/`, or any plugin's `skills/` directory. No restart needed.
+No telemetry. No data collection. No API calls. No cloud anything.
 
-### OpenClaw
+The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads locally. Your text never leaves your machine. There's nothing to audit because there's nothing running.
 
-```bash
-clawhub install humanizer-skill
-```
+> **Note:** Pure markdown skill. No JavaScript, no binaries, no network requests. Read the source yourself: it's one file.
 
-Or copy manually:
+---
 
-```bash
-mkdir -p ~/.openclaw/skills/humanizer && curl -sL \
-  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
-  -o ~/.openclaw/skills/humanizer/SKILL.md
-```
-
-### Other AI editors
-
-The humanizer is a pure Markdown skill file. It works with any tool that supports SKILL.md format. Codex CLI, Cursor, Gemini CLI, and VS Code do not currently support the SKILL.md skill format. For these editors, copy the patterns from SKILL.md into your system prompt manually.
-
-<br/>
-
-## 📁 File structure
+## File structure
 
 ```
 your-project/
   .claude/
     skills/
       humanizer/
-        SKILL.md    # <- the entire skill, one file
+        SKILL.md    # the entire skill, one file
 ```
 
-<br/>
+---
 
-## 🤝 Contributing
+## Contributing
 
 Found a new AI pattern? Have a better fix? PRs welcome.
 
@@ -363,16 +397,13 @@ Found a new AI pattern? Have a better fix? PRs welcome.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-<br/>
-
-## 📚 Research sources
+---
 
 <details>
-<summary><b>90+ sources across academic research, editorial expertise, and community intelligence</b></summary>
-<br/>
+<summary><b>Research sources (90+)</b></summary>
 
-- [Wikipedia: Signs of AI writing][wiki-ai], 24 pattern categories with real examples
-- [Wikipedia FR: Identifier l'usage d'une IA generative][wiki-fr], additional AI pattern research
+- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), 24 pattern categories with real examples
+- [Wikipedia FR: Identifier l'usage d'une IA generative](https://fr.wikipedia.org/wiki/Aide:Identifier_l%27usage_d%27une_IA_g%C3%A9n%C3%A9rative), additional AI pattern research
 - RAID Benchmark (ACL 2024), 6M+ generations, 12 detectors evaluated
 - NeurIPS 2023, intrinsic dimension analysis (Tulchinskii et al.)
 - Washington Post, 328,744 ChatGPT message analysis
@@ -389,8 +420,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 - Professional editorial firms' AI content guidelines
 
 </details>
-
-<br/>
 
 ---
 
@@ -410,6 +439,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 <p align="center">
   <sub>Built by <a href="https://github.com/Aboudjem">Adam Boudjemaa</a> · MIT License · No telemetry · No data collection</sub>
 </p>
-
-[wiki-ai]: https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
-[wiki-fr]: https://fr.wikipedia.org/wiki/Aide:Identifier_l%27usage_d%27une_IA_g%C3%A9n%C3%A9rative
