@@ -297,32 +297,46 @@ The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads l
 
 <br/>
 
-## 📂 Install options
+## Install
 
-> [!TIP]
-> The skill is a single file. No config, no setup, no dependencies. Claude Code picks it up automatically.
+### Claude Code (recommended)
 
-**Option 1: Project-scoped** (recommended, travels with your repo):
+Project-scoped (travels with your repo):
 
 ```bash
-git clone https://github.com/Aboudjem/humanizer-skill.git
-cp -r humanizer-skill/skills/humanizer .claude/skills/
-rm -rf humanizer-skill
+mkdir -p .claude/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o .claude/skills/humanizer/SKILL.md
 ```
 
-**Option 2: Global** (available in every project):
+Global (available in every project):
 
 ```bash
-mkdir -p ~/.claude/skills/humanizer
-curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+mkdir -p ~/.claude/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
   -o ~/.claude/skills/humanizer/SKILL.md
 ```
 
-**Option 3: Inside an existing plugin:**
+> [!NOTE]
+> Claude Code detects skills in `.claude/skills/`, `~/.claude/skills/`, or any plugin's `skills/` directory. No restart needed.
+
+### OpenClaw
 
 ```bash
-cp -r skills/humanizer /path/to/your-plugin/skills/
+clawhub install humanizer-skill
 ```
+
+Or copy manually:
+
+```bash
+mkdir -p ~/.openclaw/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o ~/.openclaw/skills/humanizer/SKILL.md
+```
+
+### Other AI editors
+
+The humanizer is a pure Markdown skill file. It works with any tool that supports SKILL.md format. Codex CLI, Cursor, Gemini CLI, and VS Code do not currently support the SKILL.md skill format. For these editors, copy the patterns from SKILL.md into your system prompt manually.
 
 <br/>
 
