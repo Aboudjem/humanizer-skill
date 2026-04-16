@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.svg">
-  <img alt="Humanizer, Make AI Text Sound Like a Human Wrote It" src=".github/assets/logo-light.svg" width="100%">
+  <img alt="Humanizer - open source Claude Code skill that detects 37 AI writing patterns and rewrites text with human rhythm, burstiness, and voice profiles" src=".github/assets/logo-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -26,7 +26,7 @@
 
 You write with AI. The output sounds like a chatbot. Every sentence is the same length, the vocabulary is predictable, and phrases like "delve into" and "it's important to note" show up everywhere.
 
-**Humanizer** is a Claude Code skill that detects 37 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentences from the ground up, injecting the burstiness and unpredictability that make writing sound like an actual person wrote it.
+**Humanizer** is a Claude Code skill that detects 37 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentence structure, injecting the burstiness and unpredictability that make writing sound like an actual person wrote it.
 
 ```bash
 # Install (one command, zero config)
@@ -39,6 +39,17 @@ That's it. No config. No dependencies. Claude Code picks it up automatically.
 
 > [!TIP]
 > This is about **writing quality**, not detection evasion. Good writing doesn't trigger AI detectors because it doesn't exhibit the lazy patterns that detectors look for. Fix the writing, and the detection problem solves itself.
+
+<br/>
+
+### Key facts
+
+- **What:** Open source Claude Code skill that detects 37 AI writing patterns and rewrites text to sound human-written
+- **Who it's for:** Developers, technical writers, and content creators who use AI for drafts but want output that reads naturally
+- **How it works:** Detects patterns like filler phrases, significance inflation, and predictable sentence structure, then applies structural transformation with burstiness and perplexity injection across 5 voice profiles
+- **Install:** One curl command to copy the skill file. Zero dependencies, zero config
+- **Comparable to:** Unlike synonym-swapping tools (QuillBot), Humanizer rebuilds sentence structure. Research shows structural paraphrasing drops AI detector accuracy from 70.3% to 4.6% (RAID benchmark, ACL 2024)
+- **Unique:** 37 catalogued AI patterns across 5 categories. 5 voice profiles (casual, professional, technical, warm, blunt). Works as a native Claude Code skill with no external APIs
 
 <br/>
 

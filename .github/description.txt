@@ -1,0 +1,5 @@
+# Recommended GitHub Repository Description (under 350 chars)
+# Set this in: Repository Settings > About > Description
+#
+# Current recommendation:
+Claude Code skill that detects 37 AI writing patterns and rewrites text with human rhythm and voice. 5 voice profiles (casual, professional, technical, warm, blunt). Based on burstiness and perplexity research. Zero dependencies.

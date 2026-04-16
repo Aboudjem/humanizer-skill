@@ -1,0 +1,27 @@
+# Recommended GitHub Topics for humanizer-skill
+# Set these in: Repository Settings > About > Topics
+#
+# Primary (category + ecosystem)
+claude-code
+claude-code-skill
+ai-writing
+humanizer
+
+# Features
+ai-detection
+writing-quality
+content-optimization
+text-rewriting
+natural-language-processing
+
+# Technology
+nlp
+llm
+prompt-engineering
+
+# Discovery
+developer-tools
+writing-tools
+content-creation
+open-source
+ai-tools
