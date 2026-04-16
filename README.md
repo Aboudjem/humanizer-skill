@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-8b5cf6?style=flat-square" alt="License"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-30-8b5cf6?style=flat-square" alt="30 AI Patterns"></a>
+  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-37-8b5cf6?style=flat-square" alt="37 AI Patterns"></a>
   <a href="#-voice-profiles"><img src="https://img.shields.io/badge/voices-5-8b5cf6?style=flat-square" alt="5 Voice Profiles"></a>
   <a href="#"><img src="https://img.shields.io/badge/dependencies-0-8b5cf6?style=flat-square" alt="Zero Dependencies"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-skill-8b5cf6?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiPjxwYXRoIGQ9Ik0xMiAyTDIgN2wxMCA1IDEwLTV6Ii8+PC9zdmc+" alt="Claude Code Skill"></a>
@@ -15,7 +15,7 @@
 
 <p align="center">
   <b>Your writing quality, measured and fixed. Not just word-swapped.</b><br/>
-  <sub>Drop-in Claude Code skill. 30 AI patterns detected. 5 voice profiles. Zero dependencies.</sub>
+  <sub>Drop-in Claude Code skill. 37 AI patterns detected. 5 voice profiles. Zero dependencies.</sub>
 </p>
 
 ---
@@ -26,7 +26,7 @@
 
 You write with AI. The output sounds like a chatbot. Every sentence is the same length, the vocabulary is predictable, and phrases like "delve into" and "it's important to note" show up everywhere.
 
-**Humanizer** is a Claude Code skill that detects 30 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentences from the ground up, injecting the burstiness and unpredictability that make writing sound like an actual person wrote it.
+**Humanizer** is a Claude Code skill that detects 37 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentences from the ground up, injecting the burstiness and unpredictability that make writing sound like an actual person wrote it.
 
 ```bash
 # Install (one command, zero config)
@@ -80,7 +80,7 @@ That's it. No config. No dependencies. Claude Code picks it up automatically.
 
 ```mermaid
 graph LR
-    A["🔎 Detect<br/><sub>Scan for 30 AI patterns<br/>across 5 categories</sub>"] --> B["🧹 Strip<br/><sub>Remove significance inflation,<br/>AI vocabulary, filler</sub>"]
+    A["🔎 Detect<br/><sub>Scan for 37 AI patterns<br/>across 5 categories</sub>"] --> B["🧹 Strip<br/><sub>Remove significance inflation,<br/>AI vocabulary, filler</sub>"]
     B --> C["🎭 Inject<br/><sub>Apply voice profile,<br/>burstiness, perplexity</sub>"]
     C --> D["✅ Verify<br/><sub>Sentence variance check,<br/>blacklist scan, final test</sub>"]
 
@@ -166,7 +166,7 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 | Feature | **Humanizer** | QuillBot | Undetectable.ai | Manual editing |
 |:--------|:------------:|:--------:|:----------------:|:--------------:|
 | Open source | ✅ | ❌ | ❌ | N/A |
-| Pattern detection | ✅ **30** | ❌ 0 | ❌ 0 | ❌ 0 |
+| Pattern detection | ✅ **37** | ❌ 0 | ❌ 0 | ❌ 0 |
 | Voice profiles | ✅ **5** | ❌ 0 | ❌ 3 | Manual |
 | Works offline | ✅ | ❌ | ❌ | ✅ |
 | Burstiness injection | ✅ | ❌ | Partial | ❌ |
@@ -179,13 +179,13 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 ## 🤔 Why not just...
 
 **"...use a better prompt?"**
-Prompts help, but they can't enforce 30 specific pattern rules consistently. The skill has a checklist. It catches things you'd miss on your 50th revision.
+Prompts help, but they can't enforce 37 specific pattern rules consistently. The skill has a checklist. It catches things you'd miss on your 50th revision.
 
 **"...use QuillBot or Undetectable.ai?"**
 They swap words. The rhythm stays robotic, the sentence lengths stay uniform, the structure stays predictable. Detectors don't care about individual words. They care about patterns.
 
 **"...just edit it myself?"**
-You absolutely can. But do you know all 30 patterns? Can you spot "copula avoidance" or "significance inflation" on sight? This skill is a ruthless editor that never gets tired and never misses a pattern.
+You absolutely can. But do you know all 37 patterns? Can you spot "copula avoidance" or "significance inflation" on sight? This skill is a ruthless editor that never gets tired and never misses a pattern.
 
 <br/>
 
@@ -200,7 +200,7 @@ The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads l
 
 <br/>
 
-## 📋 All 30 patterns
+## 📋 All 37 patterns
 
 <details>
 <summary><b>Content Patterns (P1-P8)</b> - the worst offenders</summary>
@@ -268,6 +268,22 @@ The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads l
 
 </details>
 
+<details>
+<summary><b>Emerging Patterns (P31-P37)</b> - 2026 Wikipedia research</summary>
+<br/>
+
+| # | Pattern | What to look for |
+|:--|:--------|:-----------------|
+| P31 | Elegant Variation (Noun-Phrase Cycling) | "the artist", "the visionary creator", "the non-conformist painter" for the same person |
+| P32 | Collaborative Communication Leaking | "In this article, we will explore", "Let me walk you through" |
+| P33 | Placeholder Text / Mad Libs Templates | `[Your Name]`, `[INSERT SOURCE URL]`, unfilled brackets |
+| P34 | Chatbot Reference Markup Leaking | `citeturn0search0`, `oai_citation`, broken footnote refs |
+| P35 | UTM Source Parameters from AI Tools | `utm_source=chatgpt.com`, `utm_source=openai` in URLs |
+| P36 | Sudden Style/Register Shift | Formal prose suddenly switching to casual, or vice versa |
+| P37 | Overattribution / Source-Listing as Content | "Featured in Wired, Refinery29, and other outlets" without substance |
+
+</details>
+
 <br/>
 
 ## 📂 Install options
@@ -316,7 +332,7 @@ your-project/
 Found a new AI pattern? Have a better fix? PRs welcome.
 
 1. Fork the repo
-2. Add your pattern to `SKILL.md` (follow the P1-P30 format)
+2. Add your pattern to `SKILL.md` (follow the P1-P37 format)
 3. Include a before/after example
 4. Open a PR
 

@@ -1,6 +1,6 @@
 ---
 name: humanizer
-description: Transforms AI-generated text into natural human writing by detecting and removing 30 AI patterns, injecting authentic voice, and varying rhythm. Use when text sounds like a chatbot wrote it, when preparing content for publication, or when AI detection scores need to drop.
+description: Transforms AI-generated text into natural human writing by detecting and removing 37 AI patterns, injecting authentic voice, and varying rhythm. Use when text sounds like a chatbot wrote it, when preparing content for publication, or when AI detection scores need to drop.
 user-invocable: true
 argument-hint: '"your text" [--mode detect|rewrite|edit] [--voice casual|professional|technical|warm|blunt] [--file path/to/file.md] [--aggressive]'
 allowed-tools:
@@ -289,6 +289,71 @@ Scan the input text for ALL of the following patterns. Track each match with its
 
 **Fix:** Deliberately vary. Follow a long sentence with a short one. Or a fragment. Then open up again.
 
+### EMERGING PATTERNS (2026)
+
+#### P31: Elegant Variation (Noun-Phrase Cycling)
+**Trigger:** Same referent described 3+ different ways in a paragraph (e.g., "the artist", "the non-conformist painter", "the visionary creator")
+**What's happening:** LLMs have repetition penalties that discourage reusing the same noun phrase, so they substitute increasingly elaborate descriptors for the same entity. Distinct from P11 (Synonym Cycling) which covers word-level swaps. This is about cycling entire noun phrases for the same subject.
+**Fix:** Pick the clearest term and repeat it. Humans repeat words naturally.
+
+| AI version | Human version |
+|---|---|
+| "Yankilevsky, alongside other non-conformist artists, faced obstacles. The visionary creator's distinctive artistic journey..." | "Yankilevsky and other non-conformist artists faced obstacles. His work..." |
+
+#### P32: Collaborative Communication Leaking
+**Trigger:** "In this article, we will explore", "Let me walk you through", "Would you like me to", "Here's what you need to know", instructions to the reader about what they should do, conversational framing in published content
+**What's happening:** The LLM was generating advice or correspondence for the user, not content for publication. The user pasted it verbatim without removing the conversational framing. Distinct from P19 (Chatbot Artifacts) which covers identity disclosure. This is about instructional framing leaking into output.
+**Fix:** Delete the meta-commentary. Just start with the actual content.
+
+| AI version | Human version |
+|---|---|
+| "In this article, we will explore the unique characteristics that make this framework worth using." | "This framework solves three problems that React Router doesn't." |
+
+#### P33: Placeholder Text / Mad Libs Templates
+**Trigger:** `[Your Name]`, `[Describe the specific section]`, `[INSERT SOURCE URL]`, `2025-XX-XX`, `<!-- Add if available -->`, square-bracketed instructions that were meant to be filled in
+**What's happening:** LLMs generate fill-in-the-blank templates that users forget to complete before publishing. These are near-definitive AI tells.
+**Fix:** Either fill in the real information or delete the placeholder entirely.
+
+| AI version | Human version |
+|---|---|
+| "Dear [Recipient], I am writing regarding [Topic]." | (Either fill it in or don't send it) |
+
+#### P34: Chatbot Reference Markup Leaking
+**Trigger:** `citeturn0search0`, `contentReference[oaicite:0]{index=0}`, `oai_citation`, `[attached_file:1]`, `grok_card`, footnote reference characters that don't link to anything
+**What's happening:** Internal chatbot citation markup tokens get preserved when copy-pasting from ChatGPT, Grok, Perplexity, or similar tools. These are near-definitive proof of AI tool usage.
+**Fix:** Delete all markup artifacts. If the citation was meaningful, replace with a proper reference.
+
+| AI version | Human version |
+|---|---|
+| "The school has been recognized as an International Fellowship Centre. citeturn0search1" | "The school has been recognized as an International Fellowship Centre." |
+
+#### P35: UTM Source Parameters from AI Tools
+**Trigger:** `utm_source=chatgpt.com`, `utm_source=openai`, `utm_source=copilot.com`, `referrer=grok.com` in URLs
+**What's happening:** ChatGPT, Copilot, and Grok automatically append tracking parameters to URLs they generate. These are near-definitive proof of AI tool involvement.
+**Fix:** Strip UTM parameters from all URLs.
+
+| AI version | Human version |
+|---|---|
+| `https://example.com/article?utm_source=chatgpt.com` | `https://example.com/article` |
+
+#### P36: Sudden Style/Register Shift
+**Trigger:** One paragraph with perfect formal English followed by casual text with errors, or vice versa. American English suddenly appearing in text by a non-American author. Graduate-thesis prose in the middle of casual notes.
+**What's happening:** The AI-generated portions have a distinctly different voice, register, and error profile than the human-written portions. This catches mixed human+AI authorship.
+**Fix:** Maintain consistent register throughout. Rewrite the AI-generated sections to match the author's natural voice.
+
+| AI version | Human version |
+|---|---|
+| "yeah so the bug is in line 42 lol. The aforementioned implementation exhibits suboptimal performance characteristics due to..." | "yeah so the bug is in line 42. the loop allocates on every iteration instead of reusing the buffer." |
+
+#### P37: Overattribution / Source-Listing as Content
+**Trigger:** "Featured in [Publication A], [Publication B], and other media outlets", "Has been cited in", "Maintains an active social media presence", entire sections that just list where something was covered without saying what the coverage actually said
+**What's happening:** LLMs try to prove a subject's importance by listing coverage sources rather than summarizing what sources actually reported. Distinct from P2 (Notability Name-Dropping) which covers dropping famous names. This is about treating source lists as proof of importance.
+**Fix:** Pick ONE source and say what it reported. Or cut the list entirely.
+
+| AI version | Human version |
+|---|---|
+| "Her insights have been featured in Wired, Refinery29, and other prominent media outlets." | "Wired profiled her 2024 research on algorithmic bias in hiring software." |
+
 ---
 
 ## Step 3: Inject Human Voice
@@ -393,7 +458,7 @@ These make the difference between "clean" and "human":
 
 ### Mode: `detect`
 
-1. Scan input text for all 30 patterns
+1. Scan input text for all 37 patterns
 2. For each match, record:
    - Pattern ID and name (e.g., "P7: AI Vocabulary")
    - The offending text (quoted)
