@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a0a22"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect x="0" y="0" width="8" height="640" fill="url(#accent)"/>
+  <circle cx="1100" cy="160" r="220" fill="#8b5cf6" opacity="0.08"/>
+  <text x="96" y="240" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="140" font-weight="900" fill="#ffffff" letter-spacing="-3">Humanizer</text>
+  <text x="96" y="310" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="38" font-weight="600" fill="#a78bfa">Writing quality, measured and fixed.</text>
+  <text x="96" y="380" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="28" fill="#cbd5e1">Detects 37 AI writing patterns. Rewrites with human rhythm</text>
+  <text x="96" y="420" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="28" fill="#cbd5e1">and voice. 5 voice profiles. Based on burstiness research.</text>
+  <g transform="translate(96, 500)">
+    <rect x="0" y="0" width="165" height="40" rx="20" fill="#8b5cf6" opacity="0.15"/>
+    <text x="82" y="27" font-family="Inter, monospace" font-size="18" font-weight="700" fill="#a78bfa" text-anchor="middle">37 patterns</text>
+    <rect x="180" y="0" width="140" height="40" rx="20" fill="#ec4899" opacity="0.15"/>
+    <text x="250" y="27" font-family="Inter, monospace" font-size="18" font-weight="700" fill="#f9a8d4" text-anchor="middle">5 voices</text>
+    <rect x="340" y="0" width="140" height="40" rx="20" fill="#ffffff" opacity="0.08"/>
+    <text x="410" y="27" font-family="Inter, monospace" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">0 deps</text>
+  </g>
+  <text x="1184" y="592" font-family="Inter, monospace" font-size="20" fill="#64748b" text-anchor="end">github.com/Aboudjem/humanizer-skill</text>
+</svg>
