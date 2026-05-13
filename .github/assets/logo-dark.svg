@@ -62,7 +62,7 @@
   <!-- Title -->
   <text x="175" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="700" fill="#e0e7ff" letter-spacing="-1">humanizer</text>
   <!-- Subtitle -->
-  <text x="175" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="#a78bfa" font-weight="500">Make AI Text Undetectable</text>
+  <text x="175" y="115" font-family="system-ui, -apple-system, sans-serif" font-size="17" fill="#a78bfa" font-weight="500">Make AI Text Sound Human</text>
   <!-- Tagline -->
-  <text x="175" y="147" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#94a3b8">37 patterns  ·  5 voices  ·  90+ research sources  ·  Zero deps</text>
+  <text x="175" y="147" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#94a3b8">43 patterns  ·  5 voices  ·  90+ sources  ·  Zero deps  ·  One markdown file</text>
 </svg>

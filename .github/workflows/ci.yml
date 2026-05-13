@@ -46,11 +46,32 @@ jobs:
       - name: Check pattern count
         run: |
           COUNT=$(grep -c '^#### P[0-9]' skills/humanizer/SKILL.md || true)
-          if [ "$COUNT" -lt 30 ]; then
-            echo "FAIL: Expected 30 patterns, found $COUNT"
+          EXPECTED=43
+          if [ "$COUNT" -lt "$EXPECTED" ]; then
+            echo "FAIL: Expected at least $EXPECTED patterns, found $COUNT"
             exit 1
           fi
-          echo "Pattern count OK: $COUNT patterns"
+          echo "Pattern count OK: $COUNT patterns (>= $EXPECTED)"
+
+      - name: No em dashes in SKILL.md or README
+        run: |
+          # SKILL.md treats em dashes as a banned pattern (P13). Skill itself must not violate its own rule.
+          if grep -lP '[\x{2014}]' skills/humanizer/SKILL.md README.md 2>/dev/null; then
+            echo "FAIL: em dash (U+2014) found in core docs (violates P13)"
+            grep -nP '[\x{2014}]' skills/humanizer/SKILL.md README.md || true
+            exit 1
+          fi
+          echo "Zero em dashes in core docs"
+
+      - name: Pattern badge matches actual count
+        run: |
+          BADGE=$(grep -oE 'patterns-[0-9]+' README.md | head -1 | grep -oE '[0-9]+')
+          ACTUAL=$(grep -c '^#### P[0-9]' skills/humanizer/SKILL.md)
+          if [ "$BADGE" != "$ACTUAL" ]; then
+            echo "FAIL: README badge says $BADGE patterns, SKILL.md has $ACTUAL"
+            exit 1
+          fi
+          echo "Badge count matches: $BADGE"
 
       - name: No internal files leaked
         run: |

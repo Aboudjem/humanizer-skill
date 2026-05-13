@@ -6,13 +6,24 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-8b5cf6?style=flat-square" alt="License"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-37-8b5cf6?style=flat-square" alt="37 AI Patterns"></a>
+  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-43-8b5cf6?style=flat-square" alt="43 AI Patterns"></a>
   <a href="#voice-profiles"><img src="https://img.shields.io/badge/voices-5-8b5cf6?style=flat-square" alt="5 Voice Profiles"></a>
   <a href="#"><img src="https://img.shields.io/badge/dependencies-0-8b5cf6?style=flat-square" alt="Zero Dependencies"></a>
   <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=8b5cf6" alt="Stars"></a>
 </p>
 
-<p align="center">Your writing quality, measured and fixed. Not just word-swapped.</p>
+<p align="center">
+  <b>AI text scores ~0.00 burstiness. Humans score ~+0.70.</b><br/>
+  Humanizer rewrites the gap. 43 patterns, 5 voices, one Markdown file, zero API calls.
+</p>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-burstiness-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/assets/demo-burstiness-light.svg">
+  <img alt="Burstiness comparison: AI writing has flat, uniform sentence lengths; human writing varies wildly. Humanizer restores the variation." src=".github/assets/demo-burstiness-light.svg" width="100%">
+</picture>
+
+<p align="center"><sub>The chart is the whole pitch. AI writes in monotone. Humans don't. Detectors notice. So do readers.</sub></p>
 
 ---
 
@@ -142,8 +153,10 @@ mkdir -p ~/.openclaw/skills/humanizer && curl -sL \
 /humanizer "Your AI-generated text here"              # rewrite with default voice
 /humanizer "text" --voice casual                      # pick a voice profile
 /humanizer "text" --mode detect                       # scan only, no rewrite
+/humanizer "text" --score                             # add 0-100 AI-tell score header
 /humanizer --file docs/README.md --voice technical    # edit a file in place
-/humanizer "text" --aggressive                        # maximum transformation
+/humanizer "text" --aggressive --iterate 3            # heavy rewrite, converge to zero patterns
+/humanizer "text" --purpose marketing --voice warm    # purpose-specific rules + voice
 ```
 
 Three modes, each for a different job:
@@ -156,19 +169,52 @@ Three modes, each for a different job:
 
 `rewrite` is the default. You don't need to specify it.
 
+### Score yourself in 5 seconds
+
+Run detect with `--score` on any text and you get a number you can quote:
+
+```text
+$ /humanizer "In today's rapidly evolving landscape, AI is reshaping how we think about creativity..." --mode detect --score
+
+[Score: 87/100, Pure AI smell]
+
+Patterns found: 9
+| #   | Pattern              | Text                              |
+| P4  | Promotional          | "rapidly evolving landscape"      |
+| P7  | AI Vocabulary        | "reshaping"                       |
+| P22 | Filler               | "In today's"                      |
+| P29 | Comprehensive Opening| meta-commentary about the article |
+| P30 | Uniform Length       | sentences avg 19 words            |
+| ...
+```
+
+After rewriting with `/humanizer "..." --voice casual`, the same text scores around 12/100. That delta is the entire point.
+
+### Bring your own brand voice
+
+Drop a `humanizer-context.md` file at your project root with your brand samples and banned phrases. The skill auto-loads it as a personal extension of the `--voice` profile, so the rewrite sounds like _you_, not a preset.
+
 ---
 
 ## What it does
 
 You write with AI. The output sounds like a chatbot. Every sentence is the same length, the vocabulary is predictable, and phrases like "delve into" and "it's important to note" show up everywhere.
 
-Humanizer detects 37 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentence structure, injecting the burstiness and unpredictability that make writing sound like a person wrote it.
+Humanizer detects 43 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentence structure, injecting the burstiness and unpredictability that make writing sound like a person wrote it.
 
 > **Tip:** This is about writing quality, not detection evasion. Good writing doesn't trigger AI detectors because it doesn't have the lazy patterns that detectors look for. Fix the writing, and the detection problem solves itself.
 
 ---
 
 ## Before and after
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-typewriter-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/assets/demo-typewriter-light.svg">
+  <img alt="Animated demo: AI text with 'comprehensive', 'delves into', and 'pivotal' highlighted and struck through, replaced with cleaner human prose" src=".github/assets/demo-typewriter-light.svg" width="100%">
+</picture>
+
+<p align="center"><sub>Three real AI tells flagged, struck, replaced. The skill does this on text you paste.</sub></p>
 
 ### Technical documentation
 
@@ -218,11 +264,13 @@ Every voice changes how the skill rewrites. Not just what words it picks, but th
 
 ## How it works
 
+A 4-pass editing system. Each pass has one job and never does the others.
+
 ```mermaid
 graph LR
-    A["Detect<br/><sub>Scan for 37 AI patterns<br/>across 5 categories</sub>"] --> B["Strip<br/><sub>Remove significance inflation,<br/>AI vocabulary, filler</sub>"]
-    B --> C["Inject<br/><sub>Apply voice profile,<br/>burstiness, perplexity</sub>"]
-    C --> D["Verify<br/><sub>Sentence variance check,<br/>blacklist scan, final test</sub>"]
+    A["Pass 1: Detect<br/><sub>Scan for 43 AI patterns<br/>across 5 categories</sub>"] --> B["Pass 2: Strip<br/><sub>Remove significance inflation,<br/>AI vocabulary, filler</sub>"]
+    B --> C["Pass 3: Inject<br/><sub>Apply voice profile,<br/>burstiness, perplexity</sub>"]
+    C --> D["Pass 4: Verify<br/><sub>Sentence variance check,<br/>blacklist scan, final test</sub>"]
 
     style A fill:#f5f3ff,stroke:#8b5cf6,color:#1e1b4b
     style B fill:#ede9fe,stroke:#8b5cf6,color:#1e1b4b
@@ -230,7 +278,7 @@ graph LR
     style D fill:#8b5cf6,stroke:#7c3aed,color:#ffffff
 ```
 
-Your text goes in. Clean, human-sounding writing comes out. The skill auto-detects which patterns are present and applies the minimum transformation needed.
+Your text goes in. Clean, human-sounding writing comes out. The skill auto-detects which patterns are present and applies the minimum transformation needed. Pass 1 is non-destructive: you can run `--mode detect` to get the report without rewriting anything.
 
 ---
 
@@ -260,7 +308,7 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 | Feature | **Humanizer** | QuillBot | Undetectable.ai | Manual editing |
 |:--------|:------------:|:--------:|:----------------:|:--------------:|
 | Open source | Yes | No | No | N/A |
-| Pattern detection | **37** | 0 | 0 | 0 |
+| Pattern detection | **43** | 0 | 0 | 0 |
 | Voice profiles | **5** | 0 | 3 | Manual |
 | Works offline | Yes | No | No | Yes |
 | Burstiness injection | Yes | No | Partial | No |
@@ -270,7 +318,7 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 
 ---
 
-## All 37 patterns
+## All 43 patterns
 
 <details>
 <summary><b>Content Patterns (P1-P8)</b></summary>
@@ -335,7 +383,7 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 </details>
 
 <details>
-<summary><b>Emerging Patterns (P31-P37)</b></summary>
+<summary><b>Emerging Patterns (P31-P43)</b></summary>
 
 | # | Pattern | What to look for |
 |:--|:--------|:-----------------|
@@ -346,21 +394,29 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 | P35 | UTM Source Parameters | `utm_source=chatgpt.com`, `utm_source=openai` in URLs |
 | P36 | Sudden Style/Register Shift | Formal prose suddenly switching to casual, or vice versa |
 | P37 | Overattribution | "Featured in Wired, Refinery29, and other outlets" without substance |
+| P38 | Paragraph-Reshuffling Immunity | Paragraphs that could swap order without breaking the argument |
+| P39 | "Whether" Paragraph Closers | "Whether you prefer X or Y, the answer is..." as a paragraph wrap-up |
+| P40 | Symbolic Gloss / Meaning-Telling | "represents", "symbolizes", "speaks to broader" applied to mundane things |
+| P41 | Infomercial Engagement Hooks | "The catch?", "The kicker?", "Here's the thing.", "The brutal truth?" |
+| P42 | Erratic Inline Bolding | Random mid-sentence bold spans with no shared logic or category |
+| P43 | The Treadmill Effect | "In other words", "Put simply", "Essentially" looping the same point |
 
 </details>
+
+> All P38-P43 are 2026 community discoveries sourced from HackerNews threads, Wikipedia's evolving editorial guideline, and writing practitioner blogs. Sources cited inline in [SKILL.md](skills/humanizer/SKILL.md).
 
 ---
 
 ## Why not just...
 
 **"...use a better prompt?"**
-Prompts help, but they can't enforce 37 specific pattern rules consistently. The skill has a checklist. It catches things you'd miss on your 50th revision.
+Prompts help, but they can't enforce 43 specific pattern rules consistently. The skill has a checklist. It catches things you'd miss on your 50th revision.
 
 **"...use QuillBot or Undetectable.ai?"**
 They swap words. The rhythm stays robotic, the sentence lengths stay uniform, the structure stays predictable. Detectors don't care about individual words. They care about patterns.
 
 **"...just edit it myself?"**
-You absolutely can. But do you know all 37 patterns? Can you spot "copula avoidance" or "significance inflation" on sight? This skill is a ruthless editor that never gets tired and never misses a pattern.
+You absolutely can. But do you know all 43 patterns? Can you spot "copula avoidance" or "significance inflation" on sight? This skill is a ruthless editor that never gets tired and never misses a pattern.
 
 ---
 
@@ -391,11 +447,25 @@ your-project/
 Found a new AI pattern? Have a better fix? PRs welcome.
 
 1. Fork the repo
-2. Add your pattern to `SKILL.md` (follow the P1-P37 format)
+2. Add your pattern to `SKILL.md` (follow the P1-P43 format)
 3. Include a before/after example
 4. Open a PR
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details, including the three-file lockstep update (badge count, CI threshold, CHANGELOG).
+
+---
+
+## Lineage and credit
+
+This skill is part of a wider family of humanizer tools. Direct lineage:
+
+- [@blader/humanizer](https://github.com/blader/humanizer), the original Claude skill that named this category. Different patterns, no voice profiles, no edit mode, but it lit the path.
+- [@softaworks/agent-toolkit](https://github.com/softaworks/agent-toolkit), the humanizer plugin that proved Markdown skill files were the right distribution format.
+- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), the public, open, citation-backed reference list that ~70% of P1-P30 are derived from.
+
+What this fork adds: 43 numbered patterns (largest open catalog), 5 named voice profiles, three operating modes (`detect`/`rewrite`/`edit`), 8-editor install matrix, CI that enforces its own rules (no em dashes in the skill that bans em dashes), and a research-first README that cites primary sources for every claim.
+
+If you used the older humanizers, this one will feel familiar but tighter. If you're new to the category, [@blader's repo](https://github.com/blader/humanizer) is also worth a read.
 
 ---
 

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none">
+  <style>
+    @keyframes aiLabel{0%,25%{opacity:1}32%,100%{opacity:0}}
+    @keyframes humanLabel{0%,58%{opacity:0}65%,90%{opacity:1}96%,100%{opacity:0}}
+    @keyframes modeAI{0%,25%{opacity:1}32%,100%{opacity:0}}
+    @keyframes modeHuman{0%,58%{opacity:0}65%,90%{opacity:1}96%,100%{opacity:0}}
+    @keyframes uniformLine{0%,25%{opacity:1}35%,100%{opacity:0}}
+    @keyframes variance{0%,58%{opacity:0}65%,90%{opacity:1}96%,100%{opacity:0}}
+    @keyframes wc{0%,58%{opacity:0}65%,90%{opacity:1}96%,100%{opacity:0}}
+    @keyframes b1{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:6px;y:139px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b2{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:62px;y:83px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b3{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:14px;y:131px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b4{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:44px;y:101px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b5{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:8px;y:137px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b6{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:56px;y:89px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b7{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:18px;y:127px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b8{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:34px;y:111px;fill:#a78bfa}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b9{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:10px;y:135px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b10{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:50px;y:95px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b11{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:12px;y:133px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b12{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:40px;y:105px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    @keyframes b13{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:22px;y:123px;fill:#a78bfa}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
+    .ai-lbl{animation:aiLabel 5s ease-in-out infinite}
+    .h-lbl{animation:humanLabel 5s ease-in-out infinite}
+    .ai-mode{animation:modeAI 5s ease-in-out infinite}
+    .h-mode{animation:modeHuman 5s ease-in-out infinite}
+    .ul{animation:uniformLine 5s ease-in-out infinite}
+    .vr{animation:variance 5s ease-in-out infinite}
+    .wc{animation:wc 5s ease-in-out infinite}
+    .r1{animation:b1 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r2{animation:b2 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r3{animation:b3 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r4{animation:b4 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r5{animation:b5 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r6{animation:b6 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r7{animation:b7 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r8{animation:b8 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r9{animation:b9 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r10{animation:b10 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r11{animation:b11 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r12{animation:b12 5s cubic-bezier(.34,1.56,.64,1) infinite}
+    .r13{animation:b13 5s cubic-bezier(.34,1.56,.64,1) infinite}
+  </style>
+  <rect x="10" y="12" width="700" height="176" rx="20" fill="#faf5ff" stroke="#8b5cf6" stroke-width="1.5" stroke-opacity="0.25"/>
+  <text class="ai-lbl" x="38" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#ef4444" letter-spacing="0.5">AI</text>
+  <text class="h-lbl"  x="38" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#16a34a" letter-spacing="0.5">Human</text>
+  <text class="ai-mode" x="72" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#64748b">— uniform sentence length (≈18 words each)</text>
+  <text class="h-mode"  x="98" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#64748b">— natural burstiness (3 to 31 words)</text>
+  <text x="38" y="56" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a78bfa" letter-spacing="0.3">SENTENCE LENGTH · BURSTINESS SCORE</text>
+  <line x1="38" y1="145" x2="618" y2="145" stroke="#e2e8f0" stroke-width="1"/>
+  <line class="ul" x1="38" y1="107" x2="618" y2="107" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
+  <rect class="r1"  x="44"  y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r2"  x="80"  y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r3"  x="116" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r4"  x="152" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r5"  x="188" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r6"  x="224" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r7"  x="260" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r8"  x="296" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r9"  x="332" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r10" x="368" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r11" x="404" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r12" x="440" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <rect class="r13" x="476" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
+  <text class="wc" x="77"  y="79"  font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#7c3aed" font-weight="700">31</text>
+  <text class="wc" x="221" y="85"  font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#7c3aed" font-weight="700">28</text>
+  <text class="wc" x="365" y="91"  font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#7c3aed" font-weight="700">25</text>
+  <text class="wc" x="185" y="133" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#8b5cf6">4</text>
+  <text class="wc" x="44"  y="136" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#8b5cf6">3</text>
+  <g class="vr">
+    <line x1="516" y1="83"  x2="516" y2="141" stroke="#8b5cf6" stroke-width="1.5"/>
+    <line x1="516" y1="83"  x2="520" y2="83"  stroke="#8b5cf6" stroke-width="1.5"/>
+    <line x1="516" y1="141" x2="520" y2="141" stroke="#8b5cf6" stroke-width="1.5"/>
+    <text x="524" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#8b5cf6" font-weight="600">58 word</text>
+    <text x="524" y="125" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#8b5cf6" font-weight="600">spread</text>
+  </g>
+  <g class="vr">
+    <rect x="560" y="55" width="130" height="46" rx="8" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="574" y="72" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#64748b">Burstiness</text>
+    <text x="574" y="88" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#7c3aed">+0.74</text>
+  </g>
+  <g class="ai-lbl">
+    <rect x="560" y="55" width="130" height="46" rx="8" fill="#fff1f2" stroke="#ef4444" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="574" y="72" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#64748b">Burstiness</text>
+    <text x="574" y="88" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#ef4444">−0.02</text>
+  </g>
+  <text x="38"  y="170" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a78bfa" opacity="0.8" font-weight="600">humanizer</text>
+  <text x="107" y="170" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#64748b">restores the rhythm humans actually write in</text>
+</svg>
