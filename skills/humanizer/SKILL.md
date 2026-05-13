@@ -14,6 +14,8 @@ allowed-tools:
 
 # Humanizer: Make Text Sound Like a Human Wrote It
 
+Take text that smells like a chatbot wrote it and rewrite it as a specific, opinionated human. Detects 43 AI writing patterns, scores them 0-100, applies a chosen voice profile, and varies sentence-length burstiness so the result reads as written by a person.
+
 ## Quick reference
 
 **Modes**
@@ -108,383 +110,161 @@ Scan the input text for ALL of the following patterns. Track each match with its
 
 ### CONTENT PATTERNS
 
-#### P1: Significance Inflation
-**Trigger words:** stands/serves as, is a testament/reminder, vital/significant/crucial/pivotal/key role/moment, underscores/highlights importance, reflects broader, symbolizing ongoing/enduring/lasting, contributing to the, setting the stage, marking/shaping the, represents a shift, key turning point, evolving landscape, focal point, indelible mark, deeply rooted
+**P1: Significance Inflation.** Puff up importance by claiming arbitrary facts represent broader trends. Fix: State what the thing actually is or does. Cut the commentary about what it "represents." Triggers: stands/serves as, is a testament/reminder, vital/significant/crucial/pivotal/key role/moment, underscores/highlights importance, reflects broader, symbolizing ongoing/enduring/lasting, contributing to the, setting the stage, marking/shaping the, represents a shift, key turning point, evolving landscape, focal point, indelible mark, deeply rooted.
 
-**What's happening:** LLMs puff up importance by claiming arbitrary facts represent broader trends.
+> **AI:** established in 1989, marking a pivotal moment in the evolution of regional statistics  
+> **Human:** established in 1989 to collect regional statistics
 
-**Fix:** State what the thing actually IS or DOES. Cut the commentary about what it "represents."
+**P2: Notability Name-Dropping.** Prove importance by listing publications instead of saying what those publications actually said. Fix: Pick one source and say what it reported. Or cut the name-dropping entirely. Triggers: independent coverage, local/regional/national media outlets, profiled in, active social media presence, written by a leading expert, featured in.
 
-| AI version | Human version |
-|---|---|
-| "established in 1989, marking a pivotal moment in the evolution of regional statistics" | "established in 1989 to collect regional statistics" |
-| "This etymology highlights the enduring legacy of the community's resistance" | [delete entirely; etymology doesn't "highlight legacy"] |
+> **AI:** cited in NYT, BBC, FT, and The Hindu  
+> **Human:** In a 2024 NYT interview, she argued that regulation should focus on outcomes
 
-#### P2: Notability Name-Dropping
-**Trigger words:** independent coverage, local/regional/national media outlets, profiled in, active social media presence, written by a leading expert, featured in
+**P3: Superficial -ing Phrases.** Tack present participle phrases onto sentences to fake depth. It's the written equivalent of nodding sagely while saying nothing. Fix: Delete the -ing clause. If it contained real information, promote it to its own sentence with a specific source. Triggers: highlighting/underscoring/emphasizing.", ensuring.", reflecting/symbolizing.", contributing to.", cultivating/fostering.", encompassing.", showcasing."
 
-**What's happening:** LLMs prove importance by listing publications instead of saying what those publications actually said.
+> **AI:** The color palette resonates with the region's beauty, symbolizing bluebonnets, reflecting the community's deep connection to the land  
+> **Human:** The architect chose blue and gold to reference local bluebonnets
 
-**Fix:** Pick ONE source and say what it reported. Or cut the name-dropping entirely.
+**P4: Promotional Language.** Default to travel-brochure language. They can't describe a place without "nestling" it somewhere "vibrant." Fix: Replace adjectives with facts. What specifically makes it notable? Triggers: boasts a, vibrant, rich (figurative), profound, enhancing its, showcasing, exemplifies, commitment to, natural beauty, nestled, in the heart of, groundbreaking (figurative), renowned, breathtaking, must-visit, stunning, cutting-edge, seamless, robust, world-class, state-of-the-art.
 
-| AI version | Human version |
-|---|---|
-| "cited in NYT, BBC, FT, and The Hindu" | "In a 2024 NYT interview, she argued that regulation should focus on outcomes" |
-| "maintains an active social media presence" | [delete; this is a non-statement] |
+> **AI:** Nestled within the breathtaking region of Gonder, a vibrant town with rich cultural heritage  
+> **Human:** A town in the Gonder region, known for its weekly market and 18th-century church
 
-#### P3: Superficial -ing Phrases
-**Trigger words:** highlighting/underscoring/emphasizing..., ensuring..., reflecting/symbolizing..., contributing to..., cultivating/fostering..., encompassing..., showcasing...
+**P5: Vague Attributions.** Invent phantom authorities to give opinions weight. Fix: name the specific expert/paper/report. If you can't, delete the claim. Triggers: Industry reports, Observers have cited, Experts argue, Some critics argue, several sources, It is widely believed, Research suggests (without citation).
 
-**What's happening:** LLMs tack present participle phrases onto sentences to fake depth. It's the written equivalent of nodding sagely while saying nothing.
+> **AI:** Experts believe it plays a crucial role in the regional ecosystem  
+> **Human:** A 2019 Chinese Academy of Sciences survey found 12 endemic fish species
 
-**Fix:** Delete the -ing clause. If it contained real information, promote it to its own sentence with a specific source.
+**P6: Formulaic Challenges Sections.** Generate "challenges" sections from nothing. The template: despite [good thing], [vague problems]. Despite these, [optimistic platitude]. Fix: State specific problems with dates and data. Or cut the section if there's nothing concrete to say. Triggers: Despite its." Faces several challenges.", Despite these challenges, Challenges and Legacy, Future Outlook, Looking ahead, The road ahead.
 
-| AI version | Human version |
-|---|---|
-| "The color palette resonates with the region's beauty, symbolizing bluebonnets, reflecting the community's deep connection to the land" | "The architect chose blue and gold to reference local bluebonnets" |
+> **AI:** Despite its prosperity, faces challenges typical of urban areas. Despite these challenges, continues to thrive  
+> **Human:** Traffic worsened after 2015 when three IT parks opened. A stormwater project started in 2022
 
-#### P4: Promotional Language
-**Trigger words:** boasts a, vibrant, rich (figurative), profound, enhancing its, showcasing, exemplifies, commitment to, natural beauty, nestled, in the heart of, groundbreaking (figurative), renowned, breathtaking, must-visit, stunning, cutting-edge, seamless, robust, world-class, state-of-the-art
+**P7: AI Vocabulary Words.** These words appear 3-10x more frequently in post-2023 text. They often cluster together. "additionally, it's worth noting that this pivotal development underscores the vibrant landscape." Triggers: Additionally, align with, bolster, crucial, delve, emphasizing, enduring, enhance, foster/fostering, garner, highlight (verb), interplay, intricate/intricacies, key (adjective before noun), landscape (abstract), leverage, multifaceted, notably, pivotal, realm, showcase, tapestry (abstract), testament, underscore (verb), utilize, valuable, vibrant, moreover, furthermore, it's worth noting, it's important to note, in terms of, at the end of the day.
 
-**What's happening:** LLMs default to travel-brochure language. They can't describe a place without "nestling" it somewhere "vibrant."
+**P8: Copula Avoidance.** Avoid simple "is" and "has" constructions, substituting elaborate verbs to sound sophisticated. Fix: Use "is", "are", "has", "was". Simple copulas are not boring; they're clear. Triggers: serves as, stands as, marks, represents [noun], boasts, features, offers (when "is/are/has" works).
 
-**Fix:** Replace adjectives with facts. What specifically makes it notable?
-
-| AI version | Human version |
-|---|---|
-| "Nestled within the breathtaking region of Gonder, a vibrant town with rich cultural heritage" | "A town in the Gonder region, known for its weekly market and 18th-century church" |
-
-#### P5: Vague Attributions
-**Trigger words:** Industry reports, Observers have cited, Experts argue, Some critics argue, several sources, It is widely believed, Research suggests (without citation)
-
-**What's happening:** LLMs invent phantom authorities to give opinions weight.
-
-**Fix:** Name the specific expert/paper/report. If you can't, delete the claim.
-
-| AI version | Human version |
-|---|---|
-| "Experts believe it plays a crucial role in the regional ecosystem" | "A 2019 Chinese Academy of Sciences survey found 12 endemic fish species" |
-
-#### P6: Formulaic Challenges Sections
-**Trigger words:** Despite its... faces several challenges..., Despite these challenges, Challenges and Legacy, Future Outlook, Looking ahead, The road ahead
-
-**What's happening:** LLMs generate "challenges" sections from nothing. The template: despite [good thing], [vague problems]. Despite these, [optimistic platitude].
-
-**Fix:** State specific problems with dates and data. Or cut the section if there's nothing concrete to say.
-
-| AI version | Human version |
-|---|---|
-| "Despite its prosperity, faces challenges typical of urban areas. Despite these challenges, continues to thrive" | "Traffic worsened after 2015 when three IT parks opened. A stormwater project started in 2022" |
-
-#### P7: AI Vocabulary Words
-**Blacklist (high-frequency AI markers):** Additionally, align with, bolster, crucial, delve, emphasizing, enduring, enhance, foster/fostering, garner, highlight (verb), interplay, intricate/intricacies, key (adjective before noun), landscape (abstract), leverage, multifaceted, notably, pivotal, realm, showcase, tapestry (abstract), testament, underscore (verb), utilize, valuable, vibrant, moreover, furthermore, it's worth noting, it's important to note, in terms of, at the end of the day
-
-**What's happening:** These words appear 3-10x more frequently in post-2023 text. They often cluster together. "Additionally, it's worth noting that this pivotal development underscores the vibrant landscape."
-
-**Fix:** Replace with plain English. "Additionally" → "Also" or just start the sentence. "Utilize" → "use". "Leverage" → "use". "Delve" → "look at" or "explore". "Pivotal" → [delete, just say what happened].
-
-#### P8: Copula Avoidance
-**Trigger words:** serves as, stands as, marks, represents [noun], boasts, features, offers (when "is/are/has" works)
-
-**What's happening:** LLMs avoid simple "is" and "has" constructions, substituting elaborate verbs to sound sophisticated.
-
-**Fix:** Use "is", "are", "has", "was". Simple copulas are not boring; they're clear.
-
-| AI version | Human version |
-|---|---|
-| "Gallery 825 serves as the exhibition space" | "Gallery 825 is the exhibition space" |
-| "features four rooms and boasts 3,000 sq ft" | "has four rooms totaling 3,000 sq ft" |
-
+> **AI:** Gallery 825 serves as the exhibition space  
+> **Human:** Gallery 825 is the exhibition space
 ### LANGUAGE & STYLE PATTERNS
 
-#### P9: Negative Parallelisms
-**Trigger:** "Not only X but Y", "It's not just about X, it's Y", "It's not merely X, it's Y", "X isn't just Y, it's Z"
+**P9: Negative Parallelisms.** Once is fine. Twice is a pattern. Three times is a chatbot. Fix: State the point directly without the theatrical build-up. Triggers: "Not only X but Y", "It's not just about X, it's Y", "It's not merely X, it's Y", "X isn't just Y, it's Z".
 
-**What's happening:** Once is fine. Twice is a pattern. Three times is a chatbot.
+> **AI:** It's not just a song, it's a statement  
+> **Human:** The heavy beat adds to the aggressive tone
 
-**Fix:** State the point directly without the theatrical build-up.
+**P10: Rule of Three.** Group things in threes to sound authoritative. Humans don't always think in triads. Fix: Use the natural number. Sometimes one. Sometimes four. Two is underrated. Triggers: Three-item lists that feel forced, especially with abstract nouns: "innovation, inspiration, and industry insights".
 
-| AI version | Human version |
-|---|---|
-| "It's not just a song, it's a statement" | "The heavy beat adds to the aggressive tone" |
+> **AI:** innovation, inspiration, and industry insights  
+> **Human:** talks and panels, plus time for networking
 
-#### P10: Rule of Three
-**Trigger:** Three-item lists that feel forced, especially with abstract nouns: "innovation, inspiration, and industry insights"
+**P11: Synonym Cycling (Elegant Variation).** Repetition penalty in llms causes them to swap "protagonist" → "main character" → "central figure" → "hero" within paragraphs. Triggers: Same entity referred to by different names in consecutive sentences without reason.
 
-**What's happening:** LLMs group things in threes to sound authoritative. Humans don't always think in triads.
+**P12: False Ranges.**  Triggers: "From X to Y" where X and Y aren't on a meaningful spectrum.
 
-**Fix:** Use the natural number. Sometimes one. Sometimes four. Two is underrated.
+**P13: Em Dash Ban.** Overuse em dashes mimicking punchy sales/editorial writing. It's the single most common ai formatting tell. Triggers: Any em dash (U+2014) anywhere in the text. Zero tolerance.
 
-| AI version | Human version |
-|---|---|
-| "innovation, inspiration, and industry insights" | "talks and panels, plus time for networking" |
+**P14: Boldface/Formatting Overuse.** Mechanically emphasize terms. Humans use bold sparingly, once per section, not on every noun. Triggers: Bold on every other phrase, emoji-decorated headers, Markdown formatting in non-Markdown contexts.
 
-#### P11: Synonym Cycling (Elegant Variation)
-**Trigger:** Same entity referred to by different names in consecutive sentences without reason
+**P15: Structured List Syndrome.**  Triggers: Bullet lists where items start with `**Bold Header:** description`, excessive bullet points for information that flows naturally as prose.
 
-**What's happening:** Repetition penalty in LLMs causes them to swap "protagonist" → "main character" → "central figure" → "hero" within paragraphs.
+**P16: Title Case in Headings.**  Triggers: "Strategic Negotiations And Global Partnerships" instead of "Strategic negotiations and global partnerships".
 
-**Fix:** Pick the clearest term and repeat it. Humans repeat words. It's fine.
+**P17: Curly Quotes and Typographic Tells.** Chatgpt specifically uses curly quotes. Claude uses straight quotes. These are fingerprints. Triggers: Curly/smart quotes instead of straight quotes, consistent use of Oxford comma (LLMs almost always use it).
 
-#### P12: False Ranges
-**Trigger:** "From X to Y" where X and Y aren't on a meaningful spectrum
-
-**Fix:** List the topics directly. Drop the "from/to" framing.
-
-#### P13: Em Dash Ban
-**Trigger:** Any em dash (U+2014) anywhere in the text. Zero tolerance.
-
-**What's happening:** LLMs overuse em dashes mimicking punchy sales/editorial writing. It's the single most common AI formatting tell.
-
-**Fix:** Replace ALL em dashes with commas, periods, parentheses, colons, or hyphens. Never output an em dash.
-
-#### P14: Boldface/Formatting Overuse
-**Trigger:** Bold on every other phrase, emoji-decorated headers, Markdown formatting in non-Markdown contexts
-
-**What's happening:** LLMs mechanically emphasize terms. Humans use bold sparingly, once per section, not on every noun.
-
-**Fix:** Strip most bold. Remove emoji decorations. If it's important, the words should convey that.
-
-#### P15: Structured List Syndrome
-**Trigger:** Bullet lists where items start with `**Bold Header:** description`, excessive bullet points for information that flows naturally as prose
-
-**Fix:** Convert bullet lists to flowing prose. Keep lists only for genuinely enumerable items (steps, ingredients, CLI flags).
-
-#### P16: Title Case in Headings
-**Trigger:** "Strategic Negotiations And Global Partnerships" instead of "Strategic negotiations and global partnerships"
-
-**Fix:** Use sentence case for headings unless the style guide specifically requires title case.
-
-#### P17: Curly Quotes and Typographic Tells
-**Trigger:** Curly/smart quotes instead of straight quotes, consistent use of Oxford comma (LLMs almost always use it)
-
-**What's happening:** ChatGPT specifically uses curly quotes. Claude uses straight quotes. These are fingerprints.
-
-**Fix:** Match the target platform's convention. For code/technical contexts, always straight quotes.
-
-#### P18: Formal Register Overuse
-**Trigger:** Text reads like a government memo or academic abstract when the context calls for plain language. Phrases like "it should be noted that", "it is essential to", "in the context of", "the implementation of"
-
-**What's happening:** LLMs default to the most formal register in any language. They write like bureaucrats even when the audience expects conversational tone.
-
-**Fix:** Match the register to the audience. Business email ≠ legal brief. Blog post ≠ white paper. When in doubt, one notch less formal than you think.
-
+**P18: Formal Register Overuse.** Default to the most formal register in any language. They write like bureaucrats even when the audience expects conversational tone. Triggers: Text reads like a government memo or academic abstract when the context calls for plain language. Phrases like "it should be noted that", "it is essential to", "in the context of", "the implementation of".
 ### COMMUNICATION PATTERNS
 
-#### P19: Chatbot Artifacts
-**Trigger:** "I hope this helps", "Of course!", "Certainly!", "You're absolutely right!", "Would you like me to...", "Let me know if...", "Here is a..."
+**P19: Chatbot Artifacts.**  Triggers: "I hope this helps", "Of course!", "Certainly!", "You're absolutely right!", "Would you like me to."", "Let me know if."", "Here is a."".
 
-**Fix:** Delete entirely. These are conversation remnants, not content.
+**P20: Knowledge-Cutoff Disclaimers.**  Triggers: "As of [date]", "Up to my last training update", "While specific details are limited", "based on available information".
 
-#### P20: Knowledge-Cutoff Disclaimers
-**Trigger:** "As of [date]", "Up to my last training update", "While specific details are limited", "based on available information"
-
-**Fix:** Either find the actual information or remove the hedged statement entirely.
-
-#### P21: Sycophantic Tone
-**Trigger:** "Great question!", "That's an excellent point!", "You raise a very important issue", "Absolutely!"
-
-**Fix:** Skip the flattery. Respond to the substance.
-
+**P21: Sycophantic Tone.**  Triggers: "Great question!", "That's an excellent point!", "You raise a very important issue", "Absolutely!".
 ### FILLER & HEDGING PATTERNS
 
-#### P22: Filler Phrases
-**Kill list (replace with shorter form):**
-- "In order to" → "To"
-- "Due to the fact that" → "Because"
-- "At this point in time" → "Now"
-- "In the event that" → "If"
-- "Has the ability to" → "Can"
-- "It is important to note that" → [delete, just state the thing]
-- "It goes without saying" → [then don't say it]
-- "In today's rapidly evolving" → [delete entirely]
-- "When it comes to" → [delete or rephrase]
-- "In terms of" → [rephrase]
-- "At the end of the day" → [delete]
-- "The fact of the matter is" → [delete]
-- "For all intents and purposes" → [delete or "effectively"]
+**P22: Filler Phrases.** 
+**P23: Excessive Hedging.**  Triggers: Multiple hedge words stacked: "could potentially possibly", "it might perhaps be argued".
 
-#### P23: Excessive Hedging
-**Trigger:** Multiple hedge words stacked: "could potentially possibly", "it might perhaps be argued"
-
-**Fix:** One hedge per claim maximum. "May" or "might", not both with "potentially" and "arguably" on top.
-
-#### P24: Generic Positive Conclusions
-**Trigger:** "The future looks bright", "exciting times lie ahead", "continues its journey toward excellence", "a step in the right direction", "poised for growth"
-
-**Fix:** End with a specific fact about what's actually happening next. Or just stop. Not every piece needs a conclusion.
-
+**P24: Generic Positive Conclusions.**  Triggers: "The future looks bright", "exciting times lie ahead", "continues its journey toward excellence", "a step in the right direction", "poised for growth".
 ### BONUS PATTERNS
 
-#### P25: Hallucination Markers
-**Trigger:** Overly specific dates/numbers that feel fabricated, attribution to sources that don't exist, confident claims about obscure facts without citations
+**P25: Hallucination Markers.**  Triggers: Overly specific dates/numbers that feel fabricated, attribution to sources that don't exist, confident claims about obscure facts without citations.
 
-**Fix:** Flag for verification. If source can't be found, mark as uncertain or delete.
+**P26: Perfect/Error Alternation.**  Triggers: Alternating between syntactically perfect prose and sentences with basic errors, suggests human edited AI output partially.
 
-#### P26: Perfect/Error Alternation
-**Trigger:** Alternating between syntactically perfect prose and sentences with basic errors, suggests human edited AI output partially
+**P27: Question-Format Section Titles.** Trained on faq content default to question headings. Human editors rarely do this in long-form content. Triggers: "What makes X unique?", "Why is Y important?", "How does Z work?".
 
-**Fix:** Normalize the quality level throughout. Either fix all errors or ensure consistent voice.
+**P28: Markdown Bleeding.**  Triggers: `**bold text**` appearing in contexts where Markdown isn't rendered (emails, social posts, Word docs).
 
-#### P27: Question-Format Section Titles
-**Trigger:** "What makes X unique?", "Why is Y important?", "How does Z work?"
+**P29: The "Comprehensive Overview" Opening.**  Triggers: "This comprehensive guide/overview/analysis covers."", "In this article, we will explore."", "Let's dive into."".
 
-**What's happening:** LLMs trained on FAQ content default to question headings. Human editors rarely do this in long-form content.
-
-**Fix:** Convert to declarative headings. "What makes X unique?" → "X's distinguishing features" or just "Features."
-
-#### P28: Markdown Bleeding
-**Trigger:** `**bold text**` appearing in contexts where Markdown isn't rendered (emails, social posts, Word docs)
-
-**Fix:** Remove Markdown formatting. Use the target medium's native formatting.
-
-#### P29: The "Comprehensive Overview" Opening
-**Trigger:** "This comprehensive guide/overview/analysis covers...", "In this article, we will explore...", "Let's dive into..."
-
-**Fix:** Just start. Drop the meta-commentary about what the text will do. The reader can see what it does by reading it.
-
-#### P30: Uniform Sentence Length
-**Trigger:** Every sentence in a paragraph is between 15-25 words. No short punches. No long flowing thoughts.
-
-**What's happening:** LLMs produce statistically average sentence lengths. Humans vary wildly: 3 words to 40+.
-
-**Fix:** Deliberately vary. Follow a long sentence with a short one. Or a fragment. Then open up again.
-
+**P30: Uniform Sentence Length.** Produce statistically average sentence lengths. Humans vary wildly: 3 words to 40+. Triggers: Every sentence in a paragraph is between 15-25 words. No short punches. No long flowing thoughts.
 ### EMERGING PATTERNS (2026)
 
-#### P31: Elegant Variation (Noun-Phrase Cycling)
-**Trigger:** Same referent described 3+ different ways in a paragraph (e.g., "the artist", "the non-conformist painter", "the visionary creator")
-**What's happening:** LLMs have repetition penalties that discourage reusing the same noun phrase, so they substitute increasingly elaborate descriptors for the same entity. Distinct from P11 (Synonym Cycling) which covers word-level swaps. This is about cycling entire noun phrases for the same subject.
-**Fix:** Pick the clearest term and repeat it. Humans repeat words naturally.
+**P31: Elegant Variation (Noun-Phrase Cycling).** Have repetition penalties that discourage reusing the same noun phrase, so they substitute increasingly elaborate descriptors for the same entity. Distinct from p11 (synonym cycling) which covers word-level swaps. This is about cycling entire noun phrases for the same subject. **fix:** pick the clearest term and repeat it. Humans repeat words naturally. Fix: Pick the clearest term and repeat it. Humans repeat words naturally. Triggers: Same referent described 3+ different ways in a paragraph (e.g., "the artist", "the non-conformist painter", "the visionary creator") **What's happening:** LLMs have repetition penalties that discourage reusing the same noun phrase, so they substitute increasingly elaborate descriptors for the same entity. Distinct from P11 (Synonym Cycling) which covers word-level swaps. This is about cycling entire noun phrases for the same subject. **Fix:** Pick the clearest term and repeat it. Humans repeat words naturally.
 
-| AI version | Human version |
-|---|---|
-| "Yankilevsky, alongside other non-conformist artists, faced obstacles. The visionary creator's distinctive artistic journey..." | "Yankilevsky and other non-conformist artists faced obstacles. His work..." |
+> **AI:** Yankilevsky, alongside other non-conformist artists, faced obstacles. The visionary creator's distinctive artistic journey."  
+> **Human:** Yankilevsky and other non-conformist artists faced obstacles. His work."
 
-#### P32: Collaborative Communication Leaking
-**Trigger:** "In this article, we will explore", "Let me walk you through", "Would you like me to", "Here's what you need to know", instructions to the reader about what they should do, conversational framing in published content
-**What's happening:** The LLM was generating advice or correspondence for the user, not content for publication. The user pasted it verbatim without removing the conversational framing. Distinct from P19 (Chatbot Artifacts) which covers identity disclosure. This is about instructional framing leaking into output.
-**Fix:** Delete the meta-commentary. Just start with the actual content.
+**P32: Collaborative Communication Leaking.** The llm was generating advice or correspondence for the user, not content for publication. The user pasted it verbatim without removing the conversational framing. Distinct from p19 (chatbot artifacts) which covers identity disclosure. This is about instructional framing leaking into output. **fix:** delete the meta-commentary. Just start with the actual content. Fix: Delete the meta-commentary. Just start with the actual content. Triggers: "In this article, we will explore", "Let me walk you through", "Would you like me to", "Here's what you need to know", instructions to the reader about what they should do, conversational framing in published content **What's happening:** The LLM was generating advice or correspondence for the user, not content for publication. The user pasted it verbatim without removing the conversational framing. Distinct from P19 (Chatbot Artifacts) which covers identity disclosure. This is about instructional framing leaking into output. **Fix:** Delete the meta-commentary. Just start with the actual content.
 
-| AI version | Human version |
-|---|---|
-| "In this article, we will explore the unique characteristics that make this framework worth using." | "This framework solves three problems that React Router doesn't." |
+> **AI:** In this article, we will explore the unique characteristics that make this framework worth using.  
+> **Human:** This framework solves three problems that React Router doesn't.
 
-#### P33: Placeholder Text / Mad Libs Templates
-**Trigger:** `[Your Name]`, `[Describe the specific section]`, `[INSERT SOURCE URL]`, `2025-XX-XX`, `<!-- Add if available -->`, square-bracketed instructions that were meant to be filled in
-**What's happening:** LLMs generate fill-in-the-blank templates that users forget to complete before publishing. These are near-definitive AI tells.
-**Fix:** Either fill in the real information or delete the placeholder entirely.
+**P33: Placeholder Text / Mad Libs Templates.** Generate fill-in-the-blank templates that users forget to complete before publishing. These are near-definitive ai tells. **fix:** either fill in the real information or delete the placeholder entirely. Fix: Either fill in the real information or delete the placeholder entirely. Triggers: `[Your Name]`, `[Describe the specific section]`, `[INSERT SOURCE URL]`, `2025-XX-XX`, `<!-- Add if available -->`, square-bracketed instructions that were meant to be filled in **What's happening:** LLMs generate fill-in-the-blank templates that users forget to complete before publishing. These are near-definitive AI tells. **Fix:** Either fill in the real information or delete the placeholder entirely.
 
-| AI version | Human version |
-|---|---|
-| "Dear [Recipient], I am writing regarding [Topic]." | (Either fill it in or don't send it) |
+> **AI:** Dear [Recipient], I am writing regarding [Topic].  
+> **Human:** (Either fill it in or don't send it)
 
-#### P34: Chatbot Reference Markup Leaking
-**Trigger:** `citeturn0search0`, `contentReference[oaicite:0]{index=0}`, `oai_citation`, `[attached_file:1]`, `grok_card`, footnote reference characters that don't link to anything
-**What's happening:** Internal chatbot citation markup tokens get preserved when copy-pasting from ChatGPT, Grok, Perplexity, or similar tools. These are near-definitive proof of AI tool usage.
-**Fix:** Delete all markup artifacts. If the citation was meaningful, replace with a proper reference.
+**P34: Chatbot Reference Markup Leaking.** Internal chatbot citation markup tokens get preserved when copy-pasting from chatgpt, grok, perplexity, or similar tools. These are near-definitive proof of ai tool usage. **fix:** delete all markup artifacts. If the citation was meaningful, replace with a proper reference. Fix: Delete all markup artifacts. If the citation was meaningful, replace with a proper reference. Triggers: `citeturn0search0`, `contentReference[oaicite:0]{index=0}`, `oai_citation`, `[attached_file:1]`, `grok_card`, footnote reference characters that don't link to anything **What's happening:** Internal chatbot citation markup tokens get preserved when copy-pasting from ChatGPT, Grok, Perplexity, or similar tools. These are near-definitive proof of AI tool usage. **Fix:** Delete all markup artifacts. If the citation was meaningful, replace with a proper reference.
 
-| AI version | Human version |
-|---|---|
-| "The school has been recognized as an International Fellowship Centre. citeturn0search1" | "The school has been recognized as an International Fellowship Centre." |
+> **AI:** The school has been recognized as an International Fellowship Centre. citeturn0search1  
+> **Human:** The school has been recognized as an International Fellowship Centre.
 
-#### P35: UTM Source Parameters from AI Tools
-**Trigger:** `utm_source=chatgpt.com`, `utm_source=openai`, `utm_source=copilot.com`, `referrer=grok.com` in URLs
-**What's happening:** ChatGPT, Copilot, and Grok automatically append tracking parameters to URLs they generate. These are near-definitive proof of AI tool involvement.
-**Fix:** Strip UTM parameters from all URLs.
+**P35: UTM Source Parameters from AI Tools.** Chatgpt, copilot, and grok automatically append tracking parameters to urls they generate. These are near-definitive proof of ai tool involvement. **fix:** strip utm parameters from all urls. Fix: Strip utm parameters from all urls. Triggers: `utm_source=chatgpt.com`, `utm_source=openai`, `utm_source=copilot.com`, `referrer=grok.com` in URLs **What's happening:** ChatGPT, Copilot, and Grok automatically append tracking parameters to URLs they generate. These are near-definitive proof of AI tool involvement. **Fix:** Strip UTM parameters from all URLs.
 
-| AI version | Human version |
-|---|---|
-| `https://example.com/article?utm_source=chatgpt.com` | `https://example.com/article` |
+> **AI:** `https://example.com/article?utm_source=chatgpt.com`  
+> **Human:** `https://example.com/article`
 
-#### P36: Sudden Style/Register Shift
-**Trigger:** One paragraph with perfect formal English followed by casual text with errors, or vice versa. American English suddenly appearing in text by a non-American author. Graduate-thesis prose in the middle of casual notes.
-**What's happening:** The AI-generated portions have a distinctly different voice, register, and error profile than the human-written portions. This catches mixed human+AI authorship.
-**Fix:** Maintain consistent register throughout. Rewrite the AI-generated sections to match the author's natural voice.
+**P36: Sudden Style/Register Shift.** The ai-generated portions have a distinctly different voice, register, and error profile than the human-written portions. This catches mixed human+ai authorship. **fix:** maintain consistent register throughout. Rewrite the ai-generated sections to match the author's natural voice. Fix: Maintain consistent register throughout. Rewrite the ai-generated sections to match the author's natural voice. Triggers: One paragraph with perfect formal English followed by casual text with errors, or vice versa. American English suddenly appearing in text by a non-American author. Graduate-thesis prose in the middle of casual notes. **What's happening:** The AI-generated portions have a distinctly different voice, register, and error profile than the human-written portions. This catches mixed human+AI authorship. **Fix:** Maintain consistent register throughout. Rewrite the AI-generated sections to match the author's natural voice.
 
-| AI version | Human version |
-|---|---|
-| "yeah so the bug is in line 42 lol. The aforementioned implementation exhibits suboptimal performance characteristics due to..." | "yeah so the bug is in line 42. the loop allocates on every iteration instead of reusing the buffer." |
+> **AI:** yeah so the bug is in line 42 lol. The aforementioned implementation exhibits suboptimal performance characteristics due to."  
+> **Human:** yeah so the bug is in line 42. The loop allocates on every iteration instead of reusing the buffer.
 
-#### P37: Overattribution / Source-Listing as Content
-**Trigger:** "Featured in [Publication A], [Publication B], and other media outlets", "Has been cited in", "Maintains an active social media presence", entire sections that just list where something was covered without saying what the coverage actually said
-**What's happening:** LLMs try to prove a subject's importance by listing coverage sources rather than summarizing what sources actually reported. Distinct from P2 (Notability Name-Dropping) which covers dropping famous names. This is about treating source lists as proof of importance.
-**Fix:** Pick ONE source and say what it reported. Or cut the list entirely.
+**P37: Overattribution / Source-Listing as Content.** Try to prove a subject's importance by listing coverage sources rather than summarizing what sources actually reported. Distinct from p2 (notability name-dropping) which covers dropping famous names. This is about treating source lists as proof of importance. **fix:** pick one source and say what it reported. Or cut the list entirely. Fix: Pick one source and say what it reported. Or cut the list entirely. Triggers: "Featured in [Publication A], [Publication B], and other media outlets", "Has been cited in", "Maintains an active social media presence", entire sections that just list where something was covered without saying what the coverage actually said **What's happening:** LLMs try to prove a subject's importance by listing coverage sources rather than summarizing what sources actually reported. Distinct from P2 (Notability Name-Dropping) which covers dropping famous names. This is about treating source lists as proof of importance. **Fix:** Pick ONE source and say what it reported. Or cut the list entirely.
 
-| AI version | Human version |
-|---|---|
-| "Her insights have been featured in Wired, Refinery29, and other prominent media outlets." | "Wired profiled her 2024 research on algorithmic bias in hiring software." |
-
+> **AI:** Her insights have been featured in Wired, Refinery29, and other prominent media outlets.  
+> **Human:** Wired profiled her 2024 research on algorithmic bias in hiring software.
 ### COMMUNITY-DISCOVERED PATTERNS (2026)
 
 These were surfaced from HackerNews, Substack, Wikipedia's editorial guideline, and writing practitioner blogs after the initial P1-P43 catalog. Sources cited inline.
 
-#### P38: Paragraph-Reshuffling Immunity
-**Trigger:** Any paragraph could be moved or deleted without affecting the text's argument. Each paragraph is a self-contained mini-thesis with its own setup and resolution, rather than building on the previous one.
-**What's happening:** LLMs generate parallel blocks rather than an unfolding argument. Test: can you swap paragraph 2 and paragraph 4 without breaking the piece? If yes, it's AI.
-**Fix:** Make paragraph N+1 depend on something concrete in paragraph N. References, callbacks, "this is why..." linkage. If two paragraphs are interchangeable, merge them or cut one.
-**Source:** [HackerNews thread, May 2025](https://news.ycombinator.com/item?id=46646939)
+**P38: Paragraph-Reshuffling Immunity.** Generate parallel blocks rather than an unfolding argument. test: can you swap paragraph 2 and paragraph 4 without breaking the piece? if yes, it's ai. **fix:** make paragraph n+1 depend on something concrete in paragraph n. references, callbacks, "this is why."" linkage. If two paragraphs are interchangeable, merge them or cut one. **source:** [hackernews thread, may 2025](https://news.ycombinator.com/item?id=46646939). Fix: Make paragraph n+1 depend on something concrete in paragraph n. references, callbacks, "this is why."" linkage. If two paragraphs are interchangeable, merge them or cut one. **source:** [hackernews thread, may 2025](https://news.ycombinator.com/item?id=46646939). Triggers: Any paragraph could be moved or deleted without affecting the text's argument. Each paragraph is a self-contained mini-thesis with its own setup and resolution, rather than building on the previous one. **What's happening:** LLMs generate parallel blocks rather than an unfolding argument. Test: can you swap paragraph 2 and paragraph 4 without breaking the piece? If yes, it's AI. **Fix:** Make paragraph N+1 depend on something concrete in paragraph N. References, callbacks, "this is why."" linkage. If two paragraphs are interchangeable, merge them or cut one. **Source:** [HackerNews thread, May 2025](https://news.ycombinator.com/item?id=46646939). Source: [HackerNews thread, May 2025](https://news.ycombinator.com/item?id=46646939)
 
-| AI version | Human version |
-|---|---|
-| "Remote work improves balance. Many workers prefer it. Studies show productivity rises. Additionally, commuting costs drop. Office costs decline too." | "Remote work's flexibility is the obvious sell. The harder question is what you lose. The hallway conversation that turns into your best idea. The body language that tells you someone's drowning before they say anything." |
+> **AI:** Remote work improves balance. Many workers prefer it. Studies show productivity rises. Additionally, commuting costs drop. Office costs decline too.  
+> **Human:** Remote work's flexibility is the obvious sell. The harder question is what you lose. The hallway conversation that turns into your best idea. The body language that tells you someone's drowning before they say anything.
 
-#### P39: Paragraph-Closing "Whether" Summary Sentences
-**Trigger:** Paragraphs that end with a recap line starting with "Whether you...", "Whether they...", "Whether it's...". These restate the paragraph's scope as a closer instead of advancing to the next thought.
-**What's happening:** LLMs treat paragraph endings as local summaries, mimicking SEO blog structure where each section is internally self-explaining. Humans rarely end with this construction in flowing prose.
-**Fix:** Cut the closing "whether" sentence. The paragraph should end on its strongest specific point, not a hedge that gestures at the range covered.
-**Source:** [Gone Travelling Productions, Aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/)
+**P39: Paragraph-Closing "Whether" Summary Sentences.** Treat paragraph endings as local summaries, mimicking seo blog structure where each section is internally self-explaining. Humans rarely end with this construction in flowing prose. **fix:** cut the closing "whether" sentence. The paragraph should end on its strongest specific point, not a hedge that gestures at the range covered. **source:** [gone travelling productions, aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/). Fix: Cut the closing "whether" sentence. The paragraph should end on its strongest specific point, not a hedge that gestures at the range covered. **Source:** [Gone Travelling Productions, Aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/). Triggers: Paragraphs that end with a recap line starting with "Whether you."", "Whether they."", "Whether it's."". These restate the paragraph's scope as a closer instead of advancing to the next thought. **What's happening:** LLMs treat paragraph endings as local summaries, mimicking SEO blog structure where each section is internally self-explaining. Humans rarely end with this construction in flowing prose. **Fix:** Cut the closing "whether" sentence. The paragraph should end on its strongest specific point, not a hedge that gestures at the range covered. **Source:** [Gone Travelling Productions, Aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/). Source: [Gone Travelling Productions, Aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/)
 
-| AI version | Human version |
-|---|---|
-| "Tokyo offers everything from Michelin-starred restaurants to humble ramen stalls. Whether you prefer fine dining or street food, Tokyo has something for every palate." | "Tokyo's best ramen counter doesn't have a phone, doesn't take reservations, and doesn't change the broth recipe. It's been the same since 1987." |
+> **AI:** Tokyo offers everything from Michelin-starred restaurants to humble ramen stalls. Whether you prefer fine dining or street food, Tokyo has something for every palate.  
+> **Human:** Tokyo's best ramen counter doesn't have a phone, doesn't take reservations, and doesn't change the broth recipe. It's been the same since 1987.
 
-#### P40: Symbolic Gloss / Meaning-Telling
-**Trigger:** "represents", "symbolizes", "speaks to", "embodies", "reflects broader", "is a symbol of" applied to mundane things; sentences that translate facts into their alleged significance instead of letting facts stand.
-**What's happening:** LLMs narrate the meaning of things rather than trusting description to carry it. Distinct from P1 (Significance Inflation) which uses "pivotal moment", "testament" framing. P40 is the interpretive gloss layer telling readers what to feel about something.
-**Fix:** Cut the symbol/meaning sentence. State the fact and let the reader interpret. If the symbolic claim was the whole point, replace it with a concrete consequence.
-**Source:** [Writewithai Substack, 2025](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams)
+**P40: Symbolic Gloss / Meaning-Telling.** Narrate the meaning of things rather than trusting description to carry it. Distinct from p1 (significance inflation) which uses "pivotal moment", "testament" framing. p40 is the interpretive gloss layer telling readers what to feel about something. **fix:** cut the symbol/meaning sentence. State the fact and let the reader interpret. If the symbolic claim was the whole point, replace it with a concrete consequence. **source:** [writewithai substack, 2025](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams). Fix: Cut the symbol/meaning sentence. State the fact and let the reader interpret. If the symbolic claim was the whole point, replace it with a concrete consequence. **Source:** [Writewithai Substack, 2025](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams). Triggers: "represents", "symbolizes", "speaks to", "embodies", "reflects broader", "is a symbol of" applied to mundane things; sentences that translate facts into their alleged significance instead of letting facts stand. **What's happening:** LLMs narrate the meaning of things rather than trusting description to carry it. Distinct from P1 (Significance Inflation) which uses "pivotal moment", "testament" framing. P40 is the interpretive gloss layer telling readers what to feel about something. **Fix:** Cut the symbol/meaning sentence. State the fact and let the reader interpret. If the symbolic claim was the whole point, replace it with a concrete consequence. **Source:** [Writewithai Substack, 2025](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams). Source: [Writewithai Substack, 2025](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams)
 
-| AI version | Human version |
-|---|---|
-| "The closed factory represents the decline of American manufacturing and speaks to broader anxieties about post-industrial identity." | "The factory closed in 2009. Three hundred jobs. The town's high school dropped football the following year." |
+> **AI:** The closed factory represents the decline of American manufacturing and speaks to broader anxieties about post-industrial identity.  
+> **Human:** The factory closed in 2009. Three hundred jobs. The town's high school dropped football the following year.
 
-#### P41: Infomercial Engagement Hooks
-**Trigger:** Single-sentence paragraphs that mimic viral LinkedIn cadence: "The catch?", "The kicker?", "The twist?", "Here's the thing.", "But here's the thing:", "Here's what nobody tells you:", "The brutal truth?", "Sound familiar?", "Want to know the best part?"
-**What's happening:** Distinct from P19 (chatbot artifacts like "I hope this helps") and P21 (sycophancy). These are fake dramatic pauses imported from social-media-optimized AI writing. Performative tension-builders, not real transitions.
-**Fix:** Delete the hook line entirely. Let the next paragraph make its point directly. If you really want the rhythm break, use a short declarative fragment ("That's the trick.") instead of a question.
-**Source:** [Writewithai Substack](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams), corroborated on [HackerNews](https://news.ycombinator.com/item?id=46646939)
+**P41: Infomercial Engagement Hooks.** Distinct from p19 (chatbot artifacts like "i hope this helps") and p21 (sycophancy). These are fake dramatic pauses imported from social-media-optimized ai writing. Performative tension-builders, not real transitions. **fix:** delete the hook line entirely. Let the next paragraph make its point directly. If you really want the rhythm break, use a short declarative fragment ("that's the trick.") instead of a question. **source:** [writewithai substack](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams), corroborated on [hackernews](https://news.ycombinator.com/item?id=46646939). Fix: Delete the hook line entirely. Let the next paragraph make its point directly. If you really want the rhythm break, use a short declarative fragment ("That's the trick.") instead of a question. **Source:** [Writewithai Substack](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams), corroborated on [HackerNews](https://news.ycombinator.com/item?id=46646939). Triggers: Single-sentence paragraphs that mimic viral LinkedIn cadence: "The catch?", "The kicker?", "The twist?", "Here's the thing.", "But here's the thing:", "Here's what nobody tells you:", "The brutal truth?", "Sound familiar?", "Want to know the best part?" **What's happening:** Distinct from P19 (chatbot artifacts like "I hope this helps") and P21 (sycophancy). These are fake dramatic pauses imported from social-media-optimized AI writing. Performative tension-builders, not real transitions. **Fix:** Delete the hook line entirely. Let the next paragraph make its point directly. If you really want the rhythm break, use a short declarative fragment ("That's the trick.") instead of a question. **Source:** [Writewithai Substack](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams), corroborated on [HackerNews](https://news.ycombinator.com/item?id=46646939). Source: [Writewithai Substack](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams), corroborated on [HackerNews](https://news.ycombinator.com/item?id=46646939)
 
-| AI version | Human version |
-|---|---|
-| "Most people abandon goals in week three.\n\nThe brutal truth?\n\nThey lack a clear failure threshold." | "Most people abandon goals in week three. The ones who don't usually do one thing differently: they make the failure threshold explicit before they start." |
+> **AI:** Most people abandon goals in week three.\n\nThe brutal truth?\n\nThey lack a clear failure threshold.  
+> **Human:** Most people abandon goals in week three. The ones who don't usually do one thing differently: they make the failure threshold explicit before they start.
 
-#### P42: Erratic Inline Bolding
-**Trigger:** Bold spans of 1-4 words appearing mid-paragraph, not at sentence start, not labeling a defined term. Multiple bold spans in one paragraph with no shared category (sometimes a noun, sometimes an adjective, sometimes a phrase).
-**What's happening:** Distinct from P14 (overall formatting overuse). P42 is *patternless* bolding, the model decided certain words felt important and bolded them, with no consistent rule. P14 may bold every header; P42 sprinkles bold randomly through running prose.
-**Fix:** Strip all inline bold except glossary terms and UI labels. If something deserves emphasis, the sentence structure should provide it.
-**Source:** [Gone Travelling, 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/), [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
+**P42: Erratic Inline Bolding.** Distinct from p14 (overall formatting overuse). p42 is *patternless* bolding, the model decided certain words felt important and bolded them, with no consistent rule. p14 may bold every header; p42 sprinkles bold randomly through running prose. **fix:** strip all inline bold except glossary terms and ui labels. If something deserves emphasis, the sentence structure should provide it. **source:** [gone travelling, 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/), [wikipedia: signs of ai writing](https://en.wikipedia.org/wiki/wikipedia:signs_of_ai_writing). Fix: Strip all inline bold except glossary terms and ui labels. If something deserves emphasis, the sentence structure should provide it. **source:** [gone travelling, 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/), [wikipedia: signs of ai writing](https://en.wikipedia.org/wiki/wikipedia:signs_of_ai_writing). Triggers: Bold spans of 1-4 words appearing mid-paragraph, not at sentence start, not labeling a defined term. Multiple bold spans in one paragraph with no shared category (sometimes a noun, sometimes an adjective, sometimes a phrase). **What's happening:** Distinct from P14 (overall formatting overuse). P42 is *patternless* bolding, the model decided certain words felt important and bolded them, with no consistent rule. P14 may bold every header; P42 sprinkles bold randomly through running prose. **Fix:** Strip all inline bold except glossary terms and UI labels. If something deserves emphasis, the sentence structure should provide it. **Source:** [Gone Travelling, 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/), [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing). Source: [Gone Travelling, 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/), [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
 
-| AI version | Human version |
-|---|---|
-| "Remote work has **fundamentally changed** the way companies operate, with **many employees** now preferring **flexible arrangements** that support **work-life balance**." | "Remote work has fundamentally changed how companies operate. Most employees now want flexible arrangements." |
+> **AI:** Remote work has **fundamentally changed** the way companies operate, with **many employees** now preferring **flexible arrangements** that support **work-life balance**.  
+> **Human:** Remote work has fundamentally changed how companies operate. Most employees now want flexible arrangements.
 
-#### P43: The Treadmill Effect (Low Information Density)
-**Trigger:** Paragraphs of 4+ sentences where sentences 2-N paraphrase sentence 1 without adding facts, examples, or concessions. Marker phrases inside the paragraph (not the opening): "In other words,", "Put simply,", "To put it another way,", "Essentially,", "That is to say,".
-**What's happening:** A 500-word AI section may contain 100 words of new information and 400 words of restatement. Humans advance; AI circles. Distinct from P22 (filler phrases at sentence level) and P30 (uniform sentence length).
-**Fix:** Apply the "what's actually new here?" test on each sentence. Delete any that just rephrases what came before. A paragraph that loses 60% of its words and reads better is the right outcome.
-**Source:** [aidetectors.io](https://www.aidetectors.io/blog/spotting-ai-writing-patterns), [HackerNews thread](https://news.ycombinator.com/item?id=46646939)
-
-| AI version | Human version |
-|---|---|
-| "Time management is critical for professional success. In other words, managing time well helps you achieve more. Essentially, when you organize effectively, you accomplish goals. Put simply, good time management leads to better outcomes." | "The people I've seen fail at time management almost never lack discipline. They lack a way to say no to work they never wanted to do in the first place." |
-
----
-
-## Step 3: Inject Human Voice
-
-Removing AI patterns is half the job. The other half is replacing the void with something alive.
-
+**P43: The Treadmill Effect (Low Information Density).** A 500-word ai section may contain 100 words of new information and 400 words of restatement. Humans advance; ai circles. Distinct from p22 (filler phrases at sentence level) and p30 (uniform sentence length). **fix:** apply the "what's actually new here?" test on each sentence. Delete any that just rephrases what came before. a paragraph that loses 60% of its words and reads better is the right outcome. **source:** [aidetectors.io](https://www.aidetectors.io/blog/spotting-ai-writing-patterns), [hackernews thread](https://news.ycombinator.com/item?id=46646939). Fix: Apply the "what's actually new here?" test on each sentence. Delete any that just rephrases what came before. a paragraph that loses 60% of its words and reads better is the right outcome. **source:** [aidetectors.io](https://www.aidetectors.io/blog/spotting-ai-writing-patterns), [hackernews thread](https://news.ycombinator.com/item?id=46646939). Triggers: Paragraphs of 4+ sentences where sentences 2-N paraphrase sentence 1 without adding facts, examples, or concessions. Marker phrases inside the paragraph (not the opening): "In other words,", "Put simply,", "To put it another way,", "Essentially,", "That is to say,". **What's happening:** A 500-word AI section may contain 100 words of new information and 400 words of restatement. Humans advance; AI circles. Distinct from P22 (filler phrases at sentence level) and P30 (uniform sentence length). **Fix:** Apply the "what's actually new here?" test on each sentence. Delete any that just rephrases what came before. A paragraph that loses 60% of its words and reads better is the right outcome. **Source:** [aidetectors.io](https://www.aidetectors.io/blog/spotting-ai-writing-patterns), [HackerNews thread](https://news.ycombinator.com/item?id=46646939). Source: [aidetectors.io](https://www.aidetectors.io/blog/spotting-ai-writing-patterns), [HackerNews thread](https://news.ycombinator.com/item?id=46646939)
 ### The Burstiness Principle
 
 AI detectors measure "burstiness": sentence length variance. Human writing has HIGH burstiness. AI has LOW.
@@ -557,23 +337,23 @@ These make the difference between "clean" and "human":
 
 **1. Have actual opinions.** Don't just report. React. "This API design is frustrating" is more human than "The API has certain limitations."
 
-**2. Acknowledge uncertainty honestly.** "I'm not sure this is right, but..." beats both false confidence and excessive hedging.
+**2. Acknowledge uncertainty honestly.** "I'm not sure this is right, but."" beats both false confidence and excessive hedging.
 
 **3. Use specific sensory/experiential details.** Not "the process is complex" but "debugging this at 2am with a cold cup of coffee and a stack trace that makes no sense."
 
-**4. Reference shared human experiences.** "You know that feeling when..." creates connection.
+**4. Reference shared human experiences.** "You know that feeling when."" creates connection.
 
 **5. Allow tangents and asides.** A brief digression signals a thinking mind, not an algorithm.
 
 **6. Vary paragraph length dramatically.** Four sentences, then one line. Like this.
 
-**7. Use the "imperfect start" technique.** Start mid-thought: "So I was looking at the logs and..." or "Here's what nobody tells you about..."
+**7. Use the "imperfect start" technique.** Start mid-thought: "So I was looking at the logs and."" or "Here's what nobody tells you about.""
 
 **8. Break parallel structure occasionally.** Three items with the same grammar, then make the fourth different. Humans aren't that consistent.
 
 **9. Use callbacks.** Reference something mentioned earlier. "Remember that API design I called frustrating? It gets worse."
 
-**10. Self-correct.** "The system handles auth... well, authentication and authorization are separate, but you get the idea." A small correction signals a mind thinking in real time.
+**10. Self-correct.** "The system handles auth." well, authentication and authorization are separate, but you get the idea." A small correction signals a mind thinking in real time.
 
 **11. End without wrapping up.** Not every piece needs a neat conclusion. Sometimes just stop.
 
@@ -599,10 +379,10 @@ These make the difference between "clean" and "human":
 
 | # | Pattern | Text | Fix |
 |---|---------|------|-----|
-| P3 | Superficial -ing | "...ensuring reliability and fostering growth" | Delete or expand with source |
+| P3 | Superficial -ing | "."ensuring reliability and fostering growth" | Delete or expand with source |
 | P7 | AI Vocabulary | "Additionally", "crucial", "landscape" | Replace: "Also", "important", [delete] |
 | P13 | Em Dash Overuse | 4 em dashes in 2 paragraphs | Replace 3 with commas |
-| ... | ... | ... | ... |
+|." |." |." |." |
 
 **Burstiness score:** LOW (sentence lengths: 18, 19, 17, 20, 18; very uniform)
 **Estimated AI probability:** HIGH
@@ -708,3 +488,7 @@ After producing the rewrite, re-run Step 2 (Detect) on the output. If patterns_h
 > Started a new job at TechCorp this week. I'm leading their developer tools team, 12 engineers building internal tooling that currently serves about 400 developers. First week has been drinking from the firehose: new codebase, new faces, new coffee machine I can't figure out. Nervous and excited in roughly equal measure. If anyone has advice on the first 90 days in an eng leadership role, I'm all ears.
 
 **What changed:** No emojis, no hashtags. Replaced "pivotal new role" with what the role actually is. Added specific details (team size, user count). Coffee machine line adds humanity. Closing asks for help. Vulnerable, engaging.
+
+---
+
+*Write like a human. Be weird, specific, inconsistent.*
