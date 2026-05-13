@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Quick reference table block** at the top of SKILL.md: Modes, Voices, Pattern catalog, and Flags presented as scannable tables. Matches the layout of ClawHub's top-installed skills (self-improving-agent, skill-vetter) so the registry page reads cleanly.
+- **"When to use this skill" section** right under the H1: bullet list of trigger conditions for users skimming the registry preview.
+
+### Changed
+
+- **Frontmatter description tightened** from 280 chars to 230 chars with numbered use cases. Matches ClawHub registry summary format used by top-installed skills.
+- **Operating principles trimmed**: same content, less prose padding, no redundancy between the three opening sentences.
+
+## [0.3.0] - 2026-05-13
+
+### Added
+
 - **6 community-discovered patterns (P38-P43)** sourced from HackerNews, Substack, Wikipedia editorial guideline, and writing practitioner blogs (May 2026 research wave):
   - P38 Paragraph-Reshuffling Immunity (semantic non-progression at paragraph level)
   - P39 Paragraph-Closing "Whether" Summary Sentences
