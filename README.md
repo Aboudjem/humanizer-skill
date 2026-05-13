@@ -420,6 +420,23 @@ You absolutely can. But do you know all 43 patterns? Can you spot "copula avoida
 
 ---
 
+## Model compatibility
+
+The skill is a Markdown prompt, so it runs on whichever model your editor wires up. Tested working on:
+
+| Model | Detection accuracy | Rewrite quality | Notes |
+|:------|:-------------------|:----------------|:------|
+| Claude Opus 4.x | Highest | Highest | Best for `--iterate` convergence and `--aggressive` mode |
+| Claude Sonnet 4.x | High | High | Recommended default for daily use |
+| Claude Haiku 4.x | High | Medium | Fast, good for `--mode detect` audits |
+| GPT-4.x / GPT-5 | High | High | Works via Codex CLI integration |
+| Gemini 2.x | Medium | High | Works via Gemini CLI integration |
+| Local models (Llama, Qwen) | Varies | Varies | Use longer prompts and `--aggressive` |
+
+The patterns are model-agnostic. The voice profiles are model-agnostic. The only thing that varies is how creatively each model handles the "soul injection" step.
+
+---
+
 ## Trust
 
 No telemetry. No data collection. No API calls. No cloud anything.
