@@ -1,5 +1,8 @@
 .DS_Store
 .omc/
-*.swp
+.vercel/
+*.log
 *.swo
+*.swp
 *~
+node_modules/

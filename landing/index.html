@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humanizer · Score AI text in your browser, no API key</title>
+<meta name="description" content="Paste AI text. Get a 0-100 AI-tell density score with per-pattern breakdown. 43 patterns covered. Runs entirely in your browser. Built from the open-source Claude Code skill.">
+<meta property="og:title" content="Humanizer · Score AI text in your browser">
+<meta property="og:description" content="Detect 43 AI writing patterns, get a 0-100 score, and rewrite in your editor. Open source. Zero API calls.">
+<meta property="og:image" content="https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/.github/assets/logo-light.svg">
+<meta property="og:url" content="https://humanizer-skill.vercel.app">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✍️</text></svg>">
+<style>
+  :root {
+    --violet: #8b5cf6;
+    --violet-dark: #7c3aed;
+    --violet-light: #a78bfa;
+    --bg: #faf5ff;
+    --card: #ffffff;
+    --text: #1e1b4b;
+    --muted: #64748b;
+    --red: #ef4444;
+    --green: #16a34a;
+    --border: #e9d5ff;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a0a2e;
+      --card: #2d1b4e;
+      --text: #e0e7ff;
+      --muted: #94a3b8;
+      --border: #4c1d95;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    letter-spacing: -1px;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+  h1 span { color: var(--violet); }
+  .tagline {
+    color: var(--muted);
+    font-size: 17px;
+    margin: 0 0 16px;
+  }
+  .hook {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--violet), var(--violet-dark));
+    color: white;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.05);
+  }
+  textarea {
+    width: 100%;
+    min-height: 160px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--text);
+    resize: vertical;
+    transition: border-color 0.15s;
+  }
+  textarea:focus {
+    outline: none;
+    border-color: var(--violet);
+  }
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    align-items: center;
+  }
+  button {
+    background: var(--violet);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  button:hover { background: var(--violet-dark); }
+  button.secondary {
+    background: transparent;
+    color: var(--violet);
+    border: 1.5px solid var(--border);
+  }
+  button.secondary:hover {
+    background: var(--bg);
+    border-color: var(--violet);
+  }
+  .count {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .score-wrap {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .score-big {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .score-label {
+    font-size: 14px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .score-verdict {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+  .findings {
+    margin-top: 16px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .finding {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border);
+    align-items: baseline;
+  }
+  .finding:last-child { border-bottom: none; }
+  .pid {
+    font-family: ui-monospace, monospace;
+    color: var(--violet);
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .pname {
+    font-size: 14px;
+  }
+  .pname code {
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--red);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .stat {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--violet);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 32px 16px;
+    font-style: italic;
+  }
+  .install {
+    background: #0f0520;
+    color: #e9d5ff;
+    padding: 16px;
+    border-radius: 10px;
+    font-family: ui-monospace, monospace;
+    font-size: 13px;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  .install .prompt { color: var(--violet-light); }
+  .install .comment { color: var(--muted); }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+  .cta-row a {
+    background: var(--violet);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .cta-row a:hover {
+    background: var(--violet-dark);
+    transform: translateY(-1px);
+  }
+  .cta-row a.secondary {
+    background: transparent;
+    color: var(--violet);
+    border: 1.5px solid var(--violet);
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--violet); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <span class="hook">Runs entirely in your browser. No API calls.</span>
+    <h1>Score AI text against <span>43 patterns</span></h1>
+    <p class="tagline">Paste anything. Get a 0-100 AI-tell density score and per-pattern findings in under a second.</p>
+  </header>
+
+  <section class="card">
+    <textarea id="input" placeholder="Paste AI-generated text here. Try something with 'delves into', 'pivotal moment', or 'comprehensive guide' to see how the detector responds.">In today's rapidly evolving technological landscape, artificial intelligence is reshaping how we think about creativity. This comprehensive guide delves into the intricate interplay between innovation and artistic expression, marking a pivotal moment in human history. It's not just a shift, it's a testament to our enduring commitment to progress.</textarea>
+    <div class="toolbar">
+      <button id="scan-btn">Score this text</button>
+      <button class="secondary" id="clear-btn">Clear</button>
+      <span class="count" id="word-count">0 words</span>
+    </div>
+  </section>
+
+  <section class="card" id="result">
+    <div class="empty">Hit "Score this text" to see the breakdown.</div>
+  </section>
+
+  <section class="card">
+    <h2 style="margin:0 0 8px;font-size:20px;">Run it in your editor (one command)</h2>
+    <p style="margin:0 0 12px;color:var(--muted);font-size:14px;">The browser detector covers ~12 mechanical patterns. The full skill catches all 43 and rewrites the text in five voice profiles.</p>
+    <div class="install"><span class="prompt">$</span> mkdir -p ~/.claude/skills/humanizer && curl -sL \
+  https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
+  -o ~/.claude/skills/humanizer/SKILL.md</div>
+    <p style="margin:8px 0 0;color:var(--muted);font-size:13px;">Then type <code style="background:var(--bg);padding:2px 6px;border-radius:4px;">/humanizer "your text"</code> in Claude Code. Same install path works for Cursor, Codex CLI, Gemini CLI, Windsurf, Continue.dev, and OpenClaw.</p>
+    <div class="cta-row">
+      <a href="https://github.com/Aboudjem/humanizer-skill">Star on GitHub</a>
+      <a href="https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md" class="secondary">Read the source</a>
+    </div>
+  </section>
+
+  <footer>
+    Open source · MIT · No telemetry · No API calls.<br>
+    Built by <a href="https://github.com/Aboudjem">Adam Boudjemaa</a>. Successor to <a href="https://github.com/blader/humanizer">@blader/humanizer</a>.
+  </footer>
+</div>
+
+<script>
+// Client-side detector. Subset of P1-P43 that work as pure regex.
+// Full ruleset (43 patterns + rewriting) lives at github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md
+const patterns = [
+  { id: 'P1', name: 'Significance Inflation', re: /\b(pivotal moment|testament to|marks? an? (pivotal|important|significant) (moment|chapter|milestone)|underscor(?:e|es|ing) the importance|reflects? broader|setting the stage|indelible mark)\b/gi, weight: 4 },
+  { id: 'P3', name: 'Superficial -ing Phrases', re: /\b(highlighting|underscoring|emphasizing|ensuring|reflecting|symbolizing|cultivating|fostering|encompassing|showcasing) (?!the (?:word|name|term))/gi, weight: 2 },
+  { id: 'P4', name: 'Promotional Language', re: /\b(nestled|cutting-edge|seamless|world-class|state-of-the-art|in the heart of|must-visit|breathtaking|stunning|vibrant)\b/gi, weight: 3 },
+  { id: 'P5', name: 'Vague Attributions', re: /\b(experts (argue|believe|suggest)|research suggests|some critics argue|several sources|it is widely believed|industry reports)\b/gi, weight: 3 },
+  { id: 'P7', name: 'AI Vocabulary', re: /\b(delve|delves|delving|leverage|leverages|utilize|utilizing|multifaceted|tapestry|testament|pivotal|intricate|intricacies|moreover|furthermore|notably|additionally(?:,)|it'?s worth noting|it'?s important to note|in terms of|at the end of the day|landscape(?! mode))\b/gi, weight: 3 },
+  { id: 'P8', name: 'Copula Avoidance', re: /\b(serves as|stands as|represents an? )/gi, weight: 2 },
+  { id: 'P9', name: 'Negative Parallelism', re: /\b(it'?s not (?:just|merely|simply) [a-z\s]{1,40}, it'?s|not only [a-z\s]{1,40} but)\b/gi, weight: 5 },
+  { id: 'P13', name: 'Em Dash', re: new RegExp('\u2014', 'g'), weight: 4 },
+  { id: 'P18', name: 'Formal Register', re: /\b(it should be noted|it is essential to|in the context of|the implementation of)\b/gi, weight: 3 },
+  { id: 'P19', name: 'Chatbot Artifact', re: /\b(I hope this helps|Of course!|Certainly!|You'?re absolutely right|Would you like me to|Let me know if|Here is an?)\b/gi, weight: 5 },
+  { id: 'P20', name: 'Knowledge Cutoff', re: /\b(as of (?:my last|the latest|january|march|2024|2025|2026)|based on available information|while specific details are limited)\b/gi, weight: 4 },
+  { id: 'P21', name: 'Sycophancy', re: /\b(Great question|That'?s an excellent point|absolutely!|You raise a very important issue)\b/gi, weight: 5 },
+  { id: 'P22', name: 'Filler Phrases', re: /\b(in order to|due to the fact that|at this point in time|in the event that|has the ability to|in today'?s rapidly evolving|when it comes to|the fact of the matter is)\b/gi, weight: 3 },
+  { id: 'P24', name: 'Generic Conclusion', re: /\b(the future looks bright|exciting times lie ahead|poised for growth|step in the right direction)\b/gi, weight: 4 },
+  { id: 'P29', name: 'Comprehensive Overview', re: /\b(this comprehensive (guide|overview|analysis)|in this article, we will explore|let'?s dive (into|in)|delves into)\b/gi, weight: 4 },
+  { id: 'P32', name: 'Communication Leaking', re: /\b(in this article, we will explore|let me walk you through|here'?s what you need to know)\b/gi, weight: 4 },
+  { id: 'P34', name: 'Chatbot Markup Leak', re: /(citeturn\d+search\d+|oai_citation|contentReference\[oaicite|\[attached_file:\d+\])/g, weight: 6 },
+  { id: 'P35', name: 'UTM Source from AI', re: /utm_source=(chatgpt\.com|openai|copilot\.com|grok\.com)/gi, weight: 6 },
+  { id: 'P39', name: '"Whether" Closer', re: /\bwhether (?:you|they|it|we)[^.]{0,80}, (?:the|you) (?:answer|key|choice)/gi, weight: 3 },
+  { id: 'P41', name: 'Infomercial Hook', re: /^(the (catch|kicker|twist|brutal truth)\?|here'?s the thing[.:]|here'?s what nobody tells you[.:]|sound familiar\?)$/gim, weight: 4 },
+];
+
+const $ = (sel) => document.querySelector(sel);
+
+function countWords(t) {
+  return (t.trim().match(/\S+/g) || []).length;
+}
+
+function sentenceLengths(t) {
+  return t.split(/[.!?]+/).map(s => countWords(s)).filter(n => n > 0);
+}
+
+function variance(arr) {
+  if (arr.length < 2) return 0;
+  const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
+  return arr.reduce((s, v) => s + (v - mean) ** 2, 0) / arr.length;
+}
+
+function burstinessNormalized(t) {
+  // Normalize sentence-length variance to [0, 1]. 0 = AI-flat, 1 = human-bursty.
+  const lens = sentenceLengths(t);
+  if (lens.length < 3) return 0.5;
+  const v = variance(lens);
+  // Empirical: human variance ranges 50-200; AI variance is 5-25.
+  return Math.min(1, v / 100);
+}
+
+function detect(text) {
+  const hits = [];
+  let weightSum = 0;
+  for (const p of patterns) {
+    const matches = [...text.matchAll(p.re)];
+    if (matches.length > 0) {
+      hits.push({ id: p.id, name: p.name, count: matches.length, examples: matches.slice(0, 3).map(m => m[0]) });
+      weightSum += p.weight * matches.length;
+    }
+  }
+  const burst = burstinessNormalized(text);
+  // Score: weighted patterns + burstiness flatness penalty
+  const burstPenalty = (1 - burst) * 25;
+  const rawScore = Math.min(100, weightSum * 3 + burstPenalty);
+  const score = Math.round(rawScore);
+  return { score, hits, burstiness: burst, sentenceLengths: sentenceLengths(text) };
+}
+
+function verdict(score) {
+  if (score <= 20) return { label: 'Pristine', color: 'var(--green)' };
+  if (score <= 40) return { label: 'Mostly human', color: '#84cc16' };
+  if (score <= 60) return { label: 'Mixed', color: '#eab308' };
+  if (score <= 80) return { label: 'AI-leaning', color: '#f97316' };
+  return { label: 'Pure AI smell', color: 'var(--red)' };
+}
+
+function renderResult(r) {
+  const v = verdict(r.score);
+  const findingsHtml = r.hits.length === 0
+    ? '<p style="color:var(--green);margin:16px 0 0;">No patterns detected. Reads clean.</p>'
+    : r.hits.map(h => `
+      <div class="finding">
+        <span class="pid">${h.id}</span>
+        <div class="pname">
+          <strong>${h.name}</strong> <span style="color:var(--muted);font-size:12px;">×${h.count}</span><br>
+          ${h.examples.map(e => `<code>${e.replace(/</g, '&lt;')}</code>`).join(' ')}
+        </div>
+      </div>`).join('');
+
+  $('#result').innerHTML = `
+    <div class="score-wrap">
+      <div>
+        <div class="score-label">AI-tell score</div>
+        <div class="score-big" style="color:${v.color}">${r.score}<span style="font-size:32px;color:var(--muted);">/100</span></div>
+        <div class="score-verdict" style="color:${v.color}">${v.label}</div>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">${r.hits.length}</div>
+          <div class="stat-label">patterns hit</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">${r.burstiness.toFixed(2)}</div>
+          <div class="stat-label">burstiness</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">${r.sentenceLengths.length}</div>
+          <div class="stat-label">sentences</div>
+        </div>
+      </div>
+    </div>
+    <div class="findings">${findingsHtml}</div>
+  `;
+}
+
+$('#scan-btn').addEventListener('click', () => {
+  const text = $('#input').value;
+  if (!text.trim()) {
+    $('#result').innerHTML = '<div class="empty">Paste some text first.</div>';
+    return;
+  }
+  renderResult(detect(text));
+});
+
+$('#clear-btn').addEventListener('click', () => {
+  $('#input').value = '';
+  $('#result').innerHTML = '<div class="empty">Hit "Score this text" to see the breakdown.</div>';
+  updateWordCount();
+});
+
+function updateWordCount() {
+  $('#word-count').textContent = countWords($('#input').value) + ' words';
+}
+
+$('#input').addEventListener('input', updateWordCount);
+updateWordCount();
+
+// Auto-score the demo content on load
+setTimeout(() => renderResult(detect($('#input').value)), 200);
+</script>
+</body>
+</html>

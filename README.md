@@ -17,6 +17,14 @@
   Humanizer rewrites the gap. 43 patterns, 5 voices, one Markdown file, zero API calls.
 </p>
 
+<p align="center">
+  <a href="https://humanizer-skill.vercel.app"><b>Try it in your browser →</b></a>
+  &nbsp;&middot;&nbsp;
+  <a href="#get-started">Install in 5 seconds</a>
+  &nbsp;&middot;&nbsp;
+  <a href="skills/humanizer/SKILL.md">Read the source</a>
+</p>
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-burstiness-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/demo-burstiness-light.svg">
@@ -24,6 +32,12 @@
 </picture>
 
 <p align="center"><sub>The chart is the whole pitch. AI writes in monotone. Humans don't. Detectors notice. So do readers.</sub></p>
+
+<p align="center">
+  <img src=".github/assets/demo.gif" alt="Terminal demo: pasted AI text scores 84/100 (Pure AI smell), gets rewritten with --voice technical --aggressive --iterate 2, converges in 2 iterations, final score 8/100 (Pristine)" width="100%">
+</p>
+
+<p align="center"><sub>Real terminal capture: detect, rewrite, re-detect, converge. No marketing tricks, just the score before and after.</sub></p>
 
 ---
 
