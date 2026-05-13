@@ -45,7 +45,7 @@ jobs:
 
       - name: Check pattern count
         run: |
-          COUNT=$(grep -c '^#### P[0-9]' skills/humanizer/SKILL.md || true)
+          COUNT=$(grep -cE "^\\*\\*P[0-9]+: " skills/humanizer/SKILL.md || true)
           EXPECTED=43
           if [ "$COUNT" -lt "$EXPECTED" ]; then
             echo "FAIL: Expected at least $EXPECTED patterns, found $COUNT"
@@ -66,7 +66,7 @@ jobs:
       - name: Pattern badge matches actual count
         run: |
           BADGE=$(grep -oE 'patterns-[0-9]+' README.md | head -1 | grep -oE '[0-9]+')
-          ACTUAL=$(grep -c '^#### P[0-9]' skills/humanizer/SKILL.md)
+          ACTUAL=$(grep -cE "^\\*\\*P[0-9]+: " skills/humanizer/SKILL.md)
           if [ "$BADGE" != "$ACTUAL" ]; then
             echo "FAIL: README badge says $BADGE patterns, SKILL.md has $ACTUAL"
             exit 1
