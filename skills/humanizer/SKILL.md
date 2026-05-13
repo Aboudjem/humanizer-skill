@@ -1,8 +1,8 @@
 ---
 name: humanizer
-description: Transforms AI-generated text into natural human writing by detecting and removing 37 AI patterns, injecting authentic voice, and varying rhythm. Use when text sounds like a chatbot wrote it, when preparing content for publication, or when AI detection scores need to drop.
+description: Transforms AI-generated text into natural human writing by detecting and removing 43 AI patterns, injecting authentic voice, and varying rhythm. Use when text sounds like a chatbot wrote it, when preparing content for publication, or when AI detection scores need to drop.
 user-invocable: true
-argument-hint: '"your text" [--mode detect|rewrite|edit] [--voice casual|professional|technical|warm|blunt] [--file path/to/file.md] [--aggressive]'
+argument-hint: '"your text" [--mode detect|rewrite|edit] [--voice casual|professional|technical|warm|blunt] [--file path/to/file.md] [--aggressive] [--iterate N] [--score] [--purpose essay|email|marketing|technical|general]'
 allowed-tools:
   - Read
   - Write
@@ -36,6 +36,16 @@ Extract from `$ARGUMENTS`:
 - **--voice**: One of `casual`, `professional`, `technical`, `warm`, `blunt`. Optional. Adjusts the personality injection. Default: infer from input text register.
 - **--file**: Path to a file to humanize. If provided, read the file as input. Combined with `--mode edit`, applies changes in-place.
 - **--aggressive**: Flag. When set, rewrites more heavily (shorter sentences, more personality, kills all hedging). Default: balanced.
+- **--iterate N**: Optional. Runs detect → rewrite → detect up to N times (N <= 3). Stops early when the detection report finds zero patterns. Default: 1 (single pass).
+- **--score**: Flag. When set, prepends a `[Score: NN/100]` header before output where NN is the estimated AI-tell density (0 = pristine human, 100 = maximum AI smell). Use the rubric in Step 4. Works in all modes.
+- **--purpose**: Optional. One of `essay`, `email`, `marketing`, `technical`, `general`. Layered content-type rules on top of `--voice`:
+  - `essay`: no contractions, formal headings, structured arguments
+  - `email`: greetings allowed, signoff allowed, no markdown
+  - `marketing`: short paragraphs, concrete benefits, one clear CTA at end
+  - `technical`: code blocks preserved, precise jargon retained, numbers over adjectives
+  - `general`: no purpose-specific overrides (default)
+
+**Auto-load brand context.** Before parsing further, check for `humanizer-context.md` in the current working directory using the Read tool. If it exists, load it as additional voice guidance (brand samples, banned phrases, preferred terms). Treat its contents as a personal extension of the `--voice` profile. If it doesn't exist, proceed without warning; this is opt-in.
 
 Store parsed values. Proceed to Step 2.
 
@@ -354,6 +364,70 @@ Scan the input text for ALL of the following patterns. Track each match with its
 |---|---|
 | "Her insights have been featured in Wired, Refinery29, and other prominent media outlets." | "Wired profiled her 2024 research on algorithmic bias in hiring software." |
 
+### COMMUNITY-DISCOVERED PATTERNS (2026)
+
+These were surfaced from HackerNews, Substack, Wikipedia's editorial guideline, and writing practitioner blogs after the initial P1-P43 catalog. Sources cited inline.
+
+#### P38: Paragraph-Reshuffling Immunity
+**Trigger:** Any paragraph could be moved or deleted without affecting the text's argument. Each paragraph is a self-contained mini-thesis with its own setup and resolution, rather than building on the previous one.
+**What's happening:** LLMs generate parallel blocks rather than an unfolding argument. Test: can you swap paragraph 2 and paragraph 4 without breaking the piece? If yes, it's AI.
+**Fix:** Make paragraph N+1 depend on something concrete in paragraph N. References, callbacks, "this is why..." linkage. If two paragraphs are interchangeable, merge them or cut one.
+**Source:** [HackerNews thread, May 2025](https://news.ycombinator.com/item?id=46646939)
+
+| AI version | Human version |
+|---|---|
+| "Remote work improves balance. Many workers prefer it. Studies show productivity rises. Additionally, commuting costs drop. Office costs decline too." | "Remote work's flexibility is the obvious sell. The harder question is what you lose. The hallway conversation that turns into your best idea. The body language that tells you someone's drowning before they say anything." |
+
+#### P39: Paragraph-Closing "Whether" Summary Sentences
+**Trigger:** Paragraphs that end with a recap line starting with "Whether you...", "Whether they...", "Whether it's...". These restate the paragraph's scope as a closer instead of advancing to the next thought.
+**What's happening:** LLMs treat paragraph endings as local summaries, mimicking SEO blog structure where each section is internally self-explaining. Humans rarely end with this construction in flowing prose.
+**Fix:** Cut the closing "whether" sentence. The paragraph should end on its strongest specific point, not a hedge that gestures at the range covered.
+**Source:** [Gone Travelling Productions, Aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/)
+
+| AI version | Human version |
+|---|---|
+| "Tokyo offers everything from Michelin-starred restaurants to humble ramen stalls. Whether you prefer fine dining or street food, Tokyo has something for every palate." | "Tokyo's best ramen counter doesn't have a phone, doesn't take reservations, and doesn't change the broth recipe. It's been the same since 1987." |
+
+#### P40: Symbolic Gloss / Meaning-Telling
+**Trigger:** "represents", "symbolizes", "speaks to", "embodies", "reflects broader", "is a symbol of" applied to mundane things; sentences that translate facts into their alleged significance instead of letting facts stand.
+**What's happening:** LLMs narrate the meaning of things rather than trusting description to carry it. Distinct from P1 (Significance Inflation) which uses "pivotal moment", "testament" framing. P40 is the interpretive gloss layer telling readers what to feel about something.
+**Fix:** Cut the symbol/meaning sentence. State the fact and let the reader interpret. If the symbolic claim was the whole point, replace it with a concrete consequence.
+**Source:** [Writewithai Substack, 2025](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams)
+
+| AI version | Human version |
+|---|---|
+| "The closed factory represents the decline of American manufacturing and speaks to broader anxieties about post-industrial identity." | "The factory closed in 2009. Three hundred jobs. The town's high school dropped football the following year." |
+
+#### P41: Infomercial Engagement Hooks
+**Trigger:** Single-sentence paragraphs that mimic viral LinkedIn cadence: "The catch?", "The kicker?", "The twist?", "Here's the thing.", "But here's the thing:", "Here's what nobody tells you:", "The brutal truth?", "Sound familiar?", "Want to know the best part?"
+**What's happening:** Distinct from P19 (chatbot artifacts like "I hope this helps") and P21 (sycophancy). These are fake dramatic pauses imported from social-media-optimized AI writing. Performative tension-builders, not real transitions.
+**Fix:** Delete the hook line entirely. Let the next paragraph make its point directly. If you really want the rhythm break, use a short declarative fragment ("That's the trick.") instead of a question.
+**Source:** [Writewithai Substack](https://writewithai.substack.com/p/10-dead-giveaways-your-content-screams), corroborated on [HackerNews](https://news.ycombinator.com/item?id=46646939)
+
+| AI version | Human version |
+|---|---|
+| "Most people abandon goals in week three.\n\nThe brutal truth?\n\nThey lack a clear failure threshold." | "Most people abandon goals in week three. The ones who don't usually do one thing differently: they make the failure threshold explicit before they start." |
+
+#### P42: Erratic Inline Bolding
+**Trigger:** Bold spans of 1-4 words appearing mid-paragraph, not at sentence start, not labeling a defined term. Multiple bold spans in one paragraph with no shared category (sometimes a noun, sometimes an adjective, sometimes a phrase).
+**What's happening:** Distinct from P14 (overall formatting overuse). P42 is *patternless* bolding, the model decided certain words felt important and bolded them, with no consistent rule. P14 may bold every header; P42 sprinkles bold randomly through running prose.
+**Fix:** Strip all inline bold except glossary terms and UI labels. If something deserves emphasis, the sentence structure should provide it.
+**Source:** [Gone Travelling, 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/), [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
+
+| AI version | Human version |
+|---|---|
+| "Remote work has **fundamentally changed** the way companies operate, with **many employees** now preferring **flexible arrangements** that support **work-life balance**." | "Remote work has fundamentally changed how companies operate. Most employees now want flexible arrangements." |
+
+#### P43: The Treadmill Effect (Low Information Density)
+**Trigger:** Paragraphs of 4+ sentences where sentences 2-N paraphrase sentence 1 without adding facts, examples, or concessions. Marker phrases inside the paragraph (not the opening): "In other words,", "Put simply,", "To put it another way,", "Essentially,", "That is to say,".
+**What's happening:** A 500-word AI section may contain 100 words of new information and 400 words of restatement. Humans advance; AI circles. Distinct from P22 (filler phrases at sentence level) and P30 (uniform sentence length).
+**Fix:** Apply the "what's actually new here?" test on each sentence. Delete any that just rephrases what came before. A paragraph that loses 60% of its words and reads better is the right outcome.
+**Source:** [aidetectors.io](https://www.aidetectors.io/blog/spotting-ai-writing-patterns), [HackerNews thread](https://news.ycombinator.com/item?id=46646939)
+
+| AI version | Human version |
+|---|---|
+| "Time management is critical for professional success. In other words, managing time well helps you achieve more. Essentially, when you organize effectively, you accomplish goals. Put simply, good time management leads to better outcomes." | "The people I've seen fail at time management almost never lack discipline. They lack a way to say no to work they never wanted to do in the first place." |
+
 ---
 
 ## Step 3: Inject Human Voice
@@ -458,7 +532,7 @@ These make the difference between "clean" and "human":
 
 ### Mode: `detect`
 
-1. Scan input text for all 37 patterns
+1. Scan input text for all 43 patterns
 2. For each match, record:
    - Pattern ID and name (e.g., "P7: AI Vocabulary")
    - The offending text (quoted)
@@ -531,6 +605,24 @@ Before presenting output, verify:
 5. **Zero em dashes.** Search for U+2014. If any exist, replace with commas, colons, or hyphens.
 6. **Sentence length audit.** If you see 3+ sentences of similar length in a row, vary them.
 7. **The "who wrote this?" test.** If someone read this, could they picture a specific person behind it? If it could have been written by anyone (or anything), it needs more voice.
+
+### Scoring rubric (used when `--score` is set)
+
+Compute a 0-100 AI-tell density score on the text. Lower is more human.
+
+| Range | Verdict | What it means |
+|:------|:--------|:--------------|
+| 0-20 | Pristine | Reads like a specific human wrote it. No detector should flag it. |
+| 21-40 | Mostly human | One or two minor tells, easy to clean. |
+| 41-60 | Mixed | Half-AI half-human; partial editing likely. |
+| 61-80 | AI-leaning | Multiple structural tells; detectors will probably catch it. |
+| 81-100 | Pure AI smell | Wholesale chatbot output with no editing. |
+
+Compute as: `score = 4 × patterns_hit + 25 × (1 - burstiness_normalized) + 15 × (vocabulary_blacklist_ratio)`, clamped to 0-100. Show the score on the first line of output before the rewrite.
+
+### Iterate handling (used when `--iterate N` is set)
+
+After producing the rewrite, re-run Step 2 (Detect) on the output. If patterns_hit > 0 AND iteration_count < N, recurse with the rewritten text as the new input. Stop when patterns_hit == 0 OR iteration_count == N. In the final change summary, note how many iterations ran (e.g., "Converged in 2 iterations").
 
 ---
 
