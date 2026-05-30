@@ -76,7 +76,7 @@ jobs:
       - name: No internal files leaked
         run: |
           FOUND=0
-          for dir in .planning .deep-research .omc .claude-plugin; do
+          for dir in .planning .deep-research .omc; do
             if [ -d "$dir" ]; then
               echo "FAIL: Internal directory $dir found in repo"
               FOUND=1

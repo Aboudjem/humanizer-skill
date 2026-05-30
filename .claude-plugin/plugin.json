@@ -1,0 +1,28 @@
+{
+  "name": "humanizer",
+  "version": "0.1.0",
+  "description": "Detects 43 AI writing patterns and rewrites text with burstiness, voice profiles, and a 0-100 AI-tell score. Pure Markdown, zero dependencies, no network calls.",
+  "author": {
+    "name": "Adam Boudjemaa",
+    "email": "boudjemaa.adam@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "humanizer",
+    "ai-writing",
+    "writing-tools",
+    "ai-detection",
+    "burstiness",
+    "voice-profiles",
+    "text-rewriting",
+    "content-quality"
+  ],
+  "skills": [
+    {
+      "name": "humanizer",
+      "path": "skills/humanizer/SKILL.md"
+    }
+  ]
+}
