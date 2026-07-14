@@ -19,7 +19,7 @@ Supernova Standard Pillar 1: borrowed-reach-first, same-window multi-channel sta
 - [ ] Submit to Anthropic official marketplace at `clau.de/plugin-directory-submission`
 - [ ] Draft origin-story X thread (2-4 tweets, GIF first)
 - [ ] Draft r/ClaudeAI post (problem-first, no marketing language)
-- [ ] Prep a dev.to post (the origin story: why I built this, what the 43 patterns are)
+- [ ] Prep a dev.to post (the origin story: why I built this, what the 53 patterns are)
 - [ ] Share demo privately in 2-3 writing/AI Discord servers ~24h before launch ("feel free to share")
 
 ---
@@ -30,7 +30,7 @@ Supernova Standard Pillar 1: borrowed-reach-first, same-window multi-channel sta
 
 Post here first. It's the highest-fit audience: Claude Code users who write with AI. Title:
 
-> "I built a Claude Code skill that detects 43 AI writing patterns and scores your text 0-100. Here's the before/after on a blog post that scored 87."
+> "I built a Claude Code skill that detects 53 AI writing patterns and scores your text 0-100. Here's the before/after on a blog post that scored 87."
 
 Body: problem-first (not a pitch), the burstiness chart, the score example, install command, link to repo.
 
@@ -48,7 +48,7 @@ Tag `@AnthropicAI`, `@ClaudeAI`. No begging for RTs.
 ### T+1h: 14:00 UTC — awesome-list PRs + dev.to
 
 - Merge any pre-queued awesome-list PRs (awesome-claude-code if approved)
-- Publish dev.to origin story: "How I catalogued 43 AI writing patterns (and built a skill to fix them)"
+- Publish dev.to origin story: "How I catalogued 53 AI writing patterns (and built a skill to fix them)"
 - Cross-post to r/writing, r/artificial if the r/ClaudeAI post gets traction
 
 ### T+2h: 15:00 UTC — Monitor + engage

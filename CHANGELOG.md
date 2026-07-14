@@ -9,13 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Quick reference table block** at the top of SKILL.md: Modes, Voices, Pattern catalog, and Flags presented as scannable tables. Matches the layout of ClawHub's top-installed skills (self-improving-agent, skill-vetter) so the registry page reads cleanly.
-- **"When to use this skill" section** right under the H1: bullet list of trigger conditions for users skimming the registry preview.
+- **10 new patterns (P44-P53)**, taking the catalog to **53** (badge, CI threshold, and frontmatter moved in lockstep):
+  - P44 False Agency, P45 Narrator-from-a-Distance (from stop-slop)
+  - P46 Diff-Anchored Writing, P47 Hyphenated-Pair Overuse, P48 Aphorism Formulas, P49 Fragmented Headers, P50 Passive/Subjectless (from blader)
+  - P51 Reasoning-Chain Artifacts, P52 Unicode Obfuscation (from brandonwise)
+  - P53 Hedged-Enumeration Openers (from the HC3 corpus, arXiv 2301.07597)
+- **False-positive guard**: a "What NOT to flag" section and a "Signs of human writing (preserve these)" section, so the skill stops gutting good human prose. Load-bearing rule: never rewrite watched phrases inside quotes, titles, code, or examples; flag clusters, not isolated tells.
+- **Craft features** in the rewrite step: Voice Read, Anti-Default Discipline, a Position ("teeth") engine, a Concretizer pass, an Opening tournament (`--openings N`), a certainty-spectrum lexicon in Soul Injection, and a draft/self-audit/final metacognitive pass.
+- **Tiered-confidence vocabulary** (Tier 1 always-flag / Tier 2 in-density / Tier 3 context-only) refining P7 to cut false positives.
+- **New flags**: `--openings N`, `--ignore-code`, `--ignore-quotes` (mask code/quotes before detect and score).
+- **Progressive disclosure**: verbose per-pattern deep dives and sources moved to `skills/humanizer/references/patterns.md`; always-on templates in `references/always-on-templates.md`. The `SKILL.md` core stays standalone and zero-dependency.
+- **Optional metrics CLI** (`cli/`): zero-dependency Node tool computing burstiness, type-token ratio, sentence-length CoV, trigram repetition, AI-vocabulary density, and Flesch-Kincaid, with a transparent 0-100 score. Commands `score` / `scan` / `compare`, CI gate flags (`--fail-above`, `--baseline`, `--fail-on-regression`), 25 tests, and a reusable GitHub Action at `.github/actions/humanizer-gate`.
+- **HC3 corpus citation** (arXiv 2301.07597) added to the README "science" table: bilingual, peer-reviewed corroboration of the length, vocabulary-diversity, and perplexity claims.
+- **Chinese localization**: `README.zh-CN.md` (positioned on the "humanize your English writing" wedge) with a language switcher in both READMEs, and a provisional native-Chinese pattern appendix at `references/patterns.zh.md` (explicitly marked as needing a zh-fluent validator).
 
 ### Changed
 
-- **Frontmatter description tightened** from 280 chars to 230 chars with numbered use cases. Matches ClawHub registry summary format used by top-installed skills.
-- **Operating principles trimmed**: same content, less prose padding, no redundancy between the three opening sentences.
+- Pattern count: 43 -> 53 (badge, CI threshold, frontmatter, quick-reference, comparison table).
+- **Honest positioning**: the "zero dependency / one file / nothing to audit" claims are now scoped to the Markdown skill core; the CLI is framed as a separate optional offline layer.
+- Deduplicated the P31-P43 entries, which previously repeated their fix/source text 2-3 times, and fixed mangled lowercased URLs.
+- **Quick reference table block** at the top of SKILL.md: Modes, Voices, Pattern catalog, and Flags presented as scannable tables.
+- **"When to use this skill" section** right under the H1.
+- **Frontmatter description** updated to reflect 53 patterns.
+- **Operating principles trimmed**: same content, less prose padding.
 
 ## [0.3.0] - 2026-05-13
 
