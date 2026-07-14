@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-07-15
+
+The "collection upgrade": mined from the 9-skill "去AI味" collection this repo was featured in. Bigger and more careful catalog, a real false-positive guard, a craft engine, an optional metrics CLI and CI gate, and Chinese localization.
+
 ### Added
 
 - **10 new patterns (P44-P53)**, taking the catalog to **53** (badge, CI threshold, and frontmatter moved in lockstep):
