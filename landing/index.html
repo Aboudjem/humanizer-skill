@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Humanizer · Score AI text in your browser, no API key</title>
-<meta name="description" content="Paste AI text. Get a 0-100 AI-tell density score with per-pattern breakdown. 43 patterns covered. Runs entirely in your browser. Built from the open-source Claude Code skill.">
+<meta name="description" content="Paste AI text. Get a 0-100 AI-tell density score with per-pattern breakdown. 53 patterns covered. Runs entirely in your browser. Built from the open-source Claude Code skill.">
 <meta property="og:title" content="Humanizer · Score AI text in your browser">
-<meta property="og:description" content="Detect 43 AI writing patterns, get a 0-100 score, and rewrite in your editor. Open source. Zero API calls.">
+<meta property="og:description" content="Detect 53 AI writing patterns, get a 0-100 score, and rewrite in your editor. Open source. Zero API calls.">
 <meta property="og:image" content="https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/.github/assets/logo-light.svg">
 <meta property="og:url" content="https://humanizer-skill.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
@@ -267,7 +267,7 @@
 <div class="container">
   <header>
     <span class="hook">Runs entirely in your browser. No API calls.</span>
-    <h1>Score AI text against <span>43 patterns</span></h1>
+    <h1>Score AI text against <span>53 patterns</span></h1>
     <p class="tagline">Paste anything. Get a 0-100 AI-tell density score and per-pattern findings in under a second.</p>
   </header>
 
@@ -286,7 +286,7 @@
 
   <section class="card">
     <h2 style="margin:0 0 8px;font-size:20px;">Run it in your editor (one command)</h2>
-    <p style="margin:0 0 12px;color:var(--muted);font-size:14px;">The browser detector covers ~12 mechanical patterns. The full skill catches all 43 and rewrites the text in five voice profiles.</p>
+    <p style="margin:0 0 12px;color:var(--muted);font-size:14px;">The browser detector covers ~12 mechanical patterns. The full skill catches all 53 and rewrites the text in five voice profiles.</p>
     <div class="install"><span class="prompt">$</span> mkdir -p ~/.claude/skills/humanizer && curl -sL \
   https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
   -o ~/.claude/skills/humanizer/SKILL.md</div>
@@ -304,8 +304,8 @@
 </div>
 
 <script>
-// Client-side detector. Subset of P1-P43 that work as pure regex.
-// Full ruleset (43 patterns + rewriting) lives at github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md
+// Client-side detector. Subset of P1-P53 that work as pure regex.
+// Full ruleset (53 patterns + rewriting) lives at github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md
 const patterns = [
   { id: 'P1', name: 'Significance Inflation', re: /\b(pivotal moment|testament to|marks? an? (pivotal|important|significant) (moment|chapter|milestone)|underscor(?:e|es|ing) the importance|reflects? broader|setting the stage|indelible mark)\b/gi, weight: 4 },
   { id: 'P3', name: 'Superficial -ing Phrases', re: /\b(highlighting|underscoring|emphasizing|ensuring|reflecting|symbolizing|cultivating|fostering|encompassing|showcasing) (?!the (?:word|name|term))/gi, weight: 2 },
