@@ -45,6 +45,23 @@
 
 ## Get started
 
+### Install with the skills CLI (any agent)
+
+One command, works across Claude Code, Cursor, Codex, opencode, and 70+ agents via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+```bash
+npx skills add Aboudjem/humanizer-skill
+```
+
+Target a specific agent, or list what's in the repo first:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -a claude-code   # install just for Claude Code
+npx skills add Aboudjem/humanizer-skill --list           # see the skills in this repo
+```
+
+Prefer no tooling? The one-line curl install below works too.
+
 ### Install (one command)
 
 Project-scoped (travels with your repo):

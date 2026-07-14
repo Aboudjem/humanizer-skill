@@ -37,6 +37,17 @@ Humanizer 专门去掉**你写的英文**里的 AI 痕迹（去英文 AI 味 / �
 
 ## 快速开始
 
+### 用 skills CLI 安装（任意 agent）
+
+一条命令，通过 [vercel-labs/skills](https://github.com/vercel-labs/skills) 支持 Claude Code、Cursor、Codex、opencode 等 70+ agent：
+
+```bash
+npx skills add Aboudjem/humanizer-skill
+npx skills add Aboudjem/humanizer-skill -a claude-code   # 只装到 Claude Code
+```
+
+不想用工具？下面的 curl 一行安装同样可用。
+
 ### 安装（一条命令）
 
 项目内安装（跟着仓库走）：

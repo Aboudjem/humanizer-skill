@@ -22,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Optional metrics CLI** (`cli/`): zero-dependency Node tool computing burstiness, type-token ratio, sentence-length CoV, trigram repetition, AI-vocabulary density, and Flesch-Kincaid, with a transparent 0-100 score. Commands `score` / `scan` / `compare`, CI gate flags (`--fail-above`, `--baseline`, `--fail-on-regression`), 25 tests, and a reusable GitHub Action at `.github/actions/humanizer-gate`.
 - **HC3 corpus citation** (arXiv 2301.07597) added to the README "science" table: bilingual, peer-reviewed corroboration of the length, vocabulary-diversity, and perplexity claims.
 - **Chinese localization**: `README.zh-CN.md` (positioned on the "humanize your English writing" wedge) with a language switcher in both READMEs, and a provisional native-Chinese pattern appendix at `references/patterns.zh.md` (explicitly marked as needing a zh-fluent validator).
+- **Cross-agent install via the skills CLI**: documented `npx skills add Aboudjem/humanizer-skill` ([vercel-labs/skills](https://github.com/vercel-labs/skills)), which auto-discovers the standard `skills/humanizer/SKILL.md` layout and installs to Claude Code, Cursor, Codex, opencode, and 70+ agents. No repo restructuring needed.
 
 ### Changed
 
