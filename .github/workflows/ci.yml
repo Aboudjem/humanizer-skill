@@ -46,7 +46,7 @@ jobs:
       - name: Check pattern count
         run: |
           COUNT=$(grep -cE "^\\*\\*P[0-9]+: " skills/humanizer/SKILL.md || true)
-          EXPECTED=43
+          EXPECTED=53
           if [ "$COUNT" -lt "$EXPECTED" ]; then
             echo "FAIL: Expected at least $EXPECTED patterns, found $COUNT"
             exit 1
@@ -75,12 +75,45 @@ jobs:
 
       - name: No internal files leaked
         run: |
+          # Check git-tracking, not on-disk existence: local dev dirs (.omc, .goal)
+          # are gitignored and never checked out in CI, but this keeps local and CI runs in agreement.
           FOUND=0
-          for dir in .planning .deep-research .omc; do
-            if [ -d "$dir" ]; then
-              echo "FAIL: Internal directory $dir found in repo"
+          for dir in .planning .deep-research .omc .goal; do
+            if [ -n "$(git ls-files "$dir")" ]; then
+              echo "FAIL: Internal directory $dir is tracked in git"
               FOUND=1
             fi
           done
           if [ "$FOUND" -eq 1 ]; then exit 1; fi
           echo "No internal files leaked"
+
+      - name: References present
+        run: |
+          for f in skills/humanizer/references/patterns.md skills/humanizer/references/always-on-templates.md; do
+            if [ ! -f "$f" ]; then
+              echo "FAIL: Missing $f"
+              exit 1
+            fi
+          done
+          echo "Reference files present"
+
+  cli:
+    name: CLI (metrics + tests)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Unit and smoke tests (zero dependencies)
+        working-directory: cli
+        run: node --test
+
+      - name: CLI smoke run
+        run: |
+          node cli/index.js score examples/blog-post/after.md
+          node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md

@@ -1,7 +1,7 @@
 {
   "name": "humanizer",
   "version": "0.1.0",
-  "description": "Detects 43 AI writing patterns and rewrites text with burstiness, voice profiles, and a 0-100 AI-tell score. Pure Markdown, zero dependencies, no network calls.",
+  "description": "Detects 53 AI writing patterns and rewrites text with burstiness, voice profiles, and a 0-100 AI-tell score. Pure Markdown skill core, zero dependencies, no network calls; optional metrics CLI included.",
   "author": {
     "name": "Adam Boudjemaa",
     "email": "boudjemaa.adam@gmail.com"

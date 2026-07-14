@@ -1,0 +1,60 @@
+name: 'Humanizer docs quality gate'
+description: 'Score Markdown/text files for AI-writing tells and fail the build above a threshold or on regression. Zero dependencies.'
+author: 'Adam Boudjemaa'
+branding:
+  icon: 'edit-3'
+  color: 'purple'
+
+inputs:
+  path:
+    description: 'File or directory to scan'
+    required: false
+    default: '.'
+  fail-above:
+    description: 'Fail if any file scores above this AI-tell score (0-100). Empty = no threshold gate.'
+    required: false
+    default: ''
+  baseline:
+    description: 'Path to a baseline JSON of {path: score}. Used with fail-on-regression.'
+    required: false
+    default: ''
+  fail-on-regression:
+    description: 'Fail if any file scores worse than its baseline entry.'
+    required: false
+    default: 'false'
+  ext:
+    description: 'Comma-separated extensions to scan.'
+    required: false
+    default: 'md,markdown,txt'
+  ignore-code:
+    description: 'Mask fenced code blocks before scoring.'
+    required: false
+    default: 'true'
+  ignore-quotes:
+    description: 'Mask Markdown block quotes before scoring.'
+    required: false
+    default: 'true'
+  node-version:
+    description: 'Node.js version to use.'
+    required: false
+    default: '20'
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Run humanizer scan
+      shell: bash
+      run: |
+        CLI="$GITHUB_ACTION_PATH/../../../cli/index.js"
+        ARGS=(scan "${{ inputs.path }}" --ext "${{ inputs.ext }}")
+        [ "${{ inputs.ignore-code }}" = "true" ] && ARGS+=(--ignore-code)
+        [ "${{ inputs.ignore-quotes }}" = "true" ] && ARGS+=(--ignore-quotes)
+        [ -n "${{ inputs.fail-above }}" ] && ARGS+=(--fail-above "${{ inputs.fail-above }}")
+        [ -n "${{ inputs.baseline }}" ] && ARGS+=(--baseline "${{ inputs.baseline }}")
+        [ "${{ inputs.fail-on-regression }}" = "true" ] && ARGS+=(--fail-on-regression)
+        echo "humanizer ${ARGS[*]}"
+        node "$CLI" "${ARGS[@]}"

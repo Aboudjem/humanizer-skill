@@ -4,15 +4,22 @@
 
 ## What this repo is
 
-**Humanizer** is a pure-Markdown Claude Code skill that detects 43 AI writing patterns and rewrites text to sound like a human wrote it. It scores text 0-100 (higher = more AI smell), applies one of 5 named voice profiles, and injects sentence-length burstiness. Zero dependencies. No network calls. No binaries. The entire skill is a single file: `skills/humanizer/SKILL.md`.
+**Humanizer** is a pure-Markdown Claude Code skill that detects 53 AI writing patterns and rewrites text to sound like a human wrote it. It scores text 0-100 (higher = more AI smell), applies one of 5 named voice profiles, and injects sentence-length burstiness. The installable skill core is a single zero-dependency Markdown file: `skills/humanizer/SKILL.md`. The repo also ships optional extras (on-demand reference files and a zero-dependency metrics CLI) that the skill core never requires.
 
 ## File map
 
 ```
 skills/
   humanizer/
-    SKILL.md          # the skill — the only file you need to install
+    SKILL.md          # the skill — the only file you need to install (zero-dep)
     README.md         # skill-specific docs
+    references/
+      patterns.md              # per-pattern deep dives and provenance (on demand)
+      patterns.zh.md           # provisional native-Chinese appendix
+      always-on-templates.md   # copy-paste blocks for CLAUDE.md / SOUL.md / etc.
+cli/                  # optional zero-dependency metrics + CI gate (Node, node:test)
+.github/
+  actions/humanizer-gate/      # reusable GitHub Action for CI docs-quality gating
 .claude-plugin/
   plugin.json         # Claude Code plugin manifest (name, version, author, keywords)
   marketplace.json    # single-plugin marketplace entry (installable via claude plugin marketplace add)
@@ -23,6 +30,7 @@ examples/
 docs/
   VIRAL-AUDIT.md      # supernova engine score/tier/gap report
   LAUNCH-PLAN.md      # June 2026 channel-sequenced launch plan
+README.zh-CN.md       # Simplified-Chinese README (English-writing wedge)
 landing/              # static landing page (humanizer-skill.vercel.app)
 submissions/          # awesome-list / marketplace submission drafts
 ```
@@ -87,21 +95,21 @@ The skill is invoked as `/humanizer`. It auto-triggers when a user asks to:
 
 ## How to test
 
-The skill is pure Markdown — there is no test runner. Test it manually:
+The skill itself is pure Markdown, so test it by running it:
 
 1. Install the skill (see above).
 2. Open Claude Code in any project.
 3. Run: `/humanizer "In today's rapidly evolving landscape, AI is reshaping how we think about creativity. This groundbreaking shift represents a pivotal moment in human history." --mode detect --score`
-4. Expected output: score ≥ 70/100 with patterns P1, P4, P7, P29, P30 flagged.
+4. Expected output: a high score with patterns P1, P4, P7, P29, P30 flagged.
 5. Run: `/humanizer "..." --voice casual` — verify the rewrite has shorter/varied sentences and no "pivotal"/"reshaping"/"rapidly evolving".
 
-See `examples/blog-post/` for a documented before/after that serves as a reference test case.
+The optional CLI has an automated suite: `cd cli && node --test` (25 tests, zero dependencies). Smoke it with `node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md`. See `examples/blog-post/` for a documented before/after reference case.
 
 ## Conventions for contributors
 
-- All 43 patterns are numbered P1–P43 in `SKILL.md`. New patterns continue the sequence.
-- Every new pattern needs: a name, what to look for, and a before/after example.
-- The badge count in `README.md` (`patterns-43`) must be updated when patterns are added.
+- All 53 patterns are numbered P1-P53 in `SKILL.md`. New patterns continue the sequence.
+- Every new pattern needs: a name, what to look for, and a before/after example. Deep dives and sources go in `references/patterns.md`, not the core.
+- The badge count in `README.md` (`patterns-53`), the CI threshold (`EXPECTED` in `ci.yml`), and the CHANGELOG must move together when patterns are added.
 - No em dashes in `SKILL.md` — the skill bans em dashes (P13), so the skill file enforces its own rules.
 - CI runs a markdown lint pass and a self-check that scans `SKILL.md` for its own banned patterns.
 
