@@ -4,9 +4,11 @@
   <img alt="Humanizer" src=".github/assets/logo-light.svg" width="100%">
 </picture>
 
+<p align="center"><b>English</b> | <a href="./README.zh-CN.md">简体中文</a></p>
+
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-8b5cf6?style=flat-square" alt="License"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-43-8b5cf6?style=flat-square" alt="43 AI Patterns"></a>
+  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-53-8b5cf6?style=flat-square" alt="53 AI Patterns"></a>
   <a href="#voice-profiles"><img src="https://img.shields.io/badge/voices-5-8b5cf6?style=flat-square" alt="5 Voice Profiles"></a>
   <a href="#"><img src="https://img.shields.io/badge/dependencies-0-8b5cf6?style=flat-square" alt="Zero Dependencies"></a>
   <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=8b5cf6" alt="Stars"></a>
@@ -14,7 +16,7 @@
 
 <p align="center">
   <b>AI text scores ~0.00 burstiness. Humans score ~+0.70.</b><br/>
-  Humanizer rewrites the gap. 43 patterns, 5 voices, one Markdown file, zero API calls.
+  Humanizer rewrites the gap. 53 patterns, 5 voices, one Markdown file, zero API calls.
 </p>
 
 <p align="center">
@@ -42,6 +44,23 @@
 ---
 
 ## Get started
+
+### Install with the skills CLI (any agent)
+
+One command, works across Claude Code, Cursor, Codex, opencode, and 70+ agents via [vercel-labs/skills](https://github.com/vercel-labs/skills):
+
+```bash
+npx skills add Aboudjem/humanizer-skill
+```
+
+Target a specific agent, or list what's in the repo first:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -a claude-code   # install just for Claude Code
+npx skills add Aboudjem/humanizer-skill --list           # see the skills in this repo
+```
+
+Prefer no tooling? The one-line curl install below works too.
 
 ### Install (one command)
 
@@ -214,7 +233,7 @@ Drop a `humanizer-context.md` file at your project root with your brand samples 
 
 You write with AI. The output sounds like a chatbot. Every sentence is the same length, the vocabulary is predictable, and phrases like "delve into" and "it's important to note" show up everywhere.
 
-Humanizer detects 43 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentence structure, injecting the burstiness and unpredictability that make writing sound like a person wrote it.
+Humanizer detects 53 specific AI writing patterns and rewrites your text with real human rhythm, vocabulary, and voice. It doesn't swap synonyms. It rebuilds sentence structure, injecting the burstiness and unpredictability that make writing sound like a person wrote it.
 
 > **Tip:** This is about writing quality, not detection evasion. Good writing doesn't trigger AI detectors because it doesn't have the lazy patterns that detectors look for. Fix the writing, and the detection problem solves itself.
 
@@ -282,7 +301,7 @@ A 4-pass editing system. Each pass has one job and never does the others.
 
 ```mermaid
 graph LR
-    A["Pass 1: Detect<br/><sub>Scan for 43 AI patterns<br/>across 5 categories</sub>"] --> B["Pass 2: Strip<br/><sub>Remove significance inflation,<br/>AI vocabulary, filler</sub>"]
+    A["Pass 1: Detect<br/><sub>Scan for 53 AI patterns<br/>across 6 categories</sub>"] --> B["Pass 2: Strip<br/><sub>Remove significance inflation,<br/>AI vocabulary, filler</sub>"]
     B --> C["Pass 3: Inject<br/><sub>Apply voice profile,<br/>burstiness, perplexity</sub>"]
     C --> D["Pass 4: Verify<br/><sub>Sentence variance check,<br/>blacklist scan, final test</sub>"]
 
@@ -314,6 +333,36 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 | Kill negative parallelism | Washington Post | "It's not X, it's Y" confirmed as #1 AI tell across 328K messages |
 | Structural paraphrasing | RAID benchmark, ACL 2024 | Drops DetectGPT accuracy from 70.3% to 4.6% |
 | Intrinsic dimension | NeurIPS 2023 | Human text ~9 dimensions vs AI ~7.5 |
+| Length and lexical diversity | HC3 corpus, [arXiv 2301.07597](https://arxiv.org/abs/2301.07597) | Bilingual, ~40K pairs: English human answers avg 142.5 words vs ChatGPT 198.1; humans use a larger vocabulary; ChatGPT perplexity is lower |
+
+---
+
+## Optional: computed metrics and a CI gate
+
+The skill is all you need to rewrite text. But if you want to *measure* docs and gate them in CI, the repo ships a small, zero-dependency Node CLI that computes the signals the skill describes: burstiness, type-token ratio, sentence-length CoV, trigram repetition, AI-vocabulary density, Flesch-Kincaid, and a transparent 0-100 score.
+
+```bash
+# Score a file (or - for stdin)
+node cli/index.js score README.md
+
+# See exactly what a rewrite improved
+node cli/index.js compare --before draft.md --after final.md
+
+# Fail CI when docs drift too AI-flavored, or only when they regress
+node cli/index.js scan docs/ --fail-above 40
+node cli/index.js scan docs/ --baseline .humanizer-baseline.json --fail-on-regression
+```
+
+Drop it into any pipeline with the bundled GitHub Action:
+
+```yaml
+- uses: Aboudjem/humanizer-skill/.github/actions/humanizer-gate@main
+  with:
+    path: docs/
+    fail-above: '40'
+```
+
+No API keys, no network, no third-party packages. It's a deterministic proxy, not a trained detector: fast and reproducible, complementary to the skill's holistic LLM score. Details in [`cli/README.md`](cli/README.md).
 
 ---
 
@@ -322,7 +371,7 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 | Feature | **Humanizer** | QuillBot | Undetectable.ai | Manual editing |
 |:--------|:------------:|:--------:|:----------------:|:--------------:|
 | Open source | Yes | No | No | N/A |
-| Pattern detection | **43** | 0 | 0 | 0 |
+| Pattern detection | **53** | 0 | 0 | 0 |
 | Voice profiles | **5** | 0 | 3 | Manual |
 | Works offline | Yes | No | No | Yes |
 | Burstiness injection | Yes | No | Partial | No |
@@ -332,7 +381,7 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 
 ---
 
-## All 43 patterns
+## All 53 patterns
 
 <details>
 <summary><b>Content Patterns (P1-P8)</b></summary>
@@ -419,18 +468,38 @@ Word-swapping tools like QuillBot change individual words but leave the rhythm a
 
 > All P38-P43 are 2026 community discoveries sourced from HackerNews threads, Wikipedia's evolving editorial guideline, and writing practitioner blogs. Sources cited inline in [SKILL.md](skills/humanizer/SKILL.md).
 
+<details>
+<summary><b>Craft and Forensic (P44-P53)</b></summary>
+
+| # | Pattern | What to look for |
+|:--|:--------|:-----------------|
+| P44 | False Agency | "the data tells us", "the market rewards" (abstractions doing human verbs) |
+| P45 | Narrator-from-a-Distance | "People tend to", "Nobody designed this" (floating above the scene) |
+| P46 | Diff-Anchored Writing | "was refactored to", "now uses", "replaces the old" in reference docs |
+| P47 | Hyphenated-Pair Overuse | "the report is high-quality" (hyphen kept after the noun) |
+| P48 | Aphorism Formulas | "X is the new Y", "the currency of", "not a tool but a mirror" |
+| P49 | Fragmented Headers | a heading followed by one line restating the heading |
+| P50 | Passive / Subjectless | "No configuration is needed", "changes were made" (no actor) |
+| P51 | Reasoning-Chain Artifacts | "Let me think", "Step 1:", "Breaking this down" leaking through |
+| P52 | Unicode Obfuscation | zero-width chars, soft hyphens, homoglyphs used to dodge detectors |
+| P53 | Hedged-Enumeration Openers | "There are several ways to", "In general", "It is generally a good idea" |
+
+</details>
+
+> P44-P53 are adopted from the wider open humanizer ecosystem (blader, stop-slop, brandonwise) and the HC3 corpus (arXiv 2301.07597). Provenance and deep dives in [references/patterns.md](skills/humanizer/references/patterns.md).
+
 ---
 
 ## Why not just...
 
 **"...use a better prompt?"**
-Prompts help, but they can't enforce 43 specific pattern rules consistently. The skill has a checklist. It catches things you'd miss on your 50th revision.
+Prompts help, but they can't enforce 53 specific pattern rules consistently. The skill has a checklist. It catches things you'd miss on your 50th revision.
 
 **"...use QuillBot or Undetectable.ai?"**
 They swap words. The rhythm stays robotic, the sentence lengths stay uniform, the structure stays predictable. Detectors don't care about individual words. They care about patterns.
 
 **"...just edit it myself?"**
-You absolutely can. But do you know all 43 patterns? Can you spot "copula avoidance" or "significance inflation" on sight? This skill is a ruthless editor that never gets tired and never misses a pattern.
+You absolutely can. But do you know all 53 patterns? Can you spot "copula avoidance" or "significance inflation" on sight? This skill is a ruthless editor that never gets tired and never misses a pattern.
 
 ---
 
@@ -453,22 +522,40 @@ The patterns are model-agnostic. The voice profiles are model-agnostic. The only
 
 ## Trust
 
-No telemetry. No data collection. No API calls. No cloud anything.
+No telemetry. No data collection. No API calls. No cloud anything. Nothing leaves your machine.
 
-The entire skill is a single Markdown file (`SKILL.md`) that Claude Code reads locally. Your text never leaves your machine. There's nothing to audit because there's nothing running.
+The skill core you install is a single Markdown file (`skills/humanizer/SKILL.md`) that your editor reads locally. No JavaScript, no binaries, no network. Read the source yourself: it's one file, and it installs and runs standalone.
 
-> **Note:** Pure markdown skill. No JavaScript, no binaries, no network requests. Read the source yourself: it's one file.
+The repo also ships an **optional** metrics CLI (`cli/`) for people who want a computed score or a CI gate. It is a separate layer: plain Node, still zero third-party dependencies, still fully offline, and the skill never calls it. If you only want the skill, you never touch the CLI. If you want the CLI, it is small enough to read end to end.
+
+> **Note:** The skill is pure Markdown and zero-dependency. The CLI is opt-in, offline, and dependency-free too. Nothing here phones home.
 
 ---
 
 ## File structure
+
+What you install (one file, standalone):
 
 ```
 your-project/
   .claude/
     skills/
       humanizer/
-        SKILL.md    # the entire skill, one file
+        SKILL.md    # the skill core, installs and runs on its own
+```
+
+What the repo contains (the extras are optional):
+
+```
+humanizer-skill/
+  skills/humanizer/
+    SKILL.md                        # the skill core (zero-dep)
+    references/
+      patterns.md                   # deep dives and provenance, loaded on demand
+      patterns.zh.md                # provisional native-Chinese appendix
+      always-on-templates.md        # copy-paste blocks for CLAUDE.md / SOUL.md / etc.
+  cli/                              # optional zero-dependency metrics + CI gate
+  .github/actions/humanizer-gate/  # reusable GitHub Action
 ```
 
 ---
@@ -478,7 +565,7 @@ your-project/
 Found a new AI pattern? Have a better fix? PRs welcome.
 
 1. Fork the repo
-2. Add your pattern to `SKILL.md` (follow the P1-P43 format)
+2. Add your pattern to `SKILL.md` (follow the P1-P53 format)
 3. Include a before/after example
 4. Open a PR
 
@@ -494,7 +581,7 @@ This skill is part of a wider family of humanizer tools. Direct lineage:
 - [@softaworks/agent-toolkit](https://github.com/softaworks/agent-toolkit), the humanizer plugin that proved Markdown skill files were the right distribution format.
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), the public, open, citation-backed reference list that ~70% of P1-P30 are derived from.
 
-What this fork adds: 43 numbered patterns (largest open catalog), 5 named voice profiles, three operating modes (`detect`/`rewrite`/`edit`), 8-editor install matrix, CI that enforces its own rules (no em dashes in the skill that bans em dashes), and a research-first README that cites primary sources for every claim.
+What this fork adds: 53 numbered patterns (largest open catalog), 5 named voice profiles, three operating modes (`detect`/`rewrite`/`edit`), a false-positive guard so it doesn't gut good human prose, an 8-editor install matrix, an optional zero-dependency metrics CLI and CI quality-gate, CI that enforces its own rules (no em dashes in the skill that bans em dashes), and a research-first README that cites primary sources for every claim.
 
 If you used the older humanizers, this one will feel familiar but tighter. If you're new to the category, [@blader's repo](https://github.com/blader/humanizer) is also worth a read.
 

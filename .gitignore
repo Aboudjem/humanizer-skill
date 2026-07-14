@@ -6,3 +6,5 @@
 *.swp
 *~
 node_modules/
+
+.goal/

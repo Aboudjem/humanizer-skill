@@ -1,0 +1,76 @@
+# humanizer-metrics (optional CLI)
+
+A small, **zero-dependency** Node tool that *computes* the writing signals the skill talks about, so you can score docs deterministically and gate them in CI.
+
+The pure-Markdown skill in `../skills/humanizer/SKILL.md` needs none of this. This directory is a separate, optional layer for power users and teams. Nothing here runs unless you run it.
+
+## What it computes
+
+For any text it reports:
+
+- **Burstiness** (coefficient of variation of sentence length) and Goh-Barabasi burstiness
+- **Type-token ratio** and **MATTR** (length-stable lexical diversity)
+- **Trigram repetition** (the treadmill signal, P43)
+- **AI-vocabulary tell density** (tiered blacklist, mirrors P7 and the tiered vocab in the skill)
+- **Flesch-Kincaid** grade and reading ease
+- A transparent weighted **0-100 AI-tell score** (higher = more AI smell)
+
+The score is a deterministic proxy: `0.28 low-burstiness + 0.18 low-diversity + 0.14 high-repetition + 0.40 lexical-tells`. It is not a trained detector and does not call any network. The `/humanizer` skill's LLM-estimated score is more holistic; this one is fast and reproducible. Use them together.
+
+## Requirements
+
+Node 18 or newer. No `npm install` needed.
+
+## Usage
+
+```bash
+# Score one file (or - for stdin)
+node cli/index.js score README.md
+cat draft.md | node cli/index.js score -
+
+# Ignore code fences and quoted examples so they don't inflate the score
+node cli/index.js score docs/api.md --ignore-code --ignore-quotes
+
+# Scan a whole tree
+node cli/index.js scan docs/
+
+# Show the before/after delta
+node cli/index.js compare --before draft.md --after final.md
+
+# JSON for tooling
+node cli/index.js score README.md --json
+```
+
+## CI quality gate
+
+Fail the build when docs get too AI-flavored, or only when they regress against a saved baseline:
+
+```bash
+# Hard threshold
+node cli/index.js scan docs/ --fail-above 40
+
+# Save a baseline once, then fail only on regressions (existing debt is grandfathered)
+node cli/index.js scan docs/ --baseline .humanizer-baseline.json --write-baseline
+node cli/index.js scan docs/ --baseline .humanizer-baseline.json --fail-on-regression
+```
+
+Exit codes: `0` pass, `1` gate failed, `2` usage or IO error.
+
+### GitHub Action
+
+A reusable composite action lives at `.github/actions/humanizer-gate`:
+
+```yaml
+- uses: Aboudjem/humanizer-skill/.github/actions/humanizer-gate@main
+  with:
+    path: docs/
+    fail-above: '40'
+```
+
+## Tests
+
+```bash
+cd cli && node --test
+```
+
+25 tests, no dependencies. Covers tokenization, every metric, the composite score, code/quote masking, the vocabulary layer, and CLI exit codes (threshold gate, baseline regression, bad input).
