@@ -197,7 +197,7 @@ Scan the input text for ALL of the following patterns. Track each match with its
 
 **P13: Em Dash Ban.** Overuse em dashes mimicking punchy sales/editorial writing. It's the single most common ai formatting tell. Triggers: Any em dash (U+2014) anywhere in the text. Zero tolerance.
 
-**P14: Boldface/Formatting Overuse.** Mechanically emphasize terms. Humans use bold sparingly, once per section, not on every noun. Triggers: Bold on every other phrase, emoji-decorated headers, Markdown formatting in non-Markdown contexts.
+**P14: Boldface/Formatting Overuse.** Mechanically emphasize terms, or lean on decoration and malformed structure in place of clear writing. Humans use bold sparingly, once per section, not on every noun. Triggers: Bold on every other phrase, emoji-decorated headers, emoji used as list bullets, skipped heading levels (H1 straight to H3), a thematic break (horizontal rule) jammed before every heading, tables where a sentence of prose would read better, Markdown formatting in non-Markdown contexts.
 
 **P15: Structured List Syndrome.**  Triggers: Bullet lists where items start with `**Bold Header:** description`, excessive bullet points for information that flows naturally as prose.
 
@@ -251,7 +251,7 @@ Deep dives (extended "what's happening" notes, extra examples, and full sources)
 > **AI:** Dear [Recipient], I am writing regarding [Topic].
 > **Human:** (Either fill it in or don't send it.)
 
-**P34: Chatbot Reference Markup Leaking.** Internal citation tokens preserved when copy-pasting from ChatGPT, Grok, or Perplexity. Near-definitive proof of tool use. Fix: delete all markup; replace with a real reference if the citation mattered. Triggers: `citeturn0search0`, `contentReference[oaicite:0]{index=0}`, `oai_citation`, `[attached_file:1]`, orphan footnote characters.
+**P34: Chatbot Reference Markup Leaking.** Internal citation tokens preserved when copy-pasting from ChatGPT, Grok, or Perplexity. Near-definitive proof of tool use. Fix: delete all markup; replace with a real reference if the citation mattered. Triggers: `citeturn0search0`, `contentReference[oaicite:0]{index=0}`, `oai_citation`, `[attached_file:1]`, retrieval-augmented `attribution` / `attributableIndex` tags, orphan footnote characters.
 
 > **AI:** The school has been recognized as an International Fellowship Centre. citeturn0search1
 > **Human:** The school has been recognized as an International Fellowship Centre.
@@ -280,7 +280,7 @@ Surfaced from HackerNews, Substack, and Wikipedia's editorial guideline after th
 > **AI:** Remote work improves balance. Many workers prefer it. Studies show productivity rises. Commuting costs drop. Office costs decline too.
 > **Human:** Remote work's flexibility is the obvious sell. The harder question is what you lose: the hallway conversation that turns into your best idea, the body language that tells you someone is drowning before they say anything.
 
-**P39: Paragraph-Closing "Whether" Summary Sentences.** Paragraph endings written as local SEO-style recaps. Fix: cut the closing "whether" sentence; end on the strongest specific point. Triggers: paragraphs ending "Whether you...", "Whether they...", "Whether it's...". Source: [Gone Travelling Productions, Aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/).
+**P39: Paragraph-Closing "Whether" Summary Sentences.** Paragraph and section endings written as local SEO-style recaps. Fix: cut the closing recap sentence; end on the strongest specific point. Triggers: paragraphs ending "Whether you...", "Whether they...", "Whether it's...", and section-ending recap lines ("In summary,", "To sum up,", "Overall,") that restate what the section just said. Source: [Gone Travelling Productions, Aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/).
 
 > **AI:** Tokyo offers everything from Michelin-starred restaurants to humble ramen stalls. Whether you prefer fine dining or street food, Tokyo has something for every palate.
 > **Human:** Tokyo's best ramen counter doesn't have a phone, doesn't take reservations, and hasn't changed the broth recipe since 1987.

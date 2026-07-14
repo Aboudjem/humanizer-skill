@@ -69,3 +69,17 @@ Findings this skill leans on:
 - **"Indicating words".** The corpus ships lists of top-discriminating tokens. The ChatGPT markers "There are several ways", "In general", "It is generally a good idea" became P53.
 
 Licensing note: the HuggingFace dataset is CC-BY-SA-4.0 (cite with attribution). The GitHub detector code has no license, so none of it was reused, and this skill does not claim to have benchmarked against their detectors. We cite HC3 as corroborating evidence only.
+
+---
+
+## Coverage against [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
+
+Every prose and formatting sign the Wikipedia guide documents maps to a pattern here:
+
+- Significance inflation -> P1; notability over-attribution -> P2, P37; superficial -ing -> P3; promotional tone -> P4; weasel/vague attribution -> P5; exaggerated source quantity -> P5, P37; formulaic "challenges" -> P6.
+- AI vocabulary -> P7 (tiered); copula avoidance -> P8; negative parallelisms (all three variants) -> P9; rule of three -> P10; elegant variation -> P11, P31.
+- Title case headings -> P16; boldface overuse, emoji-as-formatting, skipped heading levels, thematic breaks before headings, tables-where-prose-fits -> P14; inline-header lists -> P15; em dashes -> P13; curly quotes -> P17; Markdown in the wrong context -> P28.
+- Collaborative/conversational language -> P19, P32; knowledge-cutoff disclaimers -> P20; placeholder text -> P33; chatbot markup (turn0search0, contentReference/oaicite, RAG attribution tags) -> P34; utm_source parameters -> P35; fabricated or phantom citations -> P25; pronounced style shifts -> P36; section-end summaries -> P39.
+- Human-writing positive indicators (predating Nov 2022, natural variation) and the "detectors are unreliable, do not judge on one tell" caution map to the Guardrails section in `SKILL.md`.
+
+Intentionally out of scope (Wikipedia-namespace editing, not general prose): non-existent categories/templates, AfC submission statements, exhaustive edit summaries, pre-placed maintenance tags, canned user pages, permissions gaming, and citation-integrity mechanics (invalid DOI/ISBN, missing page numbers, unused named references). A prose humanizer should not touch these.
