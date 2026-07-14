@@ -37,6 +37,13 @@ submissions/          # awesome-list / marketplace submission drafts
 
 ## How to install the skill
 
+**Cross-agent via the skills CLI ([vercel-labs/skills](https://github.com/vercel-labs/skills)):**
+```bash
+npx skills add Aboudjem/humanizer-skill            # any supported agent
+npx skills add Aboudjem/humanizer-skill -a claude-code
+```
+The repo uses the standard `skills/<name>/SKILL.md` layout the CLI auto-discovers.
+
 **Project-scoped (travels with your repo):**
 ```bash
 mkdir -p .claude/skills/humanizer && curl -sL \
