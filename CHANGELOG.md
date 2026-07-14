@@ -33,6 +33,7 @@ The "collection upgrade": mined from the 9-skill "去AI味" collection this repo
 - Pattern count: 43 -> 53 (badge, CI threshold, frontmatter, quick-reference, comparison table).
 - **Honest positioning**: the "zero dependency / one file / nothing to audit" claims are now scoped to the Markdown skill core; the CLI is framed as a separate optional offline layer.
 - Deduplicated the P31-P43 entries, which previously repeated their fix/source text 2-3 times, and fixed mangled lowercased URLs.
+- Cross-checked the catalog against Wikipedia's "Signs of AI writing" guide and closed the remaining prose gaps by extending existing patterns (no count change): P14 now also covers skipped heading levels, thematic breaks before headings, emoji-as-bullets, and prose-worthy tables; P34 covers RAG `attribution`/`attributableIndex` markup; P39 covers section-end recap summaries. Coverage mapping documented in `references/patterns.md`.
 - **Quick reference table block** at the top of SKILL.md: Modes, Voices, Pattern catalog, and Flags presented as scannable tables.
 - **"When to use this skill" section** right under the H1.
 - **Frontmatter description** updated to reflect 53 patterns.
