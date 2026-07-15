@@ -29,7 +29,7 @@
 
 Humanizer 专门去掉**你写的英文**里的 AI 痕迹（去英文 AI 味 / 人味写作），把它改写成一个具体的、有观点的人写出来的样子。
 
-> **和 op7418/Humanizer-zh 的区别？** 那个 skill 是润色**中文**的，做得很好，要处理中文就用它。这个 skill 反过来，专治**你写的英文**里的 AI 味。两者互补，不是竞品。中文原生模式的实验性附录见文末的[中文写作支持](#中文写作支持实验性)。
+> **想润色中文？** 有不少 skill 专门润色**中文**，要处理中文可以用那些。这个 skill 反过来，专治**你写的英文**里的 AI 味。中文原生模式的实验性附录见文末的[中文写作支持](#中文写作支持实验性)。
 
 和其它同类相比，这个仓库的差异点：**53 个编号模式**（目前开源目录里最全）、**5 种命名语音风格**、以 **burstiness（句长波动）+ perplexity（用词可预测性）** 为核心的方法论、以及**一条 curl 命令、零依赖**的安装方式。
 
@@ -278,7 +278,7 @@ QuillBot 那类换词工具只改单个词，句子的节奏和可预测性原�
 
 > [`skills/humanizer/references/patterns.zh.md`](skills/humanizer/references/patterns.zh.md) —— 约 15 个原生中文 AI 痕迹模式（四字词语堆砌、首先/其次/最后、在当今…的时代、赋能/抓手/闭环 等词黑名单、破折号 与全角半角标点混用、设问-回答套路、口号式乐观结尾……）。
 
-**这份附录是临时的、未经中文母语写手校验的**，从竞品分析中提取而来，尚未与英文目录达到同等成熟度。burstiness / perplexity 这套指标也**不能直接套用**到以字为单位的中文上。想认真做中文，直接用 op7418/Humanizer-zh 更靠谱。
+**这份附录是临时的、未经中文母语写手校验的**，尚未与英文目录达到同等成熟度。burstiness / perplexity 这套指标也**不能直接套用**到以字为单位的中文上。想认真做中文，建议先请中文母语写手校验整份附录。
 
 ---
 
@@ -318,15 +318,12 @@ prompt 有帮助，但没法稳定地执行 53 条具体的模式规则。这个
 
 ---
 
-## 传承与致谢
+## 参考与致谢
 
-这个 skill 属于一个更大的 humanizer 工具家族。直接的传承：
+- [Wikipedia：Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：一份公开、开放、有引用支撑的参考清单，P1–P30 里约 70% 源自它（CC BY-SA）。
+- HC3 语料库（[arXiv 2301.07597](https://arxiv.org/abs/2301.07597)）：为长度、用词多样性、perplexity 等主张提供了双语、经同行评审的佐证。
 
-- [@blader/humanizer](https://github.com/blader/humanizer)：命名了这个品类的原版 Claude skill。模式不同、没有语音风格、没有编辑模式，但它点亮了这条路。op7418/Humanizer-zh 就是它的中文本地化版本。
-- [@softaworks/agent-toolkit](https://github.com/softaworks/agent-toolkit)：证明了 Markdown skill 文件是正确分发格式的 humanizer 插件。
-- [Wikipedia：Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：一份公开、开放、有引用支撑的参考清单，P1–P30 里约 70% 源自它。
-
-这个 fork 新增了：53 个编号模式（最大的开源目录）、5 个命名语音风格、三种运行模式（`detect`/`rewrite`/`edit`）、8 编辑器安装矩阵、会强制执行自身规则的 CI（禁用破折号的 skill 自己也不许出现破折号），以及一份为每条主张都引用一手来源的、研究导向的 README。
+这个 skill 提供：53 个编号模式（最大的开源目录）、5 个命名语音风格、三种运行模式（`detect`/`rewrite`/`edit`）、8 编辑器安装矩阵、会强制执行自身规则的 CI（禁用破折号的 skill 自己也不许出现破折号），以及一份为每条主张都引用一手来源的、研究导向的 README。
 
 ---
 

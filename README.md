@@ -196,6 +196,8 @@ Same idea for other editors, just change the folder: `.cursor/skills/`, `.github
 
 Every pattern has a full write-up, its triggers, and a before/after example in [`skills/humanizer/SKILL.md`](skills/humanizer/SKILL.md) and [`references/patterns.md`](skills/humanizer/references/patterns.md).
 
+The core catalog (P1-P30) draws on [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (CC BY-SA), the cited reference list most of those entries come from.
+
 </details>
 
 <details>
@@ -296,10 +298,6 @@ What you install is one Markdown file ([`skills/humanizer/SKILL.md`](skills/huma
 ## Contributing
 
 Found a new AI pattern, or a cleaner fix? PRs welcome. Add a short entry to `SKILL.md`, put the deep dive and a before/after example in `references/patterns.md`, and keep the badge count, CI threshold, and CHANGELOG in sync. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Lineage and credit
-
-This builds on earlier work. Direct lineage: [@blader/humanizer](https://github.com/blader/humanizer), the original Claude skill that named the category; [@softaworks/agent-toolkit](https://github.com/softaworks/agent-toolkit), which showed Markdown skill files were the right format; and [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), the cited reference list most of P1-P30 comes from. This fork adds the largest numbered catalog (53), five named voices, three modes, a guard against over-editing, an optional metrics CLI and CI check, and CI that enforces its own rules.
 
 ---
 

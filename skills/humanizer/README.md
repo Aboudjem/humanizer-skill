@@ -100,8 +100,6 @@ Deep dives and provenance live in [`references/patterns.md`](references/patterns
 
 Built from research across:
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
-- Softaworks agent-toolkit humanizer by @blader
-- Davila7 claude-code-templates (humanizer + writing-clearly-and-concisely)
 - William Strunk Jr., *The Elements of Style* (1918)
 - Community research from Reddit, HackerNews, and writing communities
 
