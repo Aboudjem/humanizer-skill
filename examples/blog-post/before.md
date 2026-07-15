@@ -1,6 +1,6 @@
 # Example: Blog Post — Before (AI-generated)
 
-**Detected score: ~87/100 (Pure AI smell)**
+**Detected score: ~46/100 (Mixed)** (deterministic CLI proxy; the skill's holistic score reads higher)
 
 Run this through humanizer to see the patterns caught:
 

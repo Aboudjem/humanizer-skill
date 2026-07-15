@@ -1,4 +1,9 @@
 {
+  "name": "humanizer",
+  "owner": {
+    "name": "Adam Boudjemaa",
+    "email": "boudjemaa.adam@gmail.com"
+  },
   "plugins": [
     {
       "name": "humanizer",

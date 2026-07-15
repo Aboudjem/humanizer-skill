@@ -129,6 +129,7 @@ const WEIGHTS = { burstiness: 0.28, diversity: 0.18, repetition: 0.14, lexical: 
  * lowBurstiness + lowDiversity + highRepetition + lexicalDensity.
  */
 function aiTellScore(m, anchors = ANCHORS) {
+  if (!m.wordCount) return 0; // no text to judge; empty input must not read as AI (would false-trip a CI gate)
   const lowBurstiness = clamp((anchors.covHuman - m.burstiness) / anchors.covHuman, 0, 1);
   const lowDiversity = clamp(
     (anchors.ttrHigh - m.mattr) / (anchors.ttrHigh - anchors.ttrLow),
@@ -156,7 +157,8 @@ function verdict(score) {
 function scoreText(rawText, options = {}) {
   const metrics = analyze(rawText, options);
   const score = aiTellScore(metrics);
-  return { metrics, score, verdict: verdict(score) };
+  const label = metrics.wordCount === 0 ? 'No text' : verdict(score);
+  return { metrics, score, verdict: label };
 }
 
 module.exports = {
