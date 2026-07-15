@@ -17,6 +17,8 @@ skills/
       patterns.md              # per-pattern deep dives and provenance (on demand)
       patterns.zh.md           # provisional native-Chinese appendix
       always-on-templates.md   # copy-paste blocks for CLAUDE.md / SOUL.md / etc.
+    evals/
+      evals.json               # should-trigger / should-NOT-trigger eval cases
 cli/                  # optional zero-dependency metrics + CI gate (Node, node:test)
 .github/
   actions/humanizer-gate/      # reusable GitHub Action for CI docs-quality gating
@@ -31,7 +33,9 @@ docs/
   VIRAL-AUDIT.md      # supernova engine score/tier/gap report
   LAUNCH-PLAN.md      # June 2026 channel-sequenced launch plan
 README.zh-CN.md       # Simplified-Chinese README (English-writing wedge)
+docs-site/            # full MDX documentation site (Docusaurus, deploy-ready)
 landing/              # static landing page (humanizer-skill.vercel.app)
+tools/                # demo.sh + demo.tape (VHS terminal demo)
 submissions/          # awesome-list / marketplace submission drafts
 ```
 

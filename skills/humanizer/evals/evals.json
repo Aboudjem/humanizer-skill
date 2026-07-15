@@ -1,0 +1,55 @@
+{
+  "skill": "humanizer",
+  "description": "Trigger and behavior evaluations for the humanizer skill. The description in SKILL.md is the trigger; these cases check that it fires on real humanizing requests and stays quiet on unrelated ones.",
+  "how_to_run": "Manual: in a fresh Claude Code session with the skill installed, paste each prompt and record whether the humanizer skill was invoked (should_trigger) and whether the output matches the expectation. Repeat across Claude Haiku, Sonnet, and Opus, since trigger sensitivity varies by model. There is no automated harness in this repo; the optional cli/ tool scores rewrite quality but does not test triggering.",
+  "cases": [
+    {
+      "id": "trigger-humanize-this",
+      "prompt": "Humanize this: In today's rapidly evolving landscape, AI is reshaping how we think about creativity, marking a pivotal moment.",
+      "should_trigger": true,
+      "expect": "Invokes humanizer in rewrite mode. Output is specific, varied human prose with no 'rapidly evolving landscape', 'reshaping', or 'pivotal', and zero em dashes."
+    },
+    {
+      "id": "trigger-sound-less-ai",
+      "prompt": "Can you make this sound less AI and more human? 'Our platform leverages cutting-edge technology to deliver a seamless, robust experience.'",
+      "should_trigger": true,
+      "expect": "Invokes humanizer. Removes 'leverages', 'cutting-edge', 'seamless', 'robust'; replaces with concrete specifics."
+    },
+    {
+      "id": "trigger-detect-score",
+      "prompt": "Does this read like ChatGPT wrote it? Give it an AI score. 'It is important to note that this comprehensive guide delves into the intricacies of the subject.'",
+      "should_trigger": true,
+      "expect": "Invokes humanizer in detect mode with --score. Reports a high 0-100 score and flags P7 (AI vocabulary), P18/P22 (filler/formal), P29 (comprehensive overview)."
+    },
+    {
+      "id": "trigger-remove-ai-tells",
+      "prompt": "Remove the AI tells from this paragraph before I publish it on LinkedIn.",
+      "should_trigger": true,
+      "expect": "Invokes humanizer, ideally --voice professional. Strips emojis, hashtags, and significance inflation; adds concrete detail."
+    },
+    {
+      "id": "trigger-edit-file",
+      "prompt": "Run the humanizer on docs/intro.md and fix the AI writing in place.",
+      "should_trigger": true,
+      "expect": "Invokes humanizer in edit mode on the file, making targeted Edit-tool changes rather than a full rewrite to chat."
+    },
+    {
+      "id": "no-trigger-translate",
+      "prompt": "Translate this to French: The cat sat on the mat and watched the rain.",
+      "should_trigger": false,
+      "expect": "Does NOT invoke humanizer. Performs a translation."
+    },
+    {
+      "id": "no-trigger-write-poem",
+      "prompt": "Write me a short poem about the ocean at night.",
+      "should_trigger": false,
+      "expect": "Does NOT invoke humanizer. Writes an original poem (humanizer rewrites existing AI-flavored text; it is not a general generator)."
+    },
+    {
+      "id": "no-trigger-summarize",
+      "prompt": "Summarize this article in three bullet points.",
+      "should_trigger": false,
+      "expect": "Does NOT invoke humanizer. Produces a summary."
+    }
+  ]
+}
