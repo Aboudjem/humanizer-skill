@@ -103,7 +103,7 @@ Drop the flags to rewrite instead. `/humanizer "your text" --voice casual` retur
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-typewriter-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/demo-typewriter-light.svg">
-  <img alt="Animated demo: three AI tells (comprehensive, delves into, pivotal) flagged, struck through, and replaced with clean human prose" src=".github/assets/demo-typewriter-light.svg" width="100%">
+  <img alt="Terminal running /humanizer with --voice technical --score: three AI tells (comprehensive, delves into, pivotal) are flagged, struck through, and replaced with clean human prose, dropping the AI-tell score from 84 to 12" src=".github/assets/demo-typewriter-light.svg" width="100%">
 </picture>
 
 **Technical docs** (`--voice technical`)
