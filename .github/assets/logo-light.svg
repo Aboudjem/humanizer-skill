@@ -1,24 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" fill="none" role="img" aria-label="Humanizer: make AI text sound human. 53 patterns, 5 voices, 3 modes, zero dependencies.">
   <title>Humanizer</title>
-  <desc>A fountain pen writes a line on a sheet of ruled paper. Detect 53 AI writing patterns and rewrite text so it sounds like a human wrote it. 5 voices, 3 modes, zero dependencies.</desc>
+  <desc>A fountain pen travels across a sheet of ruled paper, writing an ink line, on a loop. Detect 53 AI writing patterns and rewrite text so it sounds like a human wrote it. 5 voices, 3 modes, zero dependencies.</desc>
   <defs>
     <linearGradient id="barrel" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#33507a"/>
       <stop offset="1" stop-color="#1a3252"/>
     </linearGradient>
     <radialGradient id="desk" cx="0.3" cy="0.15" r="1.15">
-      <stop offset="0" stop-color="#fffdf7"/>
-      <stop offset="1" stop-color="#f2ebdb"/>
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#faf5ff"/>
     </radialGradient>
     <filter id="paperShadow" x="-40%" y="-40%" width="180%" height="180%">
       <feDropShadow dx="0" dy="4" stdDev="5" flood-color="#7a6a4a" flood-opacity="0.28"/>
     </filter>
   </defs>
 
-  <rect x="6" y="6" width="708" height="208" rx="26" fill="url(#desk)" stroke="#c0952f" stroke-opacity="0.3" stroke-width="1.5"/>
+  <rect x="6" y="6" width="708" height="208" rx="26" fill="url(#desk)" stroke="#c0952f" stroke-opacity="0.28" stroke-width="1.5"/>
   <rect x="6" y="6" width="708" height="4" rx="2" fill="#c0952f" opacity="0.8"/>
 
-  <!-- paper sheet + fountain pen -->
   <g opacity="0">
     <animate attributeName="opacity" values="0;1" dur="0.55s" begin="0.05s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
     <rect x="46" y="44" width="118" height="126" rx="12" fill="#fffdf7" stroke="#e7dcc6" stroke-width="1" filter="url(#paperShadow)"/>
@@ -28,14 +27,18 @@
       <line x1="74" y1="96" x2="150" y2="96"/>
       <line x1="74" y1="116" x2="144" y2="116"/>
     </g>
-    <path d="M74,140 C88,133 100,147 116,139 C128,133 140,145 150,138" stroke="#1f3a5f" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="92" stroke-dashoffset="92">
-      <animate attributeName="stroke-dashoffset" values="92;0" dur="0.9s" begin="0.55s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
-    </path>
+  </g>
 
-    <g opacity="0">
-      <animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.35s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
-      <animateTransform attributeName="transform" type="translate" values="6 -6;0 0" dur="0.5s" begin="0.35s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
-      <g transform="translate(150,138) rotate(-40)">
+  <path d="M74,140 C92,136 108,143 126,138 C136,135 144,140 150,138" stroke="#1f3a5f" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="84" stroke-dashoffset="84">
+    <animate attributeName="stroke-dashoffset" values="84;0;0;84" keyTimes="0;0.32;0.74;1" dur="4.6s" begin="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/>
+  </path>
+
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.35s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <g>
+      <animateMotion path="M74,140 C92,136 108,143 126,138 C136,135 144,140 150,138" keyPoints="0;1;1;0" keyTimes="0;0.32;0.74;1" dur="4.6s" begin="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1" rotate="0"/>
+      <g transform="rotate(-40)">
+        <circle cx="-1" cy="1" r="1.7" fill="#1f3a5f"/>
         <rect x="28" y="-5.5" width="48" height="11" rx="5.5" fill="url(#barrel)"/>
         <rect x="33" y="-4" width="38" height="2" rx="1" fill="#6f91b4" opacity="0.55"/>
         <rect x="28" y="-5.5" width="6" height="11" fill="#c0952f"/>
@@ -48,12 +51,8 @@
         <circle cx="12.5" cy="0" r="1.2" fill="#fffdf7"/>
       </g>
     </g>
-    <circle cx="150" cy="138" r="0" fill="#1f3a5f">
-      <animate attributeName="r" values="0;2.4;1.8" dur="0.5s" begin="0.55s" calcMode="spline" keySplines="0.34 1.56 0.64 1" fill="freeze"/>
-    </circle>
   </g>
 
-  <!-- wordmark + copy -->
   <g opacity="0">
     <animate attributeName="opacity" values="0;1" dur="0.6s" begin="0.3s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
     <text x="210" y="102" font-family="'Segoe UI',system-ui,-apple-system,sans-serif" font-size="56" font-weight="800" letter-spacing="-2" fill="#16304f">humanizer</text>
