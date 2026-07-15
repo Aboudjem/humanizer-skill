@@ -1,190 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none">
-  <style>
-    /* ── timing ── */
-    /* Phase 1 0-2s: AI text types in */
-    /* Phase 2 2-3s: bad words highlight red */
-    /* Phase 3 3-4s: strikethrough + fade */
-    /* Phase 4 4-5s: clean text fades in */
-    /* Phase 5 5-6s: hold */
-    /* total loop 6s */
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none" role="img" aria-label="Before and after: three AI tells (comprehensive, delves into, pivotal) are flagged and struck, then replaced by clean human prose.">
+  <title>Before and after: AI tells struck and rewritten</title>
+  <desc>The AI phrase 'This comprehensive guide delves into the pivotal aspects of auth' has comprehensive, delves into, and pivotal flagged in rust and struck through. The clean rewrite reads: the auth system uses JWTs, tokens expire after 15 minutes.</desc>
+  <defs>
+    <radialGradient id="desk" cx="0.5" cy="0.1" r="1.1">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset="1" stop-color="#f2ebdb"/>
+    </radialGradient>
+    <clipPath id="revealL"><rect x="384" y="62" width="0" height="90"><animate attributeName="width" values="0;196" dur="0.9s" begin="1.65s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect></clipPath>
+  </defs>
 
-    @keyframes cursorBlink {
-      0%,49%{ opacity:1; } 50%,100%{ opacity:0; }
-    }
+  <rect x="8" y="12" width="704" height="176" rx="20" fill="url(#desk)" stroke="#c0952f" stroke-opacity="0.3" stroke-width="1.5"/>
+  <rect x="8" y="12" width="704" height="4" rx="2" fill="#c0952f" opacity="0.8"/>
 
-    /* AI label pulses in at start */
-    @keyframes aiLabelIn {
-      0%,5%{ opacity:0; } 10%,65%{ opacity:1; } 75%,100%{ opacity:0; }
-    }
-    @keyframes humanLabelIn {
-      0%,68%{ opacity:0; } 75%,100%{ opacity:1; }
-    }
+  <text x="34" y="44" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#b4552d" letter-spacing="1">AI OUTPUT</text>
+  <text x="390" y="44" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#2f7d5b" letter-spacing="1">HUMANIZED</text>
 
-    /* cursor only visible while AI text is typing (0-2s) */
-    @keyframes cursorLife {
-      0%,33%{ opacity:1; } 34%,100%{ opacity:0; }
-    }
+  <!-- AI side: flag, strike, then dim -->
+  <g>
+    <animate attributeName="opacity" values="1;0.4" dur="0.5s" begin="1.6s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
 
-    /* full AI phrase reveals char-by-char via clip */
-    @keyframes aiReveal {
-      0%{ clip-path: inset(0 100% 0 0); }
-      30%{ clip-path: inset(0 0% 0 0); }
-      100%{ clip-path: inset(0 0% 0 0); }
-    }
+    <g fill="#f6ddc9" opacity="0">
+      <animate attributeName="opacity" values="0;0.9" dur="0.3s" begin="0.4s" fill="freeze"/>
+      <rect x="70" y="70" width="120" height="22" rx="3"/>
+      <rect x="32" y="98" width="88" height="22" rx="3"/>
+      <rect x="32" y="126" width="58" height="22" rx="3"/>
+    </g>
 
-    /* bad word 1: "comprehensive" */
-    @keyframes badWord1 {
-      0%,33%{ fill:#1e1b4b; text-decoration:none; }
-      38%,52%{ fill:#ef4444; }
-      54%,64%{ fill:#ef4444; text-decoration:line-through; }
-      70%,100%{ fill:#ef4444; opacity:0; }
-    }
-    /* bad word 2: "delves into" */
-    @keyframes badWord2 {
-      0%,36%{ fill:#1e1b4b; }
-      42%,55%{ fill:#ef4444; }
-      57%,66%{ fill:#ef4444; text-decoration:line-through; }
-      72%,100%{ fill:#ef4444; opacity:0; }
-    }
-    /* bad word 3: "pivotal" */
-    @keyframes badWord3 {
-      0%,39%{ fill:#1e1b4b; }
-      44%,58%{ fill:#ef4444; }
-      60%,68%{ fill:#ef4444; text-decoration:line-through; }
-      74%,100%{ fill:#ef4444; opacity:0; }
-    }
-    /* neutral words in AI phrase fade out with it */
-    @keyframes aiNeutral {
-      0%,60%{ opacity:1; }
-      68%,100%{ opacity:0; }
-    }
+    <text x="34" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">This</text>
+    <text x="72" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">comprehensive<animate attributeName="fill" values="#1f3a5f;#b4552d" dur="0.3s" begin="0.4s" fill="freeze"/></text>
+    <text x="194" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">guide</text>
+    <line x1="72" y1="79" x2="186" y2="79" stroke="#b4552d" stroke-width="2" stroke-dasharray="114" stroke-dashoffset="114"><animate attributeName="stroke-dashoffset" values="114;0" dur="0.35s" begin="0.95s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></line>
 
-    /* strikethrough bars */
-    @keyframes strike1 {
-      0%,51%{ opacity:0; transform:scaleX(0); }
-      56%{ opacity:1; transform:scaleX(1); }
-      68%,100%{ opacity:0; }
-    }
-    @keyframes strike2 {
-      0%,53%{ opacity:0; transform:scaleX(0); }
-      58%{ opacity:1; transform:scaleX(1); }
-      69%,100%{ opacity:0; }
-    }
-    @keyframes strike3 {
-      0%,55%{ opacity:0; transform:scaleX(0); }
-      60%{ opacity:1; transform:scaleX(1); }
-      70%,100%{ opacity:0; }
-    }
+    <text x="34" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">delves into<animate attributeName="fill" values="#1f3a5f;#b4552d" dur="0.3s" begin="0.5s" fill="freeze"/></text>
+    <text x="124" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">the</text>
+    <line x1="34" y1="107" x2="120" y2="107" stroke="#b4552d" stroke-width="2" stroke-dasharray="86" stroke-dashoffset="86"><animate attributeName="stroke-dashoffset" values="86;0" dur="0.35s" begin="1.05s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></line>
 
-    /* divider arrow pulses */
-    @keyframes arrowPop {
-      0%,60%{ opacity:0.2; transform:scale(0.8); }
-      70%,100%{ opacity:1; transform:scale(1.15); }
-    }
-
-    /* clean human text fades in */
-    @keyframes humanReveal {
-      0%,68%{ opacity:0; transform:translateY(6px); }
-      78%,100%{ opacity:1; transform:translateY(0); }
-    }
-
-    /* human cursor blinks on clean side */
-    @keyframes humanCursor {
-      0%,74%{ opacity:0; }
-      75%,88%{ opacity:1; }
-      89%,94%{ opacity:0; }
-      95%,100%{ opacity:1; }
-    }
-
-    /* highlight pulse on bad words */
-    @keyframes highlight1 {
-      0%,35%{ opacity:0; }
-      40%,52%{ opacity:1; }
-      54%,100%{ opacity:0; }
-    }
-    @keyframes highlight2 {
-      0%,38%{ opacity:0; }
-      43%,55%{ opacity:1; }
-      57%,100%{ opacity:0; }
-    }
-    @keyframes highlight3 {
-      0%,41%{ opacity:0; }
-      46%,58%{ opacity:1; }
-      60%,100%{ opacity:0; }
-    }
-
-    .ai-label   { animation: aiLabelIn    6s ease-in-out infinite; }
-    .human-label{ animation: humanLabelIn 6s ease-in-out infinite; }
-    .ai-phrase  { animation: aiReveal     6s steps(1,end) infinite; }
-    .cursor-ai  { animation: cursorLife   6s step-end infinite; }
-    .cursor-human { animation: humanCursor 6s step-end infinite; }
-    .bw1        { animation: badWord1     6s ease-in-out infinite; }
-    .bw2        { animation: badWord2     6s ease-in-out infinite; }
-    .bw3        { animation: badWord3     6s ease-in-out infinite; }
-    .neutral    { animation: aiNeutral    6s ease-in-out infinite; }
-    .strike1    { animation: strike1      6s ease-out infinite; transform-origin: left center; }
-    .strike2    { animation: strike2      6s ease-out infinite; transform-origin: left center; }
-    .strike3    { animation: strike3      6s ease-out infinite; transform-origin: left center; }
-    .arrow      { animation: arrowPop     6s cubic-bezier(0.34,1.56,0.64,1) infinite; transform-origin: center; }
-    .clean-text { animation: humanReveal  6s cubic-bezier(0.34,1.56,0.64,1) infinite; }
-    .hl1        { animation: highlight1   6s ease-in-out infinite; }
-    .hl2        { animation: highlight2   6s ease-in-out infinite; }
-    .hl3        { animation: highlight3   6s ease-in-out infinite; }
-  </style>
-
-  <!-- Background card -->
-  <rect x="10" y="15" width="700" height="170" rx="20" fill="#faf5ff" stroke="#8b5cf6" stroke-width="1.5" stroke-opacity="0.25"/>
-
-  <!-- Left panel label -->
-  <text class="ai-label" x="38" y="46" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600" fill="#ef4444" letter-spacing="1">AI OUTPUT</text>
-
-  <!-- Right panel label -->
-  <text class="human-label" x="420" y="46" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="600" fill="#16a34a" letter-spacing="1">HUMAN</text>
-
-  <!-- ── AI text line 1: "This comprehensive guide" ── -->
-  <!-- "This " neutral -->
-  <text class="neutral" x="38" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">This</text>
-  <!-- highlight behind "comprehensive" -->
-  <rect class="hl1" x="68" y="63" width="112" height="20" rx="3" fill="#fecaca"/>
-  <!-- "comprehensive" bad word -->
-  <text class="bw1" x="68" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">comprehensive</text>
-  <line class="strike1" x1="68" y1="71" x2="180" y2="71" stroke="#ef4444" stroke-width="1.5"/>
-  <!-- " guide" neutral -->
-  <text class="neutral" x="184" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">guide</text>
-
-  <!-- ── AI text line 2: "delves into the" ── -->
-  <!-- highlight behind "delves into" -->
-  <rect class="hl2" x="38" y="90" width="78" height="20" rx="3" fill="#fecaca"/>
-  <text class="bw2" x="38" y="105" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">delves into</text>
-  <line class="strike2" x1="38" y1="98" x2="116" y2="98" stroke="#ef4444" stroke-width="1.5"/>
-  <text class="neutral" x="120" y="105" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">the</text>
-
-  <!-- ── AI text line 3: "pivotal aspects of auth." ── -->
-  <!-- highlight behind "pivotal" -->
-  <rect class="hl3" x="38" y="117" width="54" height="20" rx="3" fill="#fecaca"/>
-  <text class="bw3" x="38" y="132" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">pivotal</text>
-  <line class="strike3" x1="38" y1="125" x2="92" y2="125" stroke="#ef4444" stroke-width="1.5"/>
-  <text class="neutral" x="96" y="132" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">aspects of auth.</text>
-
-  <!-- Blinking cursor on AI side -->
-  <rect class="cursor-ai" x="236" y="120" width="1.5" height="16" rx="1" fill="#8b5cf6"/>
-
-  <!-- ── Divider + arrow ── -->
-  <line x1="355" y1="35" x2="355" y2="170" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.2" stroke-dasharray="4,3"/>
-  <g class="arrow" transform="translate(355,105)">
-    <circle cx="0" cy="0" r="14" fill="#8b5cf6" opacity="0.12"/>
-    <path d="M-5,-4 L5,0 L-5,4" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="34" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">pivotal<animate attributeName="fill" values="#1f3a5f;#b4552d" dur="0.3s" begin="0.6s" fill="freeze"/></text>
+    <text x="96" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">aspects of auth.</text>
+    <line x1="34" y1="135" x2="92" y2="135" stroke="#b4552d" stroke-width="2" stroke-dasharray="58" stroke-dashoffset="58"><animate attributeName="stroke-dashoffset" values="58;0" dur="0.35s" begin="1.15s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></line>
   </g>
 
-  <!-- ── Clean human text ── -->
-  <g class="clean-text">
-    <text x="390" y="78" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#16a34a" font-weight="600">The auth system</text>
-    <text x="390" y="105" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">uses JWTs. Tokens</text>
-    <text x="390" y="132" font-family="system-ui,-apple-system,sans-serif" font-size="15" fill="#1e1b4b">expire after 24 h.</text>
-    <!-- blinking cursor on human side -->
-    <rect class="cursor-human" x="523" y="120" width="1.5" height="16" rx="1" fill="#16a34a"/>
+  <!-- divider + arrow -->
+  <line x1="360" y1="36" x2="360" y2="164" stroke="#c0952f" stroke-width="1" stroke-opacity="0.35" stroke-dasharray="4,3"/>
+  <g transform="translate(360,100)" opacity="0.2">
+    <animate attributeName="opacity" values="0.2;1" dur="0.5s" begin="1.45s" calcMode="spline" keySplines="0.34 1.56 0.64 1" fill="freeze"/>
+    <circle cx="0" cy="0" r="15" fill="#c0952f" opacity="0.14"/>
+    <path d="M-5,-5 L6,0 L-5,5" stroke="#b98a34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </g>
 
-  <!-- Wordmark bottom right -->
-  <text x="600" y="170" font-family="system-ui,-apple-system,sans-serif" font-size="11" fill="#8b5cf6" opacity="0.5" font-weight="600" letter-spacing="-0.3">humanizer</text>
+  <!-- Human side: typewriter clip reveal -->
+  <g clip-path="url(#revealL)">
+    <text x="390" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#2f7d5b">The auth system</text>
+    <text x="390" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">uses JWTs. Tokens</text>
+    <text x="390" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">expire after 15 min.</text>
+  </g>
+  <rect x="556" y="130" width="2" height="16" rx="1" fill="#2f7d5b" opacity="0">
+    <animate attributeName="opacity" values="0;1;0;1;0;1;1" keyTimes="0;0.63;0.69;0.75;0.81;0.87;1" dur="4s" fill="freeze"/>
+  </rect>
+
+  <text x="612" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" font-weight="700" fill="#1f3a5f" opacity="0.55">humanizer</text>
 </svg>

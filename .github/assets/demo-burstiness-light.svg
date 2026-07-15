@@ -1,89 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none">
-  <style>
-    @keyframes aiLabel{0%,25%{opacity:1}32%,100%{opacity:0}}
-    @keyframes humanLabel{0%,58%{opacity:0}65%,90%{opacity:1}96%,100%{opacity:0}}
-    @keyframes modeAI{0%,25%{opacity:1}32%,100%{opacity:0}}
-    @keyframes modeHuman{0%,58%{opacity:0}65%,90%{opacity:1}96%,100%{opacity:0}}
-    @keyframes uniformLine{0%,25%{opacity:1}35%,100%{opacity:0}}
-    @keyframes variance{0%,58%{opacity:0}65%,90%{opacity:1}96%,100%{opacity:0}}
-    @keyframes wc{0%,58%{opacity:0}65%,90%{opacity:1}96%,100%{opacity:0}}
-    @keyframes b1{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:6px;y:139px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b2{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:62px;y:83px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b3{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:14px;y:131px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b4{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:44px;y:101px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b5{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:8px;y:137px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b6{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:56px;y:89px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b7{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:18px;y:127px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b8{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:34px;y:111px;fill:#a78bfa}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b9{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:10px;y:135px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b10{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:50px;y:95px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b11{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:12px;y:133px;fill:#8b5cf6}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b12{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:40px;y:105px;fill:#7c3aed}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    @keyframes b13{0%,25%{height:38px;y:107px;fill:#c4b5fd}55%,90%{height:22px;y:123px;fill:#a78bfa}96%,100%{height:38px;y:107px;fill:#c4b5fd}}
-    .ai-lbl{animation:aiLabel 5s ease-in-out infinite}
-    .h-lbl{animation:humanLabel 5s ease-in-out infinite}
-    .ai-mode{animation:modeAI 5s ease-in-out infinite}
-    .h-mode{animation:modeHuman 5s ease-in-out infinite}
-    .ul{animation:uniformLine 5s ease-in-out infinite}
-    .vr{animation:variance 5s ease-in-out infinite}
-    .wc{animation:wc 5s ease-in-out infinite}
-    .r1{animation:b1 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r2{animation:b2 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r3{animation:b3 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r4{animation:b4 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r5{animation:b5 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r6{animation:b6 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r7{animation:b7 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r8{animation:b8 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r9{animation:b9 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r10{animation:b10 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r11{animation:b11 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r12{animation:b12 5s cubic-bezier(.34,1.56,.64,1) infinite}
-    .r13{animation:b13 5s cubic-bezier(.34,1.56,.64,1) infinite}
-  </style>
-  <rect x="10" y="12" width="700" height="176" rx="20" fill="#faf5ff" stroke="#8b5cf6" stroke-width="1.5" stroke-opacity="0.25"/>
-  <text class="ai-lbl" x="38" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#ef4444" letter-spacing="0.5">AI</text>
-  <text class="h-lbl"  x="38" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#16a34a" letter-spacing="0.5">Human</text>
-  <text class="ai-mode" x="72" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#64748b">— uniform sentence length (≈18 words each)</text>
-  <text class="h-mode"  x="98" y="38" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#64748b">— natural burstiness (3 to 31 words)</text>
-  <text x="38" y="56" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a78bfa" letter-spacing="0.3">SENTENCE LENGTH · BURSTINESS SCORE</text>
-  <line x1="38" y1="145" x2="618" y2="145" stroke="#e2e8f0" stroke-width="1"/>
-  <line class="ul" x1="38" y1="107" x2="618" y2="107" stroke="#ef4444" stroke-width="1" stroke-dasharray="3,3" opacity="0.6"/>
-  <rect class="r1"  x="44"  y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r2"  x="80"  y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r3"  x="116" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r4"  x="152" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r5"  x="188" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r6"  x="224" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r7"  x="260" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r8"  x="296" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r9"  x="332" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r10" x="368" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r11" x="404" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r12" x="440" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <rect class="r13" x="476" y="107" width="22" rx="3" height="38" fill="#c4b5fd"/>
-  <text class="wc" x="77"  y="79"  font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#7c3aed" font-weight="700">31</text>
-  <text class="wc" x="221" y="85"  font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#7c3aed" font-weight="700">28</text>
-  <text class="wc" x="365" y="91"  font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#7c3aed" font-weight="700">25</text>
-  <text class="wc" x="185" y="133" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#8b5cf6">4</text>
-  <text class="wc" x="44"  y="136" font-family="system-ui,-apple-system,sans-serif" font-size="8" fill="#8b5cf6">3</text>
-  <g class="vr">
-    <line x1="516" y1="83"  x2="516" y2="141" stroke="#8b5cf6" stroke-width="1.5"/>
-    <line x1="516" y1="83"  x2="520" y2="83"  stroke="#8b5cf6" stroke-width="1.5"/>
-    <line x1="516" y1="141" x2="520" y2="141" stroke="#8b5cf6" stroke-width="1.5"/>
-    <text x="524" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#8b5cf6" font-weight="600">58 word</text>
-    <text x="524" y="125" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#8b5cf6" font-weight="600">spread</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none" role="img" aria-label="Sentence-length chart: AI writing is flat and uniform; humans vary from 3 to 31 words. Humanizer restores that burstiness.">
+  <title>Burstiness: AI is flat, humans vary</title>
+  <desc>Thirteen sentence-length bars rise from a flat, uniform AI baseline into a varied human skyline (3 to 31 words). Burstiness goes from about zero to plus 0.74.</desc>
+  <defs>
+    <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#22436b"/>
+      <stop offset="1" stop-color="#4a79a6"/>
+    </linearGradient>
+    <radialGradient id="desk" cx="0.3" cy="0.12" r="1.1">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset="1" stop-color="#f2ebdb"/>
+    </radialGradient>
+    <filter id="barShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="2" stdDev="2.5" flood-color="#7a6a4a" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <rect x="8" y="10" width="704" height="180" rx="20" fill="url(#desk)" stroke="#c0952f" stroke-opacity="0.3" stroke-width="1.5"/>
+  <rect x="8" y="10" width="704" height="4" rx="2" fill="#c0952f" opacity="0.8"/>
+
+  <!-- title: AI state fades out, Human state fades in -->
+  <g opacity="1">
+    <animate attributeName="opacity" values="1;0" dur="0.5s" begin="1.25s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <circle cx="44" cy="36" r="4" fill="#b4552d"/>
+    <text x="56" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#b4552d">AI</text>
+    <text x="76" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#8a7f6b">· flat, uniform rhythm (every sentence ≈18 words)</text>
   </g>
-  <g class="vr">
-    <rect x="560" y="55" width="130" height="46" rx="8" fill="#f3e8ff" stroke="#8b5cf6" stroke-width="1" stroke-opacity="0.4"/>
-    <text x="574" y="72" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#64748b">Burstiness</text>
-    <text x="574" y="88" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#7c3aed">+0.74</text>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.35s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <circle cx="44" cy="36" r="4" fill="#2f7d5b"/>
+    <text x="56" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#2f7d5b">Human</text>
+    <text x="108" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#8a7f6b">· natural burstiness (3 to 31 words per sentence)</text>
   </g>
-  <g class="ai-lbl">
-    <rect x="560" y="55" width="130" height="46" rx="8" fill="#fff1f2" stroke="#ef4444" stroke-width="1" stroke-opacity="0.4"/>
-    <text x="574" y="72" font-family="system-ui,-apple-system,sans-serif" font-size="9" fill="#64748b">Burstiness</text>
-    <text x="574" y="88" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="700" fill="#ef4444">−0.02</text>
+
+  <!-- ruled gridlines -->
+  <g stroke="#e7dcc6" stroke-width="1">
+    <line x1="40" y1="160" x2="548" y2="160"/>
+    <line x1="40" y1="124" x2="548" y2="124" stroke-opacity="0.85"/>
+    <line x1="40" y1="88" x2="548" y2="88" stroke-opacity="0.65"/>
   </g>
-  <text x="38"  y="170" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a78bfa" opacity="0.8" font-weight="600">humanizer</text>
-  <text x="107" y="170" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#64748b">restores the rhythm humans actually write in</text>
+  <!-- rust reference line for the uniform AI level, fades with AI title -->
+  <line x1="40" y1="130" x2="548" y2="130" stroke="#b4552d" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0" dur="0.5s" begin="1.25s" fill="freeze"/>
+  </line>
+
+  <!-- 13 sentence-length bars: start uniform (h=30), spring to varied, hold -->
+  <g filter="url(#barShadow)">
+    <rect x="40"  y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;22" dur="0.85s" begin="0.55s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;138" dur="0.85s" begin="0.55s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="80"  y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;88" dur="0.85s" begin="0.60s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;72" dur="0.85s" begin="0.60s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="120" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;40" dur="0.85s" begin="0.65s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;120" dur="0.85s" begin="0.65s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="160" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;14" dur="0.85s" begin="0.70s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;146" dur="0.85s" begin="0.70s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="200" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;68" dur="0.85s" begin="0.75s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;92" dur="0.85s" begin="0.75s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="240" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;30" dur="0.85s" begin="0.80s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;130" dur="0.85s" begin="0.80s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="280" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;96" dur="0.85s" begin="0.85s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;64" dur="0.85s" begin="0.85s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="320" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;18" dur="0.85s" begin="0.90s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;142" dur="0.85s" begin="0.90s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="360" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;78" dur="0.85s" begin="0.95s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;82" dur="0.85s" begin="0.95s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="400" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;36" dur="0.85s" begin="1.00s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;124" dur="0.85s" begin="1.00s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="440" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;12" dur="0.85s" begin="1.05s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;148" dur="0.85s" begin="1.05s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="480" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;58" dur="0.85s" begin="1.10s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;102" dur="0.85s" begin="1.10s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="520" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;46" dur="0.85s" begin="1.15s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;114" dur="0.85s" begin="1.15s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+  </g>
+
+  <!-- word-count labels, fade in with the human state -->
+  <g opacity="0" font-family="system-ui,-apple-system,sans-serif" font-weight="700" fill="#1f3a5f" font-size="9" text-anchor="middle">
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.5s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <text x="294" y="58">31</text>
+    <text x="94" y="66">29</text>
+    <text x="374" y="76">26</text>
+    <text x="174" y="140" fill="#b98a34">4</text>
+    <text x="454" y="142" fill="#b98a34">3</text>
+  </g>
+
+  <!-- right panel: AI card fades out, Human card fades in -->
+  <g opacity="1">
+    <animate attributeName="opacity" values="1;0" dur="0.5s" begin="1.25s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <rect x="574" y="56" width="122" height="96" rx="12" fill="#fbeee6" stroke="#b4552d" stroke-opacity="0.5" stroke-width="1"/>
+    <text x="590" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#b4552d">AI · uniform</text>
+    <text x="590" y="98" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#8a7f6b">18, 18, 19, 18…</text>
+    <text x="590" y="122" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#8a7f6b">Burstiness</text>
+    <text x="590" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="800" fill="#b4552d">−0.02</text>
+  </g>
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.4s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <rect x="574" y="56" width="122" height="96" rx="12" fill="#edf3ee" stroke="#2f7d5b" stroke-opacity="0.5" stroke-width="1"/>
+    <text x="590" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#2f7d5b">Human · varied</text>
+    <text x="590" y="98" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#8a7f6b">3 → 31 words</text>
+    <text x="590" y="122" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#8a7f6b">Burstiness</text>
+    <text x="590" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="800" fill="#b98a34">+0.74</text>
+  </g>
+
+  <!-- caption -->
+  <text x="40" y="182" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" font-weight="700" fill="#1f3a5f">humanizer</text>
+  <text x="112" y="182" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" fill="#8a7f6b">restores the rhythm humans actually write in</text>
 </svg>

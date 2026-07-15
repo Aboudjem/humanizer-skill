@@ -1,28 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" fill="none" role="img" aria-label="Humanizer social card: make AI text sound human. 53 patterns, 5 voices, zero dependencies.">
+  <title>Humanizer</title>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0a0a0a"/>
-      <stop offset="100%" stop-color="#1a0a22"/>
+    <radialGradient id="paper" cx="0.26" cy="0.16" r="1.15">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset="0.6" stop-color="#f6f1e6"/>
+      <stop offset="1" stop-color="#efe6d3"/>
+    </radialGradient>
+    <linearGradient id="barrel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#33507a"/>
+      <stop offset="1" stop-color="#1a3252"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#8b5cf6"/>
-      <stop offset="100%" stop-color="#ec4899"/>
-    </linearGradient>
+    <filter id="penShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="6" stdDev="10" flood-color="#7a6a4a" flood-opacity="0.3"/>
+    </filter>
   </defs>
-  <rect width="1280" height="640" fill="url(#bg)"/>
-  <rect x="0" y="0" width="8" height="640" fill="url(#accent)"/>
-  <circle cx="1100" cy="160" r="220" fill="#8b5cf6" opacity="0.08"/>
-  <text x="96" y="240" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="140" font-weight="900" fill="#ffffff" letter-spacing="-3">Humanizer</text>
-  <text x="96" y="310" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="38" font-weight="600" fill="#a78bfa">Writing quality, measured and fixed.</text>
-  <text x="96" y="380" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="28" fill="#cbd5e1">Detects 43 AI writing patterns. Rewrites with human rhythm</text>
-  <text x="96" y="420" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="28" fill="#cbd5e1">and voice. 5 voice profiles. Based on burstiness research.</text>
-  <g transform="translate(96, 500)">
-    <rect x="0" y="0" width="165" height="40" rx="20" fill="#8b5cf6" opacity="0.15"/>
-    <text x="82" y="27" font-family="Inter, monospace" font-size="18" font-weight="700" fill="#a78bfa" text-anchor="middle">43 patterns</text>
-    <rect x="180" y="0" width="140" height="40" rx="20" fill="#ec4899" opacity="0.15"/>
-    <text x="250" y="27" font-family="Inter, monospace" font-size="18" font-weight="700" fill="#f9a8d4" text-anchor="middle">5 voices</text>
-    <rect x="340" y="0" width="140" height="40" rx="20" fill="#ffffff" opacity="0.08"/>
-    <text x="410" y="27" font-family="Inter, monospace" font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">0 deps</text>
+
+  <rect width="1280" height="640" fill="url(#paper)"/>
+  <!-- faint page ruling -->
+  <g stroke="#e8dcc4" stroke-width="1.5" opacity="0.7">
+    <line x1="0" y1="150" x2="1280" y2="150"/>
+    <line x1="0" y1="230" x2="1280" y2="230"/>
+    <line x1="0" y1="310" x2="1280" y2="310"/>
+    <line x1="0" y1="390" x2="1280" y2="390"/>
+    <line x1="0" y1="470" x2="1280" y2="470"/>
+    <line x1="0" y1="550" x2="1280" y2="550"/>
   </g>
-  <text x="1184" y="592" font-family="Inter, monospace" font-size="20" fill="#64748b" text-anchor="end">github.com/Aboudjem/humanizer-skill</text>
+  <rect x="0" y="0" width="1280" height="10" fill="#c0952f"/>
+  <rect x="0" y="0" width="10" height="640" fill="#c0952f"/>
+  <!-- notebook margin -->
+  <line x1="96" y1="40" x2="96" y2="600" stroke="#d9a86a" stroke-width="2" stroke-opacity="0.6"/>
+
+  <!-- big fountain pen, lower right -->
+  <g transform="translate(1092,486) rotate(-32) scale(2.35)" filter="url(#penShadow)">
+    <rect x="28" y="-5.5" width="70" height="11" rx="5.5" fill="url(#barrel)"/>
+    <rect x="34" y="-4" width="58" height="2" rx="1" fill="#6f91b4" opacity="0.55"/>
+    <rect x="28" y="-5.5" width="6" height="11" fill="#c0952f"/>
+    <rect x="64" y="-8" width="3" height="10" rx="1.5" fill="#dcb85e"/>
+    <rect x="98" y="-5.5" width="7" height="11" rx="3.5" fill="#c0952f"/>
+    <rect x="15" y="-4.5" width="13" height="9" rx="3" fill="#22344d"/>
+    <path d="M0,0 L16,-3.6 L16,3.6 Z" fill="#dcb85e"/>
+    <line x1="3" y1="0" x2="14" y2="0" stroke="#a9781f" stroke-width="0.8"/>
+    <circle cx="12.5" cy="0" r="1.2" fill="#f6f1e6"/>
+  </g>
+
+  <text x="116" y="248" font-family="'Segoe UI',Inter,system-ui,-apple-system,sans-serif" font-size="132" font-weight="800" letter-spacing="-4" fill="#16304f">Humanizer</text>
+  <path d="M120,286 C300,268 560,268 760,282" stroke="#c0952f" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <text x="120" y="356" font-family="Inter,system-ui,-apple-system,sans-serif" font-size="40" font-weight="600" fill="#41597a">Make AI text sound like a human wrote it.</text>
+  <text x="120" y="416" font-family="Inter,system-ui,-apple-system,sans-serif" font-size="27" fill="#8a7f6b">Detects 53 AI writing patterns and rewrites with human rhythm,</text>
+  <text x="120" y="454" font-family="Inter,system-ui,-apple-system,sans-serif" font-size="27" fill="#8a7f6b">voice, and burstiness. A pure-Markdown Claude Code skill.</text>
+
+  <g font-family="Inter,system-ui,sans-serif" font-weight="700" font-size="19" text-anchor="middle">
+    <rect x="120" y="502" width="176" height="46" rx="23" fill="#1f3a5f" opacity="0.1"/>
+    <text x="208" y="531" fill="#1f3a5f">53 patterns</text>
+    <rect x="312" y="502" width="150" height="46" rx="23" fill="#c0952f" opacity="0.16"/>
+    <text x="387" y="531" fill="#9a7420">5 voices</text>
+    <rect x="478" y="502" width="204" height="46" rx="23" fill="#2f7d5b" opacity="0.13"/>
+    <text x="580" y="531" fill="#2f7d5b">0 dependencies</text>
+  </g>
+
+  <text x="1200" y="600" font-family="Inter,ui-monospace,monospace" font-size="21" fill="#8a7f6b" text-anchor="end">github.com/Aboudjem/humanizer-skill</text>
 </svg>
