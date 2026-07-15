@@ -19,10 +19,5 @@
     "text-rewriting",
     "content-quality"
   ],
-  "skills": [
-    {
-      "name": "humanizer",
-      "path": "skills/humanizer/SKILL.md"
-    }
-  ]
+  "skills": "./skills/"
 }

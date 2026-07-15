@@ -10,13 +10,13 @@ const { scoreText, ANCHORS } = require('./lib/metrics');
 const { scanPath } = require('./lib/scan');
 const { formatScore, formatScan, formatCompare } = require('./lib/report');
 
-const USAGE = `humanizer - compute writing metrics and an AI-tell score
+const USAGE = `humanizer-metrics - compute writing metrics and an AI-tell score
 
 Usage:
-  humanizer score <file>        [options]   Score one file
-  humanizer score -             [options]   Score stdin
-  humanizer scan <dir|file>     [options]   Score every .md/.txt file under a path
-  humanizer compare --before <file> --after <file>   Show metric deltas
+  humanizer-metrics score <file>      [options]   Score one file
+  humanizer-metrics score -           [options]   Score stdin
+  humanizer-metrics scan <dir|file>   [options]   Score every .md/.txt file under a path
+  humanizer-metrics compare --before <file> --after <file>   Show metric deltas
 
 Options:
   --fail-above <N>        Exit 1 if score > N (CI gate)
@@ -41,7 +41,11 @@ function parseArgs(argv) {
     else if (a === '--ignore-quotes') opts.ignoreQuotes = true;
     else if (a === '--write-baseline') opts.writeBaseline = true;
     else if (a === '--fail-on-regression') opts.failOnRegression = true;
-    else if (a === '--fail-above') opts.failAbove = Number(argv[++i]);
+    else if (a === '--fail-above') {
+      const v = Number(argv[++i]);
+      if (!Number.isFinite(v)) throw new UsageError('--fail-above requires a number');
+      opts.failAbove = v;
+    }
     else if (a === '--baseline') opts.baseline = argv[++i];
     else if (a === '--before') opts.before = argv[++i];
     else if (a === '--after') opts.after = argv[++i];

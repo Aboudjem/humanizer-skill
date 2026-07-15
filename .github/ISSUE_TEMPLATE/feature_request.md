@@ -12,7 +12,7 @@ assignees: Aboudjem
 
 ## Is this a new AI pattern?
 
-- [ ] Yes — new pattern (P44+)
+- [ ] Yes — new pattern (P54+)
 - [ ] No — improvement to an existing pattern or another feature
 
 ### If it's a new pattern: before/after example

@@ -53,7 +53,7 @@ We adopted the ideas and rewrote every entry, trigger list, and example from scr
 
 **P37 Overattribution.** Proving importance by listing where a subject was covered, rather than what the coverage said. Distinct from P2 (dropping famous names). Fix: pick one source and summarize what it actually reported.
 
-**P38 Paragraph-Reshuffling Immunity.** LLMs generate parallel self-contained blocks instead of an unfolding argument. The test: can you swap paragraphs 2 and 4 without breaking the piece? If yes, it reads as AI. Source: [HackerNews thread, May 2025](https://news.ycombinator.com/item?id=46646939).
+**P38 Paragraph-Reshuffling Immunity.** LLMs generate parallel self-contained blocks instead of an unfolding argument. The test: can you swap paragraphs 2 and 4 without breaking the piece? If yes, it reads as AI. Source: [HackerNews thread](https://news.ycombinator.com/item?id=46646939).
 
 **P39 Paragraph-Closing "Whether" Summaries.** SEO-blog habit of ending each paragraph with a local recap ("Whether you prefer X or Y..."). Humans rarely close flowing prose this way. Source: [Gone Travelling Productions, Aug 2025](https://gonetravellingproductions.com/2025/08/20/ai-giveaways-in-writing/).
 

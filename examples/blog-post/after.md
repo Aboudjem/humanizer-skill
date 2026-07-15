@@ -1,6 +1,6 @@
 # Example: Blog Post — After (Humanized)
 
-**Score after rewrite: ~11/100 (Pristine)**
+**Score after rewrite: ~21/100 (Mostly human)**
 
 Command used:
 ```
@@ -34,4 +34,4 @@ I don't think the outcome is predetermined. But I also don't think "the future l
 | Sentence lengths: all 20-30 words | 4, 31, 8, 4, 13, 24, 5, 11... | P30 (Uniform Length) — burstiness restored |
 | "Whether you are a seasoned artist..." | Removed | P39 ("Whether" Closers) |
 
-**Score delta: 87 → 11. That's the whole point.**
+**Score delta: 46 → 21. That's the whole point.**
