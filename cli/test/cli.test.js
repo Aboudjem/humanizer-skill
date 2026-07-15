@@ -52,6 +52,13 @@ test('parseArgs rejects unknown option', () => {
   assert.throws(() => parseArgs(['score', '--nope']), UsageError);
 });
 
+test('--fail-above rejects a missing or non-numeric value', () => {
+  // missing value (end of args) and a following flag both must error, not silently disable the gate
+  assert.throws(() => parseArgs(['score', 'a.md', '--fail-above']), UsageError);
+  assert.throws(() => parseArgs(['score', 'a.md', '--fail-above', '--json']), UsageError);
+  assert.strictEqual(parseArgs(['score', 'a.md', '--fail-above', '40']).failAbove, 40);
+});
+
 test('score command exits 0 on a normal file', () => {
   const { p } = tmpFile('a.md', HUMAN_TEXT);
   const code = silent(() => run(['score', p]));

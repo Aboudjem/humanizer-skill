@@ -100,10 +100,13 @@ test('score is clamped 0-100 and verdict maps correctly', () => {
   assert.strictEqual(verdict(100), 'Pure AI smell');
 });
 
-test('empty input does not throw', () => {
-  const r = scoreText('');
-  assert.strictEqual(r.metrics.wordCount, 0);
-  assert.ok(typeof r.score === 'number');
+test('empty input scores 0 and never reads as AI', () => {
+  for (const txt of ['', '   \n\t  ']) {
+    const r = scoreText(txt);
+    assert.strictEqual(r.metrics.wordCount, 0);
+    assert.strictEqual(r.score, 0, 'empty text must score 0, not trip a CI gate');
+    assert.strictEqual(r.verdict, 'No text');
+  }
 });
 
 test('AI-vocabulary tells raise the score and are counted', () => {

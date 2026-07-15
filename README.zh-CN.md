@@ -1,11 +1,11 @@
 [English](./README.md) | **简体中文**
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-8b5cf6?style=flat-square" alt="License"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-53-8b5cf6?style=flat-square" alt="53 个 AI 模式"></a>
-  <a href="#语音风格"><img src="https://img.shields.io/badge/voices-5-8b5cf6?style=flat-square" alt="5 种语音风格"></a>
-  <a href="#"><img src="https://img.shields.io/badge/dependencies-0-8b5cf6?style=flat-square" alt="零依赖"></a>
-  <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=8b5cf6" alt="Stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f3a5f?style=flat-square" alt="License"></a>
+  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-53-1f3a5f?style=flat-square" alt="53 个 AI 模式"></a>
+  <a href="#语音风格"><img src="https://img.shields.io/badge/voices-5-1f3a5f?style=flat-square" alt="5 种语音风格"></a>
+  <a href="#"><img src="https://img.shields.io/badge/dependencies-0-1f3a5f?style=flat-square" alt="零依赖"></a>
+  <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=c0952f" alt="Stars"></a>
 </p>
 
 <p align="center">
@@ -90,7 +90,7 @@ mkdir -p .cursor/skills/humanizer && curl -sL \
   https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
   -o .cursor/skills/humanizer/SKILL.md
 ```
-把 `.cursor/` 换成 `.github/`、`.codex/`、`.gemini/`、`.windsurf/`、`.continue/` 即可。OpenClaw 用户可直接 `clawhub install humanizer-skill`。完整的 8 编辑器安装清单见[英文 README](./README.md#get-started)。
+把 `.cursor/` 换成 `.github/`、`.codex/`、`.gemini/`、`.windsurf/`、`.continue/` 即可。OpenClaw 用户可直接 `clawhub install humanizer-skill`。完整的 8 编辑器安装清单见[英文 README](./README.md#quickstart)。
 </details>
 
 > **说明：** Claude Code 会自动识别 `.claude/skills/`、`~/.claude/skills/` 或任意插件的 `skills/` 目录里的 skill，无需重启。其它编辑器可能需要在系统提示或配置里引用该文件。
@@ -212,14 +212,14 @@ Humanizer 检测 53 个具体的 AI 写作模式，然后用真实的人类节�
 
 ```mermaid
 graph LR
-    A["第 1 遍：检测<br/><sub>扫描 53 个 AI 模式<br/>横跨 5 个类别</sub>"] --> B["第 2 遍：剥离<br/><sub>删掉意义拔高、<br/>AI 词汇、废话</sub>"]
+    A["第 1 遍：检测<br/><sub>扫描 53 个 AI 模式<br/>横跨 6 个类别</sub>"] --> B["第 2 遍：剥离<br/><sub>删掉意义拔高、<br/>AI 词汇、废话</sub>"]
     B --> C["第 3 遍：注入<br/><sub>套用语音风格、<br/>burstiness、perplexity</sub>"]
     C --> D["第 4 遍：核验<br/><sub>句长方差检查、<br/>黑名单扫描、终检</sub>"]
 
-    style A fill:#f5f3ff,stroke:#8b5cf6,color:#1e1b4b
-    style B fill:#ede9fe,stroke:#8b5cf6,color:#1e1b4b
-    style C fill:#ddd6fe,stroke:#8b5cf6,color:#1e1b4b
-    style D fill:#8b5cf6,stroke:#7c3aed,color:#ffffff
+    style A fill:#fffdf7,stroke:#c0952f,color:#1f3a5f
+    style B fill:#f6f1e6,stroke:#c0952f,color:#1f3a5f
+    style C fill:#efe6d3,stroke:#1f3a5f,color:#1f3a5f
+    style D fill:#1f3a5f,stroke:#16304f,color:#f0e9d8
 ```
 
 文本进去，干净、像人写的文字出来。skill 会自动识别文中有哪些模式，只做必要的最小改动。第 1 遍是非破坏性的：跑 `--mode detect` 就能只拿报告，什么都不改。
@@ -266,9 +266,9 @@ QuillBot 那类换词工具只改单个词，句子的节奏和可预测性原�
 
 ## 全部 53 个模式
 
-模式分为 5 个类别：内容（P1–P8）、语言与风格（P9–P18）、沟通（P19–P21）、废话与含糊（P22–P30）、新兴模式（P31–P53，2026 社区发现）。每个模式都有编号、触发词和改写方法。
+模式分为 6 个类别：内容（P1–P8）、语言与风格（P9–P18）、沟通（P19–P21）、废话与含糊（P22–P30）、新兴模式（P31–P43）、工艺与取证（P44–P53，2026 社区发现）。每个模式都有编号、触发词和改写方法。
 
-完整目录（含每个模式的触发词与前后对比）见 [SKILL.md](skills/humanizer/SKILL.md)。英文 README 里也有[可展开的模式速查表](./README.md#all-53-patterns)。
+完整目录（含每个模式的触发词与前后对比）见 [SKILL.md](skills/humanizer/SKILL.md)。英文 README 里也有[可展开的模式速查表](./README.md#more)。
 
 ---
 
@@ -340,7 +340,7 @@ prompt 有帮助，但没法稳定地执行 53 条具体的模式规则。这个
 <p align="center">
   <a href="https://www.linkedin.com/in/adam-boudjemaa/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
   <a href="https://x.com/AdamBoudj"><img src="https://img.shields.io/badge/X-000000?style=flat-square&logo=x&logoColor=white" alt="X"></a>
-  <a href="https://adam-boudjemaa.com/"><img src="https://img.shields.io/badge/Website-8b5cf6?style=flat-square&logo=googlechrome&logoColor=white" alt="Website"></a>
+  <a href="https://adam-boudjemaa.com/"><img src="https://img.shields.io/badge/Website-1f3a5f?style=flat-square&logo=googlechrome&logoColor=white" alt="Website"></a>
 </p>
 
 <p align="center">

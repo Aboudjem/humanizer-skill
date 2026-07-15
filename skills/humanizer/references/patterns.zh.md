@@ -11,6 +11,17 @@
 
 ---
 
+## 目录 · Contents
+
+- [怎么用这份附录 · How to use](#怎么用这份附录--how-to-use)
+- [核心原生模式 · Core native tells (ZH1-ZH7)](#核心原生模式--core-native-tells-zh1zh7)
+- [英文模式的中文对应 · Analogs of English patterns (ZH8-ZH12)](#英文模式的中文对应--analogs-of-english-patterns-zh8zh12)
+- [未验证假设 · Unverified hypotheses (ZH13-ZH14)](#未验证假设--unverified-hypotheses-zh13zh14)
+- [最深层痕迹 · The deepest tell (ZH15)](#最深层痕迹--the-deepest-tell-zh15)
+- [来源与致谢 · Sources](#来源与致谢--sources)
+
+---
+
 ## 怎么用这份附录 · How to use
 
 跑中文改写时，除了英文的 P1–P53，再扫描下面这些原生中文模式。格式和 SKILL.md 一致：**名称（中/英）· 触发信号 · 修正 · 一组前后对比**。中文改写里**可以**使用破折号（——），这份文件不受仓库禁破折号 CI 的约束；但仍应避免像 ZH5 描述的那样滥用。
