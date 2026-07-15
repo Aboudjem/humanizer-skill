@@ -27,6 +27,7 @@
     <text x="356" y="59" fill="#e0b85e" font-weight="700">--voice</text>
     <text x="414" y="59" fill="#e8e1cf">technical</text>
     <text x="492" y="59" fill="#57c39a" font-weight="700">--score</text>
+    <rect x="546" y="47" width="2.5" height="14" fill="#57c39a"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.55;1" dur="0.9s" repeatCount="indefinite"/></rect>
   </g>
 
   <line x1="26" y1="76" x2="694" y2="76" stroke="#c0952f" stroke-width="1" stroke-opacity="0.22"/>
@@ -75,6 +76,7 @@
     <text x="390" y="128" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#57c39a">The auth system</text>
     <text x="390" y="156" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#e8e1cf">uses JWTs. Tokens</text>
     <text x="390" y="184" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#e8e1cf">expire after 15 min.</text>
+    <rect x="556" y="171" width="2.5" height="15" fill="#57c39a"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.55;1" dur="0.9s" repeatCount="indefinite"/></rect>
   </g>
 
   <text x="612" y="218" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" font-weight="700" fill="#e0b85e" opacity="0.7">humanizer</text>
