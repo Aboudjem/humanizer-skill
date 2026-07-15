@@ -1,62 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none" role="img" aria-label="Before and after: three AI tells (comprehensive, delves into, pivotal) are flagged and struck, then replaced by clean human prose.">
-  <title>Before and after: AI tells struck and rewritten</title>
-  <desc>The AI phrase 'This comprehensive guide delves into the pivotal aspects of auth' has comprehensive, delves into, and pivotal flagged in rust and struck through. The clean rewrite reads: the auth system uses JWTs, tokens expire after 15 minutes.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 236" fill="none" role="img" aria-label="Terminal running /humanizer with --voice technical --score. Three AI tells are flagged and struck, then replaced by clean human prose; the AI-tell score drops from 84 to 12.">
+  <title>humanizer in the terminal: command, options, and the rewrite</title>
+  <desc>The command /humanizer "This comprehensive guide…" --voice technical --score runs. The AI phrase has comprehensive, delves into, and pivotal flagged in rust and struck. The clean rewrite reads: the auth system uses JWTs, tokens expire after 15 minutes. The AI-tell score falls from 84 to 12.</desc>
   <defs>
     <radialGradient id="desk" cx="0.5" cy="0.1" r="1.1">
       <stop offset="0" stop-color="#fffdf7"/>
       <stop offset="1" stop-color="#f2ebdb"/>
     </radialGradient>
-    <clipPath id="revealL"><rect x="384" y="62" width="0" height="90"><animate attributeName="width" values="0;196" dur="0.9s" begin="1.65s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect></clipPath>
+    <clipPath id="cmdL"><rect x="26" y="44" width="0" height="20"><animate attributeName="width" values="0;520;520;0" keyTimes="0;0.2;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0.3 0 0.4 1;0 0 1 1;0.5 0 0.5 1"/></rect></clipPath>
+    <clipPath id="humL"><rect x="384" y="104" width="0" height="94"><animate attributeName="width" values="0;0;198;198;0" keyTimes="0;0.5;0.66;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect></clipPath>
   </defs>
 
-  <rect x="8" y="12" width="704" height="176" rx="20" fill="url(#desk)" stroke="#c0952f" stroke-opacity="0.3" stroke-width="1.5"/>
-  <rect x="8" y="12" width="704" height="4" rx="2" fill="#c0952f" opacity="0.8"/>
+  <rect x="8" y="10" width="704" height="218" rx="18" fill="url(#desk)" stroke="#c0952f" stroke-opacity="0.3" stroke-width="1.5"/>
+  <rect x="8" y="10" width="704" height="4" rx="2" fill="#c0952f" opacity="0.8"/>
 
-  <text x="34" y="44" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#b4552d" letter-spacing="1">AI OUTPUT</text>
-  <text x="390" y="44" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#2f7d5b" letter-spacing="1">HUMANIZED</text>
+  <circle cx="30" cy="30" r="4.5" fill="#df7a54"/>
+  <circle cx="46" cy="30" r="4.5" fill="#e0b85e"/>
+  <circle cx="62" cy="30" r="4.5" fill="#57c39a"/>
+  <text x="82" y="34" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#8a7f6b">humanizer</text>
 
-  <!-- AI side: flag, strike, then dim -->
-  <g>
-    <animate attributeName="opacity" values="1;0.4" dur="0.5s" begin="1.6s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
-
-    <g fill="#f6ddc9" opacity="0">
-      <animate attributeName="opacity" values="0;0.9" dur="0.3s" begin="0.4s" fill="freeze"/>
-      <rect x="70" y="70" width="120" height="22" rx="3"/>
-      <rect x="32" y="98" width="88" height="22" rx="3"/>
-      <rect x="32" y="126" width="58" height="22" rx="3"/>
-    </g>
-
-    <text x="34" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">This</text>
-    <text x="72" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">comprehensive<animate attributeName="fill" values="#1f3a5f;#b4552d" dur="0.3s" begin="0.4s" fill="freeze"/></text>
-    <text x="194" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">guide</text>
-    <line x1="72" y1="79" x2="186" y2="79" stroke="#b4552d" stroke-width="2" stroke-dasharray="114" stroke-dashoffset="114"><animate attributeName="stroke-dashoffset" values="114;0" dur="0.35s" begin="0.95s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></line>
-
-    <text x="34" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">delves into<animate attributeName="fill" values="#1f3a5f;#b4552d" dur="0.3s" begin="0.5s" fill="freeze"/></text>
-    <text x="124" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">the</text>
-    <line x1="34" y1="107" x2="120" y2="107" stroke="#b4552d" stroke-width="2" stroke-dasharray="86" stroke-dashoffset="86"><animate attributeName="stroke-dashoffset" values="86;0" dur="0.35s" begin="1.05s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></line>
-
-    <text x="34" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">pivotal<animate attributeName="fill" values="#1f3a5f;#b4552d" dur="0.3s" begin="0.6s" fill="freeze"/></text>
-    <text x="96" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">aspects of auth.</text>
-    <line x1="34" y1="135" x2="92" y2="135" stroke="#b4552d" stroke-width="2" stroke-dasharray="58" stroke-dashoffset="58"><animate attributeName="stroke-dashoffset" values="58;0" dur="0.35s" begin="1.15s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></line>
+  <g clip-path="url(#cmdL)" font-family="ui-monospace,Menlo,monospace" font-size="13">
+    <text x="30" y="59" fill="#2f7d5b">❯</text>
+    <text x="44" y="59" fill="#1f3a5f">/humanizer</text>
+    <text x="128" y="59" fill="#8a7f6b">"This comprehensive guide…"</text>
+    <text x="356" y="59" fill="#b98a34" font-weight="700">--voice</text>
+    <text x="414" y="59" fill="#1f3a5f">technical</text>
+    <text x="492" y="59" fill="#2f7d5b" font-weight="700">--score</text>
   </g>
 
-  <!-- divider + arrow -->
-  <line x1="360" y1="36" x2="360" y2="164" stroke="#c0952f" stroke-width="1" stroke-opacity="0.35" stroke-dasharray="4,3"/>
-  <g transform="translate(360,100)" opacity="0.2">
-    <animate attributeName="opacity" values="0.2;1" dur="0.5s" begin="1.45s" calcMode="spline" keySplines="0.34 1.56 0.64 1" fill="freeze"/>
+  <line x1="26" y1="76" x2="694" y2="76" stroke="#c0952f" stroke-width="1" stroke-opacity="0.25"/>
+
+  <text x="30" y="100" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#b4552d" letter-spacing="1">AI OUTPUT</text>
+  <text x="108" y="100" font-family="ui-monospace,monospace" font-size="10" font-weight="700" fill="#b4552d">[84/100]</text>
+  <text x="392" y="100" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#2f7d5b" letter-spacing="1">HUMANIZED</text>
+  <g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.58;0.66;0.92;1" dur="7s" repeatCount="indefinite"/><text x="474" y="100" font-family="ui-monospace,monospace" font-size="10" font-weight="700" fill="#2f7d5b">[12/100]</text></g>
+
+  <g>
+    <animate attributeName="opacity" values="1;1;0.4;0.4;1" keyTimes="0;0.52;0.6;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.5 0 0.5 1"/>
+
+    <g fill="#f6ddc9">
+      <animate attributeName="opacity" values="0;0;0.9;0.9;0" keyTimes="0;0.24;0.3;0.92;1" dur="7s" repeatCount="indefinite"/>
+      <rect x="66" y="112" width="120" height="22" rx="3"/>
+      <rect x="30" y="140" width="88" height="22" rx="3"/>
+      <rect x="30" y="168" width="58" height="22" rx="3"/>
+    </g>
+
+    <text x="30" y="128" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">This</text>
+    <text x="68" y="128" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">comprehensive<animate attributeName="fill" values="#1f3a5f;#1f3a5f;#b4552d;#b4552d;#1f3a5f" keyTimes="0;0.24;0.32;0.92;1" dur="7s" repeatCount="indefinite"/></text>
+    <text x="190" y="128" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">guide</text>
+    <line x1="68" y1="121" x2="182" y2="121" stroke="#b4552d" stroke-width="2" stroke-dasharray="114" stroke-dashoffset="114"><animate attributeName="stroke-dashoffset" values="114;114;0;0;114" keyTimes="0;0.32;0.44;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></line>
+
+    <text x="30" y="156" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">delves into<animate attributeName="fill" values="#1f3a5f;#1f3a5f;#b4552d;#b4552d;#1f3a5f" keyTimes="0;0.26;0.34;0.92;1" dur="7s" repeatCount="indefinite"/></text>
+    <text x="120" y="156" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">the</text>
+    <line x1="30" y1="149" x2="116" y2="149" stroke="#b4552d" stroke-width="2" stroke-dasharray="86" stroke-dashoffset="86"><animate attributeName="stroke-dashoffset" values="86;86;0;0;86" keyTimes="0;0.34;0.46;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></line>
+
+    <text x="30" y="184" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">pivotal<animate attributeName="fill" values="#1f3a5f;#1f3a5f;#b4552d;#b4552d;#1f3a5f" keyTimes="0;0.28;0.36;0.92;1" dur="7s" repeatCount="indefinite"/></text>
+    <text x="92" y="184" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">aspects of auth.</text>
+    <line x1="30" y1="177" x2="88" y2="177" stroke="#b4552d" stroke-width="2" stroke-dasharray="58" stroke-dashoffset="58"><animate attributeName="stroke-dashoffset" values="58;58;0;0;58" keyTimes="0;0.36;0.48;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></line>
+  </g>
+
+  <line x1="360" y1="90" x2="360" y2="200" stroke="#c0952f" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="4,3"/>
+  <g transform="translate(360,148)" opacity="0.2">
+    <animate attributeName="opacity" values="0.2;0.2;1;1;0.2" keyTimes="0;0.46;0.56;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.34 1.56 0.64 1;0 0 1 1;0.5 0 0.5 1"/>
     <circle cx="0" cy="0" r="15" fill="#c0952f" opacity="0.14"/>
     <path d="M-5,-5 L6,0 L-5,5" stroke="#b98a34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </g>
 
-  <!-- Human side: typewriter clip reveal -->
-  <g clip-path="url(#revealL)">
-    <text x="390" y="86" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#2f7d5b">The auth system</text>
-    <text x="390" y="114" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">uses JWTs. Tokens</text>
-    <text x="390" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">expire after 15 min.</text>
+  <g clip-path="url(#humL)">
+    <text x="390" y="128" font-family="system-ui,-apple-system,sans-serif" font-size="16" font-weight="700" fill="#2f7d5b">The auth system</text>
+    <text x="390" y="156" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">uses JWTs. Tokens</text>
+    <text x="390" y="184" font-family="system-ui,-apple-system,sans-serif" font-size="16" fill="#1f3a5f">expire after 15 min.</text>
   </g>
-  <rect x="556" y="130" width="2" height="16" rx="1" fill="#2f7d5b" opacity="0">
-    <animate attributeName="opacity" values="0;1;0;1;0;1;1" keyTimes="0;0.63;0.69;0.75;0.81;0.87;1" dur="4s" fill="freeze"/>
-  </rect>
 
-  <text x="612" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" font-weight="700" fill="#1f3a5f" opacity="0.55">humanizer</text>
+  <text x="612" y="218" font-family="system-ui,-apple-system,sans-serif" font-size="10.5" font-weight="700" fill="#1f3a5f" opacity="0.6">humanizer</text>
 </svg>

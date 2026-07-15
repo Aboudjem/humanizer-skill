@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none" role="img" aria-label="Sentence-length chart: AI writing is flat and uniform; humans vary from 3 to 31 words. Humanizer restores that burstiness.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none" role="img" aria-label="Sentence-length chart looping between AI (flat, uniform) and human (varied, 3 to 31 words). Humanizer restores the burstiness.">
   <title>Burstiness: AI is flat, humans vary</title>
-  <desc>Thirteen sentence-length bars rise from a flat, uniform AI baseline into a varied human skyline (3 to 31 words). Burstiness goes from about zero to plus 0.74.</desc>
+  <desc>Thirteen sentence-length bars loop from a flat, uniform AI baseline to a varied human skyline (3 to 31 words) and back. Burstiness goes from about zero to plus 0.74.</desc>
   <defs>
     <linearGradient id="barGrad" x1="0" y1="1" x2="0" y2="0">
       <stop offset="0" stop-color="#345a85"/>
@@ -11,22 +11,22 @@
       <stop offset="1" stop-color="#0f141e"/>
     </radialGradient>
     <filter id="barShadow" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="2" stdDev="2.5" flood-color="#000000" flood-opacity="0.35"/>
+      <feDropShadow dx="0" dy="2" stdDev="2.5" flood-color="#22d3ee" flood-opacity="0.28"/>
     </filter>
   </defs>
 
   <rect x="8" y="10" width="704" height="180" rx="20" fill="url(#desk)" stroke="#c0952f" stroke-opacity="0.3" stroke-width="1.5"/>
-  <rect x="8" y="10" width="704" height="4" rx="2" fill="#c0952f" opacity="0.7"/>
+  <rect x="8" y="10" width="704" height="4" rx="2" fill="url(#barGrad)" opacity="0.85"/>
 
-  <!-- title: AI state fades out, Human state fades in -->
+  <!-- title: AI while flat, Human while varied (loops) -->
   <g opacity="1">
-    <animate attributeName="opacity" values="1;0" dur="0.5s" begin="1.25s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
     <circle cx="44" cy="36" r="4" fill="#df7a54"/>
     <text x="56" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#df7a54">AI</text>
     <text x="76" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#a9a08b">· flat, uniform rhythm (every sentence ≈18 words)</text>
   </g>
   <g opacity="0">
-    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.35s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
     <circle cx="44" cy="36" r="4" fill="#57c39a"/>
     <text x="56" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="13" font-weight="700" fill="#57c39a">Human</text>
     <text x="108" y="40" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#a9a08b">· natural burstiness (3 to 31 words per sentence)</text>
@@ -38,31 +38,31 @@
     <line x1="40" y1="124" x2="548" y2="124" stroke-opacity="0.7"/>
     <line x1="40" y1="88" x2="548" y2="88" stroke-opacity="0.5"/>
   </g>
-  <!-- rust reference line for the uniform AI level, fades with AI title -->
+  <!-- rose reference line for the uniform AI level, on while flat -->
   <line x1="40" y1="130" x2="548" y2="130" stroke="#df7a54" stroke-width="1.2" stroke-dasharray="4,3" opacity="0.65">
-    <animate attributeName="opacity" values="0.65;0" dur="0.5s" begin="1.25s" fill="freeze"/>
+    <animate attributeName="opacity" values="0.65;0;0;0.65" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite"/>
   </line>
 
-  <!-- 13 sentence-length bars: start uniform (h=30), spring to varied, hold -->
+  <!-- 13 sentence-length bars: loop uniform (h=30) -> varied -> uniform -->
   <g filter="url(#barShadow)">
-    <rect x="40"  y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;22" dur="0.85s" begin="0.55s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;138" dur="0.85s" begin="0.55s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="80"  y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;88" dur="0.85s" begin="0.60s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;72" dur="0.85s" begin="0.60s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="120" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;40" dur="0.85s" begin="0.65s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;120" dur="0.85s" begin="0.65s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="160" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;14" dur="0.85s" begin="0.70s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;146" dur="0.85s" begin="0.70s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="200" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;68" dur="0.85s" begin="0.75s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;92" dur="0.85s" begin="0.75s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="240" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;30" dur="0.85s" begin="0.80s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;130" dur="0.85s" begin="0.80s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="280" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;96" dur="0.85s" begin="0.85s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;64" dur="0.85s" begin="0.85s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="320" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;18" dur="0.85s" begin="0.90s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;142" dur="0.85s" begin="0.90s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="360" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;78" dur="0.85s" begin="0.95s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;82" dur="0.85s" begin="0.95s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="400" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;36" dur="0.85s" begin="1.00s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;124" dur="0.85s" begin="1.00s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="440" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;12" dur="0.85s" begin="1.05s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;148" dur="0.85s" begin="1.05s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="480" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;58" dur="0.85s" begin="1.10s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;102" dur="0.85s" begin="1.10s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
-    <rect x="520" y="130" width="28" height="30" rx="4" fill="url(#barGrad)"><animate attributeName="height" values="30;46" dur="0.85s" begin="1.15s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/><animate attributeName="y" values="130;114" dur="0.85s" begin="1.15s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/></rect>
+    <rect x="40"  y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;22;22;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;138;138;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="80"  y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;88;88;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;72;72;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="120" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;40;40;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;120;120;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="160" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;14;14;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;146;146;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="200" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;68;68;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;92;92;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="240" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;30;30;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;130;130;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="280" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;96;96;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;64;64;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="320" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;18;18;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;142;142;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="360" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;78;78;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;82;82;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="400" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;36;36;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;124;124;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="440" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;12;12;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;148;148;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="480" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;58;58;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;102;102;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
+    <rect x="520" y="130" width="28" rx="4" height="30" fill="url(#barGrad)"><animate attributeName="height" values="30;46;46;30" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/><animate attributeName="y" values="130;114;114;130" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect>
   </g>
 
-  <!-- word-count labels, fade in with the human state -->
+  <!-- word-count labels, on while varied -->
   <g opacity="0" font-family="system-ui,-apple-system,sans-serif" font-weight="700" fill="#f0e9d8" font-size="9" text-anchor="middle">
-    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.5s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.24;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
     <text x="294" y="58">31</text>
     <text x="94" y="66">29</text>
     <text x="374" y="76">26</text>
@@ -70,9 +70,9 @@
     <text x="454" y="142" fill="#e0b85e">3</text>
   </g>
 
-  <!-- right panel: AI card fades out, Human card fades in -->
+  <!-- right panel: AI card while flat, Human card while varied -->
   <g opacity="1">
-    <animate attributeName="opacity" values="1;0" dur="0.5s" begin="1.25s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <animate attributeName="opacity" values="1;0;0;1" keyTimes="0;0.14;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
     <rect x="574" y="56" width="122" height="96" rx="12" fill="#2a1c18" stroke="#df7a54" stroke-opacity="0.55" stroke-width="1"/>
     <text x="590" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#df7a54">AI · uniform</text>
     <text x="590" y="98" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a9a08b">18, 18, 19, 18…</text>
@@ -80,7 +80,7 @@
     <text x="590" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="800" fill="#df7a54">−0.02</text>
   </g>
   <g opacity="0">
-    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1.4s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
     <rect x="574" y="56" width="122" height="96" rx="12" fill="#16233a" stroke="#57c39a" stroke-opacity="0.55" stroke-width="1"/>
     <text x="590" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#57c39a">Human · varied</text>
     <text x="590" y="98" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a9a08b">3 → 31 words</text>
