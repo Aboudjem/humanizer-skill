@@ -1,12 +1,12 @@
 # Pattern deep dives and provenance
 
-Loaded on demand. The core `SKILL.md` is standalone and does not need this file. This is the depth behind the compact catalog: the "what's happening" notes, the full trigger lists, the before/after examples for every pattern, and the full attribution for the 2026 emerging set (P31-P43) and the craft/forensic set (P44-P53).
+Loaded on demand. The core `SKILL.md` is standalone and does not need this file. This is the depth behind the compact catalog: the "what's happening" notes, the full trigger lists, the before/after examples for every pattern, and the sources behind the 2026 emerging set (P31-P43).
 
 The core catalog (P1-P30) is derived mostly from [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing).
 
 ## Contents
 
-- [Provenance of P44-P53](#provenance-of-p44-p53)
+- [The craft and forensic set (P44-P53)](#the-craft-and-forensic-set-p44-p53)
 - [Emerging patterns (P31-P43): extended notes](#emerging-patterns-p31-p43-extended-notes)
 - [The HC3 corpus](#the-hc3-corpus-grounding-for-p53-and-the-science-claims)
 - [Coverage against Wikipedia](#coverage-against-wikipedia-signs-of-ai-writing)
@@ -16,24 +16,22 @@ The core catalog (P1-P30) is derived mostly from [Wikipedia: Signs of AI writing
 
 ---
 
-## Provenance of P44-P53
+## The craft and forensic set (P44-P53)
 
-These ten were adopted from the wider open humanizer ecosystem and one peer-reviewed corpus. Each is credited to where it was surfaced. They are novel relative to the P1-P43 catalog (cross-checked to avoid duplicates).
+These ten extend the catalog with craft-level and forensic tells, novel relative to the P1-P43 set (cross-checked to avoid duplicates). P44-P52 target higher-order writing habits and copy-paste artifacts; P53 is grounded in the HC3 corpus.
 
-| ID | Pattern | Adopted from |
-|:---|:--------|:-------------|
-| P44 | False Agency | hardikpandya/stop-slop |
-| P45 | Narrator-from-a-Distance | hardikpandya/stop-slop |
-| P46 | Diff-Anchored Writing | blader/humanizer |
-| P47 | Hyphenated-Pair Overuse | blader/humanizer |
-| P48 | Aphorism Formulas | blader/humanizer |
-| P49 | Fragmented Headers | blader/humanizer |
-| P50 | Passive / Subjectless | blader/humanizer |
-| P51 | Reasoning-Chain Artifacts | brandonwise/humanizer |
-| P52 | Unicode Obfuscation | brandonwise/humanizer |
-| P53 | Hedged-Enumeration Openers | HC3 corpus, [arXiv 2301.07597](https://arxiv.org/abs/2301.07597) |
-
-We adopted the ideas and rewrote every entry, trigger list, and example from scratch. No text or code was copied from those repos.
+| ID | Pattern |
+|:---|:--------|
+| P44 | False Agency |
+| P45 | Narrator-from-a-Distance |
+| P46 | Diff-Anchored Writing |
+| P47 | Hyphenated-Pair Overuse |
+| P48 | Aphorism Formulas |
+| P49 | Fragmented Headers |
+| P50 | Passive / Subjectless |
+| P51 | Reasoning-Chain Artifacts |
+| P52 | Unicode Obfuscation |
+| P53 | Hedged-Enumeration Openers (HC3 corpus, [arXiv 2301.07597](https://arxiv.org/abs/2301.07597)) |
 
 ---
 

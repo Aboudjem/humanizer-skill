@@ -126,7 +126,7 @@ Optional third check, in-place file edit:
 Optional. Use this for context the maintainer might want.
 
 ```
-The repo credits its lineage to @blader/humanizer (18.5k stars) directly in the README, in a Lineage and credit section. CI enforces the skill's own rules on itself: the em-dash audit refuses to ship if SKILL.md contains a literal em dash (the pattern it bans as P13), and a badge-vs-actual count check prevents the pattern count from drifting from documentation.
+CI enforces the skill's own rules on itself: the em-dash audit refuses to ship if SKILL.md contains a literal em dash (the pattern it bans as P13), and a badge-vs-actual count check prevents the pattern count from drifting from documentation.
 
 A browser playground at humanizer-skill.vercel.app demonstrates the score-and-detect flow without installation. The page runs entirely client-side (no API calls, no data leaves the browser) and ports 20 of the 43 patterns as regex with weighted scoring plus a burstiness calculation.
 
