@@ -1,49 +1,51 @@
 # Humanizer — AI Writing Pattern Detector and Rewriter
 
-> Humanizer is a pure-Markdown Claude Code skill that detects 53 AI writing patterns and rewrites text with human rhythm, voice, and burstiness. 5 named voice profiles. 0-100 AI-tell score. Zero-dependency Markdown core plus an optional metrics CLI and CI gate. No network calls, no binaries. Install in 5 seconds with a single curl command.
+> Humanizer is a pure-Markdown Claude Code skill that detects 53 AI writing patterns and rewrites text with human rhythm, voice, and burstiness. 5 named voice profiles. 0-100 AI-tell score. Zero-dependency Markdown core plus an optional metrics CLI and CI gate. No network calls, no binaries. Install in one command.
 
 ## Overview
 
-- [README](https://github.com/Aboudjem/humanizer-skill/blob/main/README.md): Full documentation — install, usage, voice profiles, all 53 patterns, science, comparisons
-- [SKILL.md](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): The skill source — the only file needed to run humanizer
+- [README](https://github.com/Aboudjem/humanizer-skill/blob/main/README.md): Install, usage, voice profiles, the 53 patterns, science, comparisons
+- [SKILL.md](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): The skill source, the only file needed to run humanizer
+- [references/patterns.md](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/references/patterns.md): Per-pattern deep dives, full trigger lists, and before/after examples
 - [AGENTS.md](https://github.com/Aboudjem/humanizer-skill/blob/main/AGENTS.md): Harness context for Claude Code, Cursor, Copilot, Codex CLI, and 20+ other AI editors
+- [docs-site](https://github.com/Aboudjem/humanizer-skill/tree/main/docs-site): Full MDX documentation site (Docusaurus, deploy-ready)
 - [Examples](https://github.com/Aboudjem/humanizer-skill/tree/main/examples): Before/after humanization examples with pattern annotations
 
 ## Install
 
-- [Project-scoped install](https://github.com/Aboudjem/humanizer-skill#get-started): `mkdir -p .claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o .claude/skills/humanizer/SKILL.md`
-- [Global install](https://github.com/Aboudjem/humanizer-skill#get-started): `mkdir -p ~/.claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o ~/.claude/skills/humanizer/SKILL.md`
-- [Plugin marketplace](https://github.com/Aboudjem/humanizer-skill#get-started): `claude plugin marketplace add Aboudjem/humanizer-skill`
+- [Any agent via the skills CLI](https://github.com/Aboudjem/humanizer-skill#quickstart): `npx skills add Aboudjem/humanizer-skill`
+- [Project-scoped curl install](https://github.com/Aboudjem/humanizer-skill#quickstart): `mkdir -p .claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o .claude/skills/humanizer/SKILL.md`
+- [Plugin marketplace](https://github.com/Aboudjem/humanizer-skill#quickstart): `claude plugin marketplace add Aboudjem/humanizer-skill`
 
 ## Usage
 
-- [Basic rewrite](https://github.com/Aboudjem/humanizer-skill#usage): `/humanizer "your text"` — rewrite with default voice
-- [Detect mode](https://github.com/Aboudjem/humanizer-skill#usage): `/humanizer "text" --mode detect --score` — scan only, get 0-100 AI-tell score
+- [Basic rewrite](https://github.com/Aboudjem/humanizer-skill#usage): `/humanizer "your text"` — rewrite with the default voice
+- [Detect mode](https://github.com/Aboudjem/humanizer-skill#usage): `/humanizer "text" --mode detect --score` — scan only, get a 0-100 AI-tell score
 - [Voice profiles](https://github.com/Aboudjem/humanizer-skill#voice-profiles): `--voice casual|professional|technical|warm|blunt`
 - [File editing](https://github.com/Aboudjem/humanizer-skill#usage): `/humanizer --file docs/README.md --voice technical` — edit a file in place
 - [Aggressive mode](https://github.com/Aboudjem/humanizer-skill#usage): `/humanizer "text" --aggressive --iterate 3` — convergence mode
 
 ## The 53 AI Patterns
 
-- [Content Patterns P1–P8](https://github.com/Aboudjem/humanizer-skill#all-53-patterns): Significance inflation, promotional language, AI vocabulary ("delve", "leverage")
-- [Language and Style P9–P18](https://github.com/Aboudjem/humanizer-skill#all-53-patterns): Negative parallelisms, em dash overuse, structured list syndrome
-- [Communication P19–P21](https://github.com/Aboudjem/humanizer-skill#all-53-patterns): Chatbot artifacts, sycophantic tone
-- [Filler and Hedging P22–P30](https://github.com/Aboudjem/humanizer-skill#all-53-patterns): Filler phrases, uniform sentence length, comprehensive overview openers
-- [Emerging Patterns P31–P43](https://github.com/Aboudjem/humanizer-skill#all-53-patterns): Treadmill effect, infomercial hooks, elegant variation
-- [Craft and Forensic P44–P53](https://github.com/Aboudjem/humanizer-skill#all-53-patterns): False agency, diff-anchored writing, reasoning-chain artifacts, unicode obfuscation, hedged-enumeration openers
+- [Content P1-P8](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): Significance inflation, promotional language, AI vocabulary ("delve", "leverage")
+- [Language and Style P9-P18](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): Negative parallelisms, em dash overuse, structured list syndrome
+- [Communication P19-P21](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): Chatbot artifacts, sycophantic tone
+- [Filler and Hedging P22-P30](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): Filler phrases, uniform sentence length, comprehensive overview openers
+- [Emerging P31-P43](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): Treadmill effect, infomercial hooks, elegant variation
+- [Craft and Forensic P44-P53](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): False agency, diff-anchored writing, reasoning-chain artifacts, unicode obfuscation
 
 ## Science and Research
 
-- [Burstiness](https://github.com/Aboudjem/humanizer-skill#the-science): Sentence length variation — humans vary wildly, AI averages 18 words. Detectors measure this.
-- [Perplexity](https://github.com/Aboudjem/humanizer-skill#the-science): Word predictability — AI picks the statistically likely next word. Humans don't.
-- [RAID Benchmark](https://github.com/Aboudjem/humanizer-skill#the-science): Structural paraphrasing drops DetectGPT accuracy from 70.3% to 4.6% (ACL 2024)
-- [Research sources](https://github.com/Aboudjem/humanizer-skill#the-science): GPTZero, NeurIPS 2023, SSRN stylometric studies, Washington Post 328K message analysis
+- [Burstiness](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): Sentence length variation — humans vary wildly, AI averages 18 words. Detectors measure this.
+- [Perplexity](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md): Word predictability — AI picks the statistically likely next word. Humans don't.
+- [RAID Benchmark](https://github.com/Aboudjem/humanizer-skill/blob/main/README.md): Structural paraphrasing drops DetectGPT accuracy from 70.3% to 4.6% (ACL 2024)
+- [HC3 corpus](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/references/patterns.md): Bilingual ~40K-pair corpus (arXiv 2301.07597) on length, vocabulary diversity, and perplexity
 
 ## Comparisons
 
-- [vs QuillBot](https://github.com/Aboudjem/humanizer-skill#vs-alternatives): QuillBot swaps words; Humanizer fixes structure, rhythm, and burstiness
-- [vs Undetectable.ai](https://github.com/Aboudjem/humanizer-skill#vs-alternatives): Paid, closed, no pattern detection, no voice profiles
-- [Open source advantage](https://github.com/Aboudjem/humanizer-skill#vs-alternatives): 53 patterns vs 0, 5 voices vs 3, free vs $10–20/mo, explains every change
+- [vs QuillBot](https://github.com/Aboudjem/humanizer-skill/blob/main/README.md): QuillBot swaps words; Humanizer fixes structure, rhythm, and burstiness
+- [vs Undetectable.ai](https://github.com/Aboudjem/humanizer-skill/blob/main/README.md): Paid, closed, no pattern detection, no voice profiles
+- [Open source advantage](https://github.com/Aboudjem/humanizer-skill/blob/main/README.md): 53 patterns vs 0, 5 voices vs 3, free vs $10-20/mo, explains every change
 
 ## Optional
 

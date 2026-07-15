@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-07-15
+
+The "polish" release: a new visual system, a leaner README, a best-practice skill, and a docs site. No pattern changes; the catalog stays at 53.
+
+### Added
+
+- **MDX documentation site** under `docs-site/` (Docusaurus, deploy-ready) with real `:::note` admonitions, hosting the full documentation as an additional surface.
+- **Skill evaluations** at `skills/humanizer/evals/evals.json`: 5 should-trigger and 3 should-NOT-trigger cases plus a how-to-run note, following Anthropic's Agent Skills testing guidance.
+- **Table of contents** at the top of `references/patterns.md` and `references/patterns.zh.md` (both now exceed 100 lines).
+
+### Changed
+
+- **Visual refresh**: the logo, burstiness chart, typewriter demo, and social card were rebuilt in a cohesive paper-and-pen "Manuscript" system (ivory paper, blue-black fountain-pen ink, brass), authored in premium SMIL that animates once and holds. Fixed the stale "43 patterns / 90+ sources" tagline baked into the logo and social card. The landing page was reskinned to match.
+- **README** rewritten lean: a one-screen first view (hero, value prop, quickstart with expected output, features), with the full catalog, science, comparisons, model compatibility, and trust moved into `<details>` blocks. GitHub alerts used sparingly; command blocks carry no leading `$` for clean copy-paste. The badge/count/threshold lockstep and the zero-em-dash rule are preserved.
+- **SKILL.md** trimmed from 626 to 431 lines, under Anthropic's 500-line budget, by moving per-pattern before/after examples and full trigger lists into `references/patterns.md` (nothing deleted, just tucked). Section headers are now year-neutral.
+- **One canonical skill description** (third person, "Use when", literal user-phrase triggers) synced identically across `SKILL.md` frontmatter and `.claude-plugin/plugin.json`. Reinstall the skill so its registry listing refreshes.
+- Plugin version 0.4.0 -> 0.5.0.
+
 ## [0.4.0] - 2026-07-15
 
 The "collection upgrade": mined from the 9-skill "去AI味" collection this repo was featured in. Bigger and more careful catalog, a real false-positive guard, a craft engine, an optional metrics CLI and CI gate, and Chinese localization.
