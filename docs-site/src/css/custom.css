@@ -1,0 +1,52 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default.
+ *
+ * Humanizer brand: the "Manuscript" system. Warm ivory paper, blue-black
+ * fountain-pen ink (#1f3a5f) as the primary, brass (#c0952f) as the accent.
+ * Supports both light and dark mode.
+ */
+
+/* Light mode: ink primary on warm paper. */
+:root {
+  --ifm-color-primary: #1f3a5f;
+  --ifm-color-primary-dark: #1b3355;
+  --ifm-color-primary-darker: #19304f;
+  --ifm-color-primary-darkest: #142842;
+  --ifm-color-primary-light: #274a78;
+  --ifm-color-primary-lighter: #2c5488;
+  --ifm-color-primary-lightest: #356199;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(31, 58, 95, 0.1);
+
+  --ifm-background-color: #fbf8f0;
+  --ifm-background-surface-color: #fffdf7;
+
+  /* Brass accent used for links and subtle highlights. */
+  --humanizer-brass: #c0952f;
+  --ifm-link-color: #1f3a5f;
+}
+
+/* Dark mode: a lighter ink for readable contrast on a dark desk. */
+[data-theme='dark'] {
+  --ifm-color-primary: #7aa8cd;
+  --ifm-color-primary-dark: #6699c2;
+  --ifm-color-primary-darker: #5c92bd;
+  --ifm-color-primary-darkest: #4a7fa8;
+  --ifm-color-primary-light: #8eb4d5;
+  --ifm-color-primary-lighter: #9cbedb;
+  --ifm-color-primary-lightest: #b6d0e6;
+  --docusaurus-highlighted-code-line-bg: rgba(122, 168, 205, 0.2);
+
+  --ifm-background-color: #141a26;
+  --ifm-background-surface-color: #1d2634;
+
+  --humanizer-brass: #e0b85e;
+  --ifm-link-color: #9cbedb;
+}
+
+/* Brass underline accent on the navbar title, echoing the wordmark. */
+.navbar__title {
+  border-bottom: 2px solid var(--humanizer-brass);
+  padding-bottom: 1px;
+}
