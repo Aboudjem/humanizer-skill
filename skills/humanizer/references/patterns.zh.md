@@ -3,9 +3,9 @@
 
 > ## ⚠️ 实验性 · PROVISIONAL — 请先读这里
 >
-> **中文：** 本附录（ZH1–ZH15）是**临时草稿**，从竞品分析中提取而来（主要参考 op7418/Humanizer-zh 的「此模式在中文中不适用」标注，以及 dongbeixiaohuo/writing-agent 的「去 AI 味」工作流），**尚未经过中文母语写手校验**。它与英文正式目录（P1–P53）**不在同一成熟度**，不应被当作已验证的规则使用。此外，英文用的 **burstiness（句长波动）/ perplexity（用词可预测性）指标不能直接迁移到以字为单位、不用空格的中文** —— 中文里四字成语的密度、句读节奏往往比词长方差更能反映 AI 痕迹。
+> **中文：** 本附录（ZH1–ZH15）是作者的**临时草稿**，**尚未经过中文母语写手校验**。它与英文正式目录（P1–P53）**不在同一成熟度**，不应被当作已验证的规则使用。此外，英文用的 **burstiness（句长波动）/ perplexity（用词可预测性）指标不能直接迁移到以字为单位、不用空格的中文** —— 中文里四字成语的密度、句读节奏往往比词长方差更能反映 AI 痕迹。
 >
-> **English:** This appendix (ZH1–ZH15) is a **provisional draft**, extracted from competitor analysis (chiefly op7418/Humanizer-zh's "this pattern is N/A in Chinese" annotations and dongbeixiaohuo/writing-agent's 去AI味 workflow). It has **NOT been validated by a zh-fluent writer**, is **not at parity** with the English catalog (P1–P53), and should not be treated as a proven ruleset. Also: **burstiness and perplexity do not port cleanly to character-based, space-free Chinese** — in Chinese, four-character-idiom density and clause rhythm are usually stronger tells than sentence-length variance.
+> **English:** This appendix (ZH1–ZH15) is the author's **provisional draft**. It has **NOT been validated by a zh-fluent writer**, is **not at parity** with the English catalog (P1–P53), and should not be treated as a proven ruleset. Also: **burstiness and perplexity do not port cleanly to character-based, space-free Chinese** — in Chinese, four-character-idiom density and clause rhythm are usually stronger tells than sentence-length variance.
 >
 > **两个未验证的假设 / Two UNVERIFIED hypotheses:** ZH13（「的/了」虚词过度使用）和 ZH14（翻译腔）是**推测**，**目前没有任何竞品会显式检测它们**（翻译腔仅通过外来语黑名单被间接触及）。列在这里是为了记录假设，不是因为它们已被解决。ZH13 (的/了 particle overuse) and ZH14 (translationese) are **speculative — no competitor detects them explicitly**; kept here as flagged hypotheses, not solved patterns.
 
@@ -116,7 +116,7 @@
 
 ## 最深层痕迹 · The deepest tell (ZH15)
 
-**ZH15：立场缺失 / 温吞表达 · No stance / lukewarm hedging.**（对应 P38 段落可打乱性 + 英文版 North Star）最深的 AI 痕迹不是某个词，而是**通篇没有一个能被反驳的观点** —— 面面俱到、两边都对、段落顺序打乱也不影响论证。借用 dongbeixiaohuo/writing-agent 的说法：「不能被反驳的观点就不叫观点，叫温吞的空气。」**修正：** 逼出一个站得住但足够鲜明的立场，点名一个具体对象或反方，让读者知道作者到底站哪边、要付什么代价。**触发信号：** 全文没有一句可争论的判断、每个观点后面都跟「当然，也有另一种看法」、段落调换顺序读起来一样通顺、结论谁都不得罪。
+**ZH15：立场缺失 / 温吞表达 · No stance / lukewarm hedging.**（对应 P38 段落可打乱性 + 英文版 North Star）最深的 AI 痕迹不是某个词，而是**通篇没有一个能被反驳的观点** —— 面面俱到、两边都对、段落顺序打乱也不影响论证。一句话概括：不能被反驳的观点就不叫观点，叫温吞的空气。**修正：** 逼出一个站得住但足够鲜明的立场，点名一个具体对象或反方，让读者知道作者到底站哪边、要付什么代价。**触发信号：** 全文没有一句可争论的判断、每个观点后面都跟「当然，也有另一种看法」、段落调换顺序读起来一样通顺、结论谁都不得罪。
 
 > **AI：** 关于是否采用微服务，业界看法不一。它既有优势，也有挑战，需要根据具体情况权衡，没有绝对的对错。
 > **人：** 团队少于十个人就别上微服务。我们试过，光维护那套服务发现就吃掉了两个人。等你真被单体拖垮了再拆也不迟。
@@ -125,8 +125,6 @@
 
 ## 来源与致谢 · Sources
 
-- **dongbeixiaohuo/writing-agent** —— 最丰富的原生中文「去 AI 味」来源；其 `humanizer.md` 子代理封装了 Humanizer-zh 并加了原生层。ZH1–ZH7、ZH15 主要源自它。
-- **op7418/Humanizer-zh** —— blader/humanizer 的中文本地化；其「此模式在中文中不适用」的标注方式启发了本附录对英文对应模式（ZH8–ZH12）的处理。
-- **英文正式目录** —— 见 [`../SKILL.md`](../SKILL.md)（P1–P53）。本附录是其实验性的中文补充，**不是**替代。
+- **英文正式目录** —— 见 [`../SKILL.md`](../SKILL.md)（P1–P53）。本附录是作者实验性的中文补充草稿，**不是**替代。
 
 给 integrator 的提醒：ZH13、ZH14 无证据支撑，公开前建议找中文母语写手校验整份附录；burstiness/perplexity 相关表述在中文语境下需保留「不能直接迁移」的说明。

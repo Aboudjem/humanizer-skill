@@ -27,14 +27,14 @@ The "polish" release: a new visual system, a leaner README, a best-practice skil
 
 ## [0.4.0] - 2026-07-15
 
-The "collection upgrade": mined from the 9-skill "去AI味" collection this repo was featured in. Bigger and more careful catalog, a real false-positive guard, a craft engine, an optional metrics CLI and CI gate, and Chinese localization.
+The "collection upgrade": a bigger and more careful catalog, a real false-positive guard, a craft engine, an optional metrics CLI and CI gate, and Chinese localization.
 
 ### Added
 
 - **10 new patterns (P44-P53)**, taking the catalog to **53** (badge, CI threshold, and frontmatter moved in lockstep):
-  - P44 False Agency, P45 Narrator-from-a-Distance (from stop-slop)
-  - P46 Diff-Anchored Writing, P47 Hyphenated-Pair Overuse, P48 Aphorism Formulas, P49 Fragmented Headers, P50 Passive/Subjectless (from blader)
-  - P51 Reasoning-Chain Artifacts, P52 Unicode Obfuscation (from brandonwise)
+  - P44 False Agency, P45 Narrator-from-a-Distance
+  - P46 Diff-Anchored Writing, P47 Hyphenated-Pair Overuse, P48 Aphorism Formulas, P49 Fragmented Headers, P50 Passive/Subjectless
+  - P51 Reasoning-Chain Artifacts, P52 Unicode Obfuscation
   - P53 Hedged-Enumeration Openers (from the HC3 corpus, arXiv 2301.07597)
 - **False-positive guard**: a "What NOT to flag" section and a "Signs of human writing (preserve these)" section, so the skill stops gutting good human prose. Load-bearing rule: never rewrite watched phrases inside quotes, titles, code, or examples; flag clusters, not isolated tells.
 - **Craft features** in the rewrite step: Voice Read, Anti-Default Discipline, a Position ("teeth") engine, a Concretizer pass, an Opening tournament (`--openings N`), a certainty-spectrum lexicon in Soul Injection, and a draft/self-audit/final metacognitive pass.
@@ -75,7 +75,6 @@ The "collection upgrade": mined from the 9-skill "去AI味" collection this repo
 - **Brand voice context auto-load**: drop a `humanizer-context.md` at project root; skill picks it up as a personal extension of the voice profile
 - **3 new animated demo SVGs** (light + dark variants): burstiness comparison, typewriter before/after, pattern scanner. Burstiness viz embedded as the new hero proof asset in README.
 - **"4-pass system" framing** in the How-it-works mermaid (Detect → Strip → Inject → Verify)
-- **Lineage and credit section** acknowledging [@blader/humanizer](https://github.com/blader/humanizer) and [@softaworks/agent-toolkit](https://github.com/softaworks/agent-toolkit) as predecessors
 - **Score-yourself example** in README usage with quotable 0-100 number
 - Stricter CI checks: em-dash audit, pattern-badge consistency check
 
