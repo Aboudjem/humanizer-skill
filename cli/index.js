@@ -67,7 +67,7 @@ function loadBaseline(p) {
   if (!p || !fs.existsSync(p)) return {};
   try {
     return JSON.parse(fs.readFileSync(p, 'utf8'));
-  } catch (e) {
+  } catch {
     throw new UsageError('Cannot parse baseline JSON: ' + p);
   }
 }

@@ -6,19 +6,20 @@ The core catalog (P1-P30) is derived mostly from [Wikipedia: Signs of AI writing
 
 ## Contents
 
-- [The craft and forensic set (P44-P53)](#the-craft-and-forensic-set-p44-p53)
+- [The craft and forensic set (P44-P55)](#the-craft-and-forensic-set-p44-p55)
 - [Emerging patterns (P31-P43): extended notes](#emerging-patterns-p31-p43-extended-notes)
 - [The HC3 corpus](#the-hc3-corpus-grounding-for-p53-and-the-science-claims)
 - [Coverage against Wikipedia](#coverage-against-wikipedia-signs-of-ai-writing)
+- [Honest limits of this catalog](#honest-limits-of-this-catalog)
 - [Full trigger lists (P1, P4, P7)](#full-trigger-lists)
-- [Before and after examples (P1-P53)](#before-and-after-examples)
+- [Before and after examples (P1-P55)](#before-and-after-examples)
 - [Worked examples (technical, blog, LinkedIn)](#worked-examples)
 
 ---
 
-## The craft and forensic set (P44-P53)
+## The craft and forensic set (P44-P55)
 
-These ten extend the catalog with craft-level and forensic tells, novel relative to the P1-P43 set (cross-checked to avoid duplicates). P44-P52 target higher-order writing habits and copy-paste artifacts; P53 is grounded in the HC3 corpus.
+These twelve extend the catalog with craft-level and forensic tells, novel relative to the P1-P43 set (cross-checked to avoid duplicates). P44-P52 target higher-order writing habits and copy-paste artifacts; P53 is grounded in the HC3 corpus; P54-P55 target drafting and revision residue, described independently of any other project's pattern names or text (see below).
 
 | ID | Pattern |
 |:---|:--------|
@@ -32,6 +33,10 @@ These ten extend the catalog with craft-level and forensic tells, novel relative
 | P51 | Reasoning-Chain Artifacts |
 | P52 | Unicode Obfuscation |
 | P53 | Hedged-Enumeration Openers (HC3 corpus, [arXiv 2301.07597](https://arxiv.org/abs/2301.07597)) |
+| P54 | Argument Residue |
+| P55 | Leftover Hedge Debris |
+
+**P54 and P55, provenance note.** Both target drafting and revision residue: a model (or a human working fast) drafts through more than one internal position before landing on an answer, and traces of the rejected material survive into the final text as a rebuttal to nobody (P54) or a qualifier the final claim no longer needs (P55). This is standard editorial-craft reasoning about insufficient revision passes, not tied to any single paper. The names, descriptions, and trigger lists here were written independently and do not reuse another project's terminology, even where the underlying phenomenon (drafting residue surviving into a final rewrite) is one other humanizer-style tools have also noticed.
 
 ---
 
@@ -91,6 +96,20 @@ Every prose and formatting sign the Wikipedia guide documents maps to a pattern 
 - Human-writing positive indicators (predating Nov 2022, natural variation) and the "detectors are unreliable, do not judge on one tell" caution map to the Guardrails section in `SKILL.md`.
 
 Intentionally out of scope (Wikipedia-namespace editing, not general prose): non-existent categories/templates, AfC submission statements, exhaustive edit summaries, pre-placed maintenance tags, canned user pages, permissions gaming, and citation-integrity mechanics (invalid DOI/ISBN, missing page numbers, unused named references). A prose humanizer should not touch these.
+
+---
+
+## Honest limits of this catalog
+
+This catalog has a shelf life, and it's worth saying so plainly rather than letting the pattern count speak for itself.
+
+Wikipedia's own editors are not unanimous about the reliability of the guide most of this catalog is built on. The talk page for [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia_talk:Signs_of_AI_writing) records editors arguing that some listed indicators are not reliable evidence of AI authorship, because they have seen the same patterns in human-written content for years. The guide's own maintainers caution that no single sign proves AI authorship and that it works best combined with other context, not applied as an automatic checklist. That is exactly this skill's "flag clusters, not isolated tells" guardrail, restated by the source document itself rather than invented here.
+
+Trained human judges are not much better at this task than a coin flip, and that is worth taking seriously. Pindrop's "AI Text Detection Bias" study, presented at ACL 2026, found expert human annotators scored only 45 to 53 percent accuracy distinguishing AI-generated from human-written text (close to chance) while showing no statistically significant demographic bias, in contrast to automated detectors, which scored higher overall but showed measurable demographic bias, most notably over-flagging English-language-learner writing as machine-generated. Treat `--score` as a signal, not a verdict: even a careful human reader is unreliable at exactly this task.
+
+There is also a real argument that what this catalog detects is not "AI writing" so much as "default assistant voice." Xu et al., "Base Models Look Human To AI Detectors" ([arXiv:2605.19516](https://arxiv.org/abs/2605.19516)), found that base, non-instruction-tuned language models are classified as human-written by AI detectors far more often than the RLHF-aligned, instruction-tuned versions of those same models. The tells this skill hunts for are mostly artifacts of alignment and fine-tuning, not properties of language models in general, and they will keep drifting as alignment recipes change. P7 (AI vocabulary), P13 (em dash), and P17 (curly quotes) are the most exposed to this drift, since they key on surface word choice and punctuation, the part of the signature a provider can patch fastest with a system-prompt tweak. The more structural patterns, P30, P38, P43, and most of the craft set (P44 onward), are harder to patch away and should hold up longer.
+
+Fiction and creative prose sit outside this catalog's current scope. StoryScope ([arXiv:2604.03136](https://arxiv.org/abs/2604.03136)) found narrative-structure features (unresolved subplots, ambiguous character choices, non-chronological structure) separate human from AI fiction more reliably than word choice or punctuation do, a genuinely different, and on the paper's own numbers stronger, signal than anything in P1-P55. Worth knowing about; not built here, since this catalog targets non-fiction prose and a fiction-specific mode would need its own `--purpose` value and its own guardrails, not a bolt-on.
 
 ---
 
@@ -237,6 +256,14 @@ One before/after pair per pattern that benefits from one. Read the AI line, then
 **P53 Hedged-Enumeration Openers**
 > **AI:** There are several ways to speed up a slow query. In general, it is a good idea to consider indexing.
 > **Human:** Add an index on user_id. That one change took the query from 900ms to 12ms.
+
+**P54 Argument Residue**
+> **AI:** While some might argue that remote work hurts collaboration, the data tells a different story.
+> **Human:** Remote work hasn't hurt our collaboration. Our incident response time actually improved after we went remote.
+
+**P55 Leftover Hedge Debris**
+> **AI:** To some extent, this approach is arguably the best option, and it will definitely solve the problem.
+> **Human:** This approach solves the problem.
 
 ---
 

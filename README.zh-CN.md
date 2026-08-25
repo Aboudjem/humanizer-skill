@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f3a5f?style=flat-square" alt="License"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-53-1f3a5f?style=flat-square" alt="53 个 AI 模式"></a>
+  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-55-1f3a5f?style=flat-square" alt="55 个 AI 模式"></a>
   <a href="#语音风格"><img src="https://img.shields.io/badge/voices-5-1f3a5f?style=flat-square" alt="5 种语音风格"></a>
   <a href="#"><img src="https://img.shields.io/badge/dependencies-0-1f3a5f?style=flat-square" alt="零依赖"></a>
   <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=c0952f" alt="Stars"></a>
@@ -10,7 +10,7 @@
 
 <p align="center">
   <b>AI 写的英文，每句话都差不多长，用词千篇一律。真人不这么写。</b><br/>
-  Humanizer 把这道差距补回来。53 个模式，5 种语音，一个 Markdown 文件，零 API 调用。
+  Humanizer 把这道差距补回来。55 个模式，5 种语音，一个 Markdown 文件，零 API 调用。
 </p>
 
 <p align="center">
@@ -31,7 +31,7 @@ Humanizer 专门去掉**你写的英文**里的 AI 痕迹（去英文 AI 味 / �
 
 > **想润色中文？** 有不少 skill 专门润色**中文**，要处理中文可以用那些。这个 skill 反过来，专治**你写的英文**里的 AI 味。中文原生模式的实验性附录见文末的[中文写作支持](#中文写作支持实验性)。
 
-和其它同类相比，这个仓库的差异点：**53 个编号模式**（目前开源目录里最全）、**5 种命名语音风格**、以 **burstiness（句长波动）+ perplexity（用词可预测性）** 为核心的方法论、以及**一条 curl 命令、零依赖**的安装方式。
+和其它同类相比，这个仓库的差异点：**55 个编号模式**（目前开源目录里最全）、**5 种命名语音风格**、以 **burstiness（句长波动）+ perplexity（用词可预测性）** 为核心的方法论、以及**一条 curl 命令、零依赖**的安装方式。
 
 ---
 
@@ -150,7 +150,7 @@ Patterns found: 9
 
 你用 AI 写作。输出读起来像个聊天机器人：每句话一样长，用词可以预测，`delve into`、`it's important to note` 满天飞。
 
-Humanizer 检测 53 个具体的 AI 写作模式，然后用真实的人类节奏、词汇和语音把文本重写一遍。它不是换同义词，而是**重建句子结构**，注入让文字读起来像真人写的那种 burstiness 和不可预测性。
+Humanizer 检测 55 个具体的 AI 写作模式，然后用真实的人类节奏、词汇和语音把文本重写一遍。它不是换同义词，而是**重建句子结构**，注入让文字读起来像真人写的那种 burstiness 和不可预测性。
 
 > **提示：** 这是关于**写作质量**，不是关于**规避检测**。好的写作不会触发 AI 检测器，因为它没有检测器盯着找的那些偷懒模式。把写作本身改好，检测的问题自然就解决了。（如果你在关注 降AIGC率 / 过朱雀检测：思路一致 —— 与其去骗检测器，不如把偷懒的痕迹删干净。）
 
@@ -212,7 +212,7 @@ Humanizer 检测 53 个具体的 AI 写作模式，然后用真实的人类节�
 
 ```mermaid
 graph LR
-    A["第 1 遍：检测<br/><sub>扫描 53 个 AI 模式<br/>横跨 6 个类别</sub>"] --> B["第 2 遍：剥离<br/><sub>删掉意义拔高、<br/>AI 词汇、废话</sub>"]
+    A["第 1 遍：检测<br/><sub>扫描 55 个 AI 模式<br/>横跨 6 个类别</sub>"] --> B["第 2 遍：剥离<br/><sub>删掉意义拔高、<br/>AI 词汇、废话</sub>"]
     B --> C["第 3 遍：注入<br/><sub>套用语音风格、<br/>burstiness、perplexity</sub>"]
     C --> D["第 4 遍：核验<br/><sub>句长方差检查、<br/>黑名单扫描、终检</sub>"]
 
@@ -236,7 +236,7 @@ AI 检测器不靠魔法。它主要量两样东西，两样都有公开发表�
 
 QuillBot 那类换词工具只改单个词，句子的节奏和可预测性原封不动，所以它们没用。你需要的是结构性改写，而不是同义词替换。
 
-> **诚实声明：** burstiness 和 perplexity 这套方法论、以及全部 53 个编号模式，都是针对**英文**（以词为单位的语言）设计和验证的，这也正是这个 skill 的定位。中文以字为单位、不用空格，句长方差的意义完全不同，四字成语的密度往往比词长波动更重要。中文原生模式仍是**实验性**的，见[中文写作支持](#中文写作支持实验性)。
+> **诚实声明：** burstiness 和 perplexity 这套方法论、以及全部 55 个编号模式，都是针对**英文**（以词为单位的语言）设计和验证的，这也正是这个 skill 的定位。中文以字为单位、不用空格，句长方差的意义完全不同，四字成语的密度往往比词长波动更重要。中文原生模式仍是**实验性**的，见[中文写作支持](#中文写作支持实验性)。
 
 | 技术 | 来源 | 结论 |
 |:-----|:-----|:-----|
@@ -254,7 +254,7 @@ QuillBot 那类换词工具只改单个词，句子的节奏和可预测性原�
 | 特性 | **Humanizer** | QuillBot | Undetectable.ai | 手工改 |
 |:-----|:------------:|:--------:|:----------------:|:------:|
 | 开源 | 是 | 否 | 否 | 不适用 |
-| 模式检测 | **53** | 0 | 0 | 0 |
+| 模式检测 | **55** | 0 | 0 | 0 |
 | 语音风格 | **5** | 0 | 3 | 手动 |
 | 离线可用 | 是 | 否 | 否 | 是 |
 | Burstiness 注入 | 是 | 否 | 部分 | 否 |
@@ -264,9 +264,9 @@ QuillBot 那类换词工具只改单个词，句子的节奏和可预测性原�
 
 ---
 
-## 全部 53 个模式
+## 全部 55 个模式
 
-模式分为 6 个类别：内容（P1–P8）、语言与风格（P9–P18）、沟通（P19–P21）、废话与含糊（P22–P30）、新兴模式（P31–P43）、工艺与取证（P44–P53，2026 社区发现）。每个模式都有编号、触发词和改写方法。
+模式分为 6 个类别：内容（P1–P8）、语言与风格（P9–P18）、沟通（P19–P21）、废话与含糊（P22–P30）、新兴模式（P31–P43）、工艺与取证（P44–P55，2026 社区发现）。每个模式都有编号、触发词和改写方法。
 
 完整目录（含每个模式的触发词与前后对比）见 [SKILL.md](skills/humanizer/SKILL.md)。英文 README 里也有[可展开的模式速查表](./README.md#more)。
 
@@ -285,13 +285,13 @@ QuillBot 那类换词工具只改单个词，句子的节奏和可预测性原�
 ## 为什么不直接……
 
 **「……写个更好的 prompt？」**
-prompt 有帮助，但没法稳定地执行 53 条具体的模式规则。这个 skill 带一张检查清单，能抓到你改到第 50 遍都会漏的东西。
+prompt 有帮助，但没法稳定地执行 55 条具体的模式规则。这个 skill 带一张检查清单，能抓到你改到第 50 遍都会漏的东西。
 
 **「……用 QuillBot 或 Undetectable.ai？」**
 它们换词。节奏照样机械，句长照样均匀，结构照样可预测。检测器不在乎单个词，它在乎模式。
 
 **「……自己改？」**
-完全可以。但你记得住全部 53 个模式吗？能一眼认出「copula avoidance」或「意义拔高」吗？这个 skill 是个永远不累、永远不漏的狠编辑。
+完全可以。但你记得住全部 55 个模式吗？能一眼认出「copula avoidance」或「意义拔高」吗？这个 skill 是个永远不累、永远不漏的狠编辑。
 
 ---
 
@@ -310,7 +310,7 @@ prompt 有帮助，但没法稳定地执行 53 条具体的模式规则。这个
 发现了新的 AI 模式？有更好的改法？欢迎 PR。
 
 1. Fork 仓库
-2. 把你的模式加进 `SKILL.md`（沿用 P1–P53 的格式）
+2. 把你的模式加进 `SKILL.md`（沿用 P1–P55 的格式）
 3. 附一个前后对比的例子
 4. 提 PR
 
@@ -323,7 +323,7 @@ prompt 有帮助，但没法稳定地执行 53 条具体的模式规则。这个
 - [Wikipedia：Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)：一份公开、开放、有引用支撑的参考清单，P1–P30 里约 70% 源自它（CC BY-SA）。
 - HC3 语料库（[arXiv 2301.07597](https://arxiv.org/abs/2301.07597)）：为长度、用词多样性、perplexity 等主张提供了双语、经同行评审的佐证。
 
-这个 skill 提供：53 个编号模式（最大的开源目录）、5 个命名语音风格、三种运行模式（`detect`/`rewrite`/`edit`）、8 编辑器安装矩阵、会强制执行自身规则的 CI（禁用破折号的 skill 自己也不许出现破折号），以及一份为每条主张都引用一手来源的、研究导向的 README。
+这个 skill 提供：55 个编号模式（最大的开源目录）、5 个命名语音风格、三种运行模式（`detect`/`rewrite`/`edit`）、8 编辑器安装矩阵、会强制执行自身规则的 CI（禁用破折号的 skill 自己也不许出现破折号），以及一份为每条主张都引用一手来源的、研究导向的 README。
 
 ---
 

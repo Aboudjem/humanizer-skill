@@ -7,7 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.5.0] - 2026-07-15
+## [0.6.0] - 2026-08-25
+
+The "discoverability" release: 2 new patterns, a sharper false-positive guard, a pre-commit hook, and SEO/GEO fixes across the README, llms.txt, and docs site. Evidence-scoped by five parallel research passes (competitor landscape, ClawHub/outbound status, product-surface gaps, content-craft frontier, GEO/SEO audit).
+
+### Added
+
+- **2 new patterns (P54-P55)**, taking the catalog to **55** (badge, CI threshold, and frontmatter moved in lockstep): P54 Argument Residue (rebutting an objection nobody raised) and P55 Leftover Hedge Debris (a qualifier a real revision pass would have cut). Named and worded independently; not derived from any other project's pattern text.
+- **P34 trigger list widened to five providers**: Gemini (`[cite: 1]`, `[span_1](start_span)`), Grok (`grok_card`, `grok_render_citation_card_json`), DeepSeek (lenticular brackets, dagger symbols), and Perplexity (`attached_file`, `ppl-ai-file-upload`), alongside the existing ChatGPT tokens. Sourced from the live Wikipedia "Signs of AI writing" page.
+- **P22 trigger list widened** with vague connector phrases: "in connection with", "connected with/to", "in association with", "associated with".
+- **A semicolon/colon clustering note next to P13**: low-medium confidence, flag-in-clustering-only, explicitly not zero-tolerance like the em dash rule.
+- **Sub-tiered Tier 1 vocabulary**: split into Tier 1A (evidence-grade, near-definitive on its own) and Tier 1B (wordiness-grade, flagged but weighted lower so a clarity fix alone cannot tip a score toward "AI").
+- **False-positive guard additions**: a guardrail for neurodivergent writers (autistic/ADHD low-variance prose is not proof of AI) and an explicit non-native-English-speaker callout (Liang et al., arXiv:2304.02819).
+- **A no-fabrication rule**: rewrites may not invent facts, names, dates, or numbers not present in the source.
+- **An edit-mode refusal guard**: `--mode edit` now explicitly refuses non-prose targets (source code, config, structured data) instead of silently attempting a rewrite.
+- **`references/patterns.md` "Honest limits of this catalog" section**: cites the Wikipedia guide's own talk-page reliability debate, Pindrop's ACL 2026 finding that trained human judges score only 45-53% at this task, the RLHF/instruction-tuning-artifact framing (arXiv:2605.19516), and flags P7/P13/P17 as the catalog's most model-version-fragile patterns. Also notes StoryScope (arXiv:2604.03136) as fiction-specific research currently out of scope.
+- **`.pre-commit-hooks.yaml`** at the repo root, wrapping the existing CLI's `scan --fail-above` for the Python `pre-commit` framework, plus a doc section in `cli/README.md` with the consumer snippet and an optional Husky/lint-staged example.
+- **P52 (Unicode Obfuscation) added to the browser demo's regex subset** (`landing/index.html`), closing a pattern-list drift between `SKILL.md` and the client-side detector.
+- **`robots.txt`** for `docs-site/static/`.
+- **`repository` field** and `files` allowlist in `cli/package.json` ahead of any future npm publish.
+- **A lint step in CI** (`.github/workflows/ci.yml`) for the `cli/` JS.
+
+### Changed
+
+- **README**: added the missing `# Humanizer` H1 (previously zero H1s), rewrote the hero tagline to name the target phrase ("AI writing humanizer") near the top, and rephrased the existing GPTZero/Washington Post/RAID/HC3 citations as explicit "according to X" authority-signal language.
+- **`docs-site/docs/intro.md`**: replaced the generic `title: What is Humanizer` frontmatter with a more specific, entity-rich title and description.
+- **`docs-site/static/img/`**: replaced the stock Docusaurus `logo.svg`, `docusaurus-social-card.jpg`, `docusaurus.png`, and `favicon.ico` with the repo's own logo and social-preview assets, generated from `.github/assets/logo-light.svg` and `social-preview.png`.
+- **GitHub repo metadata**: added topics `agent-skills` and `openclaw-skill` (the repo was already at 18 of GitHub's 20-topic cap, one more than the source research assumed, so `geo` did not fit and was dropped rather than displacing an existing topic); set the homepage field to `https://humanizer-skill.vercel.app`; refreshed the repo description to say 55 patterns.
+- Plugin version 0.5.0 -> 0.6.0.
+
+
 
 The "polish" release: a new visual system, a leaner README, a best-practice skill, and a docs site. No pattern changes; the catalog stays at 53.
 

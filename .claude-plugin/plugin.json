@@ -1,7 +1,7 @@
 {
   "name": "humanizer",
-  "version": "0.5.0",
-  "description": "Detects 53 AI writing patterns and rewrites text in five voice profiles so it reads like a specific human wrote it, with an optional 0-100 AI-tell score. Use when text sounds AI-generated or like a chatbot, when preparing a blog post, README, or LinkedIn post for publication, when auditing prose for AI tells, or when editing a Markdown file in place. Triggers on phrases like \"humanize this\", \"make this sound less AI\", \"make this sound human\", \"remove AI tells\", \"does this read like ChatGPT\", and \"rewrite so it does not sound AI-generated\". Pure Markdown, zero dependencies, no network calls.",
+  "version": "0.6.0",
+  "description": "Detects 55 AI writing patterns and rewrites text in five voice profiles so it reads like a specific human wrote it, with an optional 0-100 AI-tell score. Use when text sounds AI-generated or like a chatbot, when preparing a blog post, README, or LinkedIn post for publication, when auditing prose for AI tells, or when editing a Markdown file in place. Triggers on phrases like \"humanize this\", \"make this sound less AI\", \"make this sound human\", \"remove AI tells\", \"does this read like ChatGPT\", and \"rewrite so it does not sound AI-generated\". Pure Markdown, zero dependencies, no network calls.",
   "author": {
     "name": "Adam Boudjemaa",
     "email": "boudjemaa.adam@gmail.com"

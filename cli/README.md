@@ -67,10 +67,40 @@ A reusable composite action lives at `.github/actions/humanizer-gate`:
     fail-above: '40'
 ```
 
+### Pre-commit hook
+
+For a fast local gate (the GitHub Action above is the CI-side backstop), the repo ships a `.pre-commit-hooks.yaml` for the Python [`pre-commit`](https://pre-commit.com) framework. It wraps the same zero-dependency CLI, `language: script` (no install step, just Node), and re-scans the repo on every commit that touches a Markdown or text file.
+
+Add this to your own repo's `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: https://github.com/Aboudjem/humanizer-skill
+    rev: main  # pin to a tagged release or commit SHA in production; `pre-commit autoupdate` will not update a mutable ref
+    hooks:
+      - id: humanizer-scan
+```
+
+Then `pre-commit install` once. The hook fails the commit if any scanned file scores above 40; adjust the threshold by overriding `entry` in your own config, e.g. `entry: cli/index.js scan . --fail-above 60`.
+
+Not using the Python `pre-commit` framework? Husky (the most common JS-native alternative) works too. The CLI is not published to npm today (see below), so vendor it, for example as a git submodule at `tools/humanizer-skill`, then add one line to `.husky/pre-commit`:
+
+```bash
+node tools/humanizer-skill/cli/index.js scan . --fail-above 40
+```
+
 ## Tests
 
 ```bash
 cd cli && node --test
 ```
 
-25 tests, no dependencies. Covers tokenization, every metric, the composite score, code/quote masking, the vocabulary layer, and CLI exit codes (threshold gate, baseline regression, bad input).
+26 tests, no dependencies. Covers tokenization, every metric, the composite score, code/quote masking, the vocabulary layer, and CLI exit codes (threshold gate, baseline regression, bad input).
+
+## Linting
+
+```bash
+cd cli && npm install && npm run lint
+```
+
+ESLint is a devDependency only, used for local and CI linting; it never ships with the published package and does not affect the CLI's zero-runtime-dependency claim.

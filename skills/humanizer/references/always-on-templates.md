@@ -67,4 +67,4 @@ and quoted text exactly as written.
 
 ---
 
-These templates cover the highest-signal rules only. For the full 53-pattern catalog, voice profiles, and scoring, run the `/humanizer` skill on demand.
+These templates cover the highest-signal rules only. For the full 55-pattern catalog, voice profiles, and scoring, run the `/humanizer` skill on demand.
