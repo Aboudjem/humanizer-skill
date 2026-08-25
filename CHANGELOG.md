@@ -36,7 +36,7 @@ The "discoverability" release: 2 new patterns, a sharper false-positive guard, a
 - **GitHub repo metadata**: added topics `agent-skills` and `openclaw-skill` (the repo was already at 18 of GitHub's 20-topic cap, one more than the source research assumed, so `geo` did not fit and was dropped rather than displacing an existing topic); set the homepage field to `https://humanizer-skill.vercel.app`; refreshed the repo description to say 55 patterns.
 - Plugin version 0.5.0 -> 0.6.0.
 
-
+## [0.5.0] - 2026-07-15
 
 The "polish" release: a new visual system, a leaner README, a best-practice skill, and a docs site. No pattern changes; the catalog stays at 53.
 
