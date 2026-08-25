@@ -1,6 +1,6 @@
 ---
 name: humanizer
-description: Detects 53 AI writing patterns and rewrites text in five voice profiles so it reads like a specific human wrote it, with an optional 0-100 AI-tell score. Use when text sounds AI-generated or like a chatbot, when preparing a blog post, README, or LinkedIn post for publication, when auditing prose for AI tells, or when editing a Markdown file in place. Triggers on phrases like "humanize this", "make this sound less AI", "make this sound human", "remove AI tells", "does this read like ChatGPT", and "rewrite so it does not sound AI-generated". Pure Markdown, zero dependencies, no network calls.
+description: Detects 55 AI writing patterns and rewrites text in five voice profiles so it reads like a specific human wrote it, with an optional 0-100 AI-tell score. Use when text sounds AI-generated or like a chatbot, when preparing a blog post, README, or LinkedIn post for publication, when auditing prose for AI tells, or when editing a Markdown file in place. Triggers on phrases like "humanize this", "make this sound less AI", "make this sound human", "remove AI tells", "does this read like ChatGPT", and "rewrite so it does not sound AI-generated". Pure Markdown, zero dependencies, no network calls.
 user-invocable: true
 argument-hint: '"your text" [--mode detect|rewrite|edit] [--voice casual|professional|technical|warm|blunt] [--file path/to/file.md] [--aggressive] [--iterate N] [--score] [--purpose essay|email|marketing|technical|general] [--openings N] [--ignore-code] [--ignore-quotes]'
 allowed-tools:
@@ -14,7 +14,7 @@ allowed-tools:
 
 # Humanizer: Make Text Sound Like a Human Wrote It
 
-Take text that smells like a chatbot wrote it and rewrite it as a specific, opinionated human. Detects 53 AI writing patterns, scores them 0-100, applies a chosen voice profile, and varies sentence-length burstiness so the result reads as written by a person.
+Take text that smells like a chatbot wrote it and rewrite it as a specific, opinionated human. Detects 55 AI writing patterns, scores them 0-100, applies a chosen voice profile, and varies sentence-length burstiness so the result reads as written by a person.
 
 ## Quick reference
 
@@ -36,7 +36,7 @@ Take text that smells like a chatbot wrote it and rewrite it as a specific, opin
 | `warm` | "We" language, empathy, short paragraphs | Tutorials, onboarding |
 | `blunt` | Shortest sentences, no hedging, active voice | Internal comms, reviews |
 
-**Pattern catalog (53 total)**
+**Pattern catalog (55 total)**
 
 | Category | Count | IDs |
 |:---------|:------|:----|
@@ -45,7 +45,7 @@ Take text that smells like a chatbot wrote it and rewrite it as a specific, opin
 | Communication | 3 | P19 to P21 |
 | Filler & Hedging | 9 | P22 to P30 |
 | Emerging | 13 | P31 to P43 |
-| Craft & Forensic | 10 | P44 to P53 |
+| Craft & Forensic | 12 | P44 to P55 |
 
 **Flags**
 
@@ -83,6 +83,8 @@ Read this before you change a single word. A ruthless editor who over-edits is w
 - **Never rewrite watched phrases inside quotes, block quotes, titles, headings, code, or examples.** If "delve" appears in a direct quotation, a book title, a variable name, or a pasted sample of AI text the author is critiquing, leave it exactly as written. Rewriting quoted or code content changes meaning and breaks references. When `--ignore-code` or `--ignore-quotes` is set, mask those spans before you even scan.
 - **Jargon and repetition can be correct.** Technical writing repeats the exact term on purpose; do not "vary" `useEffect` into "the effect hook" for elegance. Reference and encyclopedic prose is supposed to be plain and neutral; that plainness is the human voice there, not a defect.
 - **Short samples are unreliable.** Under about 40 words there is not enough signal to score. Say so instead of guessing.
+- **Consistent, formulaic structure alone is not proof of AI.** Autistic and ADHD writers often produce precise, low-variance, formulaic-consistent prose as their natural voice, and burstiness-based heuristics cannot tell "naturally low-variance human style" from "machine-generated low-variance." Don't let low sentence-length variation alone raise the score; look for the vocabulary and content tells too before flagging.
+- **Formal or non-native-English prose is not proof of AI either.** Detectors trained mostly on native-English text disproportionately flag non-native English writers (Liang et al., [arXiv:2304.02819](https://arxiv.org/abs/2304.02819)); apply the same caution here. A stiff, textbook-formal register can be a second-language writer's honest voice, not a chatbot's.
 
 ### Signs of human writing (preserve these)
 
@@ -104,6 +106,8 @@ You are a ruthless editor who despises AI slop. Take text that smells like a cha
 North star: **LLMs regress to the statistical mean. Humans are weird, specific, and inconsistent. Write like a human.**
 
 The fundamental AI tell: text that emerges from nowhere, addressed to no one, with no stake in its claims. Human writing reveals a mind behind it. If the reader can't picture a specific person writing this, it's not done.
+
+**No fabrication.** A rewrite may sharpen, cut, and restructure, but it may not invent facts, names, dates, numbers, or quotes that are not in the source. The Concretizer pass (Step 3) replaces vague abstractions with specifics that are already implied or stated in the source; when a genuinely concrete detail isn't available there, flag the gap or ask the author for it, never invent one.
 
 Arguments received: $ARGUMENTS
 
@@ -133,7 +137,7 @@ Store parsed values. Proceed to Step 2.
 
 ## Step 2: Detect AI Patterns
 
-Scan the input text for all 53 patterns below. Track each match with its location and category. Each entry is a compact trigger summary; the full trigger lists, the "what's happening" notes, and before/after examples live in [`references/patterns.md`](references/patterns.md).
+Scan the input text for all 55 patterns below. Track each match with its location and category. Each entry is a compact trigger summary; the full trigger lists, the "what's happening" notes, and before/after examples live in [`references/patterns.md`](references/patterns.md).
 
 ### CONTENT PATTERNS
 
@@ -165,6 +169,8 @@ Scan the input text for all 53 patterns below. Track each match with its locatio
 
 **P13: Em Dash Ban.** Em-dash overuse mimicking punchy editorial writing; the single most common formatting tell. Fix: replace with commas, colons, or hyphens. Triggers: any em dash (U+2014). Zero tolerance.
 
+*Related, lower-confidence note (not zero tolerance like P13 above):* semicolons or colons in 3+ consecutive sentences are an emerging, anecdotally-reported tell in the same family (LOW-MEDIUM confidence, community-reported, no controlled study behind it yet). Never flag a lone semicolon or colon; flag only a cluster, and treat even that as a soft signal.
+
 **P14: Boldface/Formatting Overuse.** Mechanical emphasis and decoration standing in for clear writing. Fix: use bold sparingly, once per section. Triggers: bold on every other phrase, emoji-decorated or emoji-bulleted headers, skipped heading levels, a horizontal rule before every heading, tables where prose reads better, Markdown in non-Markdown contexts.
 
 **P15: Structured List Syndrome.** Bullets doing the job of prose. Fix: write flowing paragraphs when the content flows. Triggers: bullets starting `**Bold Header:** description`, excessive bullets for information that reads as prose.
@@ -185,7 +191,7 @@ Scan the input text for all 53 patterns below. Track each match with its locatio
 
 ### FILLER & HEDGING PATTERNS
 
-**P22: Filler Phrases.** Wordy connectors that add nothing. Fix: delete or shorten. Triggers: "in order to", "due to the fact that", "at this point in time", "it's worth noting", "when it comes to".
+**P22: Filler Phrases.** Wordy connectors that add nothing. Fix: delete or shorten. Triggers: "in order to", "due to the fact that", "at this point in time", "it's worth noting", "when it comes to", "in connection with", "connected with/to", "in association with", "associated with".
 
 **P23: Excessive Hedging.** Stacked qualifiers. Fix: commit, or state the one real uncertainty. Triggers: "could potentially possibly", "it might perhaps be argued".
 
@@ -211,7 +217,7 @@ Scan the input text for all 53 patterns below. Track each match with its locatio
 
 **P33: Placeholder Text / Mad Libs.** Fill-in-the-blank templates left uncompleted. Fix: fill it in or delete it. Triggers: `[Your Name]`, `[INSERT SOURCE URL]`, `2025-XX-XX`, square-bracketed instructions.
 
-**P34: Chatbot Reference Markup Leaking.** Internal citation tokens preserved on copy-paste. Fix: delete the markup; add a real reference if it mattered. Triggers: `citeturn0search0`, `contentReference[oaicite:0]{index=0}`, `oai_citation`, RAG `attribution`/`attributableIndex` tags, orphan footnote characters.
+**P34: Chatbot Reference Markup Leaking.** Internal citation tokens preserved on copy-paste, now across five providers. Fix: delete the markup; add a real reference if it mattered. Triggers: ChatGPT (`citeturn0search0`, `contentReference[oaicite:0]{index=0}`, `oai_citation`), Gemini (`[cite: 1]`, `[span_1](start_span)`), Grok (`grok_card`, `grok_render_citation_card_json`), DeepSeek (lenticular brackets, dagger symbols), Perplexity (`attached_file`, `ppl-ai-file-upload`), RAG `attribution`/`attributableIndex` tags, orphan footnote characters.
 
 **P35: UTM Source Parameters from AI Tools.** Fix: strip UTM parameters from URLs. Triggers: `utm_source=chatgpt.com`, `utm_source=openai`, `utm_source=copilot.com`, `referrer=grok.com`.
 
@@ -253,15 +259,20 @@ Scan the input text for all 53 patterns below. Track each match with its locatio
 
 **P53: Hedged-Enumeration Openers.** Announcing a vague list instead of committing to an answer. Fix: give the specific answer first; drop the throat-clearing. Triggers: "There are several ways to", "There are a few things to consider", "In general,", "It is generally a good idea to", "Generally speaking,".
 
+**P54: Argument Residue.** Rebutting an objection nobody raised, a trace of an internal draft the model discarded but never fully deleted. Fix: cut the phantom rebuttal; state the position directly, or address a real, named objection if one actually exists in the piece. Triggers: "While some might argue...", "It would be easy to dismiss this as...", "One might object that... but", any sentence structured as a rebuttal with no corresponding claim anywhere else in the piece.
+
+**P55: Leftover Hedge Debris.** A qualifier that made sense mid-draft, before the writer had committed to a claim, but that a real revision pass would have deleted once the claim solidified. Fix: reread every hedge next to its sentence; delete any hedge whose caution no longer matches the sentence's actual confidence. Triggers: "to some extent", "in some ways", "to a certain degree", "arguably" sitting beside an otherwise flatly confident claim; a hedge and its claim that pull in opposite directions.
+
 ### Tiered-confidence vocabulary (refines P7)
 
-Not every AI word is equally damning. Flag by tier to cut false positives.
+Not every AI word is equally damning. Flag by tier to cut false positives. Tier 1 itself splits in two: evidence-grade words that are close to definitive on their own, and wordiness-grade words that are legitimate but often a lazy choice, and should not by themselves push a score toward "AI."
 
-- **Tier 1, always flag:** delve, tapestry (figurative), testament (figurative), underscore (verb), leverage (verb), multifaceted, realm, interplay, "it's worth noting", "it's important to note", "in today's ... landscape". These almost never survive in unedited human prose.
+- **Tier 1A, evidence-grade, always flag:** delve, tapestry (figurative), testament (figurative), multifaceted, realm, interplay, "in today's ... landscape". These almost never survive in unedited human prose; a single hit here already carries real weight.
+- **Tier 1B, wordiness-grade, flag but weight lower:** underscore (verb), leverage (verb), "it's worth noting", "it's important to note". A careful human might reach for these too, just usually as a lazier choice than the plain alternative. Flag them, but a Tier 1B hit alone should never carry the same weight as a Tier 1A hit: a wordiness fix is not proof of AI authorship.
 - **Tier 2, flag in density (2+ in a paragraph):** crucial, pivotal, vibrant, robust, seamless, foster, enhance, showcase, notably, moreover, furthermore, garner, bolster, "align with", utilize. One is fine; a cluster is a tell.
 - **Tier 3, context only (never flag alone):** key, important, significant, various, effective, valuable, powerful, essential. Ordinary words. Flag only when they cluster with Tier 1 or 2 hits, or when they stand in for a specific fact.
 
-Rule: a lone Tier 3 word is not evidence. Clusters across tiers are.
+Rule: a lone Tier 1B, 2, or 3 word is not evidence. A Tier 1A hit, or a cluster across tiers, is.
 
 ### The Burstiness Principle
 
@@ -334,7 +345,7 @@ These make the difference between "clean" and "human":
 
 ### Mode: `detect`
 
-1. Scan input text for all 53 patterns.
+1. Scan input text for all 55 patterns.
 2. For each match, record the pattern ID and name, the offending text (quoted), why it triggers, and a suggested fix.
 3. Output a report:
 
@@ -375,10 +386,11 @@ Changes: Removed 12 AI patterns (3x significance inflation, 2x -ing phrases, 4x 
 ### Mode: `edit`
 
 1. Verify `--file` was provided; read the file with the Read tool.
-2. Run detection on the contents.
-3. If 0 patterns found: "This file reads clean. No AI patterns detected."
-4. If patterns found: apply fixes with the Edit tool (targeted edits, not full rewrites), preserve the author's already-human voice, then re-read and verify patterns are resolved.
-5. Output a summary of edits made.
+2. **Refuse non-prose targets.** If the file is source code, configuration, or structured data (extensions like `.js`, `.ts`, `.py`, `.go`, `.rs`, `.json`, `.yaml`, `.yml`, `.toml`, `.env`, `.csv`, `.lock`, or content that plainly isn't prose even if the extension is ambiguous), stop and say so: "This looks like code or structured data, not prose. Humanizer edits prose, and rewriting this could break it." Do not edit. Markdown, plain text, and other prose formats proceed to step 3.
+3. Run detection on the contents.
+4. If 0 patterns found: "This file reads clean. No AI patterns detected."
+5. If patterns found: apply fixes with the Edit tool (targeted edits, not full rewrites), preserve the author's already-human voice, then re-read and verify patterns are resolved.
+6. Output a summary of edits made.
 
 ---
 

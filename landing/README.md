@@ -1,6 +1,6 @@
 # Humanizer landing page
 
-A single static HTML page with a client-side AI-text detector. Ported a subset of the SKILL.md regex blacklist (P1, P3, P4, P5, P7, P8, P9, P13, P18, P19, P20, P21, P22, P24, P29, P32, P34, P35, P39, P41, 20 patterns of 53) plus burstiness scoring.
+A single static HTML page with a client-side AI-text detector. Ported a subset of the SKILL.md regex blacklist (P1, P3, P4, P5, P7, P8, P9, P13, P18, P19, P20, P21, P22, P24, P29, P32, P34, P35, P39, P41, P52, 21 patterns of 55) plus burstiness scoring.
 
 ## Local preview
 
@@ -24,7 +24,7 @@ The first deploy will prompt for project linking. Subsequent deploys reuse the l
 
 Closes the "try it before you install" gap that humanize.io and undetectable.ai use to capture top-of-funnel traffic for the commercial humanizer category. Our version is the only open-source one that runs entirely client-side (no API keys, no data leaves the browser, no cost).
 
-The 20 patterns it covers are the mechanically detectable ones. The full skill catches all 53 plus does the rewriting, which requires an LLM (Claude/GPT/Gemini), which is why the actual rewriting happens in your editor.
+The 21 patterns it covers are the mechanically detectable ones. The full skill catches all 55 plus does the rewriting, which requires an LLM (Claude/GPT/Gemini), which is why the actual rewriting happens in your editor.
 
 ## What it tracks
 

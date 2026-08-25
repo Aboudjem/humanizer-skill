@@ -6,7 +6,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Humanizer',
-  tagline: 'Detect 53 AI writing patterns. Rewrite text that sounds human.',
+  tagline: 'AI writing humanizer: detect 55 AI writing patterns and rewrite text that sounds human.',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -57,6 +57,10 @@ const config: Config = {
     },
     navbar: {
       title: 'Humanizer',
+      logo: {
+        alt: 'Humanizer',
+        src: 'img/logo.svg',
+      },
       items: [
         {
           type: 'docSidebar',
@@ -86,7 +90,7 @@ const config: Config = {
               to: '/installation',
             },
             {
-              label: 'The 53 patterns',
+              label: 'The 55 patterns',
               to: '/patterns',
             },
           ],

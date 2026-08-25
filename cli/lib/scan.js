@@ -22,7 +22,7 @@ function collectFiles(dir, exts) {
   let entries;
   try {
     entries = fs.readdirSync(dir, { withFileTypes: true });
-  } catch (e) {
+  } catch {
     return out;
   }
   for (const entry of entries) {

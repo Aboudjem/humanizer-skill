@@ -4,7 +4,7 @@ A standalone Claude Code skill that transforms AI-generated text into natural hu
 
 ## What it does
 
-- Detects **53 AI writing patterns** (P1-P53, based on Wikipedia's "Signs of AI Writing" + 2025-2026 community research + the wider humanizer ecosystem)
+- Detects **55 AI writing patterns** (P1-P55, based on Wikipedia's "Signs of AI Writing" + 2025-2026 community research + the wider humanizer ecosystem)
 - Rewrites text to sound like a specific human wrote it
 - Injects authentic voice using burstiness and perplexity principles
 - Three modes: scan-only, full rewrite, in-place file editing
@@ -78,7 +78,7 @@ Drop a `humanizer-context.md` at the project root with your samples and banned p
 ## How it works
 
 1. **Parse**: Extracts text and flags from arguments
-2. **Detect**: Scans for 53 AI patterns across 6 categories (content, language, style, communication, filler, craft/forensic) + emerging 2026 patterns
+2. **Detect**: Scans for 55 AI patterns across 6 categories (content, language, style, communication, filler, craft/forensic) + emerging 2026 patterns
 3. **Inject**: Applies voice profile, varies sentence length (burstiness), increases word unpredictability (perplexity)
 4. **Verify**: Checks output against detection patterns, sentence variance, and the "who wrote this?" test
 5. **Output**: Clean text with change summary
@@ -92,7 +92,7 @@ Drop a `humanizer-context.md` at the project root with your samples and banned p
 | Communication | P19-P21 | Chatbot artifacts, disclaimers, sycophancy |
 | Filler & Hedging | P22-P30 | Filler phrases, hedging, generic conclusions, uniform sentence length |
 | Emerging (2026) | P31-P43 | Elegant variation, citeturn markup leaks, utm_source=chatgpt URLs, treadmill effect |
-| Craft & Forensic | P44-P53 | False agency, diff-anchored writing, reasoning-chain artifacts, unicode obfuscation |
+| Craft & Forensic | P44-P55 | False agency, diff-anchored writing, reasoning-chain artifacts, unicode obfuscation, argument residue |
 
 Deep dives and provenance live in [`references/patterns.md`](references/patterns.md); the core `SKILL.md` is standalone and does not require it.
 

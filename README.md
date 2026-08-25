@@ -1,3 +1,5 @@
+# Humanizer
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.svg">
@@ -8,15 +10,15 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f3a5f?style=flat-square" alt="License: MIT"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-53-1f3a5f?style=flat-square" alt="53 AI patterns"></a>
+  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-55-1f3a5f?style=flat-square" alt="55 AI patterns"></a>
   <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/voices-5-1f3a5f?style=flat-square" alt="5 voice profiles"></a>
   <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/dependencies-0-1f3a5f?style=flat-square" alt="Zero dependencies"></a>
   <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=c0952f" alt="Stars"></a>
 </p>
 
 <p align="center">
-  <b>Make AI text sound like a real person wrote it.</b><br/>
-  One Markdown file. 53 patterns, 5 voices, zero setup, and nothing leaves your machine.
+  <b>Humanizer is a free, open-source AI writing humanizer and detector.</b><br/>
+  One Markdown file. 55 patterns, 5 voices, zero setup, and nothing leaves your machine.
 </p>
 
 <p align="center">
@@ -39,7 +41,7 @@
 
 AI writing has a fingerprint. Every sentence runs about the same length. It reaches for the same safe words, and it pads with filler like "in today's landscape." Two bits of jargon worth knowing: how much your sentence lengths vary is called *burstiness* (people mix short and long, AI keeps them all one size), and those little giveaway habits are called *AI tells*.
 
-Humanizer knows 53 of them. It finds them, scores the text, and rewrites it in a voice you pick. All from a single file your editor reads on your own machine.
+This **AI writing humanizer** knows 55 of them. It finds them, scores the text, and rewrites it in a voice you pick. All from a single file your editor reads on your own machine.
 
 ## Quickstart
 
@@ -77,13 +79,13 @@ The score runs 0 to 100. Lower is more human. Drop the flags and it rewrites ins
 
 ## Features
 
-- **53 named patterns**, from travel-brochure adjectives to invisible unicode tricks. The biggest open list of its kind.
+- **55 named patterns**, from travel-brochure adjectives to invisible unicode tricks. The biggest open list of its kind.
 - **5 voices**: `casual`, `professional`, `technical`, `warm`, `blunt`. Each one changes the rhythm, not just a few words.
 - **3 modes**: `detect` (score it), `rewrite` (fix it), `edit` (change a Markdown file in place).
 - **A 0 to 100 AI-tell score** on demand, so you can measure before and after.
 - **A guard against over-editing**, so it sharpens real writing instead of flattening it.
 - **One Markdown file.** No dependencies. No network calls. It runs standalone.
-- **Optional metrics CLI and CI check** if you want a computed score in your pipeline.
+- **Optional metrics CLI, CI check, and pre-commit hook** if you want a computed score in your pipeline or a fast local gate.
 
 ---
 
@@ -181,18 +183,18 @@ Same idea for other editors, just change the folder: `.cursor/skills/`, `.github
 </details>
 
 <details>
-<summary><b>All 53 patterns</b></summary>
+<summary><b>All 55 patterns</b></summary>
 
 <br/>
 
 | IDs | Category | Examples |
 |:----|:---------|:---------|
-| P1-P8 | Content | Significance inflation, promotional language, AI vocabulary ("delve", "leverage"), copula avoidance |
+| P1-P8 | Content | Significance inflation, promotional language, AI vocabulary ("delve", "leverage") |
 | P9-P18 | Language & Style | Negative parallelisms, em dash overuse, structured-list syndrome, title-case headings |
 | P19-P21 | Communication | Chatbot artifacts, knowledge-cutoff disclaimers, sycophantic tone |
 | P22-P30 | Filler & Hedging | Filler phrases, generic conclusions, comprehensive-overview openers, uniform sentence length |
 | P31-P43 | Emerging | Elegant variation, placeholder text, chatbot markup leaks, treadmill effect, infomercial hooks |
-| P44-P53 | Craft & Forensic | False agency, diff-anchored writing, aphorism formulas, reasoning-chain artifacts, unicode obfuscation |
+| P44-P55 | Craft & Forensic | False agency, diff-anchored writing, aphorism formulas, reasoning-chain artifacts, unicode obfuscation, argument residue, leftover hedge debris |
 
 Every pattern has a full write-up, its triggers, and a before/after example in [`skills/humanizer/SKILL.md`](skills/humanizer/SKILL.md) and [`references/patterns.md`](skills/humanizer/references/patterns.md).
 
@@ -213,10 +215,12 @@ AI detectors measure two things, and both are well documented.
 
 Word-swap tools like QuillBot change individual words but leave the rhythm and the predictability alone. You need to change the structure, not just trade synonyms.
 
+According to GPTZero's own detection research, human sentence length varies wildly while AI-generated text stays close to flat, which is why burstiness injection is the skill's core rewrite technique. According to a Washington Post analysis of 328,000 messages (2025), phrases like "it's not X, it's Y" are among the AI tells that analysis surfaced, alongside emoji use and the em dash. According to the RAID benchmark (ACL 2024), structural paraphrasing (not just word-swapping) drops DetectGPT's detection accuracy from 70.3% to 4.6%. According to the HC3 corpus study (Guo et al., [arXiv 2301.07597](https://arxiv.org/abs/2301.07597)), human answers average 142.5 words versus ChatGPT's 198.1 across roughly 40,000 paired answers, and humans draw from a measurably larger vocabulary.
+
 | Technique | Source | Finding |
 |:----------|:-------|:--------|
 | Burstiness injection | GPTZero | Human sentence length varies wildly; AI doesn't. |
-| Kill negative parallelism | Washington Post | "It's not X, it's Y" is the #1 AI tell across 328K messages |
+| Kill negative parallelism | Washington Post | "It's not X, it's Y" is among the AI tells identified across 328K messages |
 | Structural paraphrasing | RAID benchmark, ACL 2024 | Drops DetectGPT accuracy from 70.3% to 4.6% |
 | Length and lexical diversity | HC3 corpus, [arXiv 2301.07597](https://arxiv.org/abs/2301.07597) | ~40K pairs: human answers avg 142.5 words vs ChatGPT 198.1; humans use a bigger vocabulary |
 
@@ -246,6 +250,8 @@ Drop it into a pipeline with the bundled Action:
     fail-above: '40'
 ```
 
+Prefer a fast local gate over a CI-only one? The repo also ships a [`.pre-commit-hooks.yaml`](.pre-commit-hooks.yaml) for the Python `pre-commit` framework, wrapping the same CLI.
+
 No API keys, no network, no third-party packages. It's a deterministic stand-in for the skill's holistic score. Details in [`cli/README.md`](cli/README.md).
 
 </details>
@@ -258,7 +264,7 @@ No API keys, no network, no third-party packages. It's a deterministic stand-in 
 | Feature | **Humanizer** | QuillBot | Undetectable.ai | Manual editing |
 |:--------|:------------:|:--------:|:----------------:|:--------------:|
 | Open source | Yes | No | No | N/A |
-| Pattern detection | **53** | 0 | 0 | 0 |
+| Pattern detection | **55** | 0 | 0 | 0 |
 | Voice profiles | **5** | 0 | 3 | Manual |
 | Works offline | Yes | No | No | Yes |
 | Burstiness injection | Yes | No | Partial | No |

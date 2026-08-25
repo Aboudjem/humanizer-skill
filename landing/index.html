@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Humanizer · Score AI text in your browser, no API key</title>
-<meta name="description" content="Paste AI text. Get a 0-100 AI-tell density score with a per-pattern breakdown, right in your browser. The full skill covers all 53 patterns. Built from the open-source Claude Code skill.">
+<meta name="description" content="Paste AI text. Get a 0-100 AI-tell density score with a per-pattern breakdown, right in your browser. The full skill covers all 55 patterns. Built from the open-source Claude Code skill.">
 <meta property="og:title" content="Humanizer · Score AI text in your browser">
-<meta property="og:description" content="Detect 53 AI writing patterns, get a 0-100 score, and rewrite in your editor. Open source. Zero API calls.">
+<meta property="og:description" content="Detect 55 AI writing patterns, get a 0-100 score, and rewrite in your editor. Open source. Zero API calls.">
 <meta property="og:image" content="https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/.github/assets/logo-light.svg">
 <meta property="og:url" content="https://humanizer-skill.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
@@ -272,7 +272,7 @@
 <div class="container">
   <header>
     <span class="hook">Runs entirely in your browser. No API calls.</span>
-    <h1>Score AI text against <span>53 patterns</span></h1>
+    <h1>Score AI text against <span>55 patterns</span></h1>
     <p class="tagline">Paste anything. Get a 0-100 AI-tell density score and per-pattern findings in under a second.</p>
   </header>
 
@@ -291,7 +291,7 @@
 
   <section class="card">
     <h2 style="margin:0 0 8px;font-size:20px;">Run it in your editor (one command)</h2>
-    <p style="margin:0 0 12px;color:var(--muted);font-size:14px;">The browser detector covers ~20 mechanical patterns. The full skill catches all 53 and rewrites the text in five voice profiles.</p>
+    <p style="margin:0 0 12px;color:var(--muted);font-size:14px;">The browser detector covers ~21 mechanical patterns. The full skill catches all 55 and rewrites the text in five voice profiles.</p>
     <div class="install"><span class="prompt">$</span> mkdir -p ~/.claude/skills/humanizer && curl -sL \
   https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
   -o ~/.claude/skills/humanizer/SKILL.md</div>
@@ -309,8 +309,8 @@
 </div>
 
 <script>
-// Client-side detector. Subset of P1-P53 that work as pure regex.
-// Full ruleset (53 patterns + rewriting) lives at github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md
+// Client-side detector. Subset of P1-P55 that work as pure regex.
+// Full ruleset (55 patterns + rewriting) lives at github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md
 const patterns = [
   { id: 'P1', name: 'Significance Inflation', re: /\b(pivotal moment|testament to|marks? an? (pivotal|important|significant) (moment|chapter|milestone)|underscor(?:e|es|ing) the importance|reflects? broader|setting the stage|indelible mark)\b/gi, weight: 4 },
   { id: 'P3', name: 'Superficial -ing Phrases', re: /\b(highlighting|underscoring|emphasizing|ensuring|reflecting|symbolizing|cultivating|fostering|encompassing|showcasing) (?!the (?:word|name|term))/gi, weight: 2 },
@@ -332,6 +332,7 @@ const patterns = [
   { id: 'P35', name: 'UTM Source from AI', re: /utm_source=(chatgpt\.com|openai|copilot\.com|grok\.com)/gi, weight: 6 },
   { id: 'P39', name: '"Whether" Closer', re: /\bwhether (?:you|they|it|we)[^.]{0,80}, (?:the|you) (?:answer|key|choice)/gi, weight: 3 },
   { id: 'P41', name: 'Infomercial Hook', re: /^(the (catch|kicker|twist|brutal truth)\?|here'?s the thing[.:]|here'?s what nobody tells you[.:]|sound familiar\?)$/gim, weight: 4 },
+  { id: 'P52', name: 'Unicode Obfuscation', re: new RegExp('[\\u200B\\u200C\\u200D\\u00AD\\uFEFF]', 'g'), weight: 6 },
 ];
 
 const $ = (sel) => document.querySelector(sel);
