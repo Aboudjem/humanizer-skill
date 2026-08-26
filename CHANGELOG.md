@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-08-26
+
+Visual identity refresh and README rewrite. No pattern or behavior changes.
+
+### Changed
+
+- **New "editorial red-pen" visual system**, replacing the fountain-pen "Manuscript" look: the logo (light/dark), the burstiness chart, the typewriter demo, and the GitHub social-preview card now show a red pen striking through an AI-sounding phrase and writing a plain correction, with a checkmark once it's fixed. The burstiness chart's bars now shift color between red (AI, flat) and green (human, varied), matching the same red/green convention used across every asset.
+- **`docs-site` favicon replaced** with a dedicated small icon mark (a bold "H" on cream), since the previous favicon was the full wordmark shrunk to 16px and unreadable at that size.
+- **README rewritten**, structure and prose both: `Install` now leads (with `npx skills add` and the vercel-labs/skills installer given real visual weight, a dedicated badge, and a one-line explainer), followed immediately by a working example (`See it work`) before any marketing copy, then `Why this exists`. Every collapsed section keeps its content, retitled and re-linked with explicit anchors.
+- Git history: the 3 commits that shipped v0.6.0 (#9, #10, #11) had their messages rewritten to drop `Co-authored-by: Claude` trailers and the "Generated with Claude Code" line, which slipped in against this project's own no-AI-generated-copy positioning. Trees are byte-identical; only the messages changed. The `v0.6.0` tag and GitHub release were recreated to point at the corrected commit.
+
 ## [0.6.0] - 2026-08-25
 
 The "discoverability" release: 2 new patterns, a sharper false-positive guard, a pre-commit hook, and SEO/GEO fixes across the README, llms.txt, and docs site. Evidence-scoped by five parallel research passes (competitor landscape, ClawHub/outbound status, product-surface gaps, content-craft frontier, GEO/SEO audit).

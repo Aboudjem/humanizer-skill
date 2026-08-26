@@ -13,6 +13,7 @@
   <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-55-1f3a5f?style=flat-square" alt="55 AI patterns"></a>
   <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/voices-5-1f3a5f?style=flat-square" alt="5 voice profiles"></a>
   <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/dependencies-0-1f3a5f?style=flat-square" alt="Zero dependencies"></a>
+  <a href="https://github.com/vercel-labs/skills"><img src="https://img.shields.io/badge/install-npx%20skills%20add-c0392b?style=flat-square" alt="Install via npx skills add"></a>
   <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=c0952f" alt="Stars"></a>
 </p>
 
@@ -24,7 +25,7 @@
 <p align="center">
   <a href="https://humanizer-skill.vercel.app"><b>Try it in your browser</b></a>
   &nbsp;&middot;&nbsp;
-  <a href="#quickstart">Install in 5 seconds</a>
+  <a href="#install">Install in 5 seconds</a>
   &nbsp;&middot;&nbsp;
   <a href="skills/humanizer/SKILL.md">Read the source</a>
 </p>
@@ -32,32 +33,30 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-burstiness-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/demo-burstiness-light.svg">
-  <img alt="Sentence-length chart: AI writing is flat and uniform; human writing varies from 3 to 31 words. Humanizer restores the variation." src=".github/assets/demo-burstiness-light.svg" width="100%">
+  <img alt="Sentence-length chart: AI writing is flat and uniform (shown in red); human writing varies from 3 to 31 words (shown in green). Humanizer restores the variation." src=".github/assets/demo-burstiness-light.svg" width="100%">
 </picture>
 
 <p align="center"><sub>Same idea, two writers. The AI line stays flat. The human line jumps around. That jumpiness is the tell.</sub></p>
 
 ---
 
-AI writing has a fingerprint. Every sentence runs about the same length. It reaches for the same safe words, and it pads with filler like "in today's landscape." Two bits of jargon worth knowing: how much your sentence lengths vary is called *burstiness* (people mix short and long, AI keeps them all one size), and those little giveaway habits are called *AI tells*.
+## Install
 
-This **AI writing humanizer** knows 55 of them. It finds them, scores the text, and rewrites it in a voice you pick. All from a single file your editor reads on your own machine.
-
-## Quickstart
-
-Install once. It works in Claude Code, Cursor, Codex, opencode, and 70+ other AI editors ([vercel-labs/skills](https://github.com/vercel-labs/skills)):
+Works in Claude Code, Cursor, Codex, opencode, and 70+ other AI editors through [**vercel-labs/skills**](https://github.com/vercel-labs/skills), the same community installer used by hundreds of Claude Code skills. One command, no folders to copy by hand:
 
 ```bash
 npx skills add Aboudjem/humanizer-skill
 ```
 
-Now score any text right in your editor. This just scans, it doesn't rewrite:
+Prefer to skip the installer entirely? A plain `curl`, and per-editor folder paths for Cursor, Copilot, Codex, Gemini CLI, Windsurf, Continue.dev, and OpenClaw, are in [Install without tooling](#install-without-tooling-curl-and-per-editor-paths) below.
+
+## See it work
+
+Score any text right in your editor. This just scans, it doesn't rewrite:
 
 ```text
 /humanizer "In today's rapidly evolving landscape, AI is reshaping how we think about creativity." --mode detect --score
 ```
-
-You get a number you can quote and the reasons behind it:
 
 ```text
 [Score: 84/100, Pure AI smell]
@@ -76,6 +75,12 @@ The score runs 0 to 100. Lower is more human. Drop the flags and it rewrites ins
 > This is about writing better, not tricking detectors. Clean writing doesn't set off AI detectors, because it skips the lazy habits they look for. Fix the writing and the detection sorts itself out.
 
 ---
+
+## Why this exists
+
+AI writing has a fingerprint. Every sentence runs about the same length. It reaches for the same safe words, and it pads with filler like "in today's landscape." Two bits of jargon worth knowing: how much your sentence lengths vary is called *burstiness* (people mix short and long, AI keeps them all one size), and those little giveaway habits are called *AI tells*.
+
+This **AI writing humanizer** knows 55 of them. It finds them, scores the text, and rewrites it in a voice you pick. All from a single file your editor reads on your own machine.
 
 ## Features
 
@@ -125,7 +130,7 @@ Other flags: `--mode` picks detect, rewrite, or edit. `--purpose` layers on rule
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-typewriter-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/demo-typewriter-light.svg">
-  <img alt="Terminal running /humanizer with --voice technical --score: three AI tells (comprehensive, delves into, pivotal) are flagged, struck through, and replaced with clean human prose, dropping the AI-tell score from 84 to 12" src=".github/assets/demo-typewriter-light.svg" width="100%">
+  <img alt="A manuscript page runs /humanizer with --voice technical --score: three AI tells (comprehensive, delves into, pivotal) are flagged and struck through in red pen, then replaced with clean human prose, dropping the AI-tell score from 84 to 12" src=".github/assets/demo-typewriter-light.svg" width="100%">
 </picture>
 
 **Technical docs** (`--voice technical`)
@@ -155,7 +160,7 @@ Other flags: `--mode` picks detect, rewrite, or edit. `--purpose` layers on rule
 </details>
 
 <details>
-<summary><b>Install without tooling (curl), and per-editor paths</b></summary>
+<summary><a id="install-without-tooling-curl-and-per-editor-paths"></a><b>Install without tooling (curl), and per-editor paths</b></summary>
 
 <br/>
 
@@ -284,11 +289,11 @@ According to GPTZero's own detection research, human sentence length varies wild
 </details>
 
 <details>
-<summary><b>Optional: computed metrics and a CI check</b></summary>
+<summary><b>Optional: computed metrics, a CI check, and a pre-commit hook</b></summary>
 
 <br/>
 
-The skill alone is enough to rewrite text. If you also want to *measure* your docs and block bad ones in CI, the repo ships a small Node CLI with zero dependencies that computes the signals the skill describes.
+The skill alone is enough to rewrite text. If you also want to *measure* your docs and block bad ones before they ship, the repo ships a small Node CLI with zero dependencies that computes the signals the skill describes.
 
 ```bash
 node cli/index.js score README.md
@@ -373,5 +378,5 @@ Found a new AI pattern, or a cleaner fix? PRs welcome. Add a short entry to `SKI
 </p>
 
 <p align="center">
-  <sub>Built by <a href="https://github.com/Aboudjem">Adam Boudjemaa</a> · MIT License · No telemetry · No data collection</sub>
+  <sub>Built by <a href="https://github.com/Aboudjem">Adam Boudjemaa</a> &middot; MIT License &middot; No telemetry &middot; No data collection</sub>
 </p>
