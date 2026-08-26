@@ -1,0 +1,9 @@
+- id: humanizer-scan
+  name: Humanizer AI-tell scan
+  description: >-
+    Fails when Markdown/text files score too high on Humanizer's 0-100 AI-tell
+    density scale. Zero dependencies, no network calls, no credentials.
+  entry: cli/index.js scan . --fail-above 40
+  language: script
+  files: \.(md|markdown|txt)$
+  pass_filenames: false

@@ -46,7 +46,7 @@ jobs:
       - name: Check pattern count
         run: |
           COUNT=$(grep -cE "^\\*\\*P[0-9]+: " skills/humanizer/SKILL.md || true)
-          EXPECTED=53
+          EXPECTED=55
           if [ "$COUNT" -lt "$EXPECTED" ]; then
             echo "FAIL: Expected at least $EXPECTED patterns, found $COUNT"
             exit 1
@@ -109,6 +109,14 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Install lint dependencies
+        working-directory: cli
+        run: npm install --no-save --no-audit --no-fund eslint
+
+      - name: Lint (cli/ JS)
+        working-directory: cli
+        run: npx eslint .
+
       - name: Unit and smoke tests (zero dependencies)
         working-directory: cli
         run: node --test
@@ -117,3 +125,16 @@ jobs:
         run: |
           node cli/index.js score examples/blog-post/after.md
           node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md
+
+      - name: Pre-commit hook manifest is well-formed
+        run: |
+          node -e "
+            const fs = require('fs');
+            const raw = fs.readFileSync('.pre-commit-hooks.yaml', 'utf8');
+            if (!/^- id: humanizer-scan/m.test(raw)) throw new Error('missing humanizer-scan hook id');
+            if (!/entry: cli\/index\.js/.test(raw)) throw new Error('entry does not point at cli/index.js');
+            if (!fs.existsSync('cli/index.js')) throw new Error('cli/index.js missing');
+            const mode = fs.statSync('cli/index.js').mode;
+            if (!(mode & 0o111)) throw new Error('cli/index.js is not executable (required for language: script)');
+            console.log('.pre-commit-hooks.yaml OK');
+          "

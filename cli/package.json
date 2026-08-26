@@ -1,13 +1,24 @@
 {
   "name": "humanizer-metrics",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Zero-dependency writing-metrics and AI-tell scoring CLI for the humanizer skill. Optional companion to the pure-Markdown skill core.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aboudjem/humanizer-skill.git",
+    "directory": "cli"
+  },
   "bin": {
     "humanizer-metrics": "index.js"
   },
   "main": "index.js",
+  "files": [
+    "index.js",
+    "lib/",
+    "README.md"
+  ],
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "lint": "eslint ."
   },
   "keywords": [
     "humanizer",
@@ -20,5 +31,8 @@
   "license": "MIT",
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "eslint": "^10.9.1"
   }
 }

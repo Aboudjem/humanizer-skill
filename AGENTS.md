@@ -4,7 +4,7 @@
 
 ## What this repo is
 
-**Humanizer** is a pure-Markdown Claude Code skill that detects 53 AI writing patterns and rewrites text to sound like a human wrote it. It scores text 0-100 (higher = more AI smell), applies one of 5 named voice profiles, and injects sentence-length burstiness. The installable skill core is a single zero-dependency Markdown file: `skills/humanizer/SKILL.md`. The repo also ships optional extras (on-demand reference files and a zero-dependency metrics CLI) that the skill core never requires.
+**Humanizer** is a pure-Markdown Claude Code skill that detects 55 AI writing patterns and rewrites text to sound like a human wrote it. It scores text 0-100 (higher = more AI smell), applies one of 5 named voice profiles, and injects sentence-length burstiness. The installable skill core is a single zero-dependency Markdown file: `skills/humanizer/SKILL.md`. The repo also ships optional extras (on-demand reference files and a zero-dependency metrics CLI) that the skill core never requires.
 
 ## File map
 
@@ -118,9 +118,9 @@ The optional CLI has an automated suite: `cd cli && node --test` (25 tests, zero
 
 ## Conventions for contributors
 
-- All 53 patterns are numbered P1-P53 in `SKILL.md`. New patterns continue the sequence.
+- All 55 patterns are numbered P1-P55 in `SKILL.md`. New patterns continue the sequence.
 - Every new pattern needs: a name, what to look for, and a before/after example. Deep dives and sources go in `references/patterns.md`, not the core.
-- The badge count in `README.md` (`patterns-53`), the CI threshold (`EXPECTED` in `ci.yml`), and the CHANGELOG must move together when patterns are added.
+- The badge count in `README.md` (`patterns-55`), the CI threshold (`EXPECTED` in `ci.yml`), and the CHANGELOG must move together when patterns are added.
 - No em dashes in `SKILL.md` — the skill bans em dashes (P13), so the skill file enforces its own rules.
 - CI runs a markdown lint pass and a self-check that scans `SKILL.md` for its own banned patterns.
 

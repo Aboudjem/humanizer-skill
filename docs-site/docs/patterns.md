@@ -1,11 +1,12 @@
 ---
 sidebar_position: 5
-title: The 53 patterns
+title: The 55 AI writing patterns Humanizer detects
+description: The full catalog of 55 numbered AI writing patterns, from significance inflation to unicode obfuscation, with what to look for and where each one comes from.
 ---
 
-# The 53 patterns
+# The 55 patterns
 
-Humanizer detects 53 numbered patterns across six categories. Below is the catalog with what to look for. Full descriptions, trigger lists, and a before/after example for each live in the [skill source](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md) and the [reference deep dives](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/references/patterns.md).
+Humanizer detects 55 numbered patterns across six categories. Below is the catalog with what to look for. Full descriptions, trigger lists, and a before/after example for each live in the [skill source](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md) and the [reference deep dives](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/references/patterns.md).
 
 :::warning[Flag clusters, not isolated tells]
 One em dash, one "crucial", one three-item list is how humans write too. A pattern only counts when several co-occur in the same passage. The skill ships a false-positive guard, and it never rewrites text inside quotes, code, titles, or examples. This is about writing quality, not detection evasion.
@@ -79,7 +80,7 @@ One em dash, one "crucial", one three-item list is how humans write too. A patte
 | P42 | Erratic Inline Bolding | Random mid-sentence bold with no shared logic |
 | P43 | Treadmill Effect | "In other words", "Put simply" looping one point |
 
-## Craft and Forensic (P44-P53)
+## Craft and Forensic (P44-P55)
 
 | # | Pattern | What to look for |
 |:--|:--------|:-----------------|
@@ -93,7 +94,9 @@ One em dash, one "crucial", one three-item list is how humans write too. A patte
 | P51 | Reasoning-Chain Artifacts | "Let me think", "Step 1:", "Breaking this down" |
 | P52 | Unicode Obfuscation | Zero-width chars, soft hyphens, homoglyphs |
 | P53 | Hedged-Enumeration Openers | "There are several ways to", "In general" |
+| P54 | Argument Residue | "While some might argue...", a rebuttal to a claim nobody made |
+| P55 | Leftover Hedge Debris | "To some extent, this is arguably..." next to a confident claim |
 
 ## Tiered vocabulary
 
-Pattern P7 uses tiers to cut false positives. Tier 1 words (`delve`, `tapestry`, `underscore`, `leverage`, `multifaceted`) almost never survive in unedited human prose and are always flagged. Tier 2 words (`crucial`, `pivotal`, `vibrant`, `seamless`, `foster`) are flagged only in density, two or more per paragraph. Tier 3 words (`key`, `important`, `significant`) are ordinary and are flagged only when they cluster with higher tiers.
+Pattern P7 uses tiers to cut false positives. Tier 1 splits into 1A, evidence-grade words (`delve`, `tapestry`, `multifaceted`, `realm`, `interplay`) that almost never survive in unedited human prose and are always flagged, and 1B, wordiness-grade words (`underscore`, `leverage`, "it's worth noting") that are legitimate but often lazy, flagged but weighted lower so a clarity fix alone cannot tip a score toward "AI." Tier 2 words (`crucial`, `pivotal`, `vibrant`, `seamless`, `foster`) are flagged only in density, two or more per paragraph. Tier 3 words (`key`, `important`, `significant`) are ordinary and are flagged only when they cluster with higher tiers.
