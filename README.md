@@ -87,6 +87,8 @@ The score runs 0 to 100. Lower is more human. Drop the flags and it rewrites ins
 - **One Markdown file.** No dependencies. No network calls. It runs standalone.
 - **Optional metrics CLI, CI check, and pre-commit hook** if you want a computed score in your pipeline or a fast local gate.
 
+The list above is the highlights. For the exhaustive version, category by category, see [Every feature, in full](#every-feature-in-full) further down.
+
 ---
 
 ## Usage
@@ -203,6 +205,61 @@ The core catalog (P1-P30) draws on [Wikipedia: Signs of AI writing](https://en.w
 </details>
 
 <details>
+<summary><a id="every-feature-in-full"></a><b>Every feature, in full</b></summary>
+
+<br/>
+
+**Detection and scoring**
+
+- 55 named, numbered patterns across 6 categories (Content, Language & Style, Communication, Filler & Hedging, Emerging, Craft & Forensic)
+- A 0-100 AI-tell score with a 5-band verdict: Pristine, Mostly human, Mixed, AI-leaning, Pure AI smell
+- Burstiness (sentence-length variance) and perplexity (word predictability) as the two measurable signals behind the score
+- Tiered vocabulary confidence on the AI-word list: Tier 1A (evidence-grade, near-definitive alone), 1B (wordiness-grade, weighted lower), Tier 2 (flag only in density), Tier 3 (context only, never alone)
+- A false-positive guard that protects real human writing: hard-to-fabricate specifics, mixed or unresolved feelings, lived sensory detail, era-bound in-group voice, deliberate imperfection, and content written before late 2022
+- Explicit guardrails for neurodivergent writers (autistic/ADHD low-variance prose) and non-native English speakers, so the skill doesn't launder a real voice flat
+- A no-fabrication rule: rewrites can sharpen and restructure, but can't invent facts, names, dates, or numbers that aren't in the source
+
+**Rewriting craft**
+
+- 5 named voice profiles: `casual`, `professional`, `technical`, `warm`, `blunt`, each changing rhythm and word choice, not just vocabulary
+- A Voice Read, an Anti-Default Discipline pass, a Position ("teeth") engine, a Concretizer pass, and an Opening tournament (`--openings N`)
+- 11 soul-injection techniques: real opinions, a certainty-calibration spectrum, sensory/experiential detail, shared-experience callbacks, tangents, dramatic paragraph-length variance, imperfect starts, broken parallel structure, callbacks, self-correction, and endings that just stop
+- `--purpose` layers content-type rules on top of voice: `essay`, `email`, `marketing`, `technical`, `general`
+- `--aggressive` for a heavier hand; `--iterate N` loops detect-rewrite-detect up to 3 times until it converges
+- A draft/self-audit/final metacognitive pass, cheaper than a full `--iterate` loop, that asks "what still reads as AI?" after the first rewrite
+
+**Modes**
+
+- `detect`: scan and report every matched pattern with a severity read, no changes made
+- `rewrite`: the full transform (default mode)
+- `edit`: in-place file editing via the Edit tool, targeted changes only, with an explicit refusal guard for non-prose targets (source code, config, structured data)
+
+**Flags**
+
+- `--score`, `--mode`, `--voice`, `--file`, `--aggressive`, `--iterate N`, `--purpose`, `--openings N`, `--ignore-code`, `--ignore-quotes`
+
+**Integrations and tooling**
+
+- Works in Claude Code, Cursor, Codex, opencode, and 70+ AI editors via `npx skills add` ([vercel-labs/skills](https://github.com/vercel-labs/skills))
+- Claude Code plugin and marketplace support (`claude plugin marketplace add`)
+- OpenClaw support (`clawhub install humanizer-skill`)
+- An optional, zero-dependency metrics CLI (`cli/`) that computes burstiness, type-token ratio, MATTR, trigram repetition, AI-vocabulary density, and Flesch-Kincaid grade, with a transparent 0-100 score
+- A CI quality gate with a hard threshold or baseline/regression mode, plus a reusable GitHub Action
+- A `.pre-commit-hooks.yaml` for the Python `pre-commit` framework (fast local gate, no install step), and a documented Husky example for JS-native repos
+- A zero-backend browser demo at [humanizer-skill.vercel.app](https://humanizer-skill.vercel.app): client-side regex subset plus burstiness scoring, no API calls, no data leaves the browser
+
+**Docs, localization, and trust**
+
+- A full Docusaurus documentation site, deploy-ready
+- A Simplified-Chinese README and a provisional native-Chinese pattern appendix
+- `llms.txt` for AI-crawler and agent discoverability
+- Worked before/after examples for technical docs, blog posts, and LinkedIn posts
+- Zero dependencies, zero network calls, zero telemetry, MIT licensed
+- CI enforces the skill's own rules on itself: zero em dashes in `SKILL.md`, and the badge/pattern-count/CHANGELOG stay in lockstep
+
+</details>
+
+<details>
 <summary><b>The science</b></summary>
 
 <br/>
@@ -299,7 +356,9 @@ What you install is one Markdown file ([`skills/humanizer/SKILL.md`](skills/huma
 
 - Skill source and full pattern catalog: [`skills/humanizer/SKILL.md`](skills/humanizer/SKILL.md)
 - Pattern deep dives, triggers, and examples: [`references/patterns.md`](skills/humanizer/references/patterns.md)
+- Optional metrics CLI, CI gate, and pre-commit hook: [`cli/README.md`](cli/README.md) and [`.pre-commit-hooks.yaml`](.pre-commit-hooks.yaml)
 - A full docs site (Docusaurus, ready to deploy) lives in [`docs-site/`](docs-site/): `npm --prefix docs-site install && npm --prefix docs-site run build`
+- Version history: [`CHANGELOG.md`](CHANGELOG.md)
 
 ## Contributing
 
