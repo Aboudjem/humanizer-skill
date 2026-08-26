@@ -15,13 +15,13 @@ RESET=$'\033[0m'
 
 clear
 printf "${VIOLET}${BOLD}humanizer${RESET}  ${DIM}Make AI text sound human${RESET}\n"
-printf "${DIM}43 patterns, 5 voices, one Markdown file, zero API calls${RESET}\n\n"
+printf "${DIM}55 patterns, 5 voices, one Markdown file, zero API calls${RESET}\n\n"
 sleep 1.0
 
 printf "${BOLD}\$${RESET} /humanizer --mode detect --score \"This comprehensive guide delves\n  into the intricacies of authentication.\"\n\n"
 sleep 1.5
 
-printf "${YELLOW}Scanning for 43 AI patterns...${RESET}\n"
+printf "${YELLOW}Scanning for 55 AI patterns...${RESET}\n"
 sleep 0.6
 printf "${DIM}  P4  Promotional Language    \"comprehensive\"${RESET}\n"
 sleep 0.25

@@ -2,4 +2,4 @@
 # Set this in: Repository Settings > About > Description
 #
 # Current recommendation:
-Claude Code skill that detects 53 AI writing patterns and rewrites text with human rhythm and voice. 5 voice profiles (casual, professional, technical, warm, blunt). Based on burstiness and perplexity research. Zero-dependency Markdown core plus an optional metrics CLI and CI gate.
+Claude Code skill that detects 55 AI writing patterns and rewrites text with human rhythm and voice. 5 voice profiles (casual, professional, technical, warm, blunt). Based on burstiness and perplexity research. Zero-dependency Markdown core plus an optional metrics CLI, CI gate, and pre-commit hook.

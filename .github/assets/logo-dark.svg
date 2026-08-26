@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" fill="none" role="img" aria-label="Humanizer: make AI text sound human. 53 patterns, 5 voices, 3 modes, zero dependencies.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" fill="none" role="img" aria-label="Humanizer: make AI text sound human. 55 patterns, 5 voices, 3 modes, zero dependencies.">
   <title>Humanizer</title>
-  <desc>A fountain pen travels across a sheet of ruled paper, writing an ink line, on a loop. Detect 53 AI writing patterns and rewrite text so it sounds like a human wrote it. 5 voices, 3 modes, zero dependencies.</desc>
+  <desc>A fountain pen travels across a sheet of ruled paper, writing an ink line, on a loop. Detect 55 AI writing patterns and rewrite text so it sounds like a human wrote it. 5 voices, 3 modes, zero dependencies.</desc>
   <defs>
     <linearGradient id="barrel" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#33507a"/>
@@ -64,6 +64,6 @@
       <animate attributeName="stroke-dashoffset" values="258;0" dur="0.8s" begin="0.7s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
     </line>
     <text x="212" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="600" fill="#d7cdb6">Make AI text sound like a human wrote it.</text>
-    <text x="212" y="178" font-family="system-ui,-apple-system,sans-serif" font-size="14.5" fill="#a9a08b">53 patterns · 5 voices · 3 modes · zero dependencies</text>
+    <text x="212" y="178" font-family="system-ui,-apple-system,sans-serif" font-size="14.5" fill="#a9a08b">55 patterns · 5 voices · 3 modes · zero dependencies</text>
   </g>
 </svg>
