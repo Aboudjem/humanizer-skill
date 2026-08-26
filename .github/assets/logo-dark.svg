@@ -1,69 +1,51 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" fill="none" role="img" aria-label="Humanizer: make AI text sound human. 55 patterns, 5 voices, 3 modes, zero dependencies.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" fill="none" role="img" aria-label="Humanizer: a red editing pen strikes through an AI-sounding phrase and writes a plain correction above it, then checks it off, on a loop. 55 patterns, 5 voices, 3 modes, zero dependencies.">
   <title>Humanizer</title>
-  <desc>A fountain pen travels across a sheet of ruled paper, writing an ink line, on a loop. Detect 55 AI writing patterns and rewrite text so it sounds like a human wrote it. 5 voices, 3 modes, zero dependencies.</desc>
+  <desc>A red pen strikes through an AI-sounding phrase on a manuscript page, writes a plainer correction above it, and checks it off, on a loop. Detect 55 AI writing patterns and rewrite text so it sounds like a human wrote it. 5 voices, 3 modes, zero dependencies.</desc>
   <defs>
-    <linearGradient id="barrel" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#33507a"/>
-      <stop offset="1" stop-color="#1a3252"/>
-    </linearGradient>
     <radialGradient id="desk" cx="0.3" cy="0.15" r="1.15">
       <stop offset="0" stop-color="#1c2536"/>
       <stop offset="1" stop-color="#0f141e"/>
     </radialGradient>
-    <filter id="paperShadow" x="-40%" y="-40%" width="180%" height="180%">
+    <filter id="pageShadow" x="-40%" y="-40%" width="180%" height="180%">
       <feDropShadow dx="0" dy="5" stdDev="6" flood-color="#000000" flood-opacity="0.45"/>
     </filter>
   </defs>
 
-  <rect x="6" y="6" width="708" height="208" rx="26" fill="url(#desk)" stroke="#c0952f" stroke-opacity="0.4" stroke-width="1.5"/>
-  <rect x="6" y="6" width="708" height="4" rx="2" fill="#c0952f" opacity="0.7"/>
+  <rect x="6" y="6" width="708" height="208" rx="20" fill="url(#desk)" stroke="#e0574a" stroke-opacity="0.35" stroke-width="1.5"/>
+  <rect x="6" y="6" width="708" height="4" rx="2" fill="#e0574a" opacity="0.85"/>
 
-  <!-- paper sheet: fades in once, then holds -->
-  <g opacity="0">
-    <animate attributeName="opacity" values="0;1" dur="0.55s" begin="0.05s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
-    <rect x="46" y="44" width="118" height="126" rx="12" fill="#f3ecda" filter="url(#paperShadow)"/>
-    <line x1="64" y1="54" x2="64" y2="160" stroke="#d9a86a" stroke-width="1.5" stroke-opacity="0.7"/>
-    <g stroke="#cdd6e2" stroke-width="1.6" stroke-linecap="round">
-      <line x1="74" y1="76" x2="150" y2="76"/>
-      <line x1="74" y1="96" x2="150" y2="96"/>
-      <line x1="74" y1="116" x2="144" y2="116"/>
-    </g>
-  </g>
+  <text x="40" y="98" font-family="'Segoe UI',system-ui,-apple-system,sans-serif" font-size="54" font-weight="800" letter-spacing="-2" fill="#f0e9d8">Humanizer</text>
+  <line x1="42" y1="114" x2="300" y2="114" stroke="#e0574a" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="258" stroke-dashoffset="258">
+    <animate attributeName="stroke-dashoffset" values="258;0" dur="0.8s" begin="0.7s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
+  </line>
+  <text x="42" y="146" font-family="system-ui,-apple-system,sans-serif" font-size="17.5" font-weight="600" fill="#d7cdb6">Make AI text sound like a human wrote it.</text>
+  <text x="42" y="174" font-family="system-ui,-apple-system,sans-serif" font-size="14.5" fill="#a9a08b">55 patterns &#183; 5 voices &#183; 3 modes &#183; zero dependencies</text>
 
-  <!-- the ink line: revealed in step with the pen, then un-drawn; loops -->
-  <path d="M74,140 C92,136 108,143 126,138 C136,135 144,140 150,138" stroke="#1f3a5f" stroke-width="3" stroke-linecap="round" fill="none" stroke-dasharray="84" stroke-dashoffset="84">
-    <animate attributeName="stroke-dashoffset" values="84;0;0;84" keyTimes="0;0.32;0.74;1" dur="4.6s" begin="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/>
-  </path>
+  <g transform="translate(432,34)" filter="url(#pageShadow)">
+    <rect x="0" y="0" width="252" height="150" rx="10" fill="#fffef9"/>
 
-  <!-- fountain pen: fades in once, then TRAVELS along the ink line as it writes -->
-  <g opacity="0">
-    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="0.35s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
-    <g>
-      <animateMotion path="M74,140 C92,136 108,143 126,138 C136,135 144,140 150,138" keyPoints="0;1;1;0" keyTimes="0;0.32;0.74;1" dur="4.6s" begin="0.6s" repeatCount="indefinite" calcMode="spline" keySplines="0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1" rotate="0"/>
-      <g transform="rotate(-40)">
-        <circle cx="-1" cy="1" r="1.7" fill="#1f3a5f"/>
-        <rect x="28" y="-5.5" width="48" height="11" rx="5.5" fill="url(#barrel)"/>
-        <rect x="33" y="-4" width="38" height="2" rx="1" fill="#6f91b4" opacity="0.55"/>
-        <rect x="28" y="-5.5" width="6" height="11" fill="#c0952f"/>
-        <rect x="52" y="-8" width="3" height="10" rx="1.5" fill="#e0b85e"/>
-        <rect x="76" y="-5.5" width="7" height="11" rx="3.5" fill="#c0952f"/>
-        <rect x="15" y="-4.5" width="13" height="9" rx="3" fill="#22344d"/>
-        <path d="M0,0 L16,-3.6 L16,3.6 Z" fill="#e0b85e"/>
-        <path d="M0,0 L16,-3.6 L16,3.6 Z" fill="none" stroke="#a9781f" stroke-width="0.6" stroke-opacity="0.6"/>
-        <line x1="3" y1="0" x2="14" y2="0" stroke="#a9781f" stroke-width="0.8"/>
-        <circle cx="12.5" cy="0" r="1.2" fill="#1c2536"/>
-      </g>
-    </g>
-  </g>
+    <text x="18" y="46" font-family="Georgia,'Times New Roman',serif" font-size="15" fill="#2b2620">This comprehensive guide</text>
+    <text x="18" y="74" font-family="Georgia,'Times New Roman',serif" font-size="15" fill="#2b2620">delves into the intricacies</text>
+    <text x="18" y="102" font-family="Georgia,'Times New Roman',serif" font-size="15" fill="#2b2620">of authentication.</text>
 
-  <!-- wordmark + copy: fades in once, then holds -->
-  <g opacity="0">
-    <animate attributeName="opacity" values="0;1" dur="0.6s" begin="0.3s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
-    <text x="210" y="102" font-family="'Segoe UI',system-ui,-apple-system,sans-serif" font-size="56" font-weight="800" letter-spacing="-2" fill="#f0e9d8">humanizer</text>
-    <line x1="212" y1="118" x2="470" y2="118" stroke="#e0b85e" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="258" stroke-dashoffset="258">
-      <animate attributeName="stroke-dashoffset" values="258;0" dur="0.8s" begin="0.7s" calcMode="spline" keySplines="0.16 1 0.3 1" fill="freeze"/>
+    <line x1="18" y1="70" x2="88" y2="70" stroke="#c0392b" stroke-width="2" stroke-linecap="round" stroke-dasharray="70" stroke-dashoffset="70">
+      <animate attributeName="stroke-dashoffset" values="70;70;0;0;70" keyTimes="0;0.08;0.24;0.82;1" dur="4.8s" begin="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/>
     </line>
-    <text x="212" y="150" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="600" fill="#d7cdb6">Make AI text sound like a human wrote it.</text>
-    <text x="212" y="178" font-family="system-ui,-apple-system,sans-serif" font-size="14.5" fill="#a9a08b">55 patterns · 5 voices · 3 modes · zero dependencies</text>
+
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.26;0.34;0.82;1" dur="4.8s" begin="0.4s" repeatCount="indefinite"/>
+      <path d="M20,66 C24,60 34,60 38,64" stroke="#c0392b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <text x="18" y="58" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-size="13" fill="#c0392b">explains</text>
+    </g>
+
+    <g transform="translate(214,124)" opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.42;0.48;0.82;1" dur="4.8s" begin="0.4s" repeatCount="indefinite"/>
+      <circle cx="0" cy="0" r="12" fill="none" stroke="#2f7d5b" stroke-width="1.6" stroke-dasharray="76" stroke-dashoffset="76">
+        <animate attributeName="stroke-dashoffset" values="76;76;0;0;76" keyTimes="0;0.42;0.54;0.82;1" dur="4.8s" begin="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/>
+      </circle>
+      <path d="M-5,0 L-1.5,4 L5,-4.5" stroke="#2f7d5b" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="16" stroke-dashoffset="16">
+        <animate attributeName="stroke-dashoffset" values="16;16;0;0;16" keyTimes="0;0.5;0.58;0.82;1" dur="4.8s" begin="0.4s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/>
+      </path>
+    </g>
   </g>
 </svg>
