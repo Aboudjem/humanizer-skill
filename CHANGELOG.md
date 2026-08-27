@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.2] - 2026-08-27
+
+Punchier animations across the visual system. No pattern, CLI, or docs-content changes.
+
+### Changed
+
+- **The logo's checkmark and correction text now bounce in with an overshoot pop** instead of a plain fade, with a radiating "ping" ring behind the checkmark, and a thicker, faster strikethrough. Light and dark variants both updated.
+- **The burstiness chart's two score numbers (`-0.02`, `+0.74`) now pulse continuously** instead of sitting static, drawing the eye to the number that's doing the work. Light and dark variants both updated.
+- **The typewriter demo's `[12/100]` humanized score now bounces in on reveal**, synced to its existing fade-in, mirroring the logo's checkmark pop. Light and dark variants both updated.
+- `docs-site/static/img/logo.svg` re-synced from `.github/assets/logo-light.svg` (was stale, predating the editorial red-pen refresh's bounce/ping additions).
+
 ## [0.6.1] - 2026-08-26
 
 Visual identity refresh and README rewrite. No pattern or behavior changes.

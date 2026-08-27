@@ -67,7 +67,12 @@
     <text x="590" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#e0574a">AI &#183; uniform</text>
     <text x="590" y="98" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a9a08b">18, 18, 19, 18&#8230;</text>
     <text x="590" y="122" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a9a08b">Burstiness</text>
-    <text x="590" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="800" fill="#e0574a">&#8722;0.02</text>
+    <g transform="translate(590,142)">
+      <g>
+        <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="1.3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+        <text x="0" y="0" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="800" fill="#e0574a">&#8722;0.02</text>
+      </g>
+    </g>
   </g>
   <g opacity="0">
     <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.16;0.86;1" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0 0 1 1;0.4 0 0.2 1"/>
@@ -75,7 +80,12 @@
     <text x="590" y="80" font-family="system-ui,-apple-system,sans-serif" font-size="11" font-weight="700" fill="#57c39a">Human &#183; varied</text>
     <text x="590" y="98" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a9a08b">3 &#8594; 31 words</text>
     <text x="590" y="122" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#a9a08b">Burstiness</text>
-    <text x="590" y="142" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="800" fill="#57c39a">+0.74</text>
+    <g transform="translate(590,142)">
+      <g>
+        <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="1.3s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+        <text x="0" y="0" font-family="system-ui,-apple-system,sans-serif" font-size="20" font-weight="800" fill="#57c39a">+0.74</text>
+      </g>
+    </g>
   </g>
 
   <text x="40" y="182" font-family="'Segoe UI',system-ui,-apple-system,sans-serif" font-size="11" font-weight="800" fill="#e8e1cf">Humanizer</text>
