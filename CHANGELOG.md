@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Release workflow: pushing a `vX.Y.Z` tag now creates the GitHub release and tells the 10x marketplace to re-sync (`.github/workflows/release.yml`).
+
 ## [0.6.2] - 2026-08-27
 
 Punchier animations across the visual system. No pattern, CLI, or docs-content changes.
