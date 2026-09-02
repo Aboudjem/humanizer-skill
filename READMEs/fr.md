@@ -28,7 +28,7 @@ claude plugin install humanizer@10x
 
 ## Ce qu'il fait
 
-L'écriture IA laisse une empreinte. Les phrases font toutes à peu près la même longueur, les mêmes mots prudents reviennent sans cesse, et du remplissage du type "in today's landscape" bouche les trous. Humanizer donne un nom à 55 de ces habitudes, compte celles que contient votre texte, et le réécrit dans la voix que vous choisissez.
+L'écriture IA laisse une empreinte. Les phrases font toutes à peu près la même longueur, les mêmes mots prudents reviennent sans cesse, et du remplissage du type "in today's landscape" bouche les trous. Humanizer donne un nom à 55 de ces habitudes, repère celles que contient votre texte, et le réécrit dans la voix que vous choisissez. Le CLI note le texte de 0 à 100 à partir de quatre signaux mesurables, et non en comptant lesquels des 55 motifs sont présents.
 
 Deux termes à expliquer. La *burstiness* mesure à quel point la longueur de vos phrases varie, et un *AI tell* est l'une de ces habitudes qui vous trahissent.
 
@@ -47,7 +47,7 @@ claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
 
-Dans n'importe quel autre agent, une seule ligne. Le [CLI skills](https://github.com/vercel-labs/skills) copie la skill dans le dossier que lit votre agent :
+Dans plus de 70 autres agents, une seule ligne. Le [CLI skills](https://github.com/vercel-labs/skills) crée un lien vers la skill dans le dossier que lit votre agent, ou la copie avec `--copy` :
 
 ```bash
 npx skills add Aboudjem/humanizer-skill
@@ -98,7 +98,9 @@ Plus le score est bas, plus le texte est humain. Le détail par signal dit leque
 
 > **Avant :** This comprehensive guide delves into the intricacies of our authentication system.
 >
-> **Après :** The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days.
+> **Après :** This guide explains how our authentication system works.
+
+La réécriture retire les tics. Elle n'ajoute jamais un fait absent de la source.
 
 **3. Vérifiez que la réécriture a gardé les faits.** Le vrai risque, c'est qu'un chiffre disparaisse sans bruit :
 
@@ -107,14 +109,14 @@ node cli/index.js compare --before examples/blog-post/before.md \
   --after examples/blog-post/after.md --check-facts
 ```
 
-La commande sort en code 1 et nomme ce qui a été perdu : un chiffre, un nom, une URL, une date ou une version.
+La commande sort en code 1 et nomme ce qui a été perdu : un chiffre, un pourcentage, une URL, une date, une version ou un sigle en majuscules.
 
 ## Ce que vous obtenez
 
 - **Un score de 0 à 100** de traces d'IA, avec un verdict en cinq paliers, de Pristine à Pure AI smell.
-- **Un détail par signal** à chaque score, pour qu'un mauvais chiffre pointe une cause précise.
+- **Un détail par signal** donné par la commande `score`, pour qu'un mauvais chiffre pointe une cause précise.
 - **Une réécriture dans l'une des cinq voix** : `casual`, `professional`, `technical`, `warm`, `blunt`.
-- **Une vérification des faits** qui échoue si la réécriture a perdu un chiffre, un nom, une URL, une date ou une version.
+- **Une vérification des faits** qui échoue si la réécriture a perdu un chiffre, un pourcentage, une URL, une date, une version ou un sigle en majuscules.
 - **Un code de sortie** pour la CI, et un [hook pre-commit](../docs/pre-commit.md) qui ne note que les fichiers que vous avez mis en staging.
 
 <details>
@@ -129,8 +131,9 @@ La commande sort en code 1 et nomme ce qui a été perdu : un chiffre, un nom, u
 | P31-P43 | Émergents | Variation élégante, texte de remplacement, fuites de balisage de chat, accroches de téléachat |
 | P44-P55 | Métier et analyse forensique | Fausse agentivité, formules d'aphorisme, obfuscation unicode, prudences oratoires oubliées |
 
-Chaque motif a son explication, ses déclencheurs et un exemple avant/après dans
-[`SKILL.md`](../skills/humanizer/SKILL.md) et [`references/patterns.md`](../skills/humanizer/references/patterns.md).
+Chaque motif a son explication et ses déclencheurs dans [`SKILL.md`](../skills/humanizer/SKILL.md). Dans
+[`references/patterns.md`](../skills/humanizer/references/patterns.md), 34 des 55 ont en plus une paire
+avant/après, une par motif qui en tire parti.
 Le catalogue principal (P1-P30) s'appuie sur
 [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (CC BY-SA).
 

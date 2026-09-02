@@ -28,7 +28,7 @@ claude plugin install humanizer@10x
 
 ## 它做什么
 
-AI 写出来的文字有指纹。句子长度几乎都差不多，同一批安全词反复出现，还会用「in today's landscape」这类填充语撑场面。Humanizer 给其中 55 种习惯命了名，统计你的文字里有多少，然后按你选定的语音风格重写。
+AI 写出来的文字有指纹。句子长度几乎都差不多，同一批安全词反复出现，还会用「in today's landscape」这类填充语撑场面。Humanizer 给其中 55 种习惯命了名，在你的文字里找出它们，然后按你选定的语音风格重写。CLI 另外给文字打一个 0 到 100 的分数，依据四个可测量的信号，而不是数这 55 个模式命中了几个。
 
 两个词值得先解释一下。*突发性（burstiness）*指的是句子长度的变化幅度，*AI 痕迹（AI tell）*指的就是上面那类一眼可辨的习惯。
 
@@ -47,7 +47,7 @@ claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
 
-在其他 agent 里只要一行。[skills CLI](https://github.com/vercel-labs/skills) 会把这个 skill 复制到你的 agent 会读取的目录：
+在另外 70 多个 agent 里只要一行。[skills CLI](https://github.com/vercel-labs/skills) 会把这个 skill 链接到你的 agent 会读取的目录，加上 `--copy` 则改为复制：
 
 ```bash
 npx skills add Aboudjem/humanizer-skill
@@ -98,7 +98,9 @@ Score: 46/100  (Mixed)
 
 > **改之前：** This comprehensive guide delves into the intricacies of our authentication system.
 >
-> **改之后：** The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days.
+> **改之后：** This guide explains how our authentication system works.
+
+重写只删掉痕迹，绝不会添加原文里没有的事实。
 
 **3. 确认重写没把事实弄丢。** 重写时悄悄漏掉一个数字才是真正的风险：
 
@@ -107,14 +109,14 @@ node cli/index.js compare --before examples/blog-post/before.md \
   --after examples/blog-post/after.md --check-facts
 ```
 
-它会以状态码 1 退出，并列出丢掉的东西：一个数字、一个名称、一个 URL、一个日期，或者一个版本号。
+它会以状态码 1 退出，并列出丢掉的东西：一个数字、一个百分比、一个 URL、一个日期、一个版本号，或者一个全大写缩写。
 
 ## 你得到什么
 
 - **一个 0 到 100 的 AI 痕迹分数**，配五档结论，从 Pristine 到 Pure AI smell。
-- **每次打分都有分项明细**，分数难看时能直接指向具体原因。
+- **`score` 命令给出分项明细**，分数难看时能直接指向具体原因。
 - **五种语音风格的重写**：`casual`、`professional`、`technical`、`warm`、`blunt`。
-- **一次事实核对**，重写若丢了数字、名称、URL、日期或版本号就判定失败。
+- **一次事实核对**，重写若丢了数字、百分比、URL、日期、版本号或全大写缩写就判定失败。
 - **一个可用于 CI 的退出码**，外加一个只给你暂存的文件打分的 [pre-commit 钩子](../docs/pre-commit.md)。
 
 <details>
@@ -129,8 +131,9 @@ node cli/index.js compare --before examples/blog-post/before.md \
 | P31-P43 | 新出现 | 同义词轮换、占位文本、聊天标记泄漏、电视购物式钩子 |
 | P44-P55 | 手艺与取证 | 虚假主体、格言公式、Unicode 混淆、遗留的模糊限定词 |
 
-每个模式都有说明、触发词和一组前后对照例子，见
-[`SKILL.md`](../skills/humanizer/SKILL.md) 和 [`references/patterns.md`](../skills/humanizer/references/patterns.md)。
+每个模式在 [`SKILL.md`](../skills/humanizer/SKILL.md) 里都有说明和触发词。
+[`references/patterns.md`](../skills/humanizer/references/patterns.md) 里，55 个模式中有 34 个另外配了一组前后对照例子，
+适合配例子的模式各一组。
 核心目录（P1-P30）参考了
 [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)（CC BY-SA）。
 

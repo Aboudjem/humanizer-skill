@@ -28,7 +28,7 @@ claude plugin install humanizer@10x
 
 ## できること
 
-AI の文章には指紋があります。どの文もだいたい同じ長さで、同じ無難な語が何度も出てきて、「in today's landscape」のような埋め草が隙間を埋めます。Humanizer はそうしたクセを 55 個に名前を付け、あなたの文章にいくつあるかを採点し、選んだボイスで書き直します。
+AI の文章には指紋があります。どの文もだいたい同じ長さで、同じ無難な語が何度も出てきて、「in today's landscape」のような埋め草が隙間を埋めます。Humanizer はそうしたクセを 55 個に名前を付け、あなたの文章の中からそれらを見つけ、選んだボイスで書き直します。CLI は別に、4 つの測定可能なシグナルから 0 から 100 のスコアを出します。55 個のうち何個当たったかを数えるわけではありません。
 
 用語をふたつだけ。*バースティネス（burstiness）*は文の長さがどれだけばらつくかで、*AI テル（AI tell）*はいま挙げたような分かりやすいクセのことです。
 
@@ -47,7 +47,7 @@ claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
 
-ほかのエージェントなら 1 行です。[skills CLI](https://github.com/vercel-labs/skills) が、あなたのエージェントが読むディレクトリにスキルをコピーします:
+ほかの 70 以上のエージェントなら 1 行です。[skills CLI](https://github.com/vercel-labs/skills) が、あなたのエージェントが読むディレクトリにスキルをリンクします。`--copy` を付ければコピーします:
 
 ```bash
 npx skills add Aboudjem/humanizer-skill
@@ -98,7 +98,9 @@ Score: 46/100  (Mixed)
 
 > **前:** This comprehensive guide delves into the intricacies of our authentication system.
 >
-> **後:** The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days.
+> **後:** This guide explains how our authentication system works.
+
+書き直しはテルを削るだけです。元の文章にない事実を足すことはありません。
 
 **3. 書き直しが事実を落としていないか確かめる。** 数字が静かに消えることこそ本当のリスクです:
 
@@ -107,14 +109,14 @@ node cli/index.js compare --before examples/blog-post/before.md \
   --after examples/blog-post/after.md --check-facts
 ```
 
-終了コード 1 で終わり、失われたものを挙げます: 数字、名前、URL、日付、バージョンのいずれかです。
+終了コード 1 で終わり、失われたものを挙げます: 数字、パーセンテージ、URL、日付、バージョン、大文字の略語のいずれかです。
 
 ## 得られるもの
 
 - **0 から 100 の AI テルスコア**。Pristine から Pure AI smell までの 5 段階の判定つき。
-- **毎回のスコアに付くシグナル別の内訳**。悪い数字が具体的な原因を指します。
+- **`score` コマンドが出すシグナル別の内訳**。悪い数字が具体的な原因を指します。
 - **5 種類のボイスでの書き直し**: `casual`、`professional`、`technical`、`warm`、`blunt`。
-- **ファクトチェック**。数字、名前、URL、日付、バージョンを落とした書き直しを失敗と判定します。
+- **ファクトチェック**。数字、パーセンテージ、URL、日付、バージョン、大文字の略語を落とした書き直しを失敗と判定します。
 - **CI 用の終了コード**と、ステージしたファイルだけを採点する [pre-commit フック](../docs/pre-commit.md)。
 
 <details>
@@ -129,8 +131,9 @@ node cli/index.js compare --before examples/blog-post/before.md \
 | P31-P43 | 新しいもの | 同義語の言い換え、プレースホルダ、チャット記法の漏れ、通販的なフック |
 | P44-P55 | 技巧と鑑識 | 偽の主体、格言の型、Unicode の難読化、消し忘れたぼかし表現 |
 
-各パターンの解説、トリガー、前後の例は
-[`SKILL.md`](../skills/humanizer/SKILL.md) と [`references/patterns.md`](../skills/humanizer/references/patterns.md) にあります。
+各パターンの解説とトリガーは [`SKILL.md`](../skills/humanizer/SKILL.md) にあります。
+[`references/patterns.md`](../skills/humanizer/references/patterns.md) には、55 個のうち 34 個について
+前後の例が 1 組ずつ載っています。例が役に立つパターンに 1 組ずつです。
 中核のカタログ（P1-P30）は
 [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)（CC BY-SA）に基づいています。
 

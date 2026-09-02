@@ -12,7 +12,7 @@ identity with the README and its translations rebuilt around them.
 
 ### Added
 
-- **`compare --check-facts`** fails a rewrite that lost a number, name, URL, date, or version. New zero-dependency `cli/lib/facts.js`, six ordered extraction passes, no network and no filesystem access. Covered by 21 cases in `cli/test/facts.test.js`.
+- **`compare --check-facts`** fails a rewrite that lost a number, percentage, URL, date, version, or uppercase acronym. New zero-dependency `cli/lib/facts.js`, six ordered extraction passes, no network and no filesystem access. Covered by 22 cases in `cli/test/facts.test.js`.
 - **A per-signal score breakdown** on every `score` run and in `--json`: each signal's raw metric, normalized value, weight, and the points it contributed, plus the unrounded `scoreRaw`. `scoreSignals` in `cli/lib/metrics.js` is now the single definition of the score. Covered by 9 new cases in `cli/test/metrics.test.js`.
 - **A `humanizer-scan-staged` pre-commit hook** that scores only the Markdown you staged, with its own `md|markdown|txt` filter. `scan` accepts multiple paths. Documented in `docs/pre-commit.md` and covered by 7 new cases in `cli/test/cli.test.js`.
 - **Neon Noir visual identity**: new light and dark hero banners, a PNG logo mark at two sizes, and a repaint of the wordmark, the burstiness chart, the typewriter demo, and the social preview card. Every SVG is hand-authored, script free, and renders in headless Chrome.

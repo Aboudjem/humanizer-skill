@@ -28,7 +28,7 @@ claude plugin install humanizer@10x
 
 ## Qué hace
 
-La escritura de la IA deja huella. Todas las frases miden más o menos lo mismo, las mismas palabras seguras vuelven una y otra vez, y el relleno tipo "in today's landscape" tapa los huecos. Humanizer pone nombre a 55 de esas costumbres, mide cuántas tiene tu texto y lo reescribe en la voz que elijas.
+La escritura de la IA deja huella. Todas las frases miden más o menos lo mismo, las mismas palabras seguras vuelven una y otra vez, y el relleno tipo "in today's landscape" tapa los huecos. Humanizer pone nombre a 55 de esas costumbres, encuentra las que hay en tu texto y lo reescribe en la voz que elijas. El CLI puntúa el texto de 0 a 100 a partir de cuatro señales medibles, no contando cuántos de los 55 patrones aparecen.
 
 Dos términos que conviene aclarar. La *burstiness* es cuánto varía la longitud de tus frases, y un *AI tell* es una de esas costumbres delatoras.
 
@@ -47,7 +47,7 @@ claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
 
-En cualquier otro agente, una línea. El [CLI de skills](https://github.com/vercel-labs/skills) copia la skill en el directorio que lee tu agente:
+En más de 70 agentes, una línea. El [CLI de skills](https://github.com/vercel-labs/skills) enlaza la skill en el directorio que lee tu agente, o la copia con `--copy`:
 
 ```bash
 npx skills add Aboudjem/humanizer-skill
@@ -98,7 +98,9 @@ Cuanto más bajo, más humano. El desglose indica qué señal costó los puntos,
 
 > **Antes:** This comprehensive guide delves into the intricacies of our authentication system.
 >
-> **Después:** The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days.
+> **Después:** This guide explains how our authentication system works.
+
+La reescritura recorta los tics. Nunca añade un dato que no estuviera en el original.
 
 **3. Comprueba que la reescritura conservó los datos.** El riesgo real es que un número desaparezca sin avisar:
 
@@ -107,14 +109,14 @@ node cli/index.js compare --before examples/blog-post/before.md \
   --after examples/blog-post/after.md --check-facts
 ```
 
-Sale con código 1 y nombra lo que se perdió: un número, un nombre, una URL, una fecha o una versión.
+Sale con código 1 y nombra lo que se perdió: un número, un porcentaje, una URL, una fecha, una versión o una sigla en mayúsculas.
 
 ## Qué obtienes
 
 - **Una puntuación de 0 a 100** de rastros de IA, con un veredicto de cinco bandas, de Pristine a Pure AI smell.
-- **Un desglose por señal** en cada puntuación, para que un número malo apunte a una causa concreta.
+- **Un desglose por señal** del comando `score`, para que un número malo apunte a una causa concreta.
 - **Una reescritura en una de cinco voces**: `casual`, `professional`, `technical`, `warm`, `blunt`.
-- **Una verificación de datos** que falla si la reescritura perdió un número, nombre, URL, fecha o versión.
+- **Una verificación de datos** que falla si la reescritura perdió un número, porcentaje, URL, fecha, versión o sigla en mayúsculas.
 - **Un código de salida** para CI y un [hook de pre-commit](../docs/pre-commit.md) que puntúa solo los archivos que preparaste.
 
 <details>
@@ -129,8 +131,9 @@ Sale con código 1 y nombra lo que se perdió: un número, un nombre, una URL, u
 | P31-P43 | Emergentes | Variación elegante, texto de marcador, fugas de marcado de chat, ganchos de teletienda |
 | P44-P55 | Oficio y forense | Agencia falsa, fórmulas de aforismo, ofuscación unicode, matices que sobraron |
 
-Cada patrón tiene su explicación, sus disparadores y un ejemplo de antes y después en
-[`SKILL.md`](../skills/humanizer/SKILL.md) y [`references/patterns.md`](../skills/humanizer/references/patterns.md).
+Cada patrón tiene su explicación y sus disparadores en [`SKILL.md`](../skills/humanizer/SKILL.md). En
+[`references/patterns.md`](../skills/humanizer/references/patterns.md), 34 de los 55 llevan además un
+par de antes y después, uno por patrón que lo aprovecha.
 El catálogo principal (P1-P30) se apoya en
 [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (CC BY-SA).
 

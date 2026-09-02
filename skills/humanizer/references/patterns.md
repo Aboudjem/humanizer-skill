@@ -1,6 +1,6 @@
 # Pattern deep dives and provenance
 
-Loaded on demand. The core `SKILL.md` is standalone and does not need this file. This is the depth behind the compact catalog: the "what's happening" notes, the full trigger lists, the before/after examples for every pattern, and the sources behind the 2026 emerging set (P31-P43).
+Loaded on demand. The core `SKILL.md` is standalone and does not need this file. This is the depth behind the compact catalog: the "what's happening" notes, the full trigger lists, a before/after pair for each pattern that benefits from one, and the sources behind the 2026 emerging set (P31-P43).
 
 The core catalog (P1-P30) is derived mostly from [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing).
 
@@ -12,7 +12,7 @@ The core catalog (P1-P30) is derived mostly from [Wikipedia: Signs of AI writing
 - [Coverage against Wikipedia](#coverage-against-wikipedia-signs-of-ai-writing)
 - [Honest limits of this catalog](#honest-limits-of-this-catalog)
 - [Full trigger lists (P1, P4, P7)](#full-trigger-lists)
-- [Before and after examples (P1-P55)](#before-and-after-examples)
+- [Before and after examples (34 of the 55)](#before-and-after-examples)
 - [Worked examples (technical, blog, LinkedIn)](#worked-examples)
 
 ---

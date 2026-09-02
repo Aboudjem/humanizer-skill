@@ -59,7 +59,7 @@ Take text that smells like a chatbot wrote it and rewrite it as a specific, opin
 | `--ignore-code` | Mask fenced code blocks before detect/score (do not flag inside them) |
 | `--ignore-quotes` | Mask blockquotes before detect/score (do not rewrite quoted text) |
 
-Deep dives, before/after examples, and full trigger lists for every pattern live in [`references/patterns.md`](references/patterns.md), loaded on demand. A provisional native-Chinese appendix is in [`references/patterns.zh.md`](references/patterns.zh.md). This file is standalone and needs neither.
+Deep dives and full trigger lists for every pattern live in [`references/patterns.md`](references/patterns.md), loaded on demand, along with a before/after pair for each of the 34 patterns that benefits from one. A provisional native-Chinese appendix is in [`references/patterns.zh.md`](references/patterns.zh.md). This file is standalone and needs neither.
 
 ## When to use this skill
 

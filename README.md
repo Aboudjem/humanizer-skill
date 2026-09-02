@@ -30,7 +30,8 @@ claude plugin install humanizer@10x
 
 AI writing has a fingerprint. Sentences all run about the same length, the same safe words keep
 coming back, and filler like "in today's landscape" pads the gaps. Humanizer names 55 of those
-habits, scores how many your text has, and rewrites it in a voice you pick.
+habits, finds the ones in your text, and rewrites it in a voice you pick. The CLI scores the text
+0 to 100 from four measurable signals, not from a count of the 55.
 
 Two words worth a gloss. *Burstiness* is how much your sentence lengths vary, and an *AI tell* is
 one of those giveaway habits.
@@ -50,8 +51,8 @@ claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
 
-In any other agent, one line. The [skills CLI](https://github.com/vercel-labs/skills) copies the
-skill into the directory your agent reads:
+In 70+ other agents, one line. The [skills CLI](https://github.com/vercel-labs/skills) links the
+skill into the directory your agent reads, or copies it with `--copy`:
 
 ```bash
 npx skills add Aboudjem/humanizer-skill
@@ -104,7 +105,9 @@ Lower is more human. The breakdown says which signal cost the points, so you kno
 
 > **Before:** This comprehensive guide delves into the intricacies of our authentication system.
 >
-> **After:** The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days.
+> **After:** This guide explains how our authentication system works.
+
+The rewrite cuts the tells. It never adds a fact the source did not have.
 
 **3. Check the rewrite kept the facts.** A rewrite that quietly drops a number is the real risk:
 
@@ -113,14 +116,14 @@ node cli/index.js compare --before examples/blog-post/before.md \
   --after examples/blog-post/after.md --check-facts
 ```
 
-It exits 1 and names anything lost: a number, a name, a URL, a date, or a version.
+It exits 1 and names anything lost: a number, a percentage, a URL, a date, a version, or an acronym.
 
 ## What you get
 
 - **A 0 to 100 AI-tell score** with a five-band verdict, from Pristine to Pure AI smell.
-- **A per-signal breakdown** on every score, so a bad number points at a specific cause.
+- **A per-signal breakdown** from the `score` command, so a bad number points at a specific cause.
 - **A rewrite in one of five voices**: `casual`, `professional`, `technical`, `warm`, `blunt`.
-- **A fact check** that fails a rewrite which lost a number, name, URL, date, or version.
+- **A fact check** that fails a rewrite which lost a number, percentage, URL, date, version, or acronym.
 - **An exit code** for CI, and a [pre-commit hook](docs/pre-commit.md) that scores only the files you staged.
 
 <details>
@@ -135,8 +138,9 @@ It exits 1 and names anything lost: a number, a name, a URL, a date, or a versio
 | P31-P43 | Emerging | Elegant variation, placeholder text, chatbot markup leaks, infomercial hooks |
 | P44-P55 | Craft and forensic | False agency, aphorism formulas, unicode obfuscation, leftover hedge debris |
 
-Every pattern has a write-up, its triggers, and a before/after example in
-[`SKILL.md`](skills/humanizer/SKILL.md) and [`references/patterns.md`](skills/humanizer/references/patterns.md).
+Every pattern has a write-up and its trigger list in [`SKILL.md`](skills/humanizer/SKILL.md). In
+[`references/patterns.md`](skills/humanizer/references/patterns.md), 34 of the 55 also carry a
+before/after pair, one per pattern that benefits from one.
 The core catalog (P1-P30) draws on
 [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (CC BY-SA).
 

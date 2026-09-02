@@ -12,8 +12,8 @@ claude plugin install humanizer@10x
 
 ## Any other agent, one line
 
-The [`skills` CLI](https://github.com/vercel-labs/skills) from vercel-labs copies the skill into
-the right directory for the agent you name. Version 1.5.23 lists 77 agent codes; the nine below are
+The [`skills` CLI](https://github.com/vercel-labs/skills) from vercel-labs links the skill into
+the right directory for the agent you name, or copies it with `--copy`. Version 1.5.23 lists 77 agent codes; the nine below are
 the ones this table covers.
 
 ```bash

@@ -6,7 +6,7 @@ description: The full catalog of 55 numbered AI writing patterns, from significa
 
 # The 55 patterns
 
-Humanizer detects 55 numbered patterns across six categories. Below is the catalog with what to look for. Full descriptions, trigger lists, and a before/after example for each live in the [skill source](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md) and the [reference deep dives](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/references/patterns.md).
+Humanizer detects 55 numbered patterns across six categories. Below is the catalog with what to look for. Full descriptions and trigger lists for all 55, plus a before/after pair for 34 of them, live in the [skill source](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md) and the [reference deep dives](https://github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/references/patterns.md).
 
 :::warning[Flag clusters, not isolated tells]
 One em dash, one "crucial", one three-item list is how humans write too. A pattern only counts when several co-occur in the same passage. The skill ships a false-positive guard, and it never rewrites text inside quotes, code, titles, or examples. This is about writing quality, not detection evasion.
