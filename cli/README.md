@@ -31,15 +31,47 @@ cat draft.md | node cli/index.js score -
 # Ignore code fences and quoted examples so they don't inflate the score
 node cli/index.js score docs/api.md --ignore-code --ignore-quotes
 
-# Scan a whole tree
+# Scan a whole tree, or a list of files
 node cli/index.js scan docs/
+node cli/index.js scan README.md docs/faq.md
 
 # Show the before/after delta
 node cli/index.js compare --before draft.md --after final.md
 
+# Fail if the rewrite dropped a fact
+node cli/index.js compare --before draft.md --after final.md --check-facts
+
 # JSON for tooling
 node cli/index.js score README.md --json
 ```
+
+## Checking that a rewrite kept the facts
+
+`--check-facts` compares the hard tokens in the two files and exits 1 if anything in `--before`
+is missing from `--after`:
+
+| Kind | Examples | Normalized so that |
+| --- | --- | --- |
+| numbers | `2200`, `5,400`, `12.5` | `5,400` and `5400` are the same fact |
+| percentages | `59%`, `12.5 %` | spacing does not matter |
+| dates | `2026-04-16`, `April 16, 2026`, `16 April 2026` | all three are one token |
+| versions | `v0.7.0`, `0.7.0` | the `v` prefix does not matter, and dropping it does not read as a loss |
+| URLs | `https://example.com/a?b=1` | trailing sentence punctuation is trimmed, balanced brackets are kept |
+| names | `AWS`, `RDS`, `P18` | any run of two or more capitals and digits, minus GitHub alert markers and shouted words |
+
+Facts are read from the raw text, so a number inside a code fence still counts even under
+`--ignore-code`. A fact the rewrite moved into a link still counts. Adding a fact is never
+reported, because adding detail is a writing choice.
+
+### What it does not catch
+
+This checks that every hard token survived. It is not a proof of factual equivalence.
+
+- **Swapped values.** The check is set-based. Turning "7 errors in 2 regions" into "2 errors in
+  7 regions" keeps both numbers, so it passes. It catches deletions and edits, not reorderings.
+- **Facts with no hard token.** "most customers" becoming "all customers" changes the claim and
+  contains nothing to extract.
+- **Meaning.** A number kept in a sentence that now says the opposite still counts as present.
 
 ## CI quality gate
 
@@ -95,7 +127,7 @@ node tools/humanizer-skill/cli/index.js scan . --fail-above 40
 cd cli && node --test
 ```
 
-60 tests, no dependencies. Covers tokenization, every metric, the composite score and its per-signal breakdown, code/quote masking, the vocabulary layer, fact extraction and the fact-loss diff, multi-path scanning, the packaged bin (shebang, executable bit, and that no shipped module requires a file outside the tarball), and CLI exit codes (threshold gate, baseline regression, fact check, bad input).
+64 tests, no dependencies. Covers tokenization, every metric, the composite score and its per-signal breakdown, code/quote masking, the vocabulary layer, fact extraction and the fact-loss diff, multi-path scanning, the packaged bin (shebang, executable bit, and that no shipped module requires a file outside the tarball), and CLI exit codes (threshold gate, baseline regression, fact check, bad input).
 
 Running the CLI needs Node 18 or newer, and CI runs the suite on both 18 and 20. Contributing or publishing needs Node 20.19 or newer, because eslint 10 does not run on 18.
 

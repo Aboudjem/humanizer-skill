@@ -6,7 +6,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const { extractFacts, diffFacts, factsInUrls, KINDS } = require('../lib/facts');
+const { extractFacts, diffFacts, factsInUrls, KINDS, SIBLINGS } = require('../lib/facts');
 const { run } = require('../index');
 
 const BEFORE =
@@ -123,6 +123,7 @@ test('a lossy rewrite reports one entry per lost fact', () => {
   const d = diffFacts(BEFORE, AFTER_LOSSY);
   assert.strictEqual(d.ok, false);
   const lost = d.lost.map((x) => `${x.kind}:${x.value}`);
+  assert.strictEqual(d.lost.length, 5, 'exactly the five facts the fixture drops');
   assert.ok(lost.includes('numbers:2200'), 'dropped figure');
   assert.ok(lost.includes('percentages:59%'), 'dropped percentage');
   assert.ok(lost.includes('dates:2026-04-16'), 'changed date');
@@ -230,4 +231,39 @@ test('factsInUrls reads inside links and nowhere else', () => {
   assert.ok(inner.versions.includes('2.1.0'));
   assert.ok(inner.dates.includes('2026-04-16'));
   assert.deepStrictEqual(factsInUrls({ urls: [] }).numbers, []);
+});
+
+test('the documented limits are the real behaviour', () => {
+  // Set-based, so a swap keeps both values and passes. Documented in cli/README.md
+  // under "What it does not catch"; pinned here so it stays a choice, not a surprise.
+  assert.strictEqual(diffFacts('7 errors in 2 regions', '2 errors in 7 regions').ok, true);
+  // A claim with no hard token to extract is invisible to the check.
+  assert.strictEqual(diffFacts('most customers renewed', 'all customers renewed').ok, true);
+});
+
+test('a URL keeps balanced brackets and drops an unbalanced one', () => {
+  // A Markdown link must yield the URL, not the closing bracket.
+  assert.deepStrictEqual(extractFacts('See [docs](https://example.com/a) now.').urls, [
+    'https://example.com/a',
+  ]);
+  // A path that really contains brackets keeps them, and its digits stay inside it.
+  const kept = extractFacts('See https://example.com/foo(123).');
+  assert.deepStrictEqual(kept.urls, ['https://example.com/foo(123)']);
+  assert.deepStrictEqual(kept.numbers, [], 'digits inside a URL are not separate facts');
+  assert.deepStrictEqual(extractFacts('See https://en.wikipedia.org/wiki/Ruby_(gem) ok.').urls, [
+    'https://en.wikipedia.org/wiki/Ruby_(gem)',
+  ]);
+});
+
+test('dropping a v prefix is not a lost version, but changing the digits is', () => {
+  assert.strictEqual(diffFacts('Pinned at v1.2.', 'Pinned at 1.2.').ok, true);
+  assert.strictEqual(diffFacts('Pinned at 1.2.', 'Pinned at v1.2.').ok, true);
+  assert.deepStrictEqual(diffFacts('Pinned at v1.2.', 'Pinned at 9.9.').lost, [
+    { kind: 'versions', value: '1.2' },
+  ]);
+});
+
+test('the exported contracts are frozen', () => {
+  assert.ok(Object.isFrozen(KINDS));
+  assert.ok(Object.isFrozen(SIBLINGS));
 });

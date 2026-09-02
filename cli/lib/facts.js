@@ -25,7 +25,7 @@ const MONTH_NAMES = Object.keys(MONTHS).join('|');
 
 // ALL-CAPS tokens that are markup or grammar, not facts. GitHub alert markers and
 // common shouted words would otherwise read as proper nouns on every document.
-const ACRONYM_STOPWORDS = new Set([
+const ACRONYM_STOPWORDS = Object.freeze(new Set([
   'OK',
   'TODO',
   'FIXME',
@@ -41,13 +41,20 @@ const ACRONYM_STOPWORDS = new Set([
   'FOR',
   'YES',
   'NO',
-]);
+]));
 
 // Order matters: each pass blanks the spans it consumes so a later, broader pattern
 // cannot re-read part of an earlier match. Percentages run before versions so 12.5%
 // is one percentage and not the version 12.5; dates run before numbers so 2026-09-02
 // is one date and not three numbers.
-const KINDS = ['urls', 'dates', 'percentages', 'versions', 'numbers', 'acronyms'];
+const KINDS = Object.freeze(['urls', 'dates', 'percentages', 'versions', 'numbers', 'acronyms']);
+
+// Categories that describe the same token. A value found in a sibling category still
+// counts as present, so a purely cosmetic re-categorization is not a lost fact.
+const SIBLINGS = Object.freeze({
+  versions: ['numbers'],
+  numbers: ['versions'],
+});
 
 function blank(match) {
   return ' '.repeat(match.length);
@@ -63,6 +70,19 @@ function harvest(state, re, normalize) {
     return blank(match);
   });
   return found;
+}
+
+/** Strip trailing punctuation and any closing parenthesis that has no opener. */
+function trimUrl(match) {
+  let url = match.replace(/[.,;:!?]+$/, '');
+  for (;;) {
+    if (!url.endsWith(')')) break;
+    const opens = (url.match(/\(/g) || []).length;
+    const closes = (url.match(/\)/g) || []).length;
+    if (closes <= opens) break;
+    url = url.slice(0, -1).replace(/[.,;:!?]+$/, '');
+  }
+  return url;
 }
 
 function normalizeDate(match) {
@@ -88,10 +108,10 @@ function normalizeDate(match) {
 function extractFacts(rawText) {
   const state = { text: String(rawText || '') };
 
-  // Trailing sentence punctuation is not part of a URL.
-  const urls = harvest(state, /https?:\/\/[^\s<>()[\]"'`]+/g, (m) =>
-    m.replace(/[.,;:!?)\]}>]+$/, '')
-  );
+  // Trailing sentence punctuation is not part of a URL. Parentheses are allowed
+  // inside one, so a path like /foo(123) survives, but an unbalanced closing bracket
+  // is stripped so a Markdown link [docs](url) yields the URL and not the bracket.
+  const urls = harvest(state, /https?:\/\/[^\s<>[\]"'`]+/g, trimUrl);
 
   const dates = harvest(
     state,
@@ -164,6 +184,12 @@ function diffFacts(beforeText, afterText) {
   const lost = [];
   for (const kind of KINDS) {
     const present = new Set([...after[kind], ...nested[kind]]);
+    // A version and a number are the same digits wearing a different hat: dropping
+    // the v from v1.2 leaves the fact intact, so accept the sibling category.
+    for (const sibling of SIBLINGS[kind] || []) {
+      for (const v of after[sibling]) present.add(v);
+      for (const v of nested[sibling]) present.add(v);
+    }
     for (const value of before[kind]) {
       if (!present.has(value)) lost.push({ kind, value });
     }
@@ -179,4 +205,4 @@ function countAll(facts) {
   return KINDS.reduce((total, kind) => total + facts[kind].length, 0);
 }
 
-module.exports = { extractFacts, diffFacts, factsInUrls, KINDS, ACRONYM_STOPWORDS };
+module.exports = { extractFacts, diffFacts, factsInUrls, KINDS, SIBLINGS, ACRONYM_STOPWORDS };
