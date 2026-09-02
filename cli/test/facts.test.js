@@ -6,7 +6,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const { extractFacts, diffFacts, KINDS } = require('../lib/facts');
+const { extractFacts, diffFacts, factsInUrls, KINDS } = require('../lib/facts');
 const { run } = require('../index');
 
 const BEFORE =
@@ -210,4 +210,24 @@ test('a fact inside a code fence still counts, even with --ignore-code', () => {
     ),
     1
   );
+});
+
+test('a fact the rewrite moved into a link is not reported lost', () => {
+  // The URL pass swallows whole links, so without the nested lookup a linkified
+  // version reads as a dropped fact.
+  const moved = diffFacts('Ship v1.2 now.', 'Ship https://example.com/release/v1.2?q=99 now.');
+  assert.deepStrictEqual(moved.lost, []);
+});
+
+test('a link that changes the fact is still reported lost', () => {
+  const changed = diffFacts('Ship v1.2 now.', 'Ship https://example.com/release/v9.9 now.');
+  assert.deepStrictEqual(changed.lost, [{ kind: 'versions', value: '1.2' }]);
+});
+
+test('factsInUrls reads inside links and nowhere else', () => {
+  const f = extractFacts('See https://example.com/v2.1.0/report-2026-04-16 and note 7.');
+  const inner = factsInUrls(f);
+  assert.ok(inner.versions.includes('2.1.0'));
+  assert.ok(inner.dates.includes('2026-04-16'));
+  assert.deepStrictEqual(factsInUrls({ urls: [] }).numbers, []);
 });

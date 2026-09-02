@@ -137,6 +137,21 @@ function unique(xs) {
 }
 
 /**
+ * Facts hiding inside URLs. The URL pass swallows whole links, so a version or a
+ * number that the rewrite moved into a link would otherwise read as lost. Stripping
+ * the scheme stops the URL pass from re-consuming the string.
+ */
+function factsInUrls(facts) {
+  const inner = {};
+  for (const kind of KINDS) inner[kind] = [];
+  for (const url of facts.urls) {
+    const nested = extractFacts(url.replace(/^https?:\/\//, ' '));
+    for (const kind of KINDS) inner[kind] = inner[kind].concat(nested[kind]);
+  }
+  return inner;
+}
+
+/**
  * Compare the facts in two texts.
  * Returns { lost: [{ kind, value }], ok, counts: { before, after } }.
  * A fact present in before and absent from after is lost; a fact the rewrite added
@@ -145,9 +160,10 @@ function unique(xs) {
 function diffFacts(beforeText, afterText) {
   const before = extractFacts(beforeText);
   const after = extractFacts(afterText);
+  const nested = factsInUrls(after);
   const lost = [];
   for (const kind of KINDS) {
-    const present = new Set(after[kind]);
+    const present = new Set([...after[kind], ...nested[kind]]);
     for (const value of before[kind]) {
       if (!present.has(value)) lost.push({ kind, value });
     }
@@ -163,4 +179,4 @@ function countAll(facts) {
   return KINDS.reduce((total, kind) => total + facts[kind].length, 0);
 }
 
-module.exports = { extractFacts, diffFacts, KINDS, ACRONYM_STOPWORDS };
+module.exports = { extractFacts, diffFacts, factsInUrls, KINDS, ACRONYM_STOPWORDS };
