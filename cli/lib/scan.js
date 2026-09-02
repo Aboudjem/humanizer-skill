@@ -42,17 +42,32 @@ function collectFiles(dir, exts) {
 }
 
 /**
- * Scan a directory (or single file) and score every matching file.
- * Returns { files: [{ file, score, verdict, metrics }], meanScore, maxScore }.
+ * Expand one target into the list of files to score. A directory is walked and
+ * filtered by extension; an explicit file path is always scored, whatever its
+ * extension, because naming a file is an instruction.
  */
-function scanPath(target, options = {}) {
-  const exts = options.exts && options.exts.length ? options.exts : DEFAULT_EXTS;
-  let paths;
+function expand(target, exts) {
   const stat = fs.statSync(target);
-  if (stat.isDirectory()) {
-    paths = collectFiles(target, exts).sort();
-  } else {
-    paths = [target];
+  if (stat.isDirectory()) return collectFiles(target, exts).sort();
+  return [target];
+}
+
+/**
+ * Scan one or more directories and files and score every matching file.
+ * Returns { files: [{ file, score, verdict, metrics }], meanScore, maxScore }.
+ * A file reachable from two targets is scored once. A target that does not exist
+ * throws, so a typo fails loudly instead of silently scanning less than asked.
+ */
+function scanPaths(targets, options = {}) {
+  const exts = options.exts && options.exts.length ? options.exts : DEFAULT_EXTS;
+  const seen = new Set();
+  const paths = [];
+  for (const target of targets) {
+    for (const file of expand(target, exts)) {
+      if (seen.has(file)) continue;
+      seen.add(file);
+      paths.push(file);
+    }
   }
   const files = paths.map((file) => {
     const text = fs.readFileSync(file, 'utf8');
@@ -67,4 +82,9 @@ function scanPath(target, options = {}) {
   };
 }
 
-module.exports = { scanPath, collectFiles, DEFAULT_EXTS };
+/** One-target form, kept so existing callers and imports are unchanged. */
+function scanPath(target, options = {}) {
+  return scanPaths([target], options);
+}
+
+module.exports = { scanPaths, scanPath, collectFiles, DEFAULT_EXTS };

@@ -6,7 +6,14 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
+const { spawnSync } = require('child_process');
+
 const { run, parseArgs, UsageError } = require('../index');
+
+// CI runs `node --test` with working-directory: cli, so the bin must be resolved from
+// this file, never from a repo-relative literal.
+const BIN = path.join(__dirname, '..', 'index.js');
+const PKG = require('../package.json');
 
 const AI_TEXT =
   "In today's rapidly evolving landscape, artificial intelligence is reshaping how we think about creativity every single day. " +
@@ -135,4 +142,88 @@ test('missing file throws (handled as exit 2 at top level)', () => {
 
 test('unknown command throws UsageError', () => {
   assert.throws(() => silent(() => run(['frobnicate'])), UsageError);
+});
+
+// --- multi-path scan -----------------------------------------------------------
+
+test('scan takes more than one path and reports each file once', () => {
+  const { dir, p } = tmpFile('one.md', AI_TEXT);
+  const two = path.join(dir, 'two.md');
+  fs.writeFileSync(two, HUMAN_TEXT);
+  let out = '';
+  const so = process.stdout.write;
+  process.stdout.write = (s) => {
+    out += s;
+    return true;
+  };
+  try {
+    run(['scan', p, two, two, '--json']);
+  } finally {
+    process.stdout.write = so;
+  }
+  const parsed = JSON.parse(out);
+  assert.strictEqual(parsed.files.length, 2, 'the repeated path is scored once');
+  assert.deepStrictEqual(
+    parsed.files.map((f) => f.file),
+    [p, two]
+  );
+});
+
+test('scan gates on the worst of several named files', () => {
+  const { dir, p } = tmpFile('human.md', HUMAN_TEXT);
+  const bad = path.join(dir, 'ai.md');
+  fs.writeFileSync(bad, AI_TEXT);
+  assert.strictEqual(silent(() => run(['scan', p, '--fail-above', '40'])), 0);
+  assert.strictEqual(silent(() => run(['scan', p, bad, '--fail-above', '40'])), 1);
+});
+
+test('scan with no path is a usage error, and a missing path is not skipped', () => {
+  assert.throws(() => silent(() => run(['scan'])), UsageError);
+  const { p } = tmpFile('a.md', HUMAN_TEXT);
+  assert.throws(() => silent(() => run(['scan', p, '/no/such/file/xyz.md'])));
+});
+
+// --- the packaged binary -------------------------------------------------------
+
+test('the bin runs as a child process and prints usage', () => {
+  const r = spawnSync(process.execPath, [BIN, '--help'], { encoding: 'utf8' });
+  assert.strictEqual(r.status, 0);
+  assert.match(r.stdout, /humanizer-metrics - compute writing metrics/);
+  assert.match(r.stdout, /--check-facts/);
+});
+
+test('the bin honours --fail-above from a real shell invocation', () => {
+  const { p } = tmpFile('ai.md', AI_TEXT);
+  assert.strictEqual(spawnSync(process.execPath, [BIN, 'score', p, '--fail-above', '5']).status, 1);
+  assert.strictEqual(spawnSync(process.execPath, [BIN, 'score', p, '--fail-above', '99']).status, 0);
+  assert.strictEqual(spawnSync(process.execPath, [BIN, 'frobnicate']).status, 2);
+});
+
+test('the package is shaped so npm can build a working bin shim', () => {
+  assert.strictEqual(PKG.bin['humanizer-metrics'], 'index.js');
+  const target = path.join(__dirname, '..', PKG.bin['humanizer-metrics']);
+  assert.ok(fs.existsSync(target), 'bin target exists');
+  assert.ok(fs.statSync(target).mode & 0o111, 'bin target is executable');
+  assert.match(fs.readFileSync(target, 'utf8').split('\n')[0], /^#!.*\bnode\b/, 'node shebang');
+  assert.strictEqual(PKG.engines.node, '>=18');
+  assert.strictEqual(PKG.dependencies, undefined, 'zero runtime dependencies');
+});
+
+test('every shipped module resolves inside the files allowlist', () => {
+  // A require that reaches outside index.js and lib/ would break the moment the
+  // tarball is installed, and npm pack would not tell us.
+  const shipped = ['index.js', ...fs.readdirSync(path.join(__dirname, '..', 'lib')).map((f) => 'lib/' + f)];
+  const allowed = new Set(shipped);
+  for (const rel of shipped) {
+    const src = fs.readFileSync(path.join(__dirname, '..', rel), 'utf8');
+    for (const m of src.matchAll(/require\('([^']+)'\)/g)) {
+      const dep = m[1];
+      if (!dep.startsWith('.')) continue; // node builtin
+      const resolved = path
+        .relative(path.join(__dirname, '..'), path.resolve(path.dirname(path.join(__dirname, '..', rel)), dep))
+        .replace(/\\/g, '/');
+      const withExt = resolved.endsWith('.js') ? resolved : resolved + '.js';
+      assert.ok(allowed.has(withExt), `${rel} requires ${dep} -> ${withExt}, which is not shipped`);
+    }
+  }
 });

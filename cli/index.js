@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 const { scoreText, ANCHORS } = require('./lib/metrics');
-const { scanPath } = require('./lib/scan');
+const { scanPaths } = require('./lib/scan');
 const { diffFacts } = require('./lib/facts');
 const { formatScore, formatScan, formatCompare, formatFacts } = require('./lib/report');
 
@@ -16,7 +16,7 @@ const USAGE = `humanizer-metrics - compute writing metrics and an AI-tell score
 Usage:
   humanizer-metrics score <file>      [options]   Score one file
   humanizer-metrics score -           [options]   Score stdin
-  humanizer-metrics scan <dir|file>   [options]   Score every .md/.txt file under a path
+  humanizer-metrics scan <dir|file...> [options]  Score every .md/.txt file under a path
   humanizer-metrics compare --before <file> --after <file>   Show metric deltas
 
 Options:
@@ -100,10 +100,12 @@ function run(argv) {
   }
 
   if (cmd === 'scan') {
-    const target = opts._[1];
-    if (!target) throw new UsageError('scan needs a directory or file');
+    // Every positional after the command is a target, so a pre-commit hook can pass
+    // the staged file list straight through.
+    const targets = opts._.slice(1);
+    if (!targets.length) throw new UsageError('scan needs at least one directory or file');
     const exts = opts.ext ? opts.ext.split(',').map((s) => s.trim().toLowerCase()) : undefined;
-    const scan = scanPath(target, { ...scoreOpts, exts });
+    const scan = scanPaths(targets, { ...scoreOpts, exts });
     if (opts.writeBaseline && opts.baseline) {
       const base = {};
       for (const f of scan.files) base[f.file] = f.score;

@@ -102,18 +102,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
+    strategy:
+      fail-fast: false
+      matrix:
+        # package.json declares engines.node >= 18, so 18 is tested, not just asserted.
+        node-version: ['18', '20']
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
 
+      # eslint 10 requires Node ^20.19 || ^22.13 || >=24, so linting runs on 20 only.
+      # The CLI itself is stdlib-only and runs on 18.
       - name: Install lint dependencies
+        if: matrix.node-version == '20'
         working-directory: cli
         run: npm install --no-save --no-audit --no-fund eslint
 
       - name: Lint (cli/ JS)
+        if: matrix.node-version == '20'
         working-directory: cli
         run: npx eslint .
 
@@ -131,8 +141,14 @@ jobs:
           node -e "
             const fs = require('fs');
             const raw = fs.readFileSync('.pre-commit-hooks.yaml', 'utf8');
-            if (!/^- id: humanizer-scan/m.test(raw)) throw new Error('missing humanizer-scan hook id');
-            if (!/entry: cli\/index\.js/.test(raw)) throw new Error('entry does not point at cli/index.js');
+            const ids = raw.split('\n').filter(l => l.startsWith('- id: ')).map(l => l.slice(6).trim());
+            if (!ids.includes('humanizer-scan')) throw new Error('missing humanizer-scan hook id');
+            if (!ids.includes('humanizer-scan-staged')) throw new Error('missing humanizer-scan-staged hook id');
+            if (raw.indexOf('entry: cli/index.js') === -1) throw new Error('entry does not point at cli/index.js');
+            const staged = raw.slice(raw.indexOf('- id: humanizer-scan-staged'));
+            if (!staged.includes('entry: cli/index.js scan --fail-above 40')) throw new Error('staged hook must run scan with a threshold and no path');
+            if (!staged.includes('pass_filenames: true')) throw new Error('staged hook must pass filenames');
+            if (!staged.includes('(md|markdown|txt)')) throw new Error('staged hook must keep the md/markdown/txt filter');
             if (!fs.existsSync('cli/index.js')) throw new Error('cli/index.js missing');
             const mode = fs.statSync('cli/index.js').mode;
             if (!(mode & 0o111)) throw new Error('cli/index.js is not executable (required for language: script)');

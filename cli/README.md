@@ -95,7 +95,9 @@ node tools/humanizer-skill/cli/index.js scan . --fail-above 40
 cd cli && node --test
 ```
 
-50 tests, no dependencies. Covers tokenization, every metric, the composite score and its per-signal breakdown, code/quote masking, the vocabulary layer, fact extraction and the fact-loss diff, and CLI exit codes (threshold gate, baseline regression, fact check, bad input).
+57 tests, no dependencies. Covers tokenization, every metric, the composite score and its per-signal breakdown, code/quote masking, the vocabulary layer, fact extraction and the fact-loss diff, multi-path scanning, the packaged bin (shebang, executable bit, and that no shipped module requires a file outside the tarball), and CLI exit codes (threshold gate, baseline regression, fact check, bad input).
+
+Running the CLI needs Node 18 or newer, and CI runs the suite on both 18 and 20. Contributing or publishing needs Node 20.19 or newer, because eslint 10 does not run on 18.
 
 ## Linting
 

@@ -7,3 +7,14 @@
   language: script
   files: \.(md|markdown|txt)$
   pass_filenames: false
+
+- id: humanizer-scan-staged
+  name: Humanizer AI-tell scan (staged files)
+  description: >-
+    Same 0-100 AI-tell gate, but only over the Markdown/text files in the commit
+    rather than the whole repository. Zero dependencies, no network calls, no
+    credentials.
+  entry: cli/index.js scan --fail-above 40
+  language: script
+  files: \.(md|markdown|txt)$
+  pass_filenames: true
