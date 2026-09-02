@@ -65,6 +65,30 @@ function formatCompare(before, after) {
   return lines.join('\n');
 }
 
+const FACT_LABELS = {
+  urls: 'URL',
+  dates: 'date',
+  percentages: 'percentage',
+  versions: 'version',
+  numbers: 'number',
+  acronyms: 'name',
+};
+
+function formatFacts(facts) {
+  const lines = ['Fact check:'];
+  if (facts.ok) {
+    lines.push(
+      `  OK. All ${facts.counts.before} fact(s) in the original survive the rewrite.`
+    );
+    return lines.join('\n');
+  }
+  lines.push(`  ${facts.lost.length} fact(s) lost or changed:`);
+  for (const f of facts.lost) {
+    lines.push('  ' + pad(FACT_LABELS[f.kind] || f.kind, 12) + f.value);
+  }
+  return lines.join('\n');
+}
+
 function signed(n) {
   return n > 0 ? '+' + n : String(n);
 }
@@ -73,4 +97,4 @@ function round(x) {
   return Math.round(x * 1000) / 1000;
 }
 
-module.exports = { formatMetrics, formatScore, formatScan, formatCompare };
+module.exports = { formatMetrics, formatScore, formatScan, formatCompare, formatFacts };

@@ -8,7 +8,8 @@
 const fs = require('fs');
 const { scoreText, ANCHORS } = require('./lib/metrics');
 const { scanPath } = require('./lib/scan');
-const { formatScore, formatScan, formatCompare } = require('./lib/report');
+const { diffFacts } = require('./lib/facts');
+const { formatScore, formatScan, formatCompare, formatFacts } = require('./lib/report');
 
 const USAGE = `humanizer-metrics - compute writing metrics and an AI-tell score
 
@@ -26,6 +27,7 @@ Options:
   --ext <csv>             Extensions for scan (default: md,markdown,txt)
   --ignore-code           Mask fenced/inline code before scoring
   --ignore-quotes         Mask Markdown block quotes before scoring
+  --check-facts           On compare, exit 1 if the rewrite lost a fact
   --json                  Machine-readable JSON output
   -h, --help              Show this help
 
@@ -39,6 +41,7 @@ function parseArgs(argv) {
     else if (a === '--json') opts.json = true;
     else if (a === '--ignore-code') opts.ignoreCode = true;
     else if (a === '--ignore-quotes') opts.ignoreQuotes = true;
+    else if (a === '--check-facts') opts.checkFacts = true;
     else if (a === '--write-baseline') opts.writeBaseline = true;
     else if (a === '--fail-on-regression') opts.failOnRegression = true;
     else if (a === '--fail-above') {
@@ -115,10 +118,23 @@ function run(argv) {
 
   if (cmd === 'compare') {
     if (!opts.before || !opts.after) throw new UsageError('compare needs --before and --after');
-    const before = scoreText(readInput(opts.before), scoreOpts);
-    const after = scoreText(readInput(opts.after), scoreOpts);
-    if (opts.json) process.stdout.write(JSON.stringify({ before, after }) + '\n');
-    else process.stdout.write(formatCompare(before, after) + '\n');
+    // Fact extraction reads the raw text, not the masked text: a number inside a
+    // code fence is still a fact the rewrite must keep.
+    const beforeRaw = readInput(opts.before);
+    const afterRaw = readInput(opts.after);
+    const before = scoreText(beforeRaw, scoreOpts);
+    const after = scoreText(afterRaw, scoreOpts);
+    const facts = opts.checkFacts ? diffFacts(beforeRaw, afterRaw) : null;
+    if (opts.json) {
+      process.stdout.write(JSON.stringify(facts ? { before, after, facts } : { before, after }) + '\n');
+    } else {
+      const body = formatCompare(before, after);
+      process.stdout.write((facts ? body + '\n\n' + formatFacts(facts) : body) + '\n');
+    }
+    if (facts && !facts.ok) {
+      process.stderr.write(`FAIL: ${facts.lost.length} fact(s) lost in the rewrite\n`);
+      return 1;
+    }
     return 0;
   }
 
