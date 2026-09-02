@@ -1,50 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" fill="none" role="img" aria-label="Humanizer social card: a red editing pen strikes through an AI-sounding phrase and corrects it by hand. 55 patterns, 5 voices, zero dependencies.">
-  <title>Humanizer</title>
-  <desc>A red pen strikes through an AI-sounding phrase on a manuscript page and writes a plainer correction above it. 55 patterns, 5 voices, zero dependencies.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" fill="none" role="img" aria-label="humanizer: an AI writing humanizer and detector. Reads like a person wrote it. 55 patterns, 5 voices, zero setup, and nothing leaves your machine.">
+  <title>humanizer</title>
+  <desc>The humanizer wordmark on a dark ground with the line Reads like a person wrote it, and the repository address github.com/Aboudjem/humanizer-skill.</desc>
   <defs>
-    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fffdf6"/>
-      <stop offset="1" stop-color="#f3ead4"/>
+    <linearGradient id="sp-ground" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="#0A0F1C"/>
+      <stop offset="60%" stop-color="#080C16"/>
+      <stop offset="100%" stop-color="#07070C"/>
     </linearGradient>
+
+    <radialGradient id="sp-bloom" cx="0.5" cy="1" r="0.75">
+      <stop offset="0%" stop-color="#FF2D78" stop-opacity="0.30"/>
+      <stop offset="38%" stop-color="#7C3AED" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="sp-brand" x1="0" y1="0" x2="1" y2="0.25" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#C77DFF"/>
+      <stop offset="100%" stop-color="#FF4D8D"/>
+    </linearGradient>
+
+    <linearGradient id="sp-horizon" gradientUnits="userSpaceOnUse" x1="90" y1="520" x2="1190" y2="520">
+      <stop offset="0%" stop-color="#00D4FF" stop-opacity="0"/>
+      <stop offset="22%" stop-color="#C77DFF" stop-opacity="0.5"/>
+      <stop offset="55%" stop-color="#C77DFF" stop-opacity="0.8"/>
+      <stop offset="82%" stop-color="#FF4D8D" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0"/>
+    </linearGradient>
+
+    <filter id="sp-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
 
-  <rect width="1280" height="640" fill="url(#page)"/>
-  <rect x="0" y="0" width="1280" height="8" fill="#c0392b" opacity="0.9"/>
+  <style>
+    .disp { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+  </style>
 
-  <text x="120" y="180" font-family="'Segoe UI',Arial,system-ui,-apple-system,sans-serif" font-size="96" font-weight="800" letter-spacing="-3" fill="#211c15">Humanizer</text>
-  <line x1="124" y1="204" x2="612" y2="204" stroke="#c0392b" stroke-width="4" stroke-linecap="round"/>
+  <rect width="1280" height="640" fill="url(#sp-ground)"/>
+  <ellipse cx="640" cy="648" rx="780" ry="250" fill="url(#sp-bloom)" opacity="0.85"/>
 
-  <text x="120" y="258" font-family="system-ui,-apple-system,sans-serif" font-size="34" fill="#4a4238">Make AI text sound like a human wrote it.</text>
-  <text x="120" y="300" font-family="system-ui,-apple-system,sans-serif" font-size="24" fill="#8a7f6b">A pure-Markdown Claude Code skill. One file, zero dependencies.</text>
+  <line x1="90" y1="520" x2="1190" y2="520" stroke="url(#sp-horizon)" stroke-width="1.5"/>
 
-  <g transform="translate(120,340)">
-    <rect x="0" y="0" width="560" height="150" rx="14" fill="#fffef9" stroke="#e7dcc6" stroke-width="1.5"/>
+  <text class="mono" x="100" y="206" font-size="18" font-weight="600" letter-spacing="6" fill="#C77DFF">AI WRITING HUMANIZER AND DETECTOR</text>
 
-    <text x="26" y="46" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#2b2620">This comprehensive guide</text>
-    <text x="26" y="94" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#2b2620">delves into the intricacies</text>
-    <text x="26" y="132" font-family="Georgia,'Times New Roman',serif" font-size="27" fill="#2b2620">of authentication.</text>
-
-    <line x1="26" y1="86" x2="156" y2="86" stroke="#c0392b" stroke-width="3" stroke-linecap="round"/>
-
-    <path d="M28,80 C34,70 50,70 58,77" stroke="#c0392b" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <text x="26" y="69" font-family="Georgia,'Times New Roman',serif" font-style="italic" font-size="22" fill="#c0392b">explains</text>
-
-    <g transform="translate(508,120)">
-      <circle cx="0" cy="0" r="20" fill="none" stroke="#2f7d5b" stroke-width="2.5"/>
-      <path d="M-8,0 L-2.5,7 L8,-8" stroke="#2f7d5b" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
+  <g filter="url(#sp-glow)">
+    <text class="disp" x="100" y="316" font-size="104" font-weight="800" letter-spacing="-4" fill="url(#sp-brand)">humanizer</text>
   </g>
 
-  <g font-family="system-ui,-apple-system,sans-serif" font-weight="700" font-size="21">
-    <rect x="732" y="340" width="176" height="46" rx="23" fill="#1f3a5f" opacity="0.08"/>
-    <text x="758" y="370" fill="#1f3a5f">55 patterns</text>
+  <text class="disp" x="100" y="380" font-size="38" font-weight="700" letter-spacing="-0.5" fill="#F2F6FF">Reads like a person wrote it</text>
+  <text class="disp" x="100" y="424" font-size="24" font-weight="500" fill="#B6C2DA">55 patterns, 5 voices, zero setup, and nothing leaves your machine.</text>
 
-    <rect x="924" y="340" width="140" height="46" rx="23" fill="#c0392b" opacity="0.12"/>
-    <text x="950" y="370" fill="#8f271d">5 voices</text>
-
-    <rect x="1080" y="340" width="200" height="46" rx="23" fill="#2f7d5b" opacity="0.13"/>
-    <text x="1104" y="370" fill="#2f7d5b">0 dependencies</text>
-  </g>
-
-  <text x="1160" y="600" font-family="system-ui,-apple-system,sans-serif" font-size="22" fill="#8a7f6b" text-anchor="end">github.com/Aboudjem/humanizer-skill</text>
+  <text class="mono" x="100" y="576" font-size="22" letter-spacing="1.6" fill="#8494B0">github.com/Aboudjem/humanizer-skill</text>
 </svg>

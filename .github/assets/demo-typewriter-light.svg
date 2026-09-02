@@ -1,72 +1,108 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 236" fill="none" role="img" aria-label="A manuscript page runs /humanizer with --voice technical --score. Three AI tells are flagged and struck in red, then replaced by clean human prose; the AI-tell score drops from 84 to 12.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 236" fill="none" role="img" aria-label="A manuscript page runs /humanizer with --voice technical --score. Three AI tells are flagged and struck, then replaced by clean human prose; the AI-tell score drops from 84 to 12.">
   <title>humanizer: the command, the flagged phrases, and the rewrite</title>
-  <desc>The command /humanizer "This comprehensive guide…" --voice technical --score runs. The AI phrase has comprehensive, delves into, and pivotal struck through in red pen. The clean rewrite reads: the auth system uses JWTs, tokens expire after 15 minutes. The AI-tell score falls from 84 to 12.</desc>
+  <desc>The command /humanizer "This comprehensive guide…" --voice technical --score runs. The AI phrase has comprehensive, delves into, and pivotal struck through. The clean rewrite reads: the auth system uses JWTs, tokens expire after 15 min. The AI-tell score falls from 84 to 12.</desc>
   <defs>
-    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fffdf6"/>
-      <stop offset="1" stop-color="#f3ead4"/>
+    <linearGradient id="tl-hairline" gradientUnits="userSpaceOnUse" x1="26" y1="76" x2="694" y2="76">
+      <stop offset="0%" stop-color="#A836FF" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#A836FF" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#EB0054" stop-opacity="0.1"/>
     </linearGradient>
-    <clipPath id="cmdL"><rect x="26" y="44" width="0" height="20"><animate attributeName="width" values="0;520;520;0" keyTimes="0;0.2;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0.3 0 0.4 1;0 0 1 1;0.5 0 0.5 1"/></rect></clipPath>
-    <clipPath id="humL"><rect x="384" y="104" width="0" height="94"><animate attributeName="width" values="0;0;198;198;0" keyTimes="0;0.5;0.66;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></rect></clipPath>
+
+    <clipPath id="tl-cmdclip"><rect class="type" x="26" y="42" width="530" height="24"/></clipPath>
+    <clipPath id="tl-humclip"><rect class="reveal" x="384" y="104" width="210" height="94"/></clipPath>
   </defs>
 
-  <rect x="8" y="10" width="704" height="218" rx="18" fill="url(#page)" stroke="#c0392b" stroke-opacity="0.22" stroke-width="1.5"/>
-  <rect x="8" y="10" width="704" height="4" rx="2" fill="#c0392b" opacity="0.85"/>
+  <style>
+    .disp { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+    .cmd   { font-size: 13px; }
+    .badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+    .prose { font-size: 16px; fill: #1A2233; }
+    .lead  { font-size: 16px; font-weight: 700; fill: #07070C; }
+    .wm    { font-size: 11px; font-weight: 800; fill: #07070C; }
 
-  <g clip-path="url(#cmdL)" font-family="ui-monospace,Menlo,monospace" font-size="13">
-    <text x="26" y="59" fill="#8f271d" font-weight="700">/humanizer</text>
-    <text x="110" y="59" fill="#8a7f6b">"This comprehensive guide…"</text>
-    <text x="338" y="59" fill="#9a7420" font-weight="700">--voice</text>
-    <text x="396" y="59" fill="#2b2620">technical</text>
-    <text x="474" y="59" fill="#2f7d5b" font-weight="700">--score</text>
-    <rect x="528" y="47" width="2.5" height="14" fill="#2f7d5b"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.55;1" dur="0.9s" repeatCount="indefinite"/></rect>
+    @keyframes tl-type   { 0% { transform: translateX(-530px); } 20%,92% { transform: translateX(0); } 100% { transform: translateX(-530px); } }
+    .type { animation: tl-type 7s ease-in-out infinite; }
+
+    @keyframes tl-reveal { 0%,52% { transform: translateX(-210px); } 68%,92% { transform: translateX(0); } 100% { transform: translateX(-210px); } }
+    .reveal { animation: tl-reveal 7s ease-in-out infinite; }
+
+    @keyframes tl-s1 { 0%,30% { stroke-dashoffset: 120; } 42%,92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 120; } }
+    @keyframes tl-s2 { 0%,33% { stroke-dashoffset: 120; } 45%,92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 120; } }
+    @keyframes tl-s3 { 0%,36% { stroke-dashoffset: 120; } 48%,92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 120; } }
+    .s1 { animation: tl-s1 7s ease-out infinite; }
+    .s2 { animation: tl-s2 7s ease-out infinite; }
+    .s3 { animation: tl-s3 7s ease-out infinite; }
+
+    @keyframes tl-flag { 0%,26% { fill: #1A2233; } 34%,92% { fill: #EB0054; } 100% { fill: #1A2233; } }
+    .flag { animation: tl-flag 7s ease-in-out infinite; }
+
+    @keyframes tl-score { 0%,56% { opacity: 0; } 66%,92% { opacity: 1; } 100% { opacity: 0; } }
+    .score { animation: tl-score 7s ease-in-out infinite; }
+
+    @keyframes tl-arrow { 0%,46% { opacity: 0.25; } 56%,92% { opacity: 1; } 100% { opacity: 0.25; } }
+    .arrow { animation: tl-arrow 7s ease-in-out infinite; }
+
+    @keyframes tl-caret { 0%,49% { opacity: 1; } 50%,100% { opacity: 0; } }
+    .caret { animation: tl-caret 0.9s steps(1,end) infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; }
+    }
+  </style>
+
+  <rect width="720" height="236" fill="#F7F8FB"/>
+
+  <g clip-path="url(#tl-cmdclip)" class="mono cmd">
+    <text x="26" y="59" fill="#A836FF" font-weight="700">/humanizer</text>
+    <text x="110" y="59" fill="#48546B">"This comprehensive guide&#8230;"</text>
+    <text x="338" y="59" fill="#EB0054" font-weight="700">--voice</text>
+    <text x="396" y="59" fill="#07070C">technical</text>
+    <text x="474" y="59" fill="#EB0054" font-weight="700">--score</text>
+    <rect class="caret" x="530" y="47" width="2.5" height="14" fill="#A836FF"/>
   </g>
 
-  <line x1="26" y1="76" x2="694" y2="76" stroke="#c0392b" stroke-width="1" stroke-opacity="0.2"/>
+  <line x1="26" y1="76" x2="694" y2="76" stroke="#D8DEE9" stroke-width="1.25"/>
+  <line x1="26" y1="76" x2="694" y2="76" stroke="url(#tl-hairline)" stroke-width="1.25"/>
 
-  <text x="30" y="100" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#8f271d" letter-spacing="1">FLAGGED</text>
-  <text x="102" y="100" font-family="ui-monospace,monospace" font-size="10" font-weight="700" fill="#8f271d">[84/100]</text>
-  <text x="392" y="100" font-family="system-ui,-apple-system,sans-serif" font-size="10" font-weight="700" fill="#2f7d5b" letter-spacing="1">HUMANIZED</text>
-  <g opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.58;0.66;0.92;1" dur="7s" repeatCount="indefinite"/>
-    <g transform="translate(474,100)">
-      <g>
-        <animateTransform attributeName="transform" type="scale" values="0.3;1.3;0.9;1;1;0.3" keyTimes="0;0.60;0.68;0.74;0.90;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0.34 1.56 0.64 1;0.34 1.56 0.64 1;0.34 1.56 0.64 1;0 0 1 1;0.5 0 0.5 1"/>
-        <text x="0" y="0" font-family="ui-monospace,monospace" font-size="10" font-weight="700" fill="#2f7d5b">[12/100]</text>
-      </g>
-    </g>
+  <text class="disp badge" x="30" y="100" fill="#AB6600">FLAGGED</text>
+  <text class="mono badge" x="102" y="100" fill="#AB6600">[84/100]</text>
+
+  <text class="disp badge" x="392" y="100" fill="#0E8571">HUMANIZED</text>
+  <g class="score" opacity="1">
+    <text class="mono badge" x="482" y="100" fill="#0E8571">[12/100]</text>
   </g>
 
   <g>
-    <animate attributeName="opacity" values="1;1;0.4;0.4;1" keyTimes="0;0.52;0.6;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.4 0 0.2 1;0 0 1 1;0.5 0 0.5 1"/>
+    <text class="disp prose" x="30" y="128">This</text>
+    <text class="disp prose flag" x="64" y="128" fill="#EB0054">comprehensive</text>
+    <text class="disp prose" x="180" y="128">guide</text>
+    <line class="s1" x1="64" y1="122" x2="175" y2="122" stroke="#EB0054" stroke-width="2"
+          stroke-linecap="round" stroke-dasharray="120 120" stroke-dashoffset="0"/>
 
-    <text x="30" y="128" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">This</text>
-    <text x="66" y="128" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">comprehensive<animate attributeName="fill" values="#2b2620;#2b2620;#c0392b;#c0392b;#2b2620" keyTimes="0;0.24;0.32;0.92;1" dur="7s" repeatCount="indefinite"/></text>
-    <text x="185" y="128" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">guide</text>
-    <line x1="66" y1="121" x2="178" y2="121" stroke="#c0392b" stroke-width="2" stroke-dasharray="112" stroke-dashoffset="112"><animate attributeName="stroke-dashoffset" values="112;112;0;0;112" keyTimes="0;0.32;0.44;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></line>
+    <text class="disp prose flag" x="30" y="156" fill="#EB0054">delves into</text>
+    <text class="disp prose" x="115" y="156">the</text>
+    <line class="s2" x1="30" y1="150" x2="108" y2="150" stroke="#EB0054" stroke-width="2"
+          stroke-linecap="round" stroke-dasharray="120 120" stroke-dashoffset="0"/>
 
-    <text x="30" y="156" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">delves into<animate attributeName="fill" values="#2b2620;#2b2620;#c0392b;#c0392b;#2b2620" keyTimes="0;0.26;0.34;0.92;1" dur="7s" repeatCount="indefinite"/></text>
-    <text x="118" y="156" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">the</text>
-    <line x1="30" y1="149" x2="114" y2="149" stroke="#c0392b" stroke-width="2" stroke-dasharray="84" stroke-dashoffset="84"><animate attributeName="stroke-dashoffset" values="84;84;0;0;84" keyTimes="0;0.34;0.46;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></line>
-
-    <text x="30" y="184" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">pivotal<animate attributeName="fill" values="#2b2620;#2b2620;#c0392b;#c0392b;#2b2620" keyTimes="0;0.28;0.36;0.92;1" dur="7s" repeatCount="indefinite"/></text>
-    <text x="90" y="184" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">aspects of auth.</text>
-    <line x1="30" y1="177" x2="86" y2="177" stroke="#c0392b" stroke-width="2" stroke-dasharray="56" stroke-dashoffset="56"><animate attributeName="stroke-dashoffset" values="56;56;0;0;56" keyTimes="0;0.36;0.48;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.16 1 0.3 1;0 0 1 1;0.5 0 0.5 1"/></line>
+    <text class="disp prose flag" x="30" y="184" fill="#EB0054">pivotal</text>
+    <text class="disp prose" x="84" y="184">aspects of auth.</text>
+    <line class="s3" x1="30" y1="178" x2="76" y2="178" stroke="#EB0054" stroke-width="2"
+          stroke-linecap="round" stroke-dasharray="120 120" stroke-dashoffset="0"/>
   </g>
 
-  <line x1="360" y1="90" x2="360" y2="200" stroke="#c0392b" stroke-width="1" stroke-opacity="0.25" stroke-dasharray="4,3"/>
-  <g transform="translate(360,148)" opacity="0.2">
-    <animate attributeName="opacity" values="0.2;0.2;1;1;0.2" keyTimes="0;0.46;0.56;0.92;1" dur="7s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.34 1.56 0.64 1;0 0 1 1;0.5 0 0.5 1"/>
-    <circle cx="0" cy="0" r="15" fill="#c0392b" opacity="0.12"/>
-    <path d="M-5,-5 L6,0 L-5,5" stroke="#8f271d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <line x1="360" y1="90" x2="360" y2="200" stroke="#D8DEE9" stroke-width="1" stroke-dasharray="4 3"/>
+  <g class="arrow" opacity="1" transform="translate(360,148)">
+    <circle cx="0" cy="0" r="15" fill="#A836FF" opacity="0.12"/>
+    <path d="M-5 -5 L6 0 L-5 5" stroke="#A836FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </g>
 
-  <g clip-path="url(#humL)">
-    <text x="390" y="128" font-family="Georgia,'Times New Roman',serif" font-size="16" font-weight="700" fill="#2f7d5b">The auth system</text>
-    <text x="390" y="156" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">uses JWTs. Tokens</text>
-    <text x="390" y="184" font-family="Georgia,'Times New Roman',serif" font-size="16" fill="#2b2620">expire after 15 min.</text>
-    <rect x="556" y="171" width="2.5" height="15" fill="#2f7d5b"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.55;1" dur="0.9s" repeatCount="indefinite"/></rect>
+  <g clip-path="url(#tl-humclip)">
+    <text class="disp lead"  x="390" y="128">The auth system</text>
+    <text class="disp prose" x="390" y="156">uses JWTs. Tokens</text>
+    <text class="disp prose" x="390" y="184">expire after 15 min.</text>
+    <rect class="caret" x="540" y="171" width="2.5" height="15" fill="#0E8571"/>
   </g>
 
-  <text x="612" y="218" font-family="'Segoe UI',system-ui,-apple-system,sans-serif" font-size="11" font-weight="800" fill="#2b2620" opacity="0.55">Humanizer</text>
+  <text class="disp wm" x="612" y="218" opacity="0.75">humanizer</text>
 </svg>
