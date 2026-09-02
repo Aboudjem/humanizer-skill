@@ -23,7 +23,7 @@ identity with the README and its translations rebuilt around them.
 
 ### Changed
 
-- **README rebuilt** from 382 lines and nine collapsed sections to 181 lines and two: a hero, a four-badge row, a five-language row, the install command above the first heading, then what it does, install, use it, what you get, editor support, limits, and links. The comparison table lost its competitor price row, which was unverifiable and drifting.
+- **README rebuilt** from 382 lines and nine collapsed sections to 182 lines and two: a hero, a four-badge row, a five-language row, the install command above the first heading, then what it does, install, use it, what you get, editor support, limits, and links. The comparison table lost its competitor price row, which was unverifiable and drifting.
 - **CI now runs the CLI tests on Node 18 and 20**, so `engines.node >= 18` is tested rather than asserted. Lint stays on 20, since ESLint 10 requires 20.19 or newer.
 - **The pre-commit manifest check** in CI now asserts the staged hook's id, its threshold, `pass_filenames`, and its extension filter.
 - `cli/package.json` moves to 0.3.0 and is packaging-complete: `LICENSE`, `homepage`, `bugs`, `publishConfig`, and a `prepublishOnly` gate. `npm pack --dry-run` lists exactly 10 files and no tests. The package is still not published, and every documented command runs it as `node cli/index.js`.
