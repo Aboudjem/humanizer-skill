@@ -1,382 +1,182 @@
-# Humanizer
-
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.svg">
-  <img alt="Humanizer" src=".github/assets/logo-light.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/assets/hero-light.svg">
+  <img alt="humanizer. AI writing humanizer and detector. Reads like a person wrote it. 55 patterns, 5 voices, zero setup, and nothing leaves your machine." src=".github/assets/hero-light.svg" width="100%">
 </picture>
 
-<p align="center"><b>English</b> | <a href="./README.zh-CN.md">简体中文</a></p>
-
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-1f3a5f?style=flat-square" alt="License: MIT"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-55-1f3a5f?style=flat-square" alt="55 AI patterns"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/voices-5-1f3a5f?style=flat-square" alt="5 voice profiles"></a>
-  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/dependencies-0-1f3a5f?style=flat-square" alt="Zero dependencies"></a>
-  <a href="https://github.com/vercel-labs/skills"><img src="https://img.shields.io/badge/install-npx%20skills%20add-c0392b?style=flat-square" alt="Install via npx skills add"></a>
-  <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=c0952f" alt="Stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-7C3AED?style=flat-square" alt="License: MIT"></a>
+  <a href="https://github.com/Aboudjem/humanizer-skill/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Aboudjem/humanizer-skill/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
+  <a href="skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-55-FF006E?style=flat-square" alt="55 AI writing patterns"></a>
+  <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=00D4FF" alt="GitHub stars"></a>
 </p>
 
 <p align="center">
-  <b>Humanizer is a free, open-source AI writing humanizer and detector.</b><br/>
-  One Markdown file. 55 patterns, 5 voices, zero setup, and nothing leaves your machine.
+  <b>English</b> · <a href="READMEs/zh-CN.md">简体中文</a> · <a href="READMEs/ja.md">日本語</a> · <a href="READMEs/es.md">Español</a> · <a href="READMEs/fr.md">Français</a>
 </p>
 
+<p align="center"><b>Humanizer is a free, open-source AI writing humanizer and detector.</b></p>
+
 <p align="center">
-  <a href="https://humanizer-skill.vercel.app"><b>Try it in your browser</b></a>
-  &nbsp;&middot;&nbsp;
-  <a href="#install">Install in 5 seconds</a>
-  &nbsp;&middot;&nbsp;
-  <a href="skills/humanizer/SKILL.md">Read the source</a>
+  <a href="#what-it-does">What it does</a> · <a href="#install">Install</a> · <a href="#use-it">Use it</a> · <a href="#works-in-your-editor">Works in your editor</a> · <a href="#learn-more">Learn more</a>
 </p>
+
+```bash
+claude plugin marketplace add Aboudjem/10x
+claude plugin install humanizer@10x
+```
+
+## What it does
+
+AI writing has a fingerprint. Sentences all run about the same length, the same safe words keep
+coming back, and filler like "in today's landscape" pads the gaps. Humanizer names 55 of those
+habits, scores how many your text has, and rewrites it in a voice you pick.
+
+Two words worth a gloss. *Burstiness* is how much your sentence lengths vary, and an *AI tell* is
+one of those giveaway habits.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-burstiness-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/demo-burstiness-light.svg">
-  <img alt="Sentence-length chart: AI writing is flat and uniform (shown in red); human writing varies from 3 to 31 words (shown in green). Humanizer restores the variation." src=".github/assets/demo-burstiness-light.svg" width="100%">
+  <img alt="Sentence-length chart. The AI line is flat and uniform. The human line runs from 3 to 31 words. Humanizer restores the variation." src=".github/assets/demo-burstiness-light.svg" width="100%">
 </picture>
-
-<p align="center"><sub>Same idea, two writers. The AI line stays flat. The human line jumps around. That jumpiness is the tell.</sub></p>
-
----
 
 ## Install
 
-Works in Claude Code, Cursor, Codex, opencode, and 70+ other AI editors through [**vercel-labs/skills**](https://github.com/vercel-labs/skills), the same community installer used by hundreds of Claude Code skills. One command, no folders to copy by hand:
+In Claude Code, through the 10x marketplace:
+
+```bash
+claude plugin marketplace add Aboudjem/10x
+claude plugin install humanizer@10x
+```
+
+In any other agent, one line. The [skills CLI](https://github.com/vercel-labs/skills) copies the
+skill into the directory your agent reads:
 
 ```bash
 npx skills add Aboudjem/humanizer-skill
 ```
 
-Prefer to skip the installer entirely? A plain `curl`, and per-editor folder paths for Cursor, Copilot, Codex, Gemini CLI, Windsurf, Continue.dev, and OpenClaw, are in [Install without tooling](#install-without-tooling-curl-and-per-editor-paths) below.
-
-## See it work
-
-Score any text right in your editor. This just scans, it doesn't rewrite:
-
-```text
-/humanizer "In today's rapidly evolving landscape, AI is reshaping how we think about creativity." --mode detect --score
-```
-
-```text
-[Score: 84/100, Pure AI smell]
-
-Patterns found: 5
-| P4  | Promotional          | "rapidly evolving landscape" |
-| P7  | AI Vocabulary        | "reshaping"                  |
-| P22 | Filler               | "In today's"                 |
-| P29 | Comprehensive Opening| meta-commentary              |
-| P30 | Uniform Length       | sentences avg 19 words       |
-```
-
-The score runs 0 to 100. Lower is more human. Drop the flags and it rewrites instead of scanning: `/humanizer "your text" --voice casual` hands back the same idea in a real voice, and the score falls to single digits.
-
-> [!TIP]
-> This is about writing better, not tricking detectors. Clean writing doesn't set off AI detectors, because it skips the lazy habits they look for. Fix the writing and the detection sorts itself out.
-
----
-
-## Why this exists
-
-AI writing has a fingerprint. Every sentence runs about the same length. It reaches for the same safe words, and it pads with filler like "in today's landscape." Two bits of jargon worth knowing: how much your sentence lengths vary is called *burstiness* (people mix short and long, AI keeps them all one size), and those little giveaway habits are called *AI tells*.
-
-This **AI writing humanizer** knows 55 of them. It finds them, scores the text, and rewrites it in a voice you pick. All from a single file your editor reads on your own machine.
-
-## Features
-
-- **55 named patterns**, from travel-brochure adjectives to invisible unicode tricks. The biggest open list of its kind.
-- **5 voices**: `casual`, `professional`, `technical`, `warm`, `blunt`. Each one changes the rhythm, not just a few words.
-- **3 modes**: `detect` (score it), `rewrite` (fix it), `edit` (change a Markdown file in place).
-- **A 0 to 100 AI-tell score** on demand, so you can measure before and after.
-- **A guard against over-editing**, so it sharpens real writing instead of flattening it.
-- **One Markdown file.** No dependencies. No network calls. It runs standalone.
-- **Optional metrics CLI, CI check, and pre-commit hook** if you want a computed score in your pipeline or a fast local gate.
-
-The list above is the highlights. For the exhaustive version, category by category, see [Every feature, in full](#every-feature-in-full) further down.
-
----
-
-## Usage
-
-```text
-/humanizer "text"                                rewrite it with the default voice
-/humanizer "text" --voice casual                 pick a voice
-/humanizer "text" --mode detect --score          scan only, add a 0 to 100 score
-/humanizer --file docs/README.md --voice technical   fix a file in place
-/humanizer "text" --aggressive --iterate 3       heavy rewrite, loop until the score bottoms out
-```
-
-Rewrite is the default, so you never have to name it.
-
-| Voice | Sounds like | Good for |
-|:------|:------------|:---------|
-| `casual` | Contractions, "I", fragments, "And" starters | Blogs, social posts |
-| `professional` | A few contractions, dry, concrete | Reports, business writing |
-| `technical` | Exact terms, plain, deadpan | Docs, READMEs |
-| `warm` | "We" and "our", patient, short paragraphs | Tutorials, onboarding |
-| `blunt` | Short. No hedging. Active voice. | Reviews, direct feedback |
-
-Other flags: `--mode` picks detect, rewrite, or edit. `--purpose` layers on rules for an essay, email, marketing copy, technical doc, or general text. `--iterate N` runs the scan-rewrite loop up to 3 times. `--aggressive` uses a heavier hand. Drop a `humanizer-context.md` file in your project root with your own writing samples and banned words, and the skill folds it into whichever voice you chose.
-
----
-
-## More
-
 <details>
-<summary><b>Before and after (docs, blog, LinkedIn)</b></summary>
+<summary>Install without the installer (curl, or a per-editor path)</summary>
 
-<br/>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/assets/demo-typewriter-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset=".github/assets/demo-typewriter-light.svg">
-  <img alt="A manuscript page runs /humanizer with --voice technical --score: three AI tells (comprehensive, delves into, pivotal) are flagged and struck through in red pen, then replaced with clean human prose, dropping the AI-tell score from 84 to 12" src=".github/assets/demo-typewriter-light.svg" width="100%">
-</picture>
-
-**Technical docs** (`--voice technical`)
-
-> **Before:** This comprehensive guide delves into the intricacies of our authentication system. The platform leverages cutting-edge JWT technology to provide a seamless, secure, and robust authentication experience.
-
-> **After:** The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days. Role-based access control restricts API endpoints by user role. The token rotation logic is in `src/auth/refresh.ts`.
-
-*Killed 9 patterns. Added real details. Cut the word count by 40%.*
-
-**Blog post** (`--voice casual`)
-
-> **Before:** In today's rapidly evolving technological landscape, artificial intelligence is reshaping how we think about creativity. This groundbreaking shift represents a pivotal moment in human history.
-
-> **After:** I've been messing around with AI image generators for about six months now, and I still can't decide if I love them or if they make me uneasy. The outputs are impressive. But there's something missing. It's like eating a perfect-looking meal that has no flavor.
-
-*Traded vague commentary for a lived opinion. Sentence lengths: 8, 31, 22, 4, 13 words. That's burstiness.*
-
-**LinkedIn** (`--voice professional`)
-
-> **Before:** Excited to announce that I've taken on a pivotal new role at TechCorp! This incredible opportunity represents a significant milestone in my professional journey. #NewBeginnings #Innovation
-
-> **After:** Started a new job at TechCorp this week. I'm leading their developer tools team, 12 engineers serving about 400 developers. First week has been drinking from the firehose: new codebase, new faces, new coffee machine I can't figure out.
-
-*No emojis, no hashtags. Real numbers instead of "pivotal milestone."*
-
-</details>
-
-<details>
-<summary><a id="install-without-tooling-curl-and-per-editor-paths"></a><b>Install without tooling (curl), and per-editor paths</b></summary>
-
-<br/>
-
-Project-scoped (travels with your repo):
+Project-scoped, so it travels with your repo:
 
 ```bash
 mkdir -p .claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o .claude/skills/humanizer/SKILL.md
 ```
 
-Global (available in every project):
-
-```bash
-mkdir -p ~/.claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o ~/.claude/skills/humanizer/SKILL.md
-```
-
-Prefer Claude Code plugins? Add the marketplace instead:
-
-```bash
-claude plugin marketplace add Aboudjem/humanizer-skill
-```
-
-Same idea for other editors, just change the folder: `.cursor/skills/`, `.github/skills/` (Copilot), `.codex/skills/`, `.gemini/skills/`, `.windsurf/skills/`, `.continue/skills/`. For OpenClaw, run `clawhub install humanizer-skill`.
-
-> [!NOTE]
-> Claude Code finds skills in `.claude/skills/`, `~/.claude/skills/`, or any plugin's `skills/` folder. No restart needed. Other editors may need you to point at the file in their config.
+Swap the folder for another editor: `.cursor/skills/`, `.github/skills/` for Copilot, `.codex/skills/`,
+`.gemini/skills/`, `.windsurf/skills/`, `.continue/skills/`. Use `~/.claude/skills/` for a global
+install. Full paths per agent are in [docs/editors.md](docs/editors.md).
 
 </details>
 
-<details>
-<summary><b>All 55 patterns</b></summary>
+## Use it
 
-<br/>
+**1. Score something you already wrote.** This scans, it does not change the file:
+
+```bash
+node cli/index.js score examples/blog-post/before.md
+```
+
+```text
+examples/blog-post/before.md
+Score: 46/100  (Mixed)
+  Signal breakdown (points out of 100):
+    lexical     40.0   weight 0.4   vocabTellDensity 0.0818
+    repetition  6.0    weight 0.14  trigramRepetition 0.077
+    burstiness  0.0    weight 0.28  burstiness 0.798
+    diversity   0.0    weight 0.18  mattr 0.866
+  words:                        391
+  sentences:                    11
+  mean sentence length:         35.55
+  ... plus 9 more metric lines
+```
+
+Lower is more human. The breakdown says which signal cost the points, so you know what to fix first.
+
+**2. Rewrite it in a voice.** In your editor, call the skill on your own draft:
+
+```text
+/humanizer --file draft.md --voice technical
+```
+
+> **Before:** This comprehensive guide delves into the intricacies of our authentication system.
+>
+> **After:** The auth system uses JWTs. Tokens expire after 15 minutes; refresh tokens last 7 days.
+
+**3. Check the rewrite kept the facts.** A rewrite that quietly drops a number is the real risk:
+
+```bash
+node cli/index.js compare --before examples/blog-post/before.md \
+  --after examples/blog-post/after.md --check-facts
+```
+
+It exits 1 and names anything lost: a number, a name, a URL, a date, or a version.
+
+## What you get
+
+- **A 0 to 100 AI-tell score** with a five-band verdict, from Pristine to Pure AI smell.
+- **A per-signal breakdown** on every score, so a bad number points at a specific cause.
+- **A rewrite in one of five voices**: `casual`, `professional`, `technical`, `warm`, `blunt`.
+- **A fact check** that fails a rewrite which lost a number, name, URL, date, or version.
+- **An exit code** for CI, and a [pre-commit hook](docs/pre-commit.md) that scores only the files you staged.
+
+<details>
+<summary>All 55 patterns, by category</summary>
 
 | IDs | Category | Examples |
 |:----|:---------|:---------|
 | P1-P8 | Content | Significance inflation, promotional language, AI vocabulary ("delve", "leverage") |
-| P9-P18 | Language & Style | Negative parallelisms, em dash overuse, structured-list syndrome, title-case headings |
+| P9-P18 | Language and style | Negative parallelisms, em dash overuse, structured-list syndrome |
 | P19-P21 | Communication | Chatbot artifacts, knowledge-cutoff disclaimers, sycophantic tone |
-| P22-P30 | Filler & Hedging | Filler phrases, generic conclusions, comprehensive-overview openers, uniform sentence length |
-| P31-P43 | Emerging | Elegant variation, placeholder text, chatbot markup leaks, treadmill effect, infomercial hooks |
-| P44-P55 | Craft & Forensic | False agency, diff-anchored writing, aphorism formulas, reasoning-chain artifacts, unicode obfuscation, argument residue, leftover hedge debris |
+| P22-P30 | Filler and hedging | Filler phrases, generic conclusions, uniform sentence length |
+| P31-P43 | Emerging | Elegant variation, placeholder text, chatbot markup leaks, infomercial hooks |
+| P44-P55 | Craft and forensic | False agency, aphorism formulas, unicode obfuscation, leftover hedge debris |
 
-Every pattern has a full write-up, its triggers, and a before/after example in [`skills/humanizer/SKILL.md`](skills/humanizer/SKILL.md) and [`references/patterns.md`](skills/humanizer/references/patterns.md).
-
-The core catalog (P1-P30) draws on [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (CC BY-SA), the cited reference list most of those entries come from.
-
-</details>
-
-<details>
-<summary><a id="every-feature-in-full"></a><b>Every feature, in full</b></summary>
-
-<br/>
-
-**Detection and scoring**
-
-- 55 named, numbered patterns across 6 categories (Content, Language & Style, Communication, Filler & Hedging, Emerging, Craft & Forensic)
-- A 0-100 AI-tell score with a 5-band verdict: Pristine, Mostly human, Mixed, AI-leaning, Pure AI smell
-- Burstiness (sentence-length variance) and perplexity (word predictability) as the two measurable signals behind the score
-- Tiered vocabulary confidence on the AI-word list: Tier 1A (evidence-grade, near-definitive alone), 1B (wordiness-grade, weighted lower), Tier 2 (flag only in density), Tier 3 (context only, never alone)
-- A false-positive guard that protects real human writing: hard-to-fabricate specifics, mixed or unresolved feelings, lived sensory detail, era-bound in-group voice, deliberate imperfection, and content written before late 2022
-- Explicit guardrails for neurodivergent writers (autistic/ADHD low-variance prose) and non-native English speakers, so the skill doesn't launder a real voice flat
-- A no-fabrication rule: rewrites can sharpen and restructure, but can't invent facts, names, dates, or numbers that aren't in the source
-
-**Rewriting craft**
-
-- 5 named voice profiles: `casual`, `professional`, `technical`, `warm`, `blunt`, each changing rhythm and word choice, not just vocabulary
-- A Voice Read, an Anti-Default Discipline pass, a Position ("teeth") engine, a Concretizer pass, and an Opening tournament (`--openings N`)
-- 11 soul-injection techniques: real opinions, a certainty-calibration spectrum, sensory/experiential detail, shared-experience callbacks, tangents, dramatic paragraph-length variance, imperfect starts, broken parallel structure, callbacks, self-correction, and endings that just stop
-- `--purpose` layers content-type rules on top of voice: `essay`, `email`, `marketing`, `technical`, `general`
-- `--aggressive` for a heavier hand; `--iterate N` loops detect-rewrite-detect up to 3 times until it converges
-- A draft/self-audit/final metacognitive pass, cheaper than a full `--iterate` loop, that asks "what still reads as AI?" after the first rewrite
-
-**Modes**
-
-- `detect`: scan and report every matched pattern with a severity read, no changes made
-- `rewrite`: the full transform (default mode)
-- `edit`: in-place file editing via the Edit tool, targeted changes only, with an explicit refusal guard for non-prose targets (source code, config, structured data)
-
-**Flags**
-
-- `--score`, `--mode`, `--voice`, `--file`, `--aggressive`, `--iterate N`, `--purpose`, `--openings N`, `--ignore-code`, `--ignore-quotes`
-
-**Integrations and tooling**
-
-- Works in Claude Code, Cursor, Codex, opencode, and 70+ AI editors via `npx skills add` ([vercel-labs/skills](https://github.com/vercel-labs/skills))
-- Claude Code plugin and marketplace support (`claude plugin marketplace add`)
-- OpenClaw support (`clawhub install humanizer-skill`)
-- An optional, zero-dependency metrics CLI (`cli/`) that computes burstiness, type-token ratio, MATTR, trigram repetition, AI-vocabulary density, and Flesch-Kincaid grade, with a transparent 0-100 score
-- A CI quality gate with a hard threshold or baseline/regression mode, plus a reusable GitHub Action
-- A `.pre-commit-hooks.yaml` for the Python `pre-commit` framework (fast local gate, no install step), and a documented Husky example for JS-native repos
-- A zero-backend browser demo at [humanizer-skill.vercel.app](https://humanizer-skill.vercel.app): client-side regex subset plus burstiness scoring, no API calls, no data leaves the browser
-
-**Docs, localization, and trust**
-
-- A full Docusaurus documentation site, deploy-ready
-- A Simplified-Chinese README and a provisional native-Chinese pattern appendix
-- `llms.txt` for AI-crawler and agent discoverability
-- Worked before/after examples for technical docs, blog posts, and LinkedIn posts
-- Zero dependencies, zero network calls, zero telemetry, MIT licensed
-- CI enforces the skill's own rules on itself: zero em dashes in `SKILL.md`, and the badge/pattern-count/CHANGELOG stay in lockstep
+Every pattern has a write-up, its triggers, and a before/after example in
+[`SKILL.md`](skills/humanizer/SKILL.md) and [`references/patterns.md`](skills/humanizer/references/patterns.md).
+The core catalog (P1-P30) draws on
+[Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) (CC BY-SA).
 
 </details>
 
-<details>
-<summary><b>The science</b></summary>
+## Works in your editor
 
-<br/>
+Works in Claude Code, Cursor, Codex, Copilot, Gemini CLI, and 70+ other agents through `npx skills add`.
 
-AI detectors measure two things, and both are well documented.
+| Agent | One-line install |
+|:--|:--|
+| Claude Code | `claude plugin install humanizer@10x` |
+| Any of 70+ agents | `npx skills add Aboudjem/humanizer-skill` |
+| One named agent (Cursor, Codex, Copilot, Gemini CLI, OpenCode, Zed) | add `-a <agent>` to that line |
+| Everything else | the table in [docs/editors.md](docs/editors.md) |
 
-**Burstiness** is how much sentence length varies. People write a 3-word sentence, then a 40-word one, then a 12-word one. AI parks almost every sentence around 18 words. Flat lengths read as AI.
+The skill is Markdown, so it runs on whatever model your editor points at.
 
-**Perplexity** is how predictable each word is. AI picks the most likely next word every single time. People reach for the surprising one. Less predictable text reads as human.
+## Good to know
 
-Word-swap tools like QuillBot change individual words but leave the rhythm and the predictability alone. You need to change the structure, not just trade synonyms.
+> [!IMPORTANT]
+> Nothing leaves your machine. The skill is one Markdown file your editor reads locally, and the
+> optional metrics CLI is plain Node with no dependencies and no network calls. No telemetry, no
+> account, no API key.
 
-According to GPTZero's own detection research, human sentence length varies wildly while AI-generated text stays close to flat, which is why burstiness injection is the skill's core rewrite technique. According to a Washington Post analysis of 328,000 messages (2025), phrases like "it's not X, it's Y" are among the AI tells that analysis surfaced, alongside emoji use and the em dash. According to the RAID benchmark (ACL 2024), structural paraphrasing (not just word-swapping) drops DetectGPT's detection accuracy from 70.3% to 4.6%. According to the HC3 corpus study (Guo et al., [arXiv 2301.07597](https://arxiv.org/abs/2301.07597)), human answers average 142.5 words versus ChatGPT's 198.1 across roughly 40,000 paired answers, and humans draw from a measurably larger vocabulary.
+- **Writing better** is the goal, not beating a detector. Clean prose skips the lazy habits
+  detectors look for, so fixing the writing sorts the detection out on its own.
+- **False positives happen.** Detectors misfire on non-native English writing
+  ([Liang et al.](https://arxiv.org/abs/2304.02819)), and low sentence-length variation is a habit
+  some people simply have. A false-positive guard protects lived detail and deliberate imperfection.
+- **The number is a stand-in**, not a verdict. It is reproducible, which is what makes it a usable
+  gate, but it reads signals rather than meaning. 64 tests pin its behaviour.
 
-| Technique | Source | Finding |
-|:----------|:-------|:--------|
-| Burstiness injection | GPTZero | Human sentence length varies wildly; AI doesn't. |
-| Kill negative parallelism | Washington Post | "It's not X, it's Y" is among the AI tells identified across 328K messages |
-| Structural paraphrasing | RAID benchmark, ACL 2024 | Drops DetectGPT accuracy from 70.3% to 4.6% |
-| Length and lexical diversity | HC3 corpus, [arXiv 2301.07597](https://arxiv.org/abs/2301.07597) | ~40K pairs: human answers avg 142.5 words vs ChatGPT 198.1; humans use a bigger vocabulary |
+## Learn more
 
-</details>
-
-<details>
-<summary><b>Optional: computed metrics, a CI check, and a pre-commit hook</b></summary>
-
-<br/>
-
-The skill alone is enough to rewrite text. If you also want to *measure* your docs and block bad ones before they ship, the repo ships a small Node CLI with zero dependencies that computes the signals the skill describes.
-
-```bash
-node cli/index.js score README.md
-```
-
-```bash
-node cli/index.js scan docs/ --fail-above 40
-```
-
-Drop it into a pipeline with the bundled Action:
-
-```yaml
-- uses: Aboudjem/humanizer-skill/.github/actions/humanizer-gate@main
-  with:
-    path: docs/
-    fail-above: '40'
-```
-
-Prefer a fast local gate over a CI-only one? The repo also ships a [`.pre-commit-hooks.yaml`](.pre-commit-hooks.yaml) for the Python `pre-commit` framework, wrapping the same CLI.
-
-No API keys, no network, no third-party packages. It's a deterministic stand-in for the skill's holistic score. Details in [`cli/README.md`](cli/README.md).
-
-</details>
-
-<details>
-<summary><b>How it compares</b></summary>
-
-<br/>
-
-| Feature | **Humanizer** | QuillBot | Undetectable.ai | Manual editing |
-|:--------|:------------:|:--------:|:----------------:|:--------------:|
-| Open source | Yes | No | No | N/A |
-| Pattern detection | **55** | 0 | 0 | 0 |
-| Voice profiles | **5** | 0 | 3 | Manual |
-| Works offline | Yes | No | No | Yes |
-| Burstiness injection | Yes | No | Partial | No |
-| Explains changes | Yes | No | No | No |
-| Price | **Free** | $20/mo | $10/mo | Free |
-
-</details>
-
-<details>
-<summary><b>Which models it runs on</b></summary>
-
-<br/>
-
-The skill is a Markdown prompt, so it runs on whatever model your editor points at. The patterns and voices don't care which. Only the creativity of the rewrite step shifts a little. Tested on Claude Opus/Sonnet/Haiku 4.x (Sonnet is the daily pick), GPT-4.x and GPT-5 through Codex CLI, and Gemini 2.x through Gemini CLI. Local models work too, with longer prompts and `--aggressive`.
-
-</details>
-
-<details>
-<summary><b>Trust</b></summary>
-
-<br/>
-
-No telemetry. No data collection. No API calls. Nothing leaves your machine.
-
-What you install is one Markdown file ([`skills/humanizer/SKILL.md`](skills/humanizer/SKILL.md)) that your editor reads locally. No JavaScript, no binaries, no network. The optional metrics CLI in [`cli/`](cli/README.md) is a separate layer: still plain Node, still zero dependencies, still fully offline, and the skill never calls it.
-
-</details>
-
----
-
-## Documentation
-
-- Skill source and full pattern catalog: [`skills/humanizer/SKILL.md`](skills/humanizer/SKILL.md)
-- Pattern deep dives, triggers, and examples: [`references/patterns.md`](skills/humanizer/references/patterns.md)
-- Optional metrics CLI, CI gate, and pre-commit hook: [`cli/README.md`](cli/README.md) and [`.pre-commit-hooks.yaml`](.pre-commit-hooks.yaml)
-- A full docs site (Docusaurus, ready to deploy) lives in [`docs-site/`](docs-site/): `npm --prefix docs-site install && npm --prefix docs-site run build`
-- Version history: [`CHANGELOG.md`](CHANGELOG.md)
-
-## Contributing
-
-Found a new AI pattern, or a cleaner fix? PRs welcome. Add a short entry to `SKILL.md`, put the deep dive and a before/after example in `references/patterns.md`, and keep the badge count, CI threshold, and CHANGELOG in sync. See [CONTRIBUTING.md](CONTRIBUTING.md).
-
----
+- [The skill itself](skills/humanizer/SKILL.md), and the [pattern deep dives](skills/humanizer/references/patterns.md)
+- [What the score measures](docs/science.md), the research behind the rewrite rules
+- [Install in your editor](docs/editors.md), [gate commits](docs/pre-commit.md), [FAQ](docs/faq.md), [how it compares](docs/comparison.md)
+- [The metrics CLI](cli/README.md), the [CHANGELOG](CHANGELOG.md), the [LICENSE](LICENSE)
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/adam-boudjemaa/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-  <a href="https://x.com/AdamBoudj"><img src="https://img.shields.io/badge/X-000000?style=flat-square&logo=x&logoColor=white" alt="X"></a>
-  <a href="https://adam-boudjemaa.com/"><img src="https://img.shields.io/badge/Website-1f3a5f?style=flat-square&logo=googlechrome&logoColor=white" alt="Website"></a>
-</p>
-
-<p align="center">
-  <sub>Built by <a href="https://github.com/Aboudjem">Adam Boudjemaa</a> &middot; MIT License &middot; No telemetry &middot; No data collection</sub>
+  <sub>Built by <a href="https://github.com/Aboudjem">Adam Boudjemaa</a> · MIT License · No telemetry, no data collection</sub>
 </p>

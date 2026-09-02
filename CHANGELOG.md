@@ -7,11 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.7.0] - 2026-09-02
 
-Identity, README and install refresh; improvements listed below as they land.
+A fact check for rewrites, a score you can read the reasons for, a commit gate, and a new visual
+identity with the README and its translations rebuilt around them.
 
 ### Added
 
+- **`compare --check-facts`** fails a rewrite that lost a number, name, URL, date, or version. New zero-dependency `cli/lib/facts.js`, six ordered extraction passes, no network and no filesystem access. Covered by 21 cases in `cli/test/facts.test.js`.
+- **A per-signal score breakdown** on every `score` run and in `--json`: each signal's raw metric, normalized value, weight, and the points it contributed, plus the unrounded `scoreRaw`. `scoreSignals` in `cli/lib/metrics.js` is now the single definition of the score. Covered by 9 new cases in `cli/test/metrics.test.js`.
+- **A `humanizer-scan-staged` pre-commit hook** that scores only the Markdown you staged, with its own `md|markdown|txt` filter. `scan` accepts multiple paths. Documented in `docs/pre-commit.md` and covered by 7 new cases in `cli/test/cli.test.js`.
+- **Neon Noir visual identity**: new light and dark hero banners, a PNG logo mark at two sizes, and a repaint of the wordmark, the burstiness chart, the typewriter demo, and the social preview card. Every SVG is hand-authored, script free, and renders in headless Chrome.
+- **Four README translations** at `READMEs/{zh-CN,ja,es,fr}.md`, translated from the final English. `README.zh-CN.md` is now a one-line pointer to `READMEs/zh-CN.md`.
+- **Install surfaces for other editors**: `.cursor-plugin/plugin.json` and `.copilot-plugin/plugin.json` alongside the Claude Code manifest, a `metadata.description` in `.claude-plugin/marketplace.json`, and `docs/editors.md` with the `npx skills add -a <agent>` table for nine agents and the manual copy path.
+- **`docs/faq.md`, `docs/comparison.md`, and `docs/science.md`**, holding the material the README no longer carries inline.
 - Release workflow: pushing a `vX.Y.Z` tag now creates the GitHub release and tells the 10x marketplace to re-sync (`.github/workflows/release.yml`).
+
+### Changed
+
+- **README rebuilt** from 382 lines and nine collapsed sections to 181 lines and two: a hero, a four-badge row, a five-language row, the install command above the first heading, then what it does, install, use it, what you get, editor support, limits, and links. The comparison table lost its competitor price row, which was unverifiable and drifting.
+- **CI now runs the CLI tests on Node 18 and 20**, so `engines.node >= 18` is tested rather than asserted. Lint stays on 20, since ESLint 10 requires 20.19 or newer.
+- **The pre-commit manifest check** in CI now asserts the staged hook's id, its threshold, `pass_filenames`, and its extension filter.
+- `cli/package.json` moves to 0.3.0 and is packaging-complete: `LICENSE`, `homepage`, `bugs`, `publishConfig`, and a `prepublishOnly` gate. `npm pack --dry-run` lists exactly 10 files and no tests. The package is still not published, and every documented command runs it as `node cli/index.js`.
+- `docs-site/static/img/logo.svg` re-synced from `.github/assets/logo-light.svg`.
+
+### Fixed
+
+- **A fact moved into a Markdown link no longer reads as lost.** `[the docs](https://example.com)` keeps its URL fact when the rewrite linkifies it.
+- **Dropping a `v` prefix no longer reads as a lost version.** `v1.2` and `1.2` are the same fact.
+- **The URL pattern no longer stops at a parenthesis**, which used to truncate `https://example.com/foo(123)` and resurface `123` as a separate missing number.
 
 ## [0.6.2] - 2026-08-27
 

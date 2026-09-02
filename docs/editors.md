@@ -45,6 +45,13 @@ npx skills add Aboudjem/humanizer-skill -a cursor -g -y
 npx skills add Aboudjem/humanizer-skill --list
 ```
 
+## OpenClaw
+
+There is a ClawHub listing at [clawhub.ai/Aboudjem/humanizer-skill](https://clawhub.ai/Aboudjem/humanizer-skill),
+installable with `clawhub install humanizer-skill`. Checked 2026-09-02, that listing is a stale
+0.1.0-era copy that still advertises 43 patterns, so it does not carry the current catalog. Until it
+is republished, use `npx skills add` or the manual copy below.
+
 ## Manual copy
 
 Any agent that reads `SKILL.md` files works without the CLI. Clone the repo and copy the one skill
