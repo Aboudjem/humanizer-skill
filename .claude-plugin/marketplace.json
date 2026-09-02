@@ -4,6 +4,9 @@
     "name": "Adam Boudjemaa",
     "email": "boudjemaa.adam@gmail.com"
   },
+  "metadata": {
+    "description": "Detects 55 AI writing patterns and rewrites text in five voice profiles with a 0-100 AI-tell score, entirely on your machine."
+  },
   "plugins": [
     {
       "name": "humanizer",
