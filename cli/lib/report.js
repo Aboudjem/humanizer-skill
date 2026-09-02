@@ -23,6 +23,24 @@ function formatMetrics(m) {
   return rows.map(([k, v]) => '  ' + pad(k + ':', 30) + v).join('\n');
 }
 
+/** Where the points came from, highest contributor first. */
+function formatSignals(signals) {
+  const lines = ['  Signal breakdown (points out of 100):'];
+  const ordered = signals.slice().sort((a, b) => b.points - a.points);
+  for (const s of ordered) {
+    lines.push(
+      '    ' +
+        pad(s.name, 12) +
+        pad(s.points.toFixed(1), 7) +
+        pad('weight ' + s.weight, 13) +
+        s.metric +
+        ' ' +
+        s.raw
+    );
+  }
+  return lines.join('\n');
+}
+
 function formatScore(result, label) {
   const lines = [];
   if (label) lines.push(label);
@@ -30,6 +48,7 @@ function formatScore(result, label) {
   if (result.metrics.shortSample) {
     lines.push('  note: short sample (< 40 words) - score is low-confidence');
   }
+  if (result.signals) lines.push(formatSignals(result.signals));
   lines.push(formatMetrics(result.metrics));
   return lines.join('\n');
 }
@@ -97,4 +116,4 @@ function round(x) {
   return Math.round(x * 1000) / 1000;
 }
 
-module.exports = { formatMetrics, formatScore, formatScan, formatCompare, formatFacts };
+module.exports = { formatMetrics, formatSignals, formatScore, formatScan, formatCompare, formatFacts };

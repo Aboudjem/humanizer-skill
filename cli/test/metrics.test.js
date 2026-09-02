@@ -10,8 +10,11 @@ const {
   trigramRepetition,
   analyze,
   aiTellScore,
+  scoreSignals,
   verdict,
   scoreText,
+  WEIGHTS,
+  ANCHORS,
 } = require('../lib/metrics');
 const { wordTokens, splitSentences, countSyllables, stripMarked } = require('../lib/tokenize');
 
@@ -127,4 +130,107 @@ test('ignore-quotes drops tells inside block quotes', () => {
   const withQuote = scoreText(t);
   const withoutQuote = scoreText(t, { ignoreQuotes: true });
   assert.ok(withoutQuote.metrics.vocabTells < withQuote.metrics.vocabTells);
+});
+
+// --- per-signal breakdown ------------------------------------------------------
+
+const SIGNAL_ORDER = ['burstiness', 'diversity', 'repetition', 'lexical'];
+
+test('the breakdown names four signals in a fixed order', () => {
+  const r = scoreText(AI_TEXT);
+  assert.deepStrictEqual(
+    r.signals.map((s) => s.name),
+    SIGNAL_ORDER
+  );
+  for (const s of r.signals) {
+    assert.deepStrictEqual(Object.keys(s), [
+      'name',
+      'metric',
+      'raw',
+      'normalized',
+      'weight',
+      'points',
+    ]);
+    assert.ok(s.normalized >= 0 && s.normalized <= 1, `${s.name} normalized in range`);
+    assert.strictEqual(r.metrics[s.metric], s.raw, `${s.name} raw matches its metric`);
+  }
+});
+
+test('the breakdown sums to the score', () => {
+  for (const txt of [AI_TEXT, HUMAN_TEXT, 'Short but real text with a few words in it here.']) {
+    const r = scoreText(txt);
+    const sum = r.signals.reduce((a, s) => a + s.points, 0);
+    // points are rounded to 3 places for display, so the gap is bounded by 4 * 0.0005
+    assert.ok(
+      Math.abs(sum - r.scoreRaw) <= 0.005,
+      `sum ${sum} should match scoreRaw ${r.scoreRaw}`
+    );
+    assert.strictEqual(Math.round(r.scoreRaw), r.score);
+  }
+});
+
+test('weights match WEIGHTS and sum to 1', () => {
+  const r = scoreText(AI_TEXT);
+  for (const s of r.signals) {
+    assert.strictEqual(s.weight, WEIGHTS[s.name], `${s.name} weight`);
+  }
+  const total = r.signals.reduce((a, s) => a + s.weight, 0);
+  assert.ok(Math.abs(total - 1) < 1e-9, `weights sum to ${total}`);
+});
+
+test('the breakdown is stable across two runs', () => {
+  assert.deepStrictEqual(scoreText(AI_TEXT).signals, scoreText(AI_TEXT).signals);
+  assert.strictEqual(
+    JSON.stringify(scoreText(HUMAN_TEXT)),
+    JSON.stringify(scoreText(HUMAN_TEXT))
+  );
+});
+
+test('empty text gives four zero-point signals and score 0', () => {
+  const r = scoreText('');
+  assert.strictEqual(r.score, 0);
+  assert.strictEqual(r.signals.length, 4);
+  for (const s of r.signals) {
+    assert.strictEqual(s.points, 0, `${s.name} contributes nothing to an empty file`);
+    assert.strictEqual(s.normalized, 0);
+  }
+});
+
+test('scoreSignals is the only score formula, so aiTellScore agrees with it', () => {
+  for (const txt of [AI_TEXT, HUMAN_TEXT, '']) {
+    const m = analyze(txt);
+    const sum = scoreSignals(m).reduce((a, s) => a + s.weight * s.normalized, 0);
+    assert.strictEqual(aiTellScore(m), Math.round(100 * sum));
+  }
+});
+
+test('the refactor did not move the score (no-drift pin)', () => {
+  // Exact values measured before scoreSignals existed. If one of these changes, the
+  // scoring behaviour changed, and every published threshold has to be revisited.
+  assert.strictEqual(scoreText(AI_TEXT).score, 66);
+  assert.strictEqual(scoreText(HUMAN_TEXT).score, 0);
+});
+
+test('a half-boundary composite still rounds the way it always did', () => {
+  // Raw composite is 57.49999999999999 here. Rounding each signal before summing
+  // would push it to 58. Regression guard for the display-rounding split.
+  const m = {
+    wordCount: 1,
+    burstiness: 0,
+    mattr: 0.3,
+    trigramRepetition: 0.045,
+    vocabTellDensity: 0.007,
+  };
+  assert.strictEqual(aiTellScore(m), 57);
+  const sum = scoreSignals(m).reduce((a, s) => a + s.weight * s.normalized, 0);
+  assert.ok(100 * sum < 57.5, 'the exact composite sits just under the .5 boundary');
+});
+
+test('custom anchors move the signals and the score together', () => {
+  const m = analyze(AI_TEXT);
+  const strict = { ...ANCHORS, vocabMax: 1 };
+  const relaxed = scoreSignals(m, strict).find((s) => s.name === 'lexical');
+  const normal = scoreSignals(m).find((s) => s.name === 'lexical');
+  assert.ok(relaxed.normalized < normal.normalized, 'a higher vocabMax lowers the lexical signal');
+  assert.ok(aiTellScore(m, strict) < aiTellScore(m));
 });

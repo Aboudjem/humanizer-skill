@@ -125,25 +125,66 @@ const ANCHORS = {
 const WEIGHTS = { burstiness: 0.28, diversity: 0.18, repetition: 0.14, lexical: 0.4 };
 
 /**
+ * The four contributors to the composite score, each with the metric it reads, that
+ * metric's raw value, its clamped 0-1 AI-likelihood, its weight, and the points it
+ * puts on the board. Fixed order, pure arithmetic, no rounding: this is the single
+ * definition of the score, and the display layer rounds a copy of it.
+ */
+function scoreSignals(m, anchors = ANCHORS) {
+  // No text to judge. Empty input must not read as AI or it would false-trip a CI gate.
+  const empty = !m.wordCount;
+  const density = m.vocabTellDensity || 0;
+  const defs = [
+    {
+      name: 'burstiness',
+      metric: 'burstiness',
+      raw: m.burstiness,
+      normalized: empty ? 0 : clamp((anchors.covHuman - m.burstiness) / anchors.covHuman, 0, 1),
+      weight: WEIGHTS.burstiness,
+    },
+    {
+      name: 'diversity',
+      metric: 'mattr',
+      raw: m.mattr,
+      normalized: empty
+        ? 0
+        : clamp((anchors.ttrHigh - m.mattr) / (anchors.ttrHigh - anchors.ttrLow), 0, 1),
+      weight: WEIGHTS.diversity,
+    },
+    {
+      name: 'repetition',
+      metric: 'trigramRepetition',
+      raw: m.trigramRepetition,
+      normalized: empty ? 0 : clamp(m.trigramRepetition / anchors.repMax, 0, 1),
+      weight: WEIGHTS.repetition,
+    },
+    {
+      name: 'lexical',
+      metric: 'vocabTellDensity',
+      raw: density,
+      normalized: empty ? 0 : clamp(density / anchors.vocabMax, 0, 1),
+      weight: WEIGHTS.lexical,
+    },
+  ];
+  for (const d of defs) d.points = d.weight * d.normalized * 100;
+  return defs;
+}
+
+/**
+ * The composite before rounding, 0-100. Sums weight * normalized in signal order and
+ * scales once, which is the original expression rewritten, not a new formula.
+ */
+function aiTellScoreRaw(m, anchors = ANCHORS) {
+  const raw = scoreSignals(m, anchors).reduce((a, s) => a + s.weight * s.normalized, 0);
+  return 100 * raw;
+}
+
+/**
  * Transparent weighted composite AI-tell score, 0-100 (higher = more AI smell).
  * lowBurstiness + lowDiversity + highRepetition + lexicalDensity.
  */
 function aiTellScore(m, anchors = ANCHORS) {
-  if (!m.wordCount) return 0; // no text to judge; empty input must not read as AI (would false-trip a CI gate)
-  const lowBurstiness = clamp((anchors.covHuman - m.burstiness) / anchors.covHuman, 0, 1);
-  const lowDiversity = clamp(
-    (anchors.ttrHigh - m.mattr) / (anchors.ttrHigh - anchors.ttrLow),
-    0,
-    1
-  );
-  const highRepetition = clamp(m.trigramRepetition / anchors.repMax, 0, 1);
-  const lexical = clamp((m.vocabTellDensity || 0) / anchors.vocabMax, 0, 1);
-  const raw =
-    WEIGHTS.burstiness * lowBurstiness +
-    WEIGHTS.diversity * lowDiversity +
-    WEIGHTS.repetition * highRepetition +
-    WEIGHTS.lexical * lexical;
-  return Math.round(100 * raw);
+  return Math.round(aiTellScoreRaw(m, anchors));
 }
 
 function verdict(score) {
@@ -156,9 +197,26 @@ function verdict(score) {
 
 function scoreText(rawText, options = {}) {
   const metrics = analyze(rawText, options);
-  const score = aiTellScore(metrics);
+  const signals = scoreSignals(metrics);
+  const scoreRaw = 100 * signals.reduce((a, s) => a + s.weight * s.normalized, 0);
+  const score = Math.round(scoreRaw);
   const label = metrics.wordCount === 0 ? 'No text' : verdict(score);
-  return { metrics, score, verdict: label };
+  return {
+    metrics,
+    score,
+    scoreRaw: round(scoreRaw, 6),
+    verdict: label,
+    // Rounded for display and for a stable JSON payload. The score above is computed
+    // from the unrounded values, so no rounding here can move it.
+    signals: signals.map((s) => ({
+      name: s.name,
+      metric: s.metric,
+      raw: s.raw,
+      normalized: round(s.normalized, 4),
+      weight: s.weight,
+      points: round(s.points, 3),
+    })),
+  };
 }
 
 module.exports = {
@@ -169,6 +227,8 @@ module.exports = {
   trigramRepetition,
   burstinessGB,
   analyze,
+  scoreSignals,
+  aiTellScoreRaw,
   aiTellScore,
   verdict,
   scoreText,

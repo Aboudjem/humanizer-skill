@@ -95,7 +95,7 @@ node tools/humanizer-skill/cli/index.js scan . --fail-above 40
 cd cli && node --test
 ```
 
-26 tests, no dependencies. Covers tokenization, every metric, the composite score, code/quote masking, the vocabulary layer, and CLI exit codes (threshold gate, baseline regression, bad input).
+50 tests, no dependencies. Covers tokenization, every metric, the composite score and its per-signal breakdown, code/quote masking, the vocabulary layer, fact extraction and the fact-loss diff, and CLI exit codes (threshold gate, baseline regression, fact check, bad input).
 
 ## Linting
 
