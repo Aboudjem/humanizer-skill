@@ -3,9 +3,9 @@
   <desc>The command /humanizer "This comprehensive guide…" --voice technical --score runs. The AI phrase has comprehensive, delves into, and pivotal struck through. The clean rewrite reads: the auth system uses JWTs, tokens expire after 15 min. The AI-tell score falls from 84 to 12.</desc>
   <defs>
     <linearGradient id="tl-hairline" gradientUnits="userSpaceOnUse" x1="26" y1="76" x2="694" y2="76">
-      <stop offset="0%" stop-color="#A836FF" stop-opacity="0"/>
-      <stop offset="30%" stop-color="#A836FF" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#EB0054" stop-opacity="0.1"/>
+      <stop offset="0%" stop-color="#8A2CD1" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#8A2CD1" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#C10045" stop-opacity="0.1"/>
     </linearGradient>
 
     <clipPath id="tl-cmdclip"><rect class="type" x="26" y="42" width="530" height="24"/></clipPath>
@@ -34,7 +34,7 @@
     .s2 { animation: tl-s2 7s ease-out infinite; }
     .s3 { animation: tl-s3 7s ease-out infinite; }
 
-    @keyframes tl-flag { 0%,26% { fill: #1A2233; } 34%,92% { fill: #EB0054; } 100% { fill: #1A2233; } }
+    @keyframes tl-flag { 0%,26% { fill: #1A2233; } 34%,92% { fill: #C10045; } 100% { fill: #1A2233; } }
     .flag { animation: tl-flag 7s ease-in-out infinite; }
 
     @keyframes tl-score { 0%,56% { opacity: 0; } 66%,92% { opacity: 1; } 100% { opacity: 0; } }
@@ -54,54 +54,54 @@
   <rect width="720" height="236" fill="#F7F8FB"/>
 
   <g clip-path="url(#tl-cmdclip)" class="mono cmd">
-    <text x="26" y="59" fill="#A836FF" font-weight="700">/humanizer</text>
+    <text x="26" y="59" fill="#8A2CD1" font-weight="700">/humanizer</text>
     <text x="110" y="59" fill="#48546B">"This comprehensive guide&#8230;"</text>
-    <text x="338" y="59" fill="#EB0054" font-weight="700">--voice</text>
+    <text x="338" y="59" fill="#C10045" font-weight="700">--voice</text>
     <text x="396" y="59" fill="#07070C">technical</text>
-    <text x="474" y="59" fill="#EB0054" font-weight="700">--score</text>
-    <rect class="caret" x="530" y="47" width="2.5" height="14" fill="#A836FF"/>
+    <text x="474" y="59" fill="#C10045" font-weight="700">--score</text>
+    <rect class="caret" x="530" y="47" width="2.5" height="14" fill="#8A2CD1"/>
   </g>
 
   <line x1="26" y1="76" x2="694" y2="76" stroke="#D8DEE9" stroke-width="1.25"/>
   <line x1="26" y1="76" x2="694" y2="76" stroke="url(#tl-hairline)" stroke-width="1.25"/>
 
-  <text class="disp badge" x="30" y="100" fill="#AB6600">FLAGGED</text>
-  <text class="mono badge" x="102" y="100" fill="#AB6600">[84/100]</text>
+  <text class="disp badge" x="30" y="100" fill="#8C5400">FLAGGED</text>
+  <text class="mono badge" x="102" y="100" fill="#8C5400">[84/100]</text>
 
-  <text class="disp badge" x="392" y="100" fill="#0E8571">HUMANIZED</text>
+  <text class="disp badge" x="392" y="100" fill="#0B6D5D">HUMANIZED</text>
   <g class="score" opacity="1">
-    <text class="mono badge" x="482" y="100" fill="#0E8571">[12/100]</text>
+    <text class="mono badge" x="482" y="100" fill="#0B6D5D">[12/100]</text>
   </g>
 
   <g>
     <text class="disp prose" x="30" y="128">This</text>
-    <text class="disp prose flag" x="64" y="128" fill="#EB0054">comprehensive</text>
+    <text class="disp prose flag" x="64" y="128" fill="#C10045">comprehensive</text>
     <text class="disp prose" x="180" y="128">guide</text>
-    <line class="s1" x1="64" y1="122" x2="175" y2="122" stroke="#EB0054" stroke-width="2"
+    <line class="s1" x1="64" y1="122" x2="175" y2="122" stroke="#C10045" stroke-width="2"
           stroke-linecap="round" stroke-dasharray="120 120" stroke-dashoffset="0"/>
 
-    <text class="disp prose flag" x="30" y="156" fill="#EB0054">delves into</text>
+    <text class="disp prose flag" x="30" y="156" fill="#C10045">delves into</text>
     <text class="disp prose" x="115" y="156">the</text>
-    <line class="s2" x1="30" y1="150" x2="108" y2="150" stroke="#EB0054" stroke-width="2"
+    <line class="s2" x1="30" y1="150" x2="108" y2="150" stroke="#C10045" stroke-width="2"
           stroke-linecap="round" stroke-dasharray="120 120" stroke-dashoffset="0"/>
 
-    <text class="disp prose flag" x="30" y="184" fill="#EB0054">pivotal</text>
+    <text class="disp prose flag" x="30" y="184" fill="#C10045">pivotal</text>
     <text class="disp prose" x="84" y="184">aspects of auth.</text>
-    <line class="s3" x1="30" y1="178" x2="76" y2="178" stroke="#EB0054" stroke-width="2"
+    <line class="s3" x1="30" y1="178" x2="76" y2="178" stroke="#C10045" stroke-width="2"
           stroke-linecap="round" stroke-dasharray="120 120" stroke-dashoffset="0"/>
   </g>
 
   <line x1="360" y1="90" x2="360" y2="200" stroke="#D8DEE9" stroke-width="1" stroke-dasharray="4 3"/>
   <g class="arrow" opacity="1" transform="translate(360,148)">
-    <circle cx="0" cy="0" r="15" fill="#A836FF" opacity="0.12"/>
-    <path d="M-5 -5 L6 0 L-5 5" stroke="#A836FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="0" cy="0" r="15" fill="#8A2CD1" opacity="0.12"/>
+    <path d="M-5 -5 L6 0 L-5 5" stroke="#8A2CD1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   </g>
 
   <g clip-path="url(#tl-humclip)">
     <text class="disp lead"  x="390" y="128">The auth system</text>
     <text class="disp prose" x="390" y="156">uses JWTs. Tokens</text>
     <text class="disp prose" x="390" y="184">expire after 15 min.</text>
-    <rect class="caret" x="540" y="171" width="2.5" height="15" fill="#0E8571"/>
+    <rect class="caret" x="540" y="171" width="2.5" height="15" fill="#0B6D5D"/>
   </g>
 
   <text class="disp wm" x="612" y="218" opacity="0.75">humanizer</text>

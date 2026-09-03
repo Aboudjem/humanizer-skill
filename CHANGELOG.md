@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2026-09-03
+
+A motion identity, and the literal synthwave scenery removed. No behaviour changes.
+
+### Changed
+
+- **Every asset is rebuilt around one principle:** the whole mark is drawn once as a muted track,
+  and a single bright element travels over it, so no frame of the loop is an incomplete logo and
+  the reduced-motion resting frame is the finished mark. This plugin's motion is
+  a nib writing a stroke that becomes lines of text.
+- **The scenery is gone.** No sun disc, no horizon line, no perspective grid and no band cuts in
+  any tracked SVG. The palette, the soft dual-tone wash, the restrained glow and the mono eyebrows
+  stay.
+- **Zero SMIL.** Every animation is now CSS, gradient colour drift included, so the
+  `prefers-reduced-motion` guard reaches all of it. Verified by phase offset in a single page load,
+  not by two renders at different virtual-time budgets, which gives a false negative.
+- **More vibrant, still readable.** The ground is lifted off near-black and tinted with this
+  plugin's own hue, every gradient drifts between two accents, and every text fill was re-measured
+  against the ground it actually ships on. Tightest pair in this repo: 5.49:1.
+
+### Added
+
+- `.github/assets/logo-mark-animated.svg` and `.github/assets/logo-mark-animated-light.svg`, a 256x256 animated mark on a
+  rounded tile, under 6 KB each, with dark and light variants.
+- `logo-mark.png`, `logo-mark-512.png` and `social-preview.png` are now headless-Chrome renders of
+  the mark's reduced-motion resting frame, so the raster is reproducible from the vector by one
+  command and cannot drift from it.
+
 ## [0.7.0] - 2026-09-02
 
 A fact check for rewrites, a score you can read the reasons for, a commit gate, and a new visual

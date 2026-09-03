@@ -3,14 +3,14 @@
   <desc>Thirteen sentence-length bars loop from a flat, uniform AI baseline to a varied human skyline (3 to 31 words) and back. Burstiness goes from about zero to plus 0.74.</desc>
   <defs>
     <linearGradient id="bl-bars" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="548" y2="0">
-      <stop offset="0%" stop-color="#A836FF"/>
-      <stop offset="100%" stop-color="#EB0054"/>
+      <stop offset="0%" stop-color="#8A2CD1"/>
+      <stop offset="100%" stop-color="#C10045"/>
     </linearGradient>
 
     <linearGradient id="bl-axis" gradientUnits="userSpaceOnUse" x1="40" y1="160" x2="548" y2="160">
-      <stop offset="0%" stop-color="#A836FF" stop-opacity="0"/>
-      <stop offset="30%" stop-color="#A836FF" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#EB0054" stop-opacity="0.15"/>
+      <stop offset="0%" stop-color="#8A2CD1" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#8A2CD1" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#C10045" stop-opacity="0.15"/>
     </linearGradient>
   </defs>
 
@@ -46,8 +46,8 @@
     <text class="disp lede" x="56" y="40"><tspan font-weight="700" fill="#48546B">AI</tspan>  &#183;  flat, uniform rhythm (every sentence &#8776;18 words)</text>
   </g>
   <g class="hum" opacity="1">
-    <circle cx="44" cy="36" r="4" fill="#A836FF"/>
-    <text class="disp lede" x="56" y="40"><tspan font-weight="700" fill="#A836FF">Human</tspan>  &#183;  natural burstiness (3 to 31 words per sentence)</text>
+    <circle cx="44" cy="36" r="4" fill="#8A2CD1"/>
+    <text class="disp lede" x="56" y="40"><tspan font-weight="700" fill="#8A2CD1">Human</tspan>  &#183;  natural burstiness (3 to 31 words per sentence)</text>
   </g>
 
   <line x1="40" y1="104" x2="548" y2="104" stroke="#48546B" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.6"/>
@@ -104,13 +104,13 @@
     <text class="disp cardt" x="590" y="80" fill="#48546B">AI &#183; uniform</text>
     <text class="disp cardm" x="590" y="98">18, 18, 19, 18&#8230;</text>
     <text class="disp cardm" x="590" y="122">Burstiness</text>
-    <text class="disp big"   x="590" y="142" fill="#AB6600">&#8722;0.02</text>
+    <text class="disp big"   x="590" y="142" fill="#8C5400">&#8722;0.02</text>
   </g>
   <g class="hum" opacity="1">
-    <text class="disp cardt" x="590" y="80" fill="#A836FF">Human &#183; varied</text>
+    <text class="disp cardt" x="590" y="80" fill="#8A2CD1">Human &#183; varied</text>
     <text class="disp cardm" x="590" y="98">3 &#8594; 31 words</text>
     <text class="disp cardm" x="590" y="122">Burstiness</text>
-    <text class="disp big"   x="590" y="142" fill="#0E8571">+0.74</text>
+    <text class="disp big"   x="590" y="142" fill="#0B6D5D">+0.74</text>
   </g>
 
   <text class="disp wm"  x="40"  y="184">humanizer</text>

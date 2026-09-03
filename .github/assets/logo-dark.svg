@@ -1,130 +1,135 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none" role="img" aria-label="humanizer: an AI writing humanizer and detector. 55 patterns, 5 voices, nothing leaves your machine.">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none" role="img"
+     aria-label="humanizer: a nib writes a stroke and the stroke becomes lines of text">
   <title>humanizer</title>
-  <desc>The humanizer wordmark beside a pen nib mark with one tapered ink stroke trailing from the tip, on a dark ground with a horizon hairline and a small sunset disc at the right edge.</desc>
   <defs>
-    <linearGradient id="ld-ground" x1="0" y1="0" x2="0.35" y2="1">
-      <stop offset="0%" stop-color="#0A0F1C"/>
-      <stop offset="60%" stop-color="#080C16"/>
-      <stop offset="100%" stop-color="#07070C"/>
+    <linearGradient id="hm-ground" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#171029"/>
+      <stop offset="55%" stop-color="#0A0F1C"/>
+      <stop offset="100%" stop-color="#080C18"/>
     </linearGradient>
-
-    <radialGradient id="ld-bloom" cx="0.5" cy="1" r="0.75">
-      <stop offset="0%" stop-color="#FF2D78" stop-opacity="0.30"/>
-      <stop offset="38%" stop-color="#7C3AED" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    <radialGradient id="hm-bloomA" cx="0.15" cy="0.13" r="0.44">
+      <stop offset="0%" stop-color="#C77DFF" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#C77DFF" stop-opacity="0"/>
     </radialGradient>
-
-    <linearGradient id="ld-sun" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFB341"/>
-      <stop offset="40%" stop-color="#FF4D8D"/>
-      <stop offset="100%" stop-color="#C77DFF"/>
-    </linearGradient>
-
-    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="0.25" gradientUnits="objectBoundingBox">
-      <stop offset="0%" stop-color="#C77DFF"/>
-      <stop offset="100%" stop-color="#FF4D8D"/>
-      <animateTransform attributeName="gradientTransform" type="translate"
-        values="-0.10 0; 0.10 0; -0.10 0" dur="18s" repeatCount="indefinite"/>
-    </linearGradient>
-
-    <linearGradient id="ld-rule" gradientUnits="userSpaceOnUse" x1="176" y1="48" x2="176" y2="146">
-      <stop offset="0%" stop-color="#C77DFF" stop-opacity="0"/>
-      <stop offset="45%" stop-color="#C77DFF" stop-opacity="0.75"/>
+    <radialGradient id="hm-bloomB" cx="0.88" cy="0.85" r="0.50">
+      <stop offset="0%" stop-color="#FF4D8D" stop-opacity="0.26"/>
       <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hm-bloomC" cx="0.52" cy="0.04" r="0.36">
+      <stop offset="0%" stop-color="#8E7BFF" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#8E7BFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hm-wash" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%"   stop-color="#E0AEFF" stop-opacity="0.20"/>
+      <stop offset="42%"  stop-color="#FF4D8D" stop-opacity="0.124"/>
+      <stop offset="76%"  stop-color="#8E7BFF" stop-opacity="0.046"/>
+      <stop offset="100%" stop-color="#8E7BFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="hm-frame"><rect width="720" height="200"/></clipPath>
+    <linearGradient id="hm-ink" gradientUnits="userSpaceOnUse" x1="44" y1="84" x2="214" y2="196">
+      <stop class="hmk1" offset="0%"   stop-color="#E0AEFF"/>
+      <stop class="hmk2" offset="52%"  stop-color="#C77DFF"/>
+      <stop class="hmk3" offset="100%" stop-color="#FF4D8D"/>
     </linearGradient>
-
-    <linearGradient id="ld-horizon" gradientUnits="userSpaceOnUse" x1="40" y1="152" x2="680" y2="152">
-      <stop offset="0%" stop-color="#00D4FF" stop-opacity="0"/>
-      <stop offset="22%" stop-color="#C77DFF" stop-opacity="0.5"/>
-      <stop offset="60%" stop-color="#C77DFF" stop-opacity="0.8"/>
-      <stop offset="86%" stop-color="#FF4D8D" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0"/>
-    </linearGradient>
-
-    <linearGradient id="ld-gridfade" gradientUnits="userSpaceOnUse" x1="0" y1="152" x2="0" y2="200">
-      <stop offset="0%" stop-color="#C77DFF" stop-opacity="0.55"/>
-      <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0.05"/>
-    </linearGradient>
-
-    <filter id="ld-glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="10" result="b"/>
+    <filter id="hm-glow" x="-45%" y="-45%" width="190%" height="190%">
+      <feGaussianBlur stdDeviation="5.5" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-
-    <filter id="ld-glow-atmo" x="-70%" y="-70%" width="240%" height="240%">
-      <feGaussianBlur stdDeviation="22" result="b"/>
+    <filter id="hm-glow-sm" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur stdDeviation="3.8" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-
-    <clipPath id="ld-sunclip"><circle cx="652" cy="130" r="22"/></clipPath>
-    <clipPath id="ld-gridclip"><rect x="0" y="152" width="720" height="48"/></clipPath>
+    <clipPath id="hm-r1"><rect class="hmw1" x="42" y="158" width="174" height="19"/></clipPath>
+    <clipPath id="hm-r2"><rect class="hmw2" x="42" y="190" width="174" height="19"/></clipPath>
+    <linearGradient id="hm-word" x1="0" y1="0" x2="1" y2="0.25">
+      <stop class="hmk1" offset="0%"   stop-color="#E0AEFF"/>
+      <stop class="hmk2" offset="46%"  stop-color="#C77DFF"/>
+      <stop class="hmk3" offset="100%" stop-color="#FF4D8D"/>
+    </linearGradient>
+    <linearGradient id="hm-sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.62"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="hm-wordclip">
+      <text x="140" y="108" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+            font-size="62" font-weight="800" letter-spacing="-1.9">humanizer</text>
+    </clipPath>
   </defs>
 
   <style>
     .disp { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
-    .word { font-size: 54px; font-weight: 800; letter-spacing: -2px; }
-    .tag  { font-size: 11px; letter-spacing: 0.8px; fill: #8494B0; }
-
-    @keyframes ld-breathe { 0%,100% { opacity: 0.55; } 50% { opacity: 0.95; } }
-    .bloom { animation: ld-breathe 9s ease-in-out infinite; }
-
-    @keyframes ld-sunpulse { 0%,100% { opacity: 0.42; } 50% { opacity: 0.62; } }
-    .sun { animation: ld-sunpulse 10s ease-in-out infinite; }
-
-    @keyframes ld-flow { to { stroke-dashoffset: -240; } }
-    .flowline { animation: ld-flow 14s linear infinite; }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; }
-    }
+    .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 4.5px; fill: #E0AEFF; }
+    .head    { font-size: 22px; font-weight: 700; fill: #F2F6FF; letter-spacing: -0.5px; }
+    .sub     { font-size: 16.5px; font-weight: 500; fill: #C2CDE4; }
+    .tag     { font-size: 11.5px; letter-spacing: 1.6px; fill: #93A2BE; }
+    .chip    { font-size: 11.5px; letter-spacing: 1.2px; fill: #C2CDE4; }
+    @keyframes hm-breathe { 0%,100% { opacity:0.62; } 50% { opacity:1; } }
+    .hmbloom { animation: hm-breathe 11s ease-in-out infinite; }
+    @keyframes hm-sweep { 0% { transform: translateX(-360px); } 100% { transform: translateX(1080px); } }
+    .hmwash { animation: hm-sweep 15s cubic-bezier(.5,0,.5,1) infinite; }
+    @keyframes hm-sheen { 0% { transform: translateX(0); } 15%,100% { transform: translateX(285px); } }
+    .hmsheen { animation: hm-sheen 8.5s cubic-bezier(.4,0,.3,1) infinite; }
+    @keyframes hm-ride{0%{transform:translate(42.0px,102.0px)}2.9%{transform:translate(52.9px,93.2px)}5.7%{transform:translate(66.8px,92.4px)}8.6%{transform:translate(79.7px,98.2px)}11.4%{transform:translate(91.7px,105.5px)}14.3%{transform:translate(104.5px,111.4px)}17.1%{transform:translate(118.2px,111.1px)}20%{transform:translate(129.6px,102.5px)}22.9%{transform:translate(140.0px,93.6px)}25.7%{transform:translate(153.8px,91.9px)}28.6%{transform:translate(166.7px,97.1px)}31.4%{transform:translate(178.9px,104.1px)}34.3%{transform:translate(192.0px,109.3px)}37.1%{transform:translate(205.6px,107.3px)}40%{transform:translate(216.0px,98.0px)}88%{transform:translate(216.0px,98.0px)}100%{transform:translate(42.0px,102.0px)}}
+    @keyframes hm-draw { 0% { stroke-dashoffset: 200; } 40% { stroke-dashoffset: 0; }
+                        88% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 200; } }
+    @keyframes hm-w1 { 0%,40% { width: 0; } 54%,90% { width: 174px; } 98%,100% { width: 0; } }
+    @keyframes hm-w2 { 0%,48% { width: 0; } 62%,90% { width: 174px; } 98%,100% { width: 0; } }
+    /* V3a: the nib and the ink it lays down must both be linear or the nib lags the stroke */
+    .hmnib { transform: translate(216px, 98px); animation: hm-ride 7s linear infinite; }
+    .hmstroke { stroke-dasharray: 200; animation: hm-draw 7s linear infinite; }
+    .hmw1 { animation: hm-w1 7s cubic-bezier(.3,0,.2,1) infinite; }
+    .hmw2 { animation: hm-w2 7s cubic-bezier(.3,0,.2,1) infinite; }
+    @keyframes hm-k1 { 0%,100% { stop-color:#E0AEFF; } 50% { stop-color:#C77DFF; } }
+    @keyframes hm-k2 { 0%,100% { stop-color:#C77DFF; } 50% { stop-color:#E86BC8; } }
+    @keyframes hm-k3 { 0%,100% { stop-color:#FF4D8D; } 50% { stop-color:#C77DFF; } }
+    .hmk1 { animation: hm-k1 14s ease-in-out infinite; }
+    .hmk2 { animation: hm-k2 14s ease-in-out infinite; }
+    .hmk3 { animation: hm-k3 14s ease-in-out infinite; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
   </style>
 
-  <rect width="720" height="200" fill="url(#ld-ground)"/>
-  <ellipse class="bloom" cx="360" cy="206" rx="460" ry="110" fill="url(#ld-bloom)"/>
-
-  <g class="sun">
-    <g filter="url(#ld-glow-atmo)">
-      <circle cx="652" cy="130" r="22" fill="url(#ld-sun)"/>
-    </g>
-    <g clip-path="url(#ld-sunclip)" fill="#080C16">
-      <rect x="624" y="133" width="56" height="1.6"/>
-      <rect x="624" y="138.5" width="56" height="2.2"/>
-      <rect x="624" y="145" width="56" height="3"/>
+  <rect width="720" height="200" fill="url(#hm-ground)"/>
+  <g class="hmbloom">
+    <rect width="720" height="200" fill="url(#hm-bloomA)"/>
+    <rect width="720" height="200" fill="url(#hm-bloomB)"/>
+    <rect width="720" height="200" fill="url(#hm-bloomC)"/>
+  </g>
+  <g clip-path="url(#hm-frame)">
+    <g transform="translate(0,100)">
+      <ellipse class="hmwash" cx="0" cy="0" rx="300" ry="180" fill="url(#hm-wash)"/>
     </g>
   </g>
-
-  <g id="grid" clip-path="url(#ld-gridclip)" opacity="0">
-    <g stroke="url(#ld-gridfade)" stroke-width="1" fill="none">
-      <path d="M360 152 L-420 200"/><path d="M360 152 L-60 200"/><path d="M360 152 L110 200"/>
-      <path d="M360 152 L230 200"/><path d="M360 152 L310 200"/><path d="M360 152 L360 200"/>
-      <path d="M360 152 L412 200"/><path d="M360 152 L494 200"/><path d="M360 152 L616 200"/>
-      <path d="M360 152 L790 200"/><path d="M360 152 L1150 200"/>
+  <g transform="translate(30,50) scale(0.3906)">
+  <g opacity="0.32">
+    <path d="M42 102 C72 66, 100 138, 130 102 C160 66, 186 136, 216 98" fill="none" stroke="url(#hm-ink)" stroke-width="13" stroke-linecap="round"/>
+    <g fill="url(#hm-ink)"><rect x="42" y="158" width="74" height="17" rx="8.5"/><rect x="128" y="158" width="88" height="17" rx="8.5"/><rect x="42" y="190" width="96" height="17" rx="8.5"/><rect x="150" y="190" width="66" height="17" rx="8.5"/></g>
+  </g>
+  <g filter="url(#hm-glow)">
+    <path class="hmstroke" d="M42 102 C72 66, 100 138, 130 102 C160 66, 186 136, 216 98" pathLength="200" fill="none"
+          stroke="url(#hm-ink)" stroke-width="13" stroke-linecap="round"/>
+  </g>
+  <g fill="url(#hm-ink)" opacity="0.95"><g clip-path="url(#hm-r1)"><rect x="42" y="158" width="74" height="17" rx="8.5"/><rect x="128" y="158" width="88" height="17" rx="8.5"/></g><g clip-path="url(#hm-r2)"><rect x="42" y="190" width="96" height="17" rx="8.5"/><rect x="150" y="190" width="66" height="17" rx="8.5"/></g></g>
+  <g class="hmnib">
+    <g transform="rotate(-15)">
+      <path fill="url(#hm-ink)" fill-rule="evenodd"
+            d="M0 0 L-13 -38 C-15.5 -49 -13 -63 0 -72 C13 -63 15.5 -49 13 -38 Z
+               M-2.2 -15 L-2.2 -43 L2.2 -43 L2.2 -15 Z
+               M-6.4 -52 A6.4 6.4 0 1 0 6.4 -52 A6.4 6.4 0 1 0 -6.4 -52 Z"/>
     </g>
-    <g stroke="url(#ld-gridfade)" stroke-width="1" fill="none">
-      <line x1="0" y1="155" x2="720" y2="155"/>
-      <line x1="0" y1="160" x2="720" y2="160"/>
-      <line x1="0" y1="168" x2="720" y2="168"/>
-      <line x1="0" y1="180" x2="720" y2="180"/>
-      <line x1="0" y1="196" x2="720" y2="196"/>
+    <g filter="url(#hm-glow-sm)"><circle r="6" fill="#FFFFFF"/></g>
+  </g>
+  </g>
+  <g filter="url(#hm-glow)">
+    <text class="disp" x="140" y="108" font-size="62" font-weight="800"
+          letter-spacing="-1.9" fill="url(#hm-word)">humanizer</text>
+  </g>
+  <g clip-path="url(#hm-wordclip)">
+    <g transform="skewX(-18)">
+      <rect class="hmsheen" x="72" y="46" width="29"
+            height="84" fill="url(#hm-sheen)" opacity="0.45"/>
     </g>
   </g>
-
-  <g opacity="0.95">
-    <line x1="40" y1="152" x2="680" y2="152" stroke="url(#ld-horizon)" stroke-width="1.25"/>
-    <line class="flowline" x1="40" y1="152" x2="680" y2="152" stroke="url(#ld-horizon)"
-          stroke-width="1.25" stroke-dasharray="3 9" opacity="0.85"/>
-  </g>
-
-  <g filter="url(#ld-glow)">
-    <g transform="translate(84,118)">
-      <path fill="url(#brand)" fill-rule="evenodd" d="M0 0 C-3.5 -14 -9 -24 -14 -33 C-17.5 -40 -18.5 -52 -16.5 -59 L-13 -64 L13 -64 L16.5 -59 C18.5 -52 17.5 -40 14 -33 C9 -24 3.5 -14 0 0 Z M-1.6 -10 L-1.6 -38 L1.6 -38 L1.6 -10 Z M-5.2 -43 A5.2 5.2 0 1 0 5.2 -43 A5.2 5.2 0 1 0 -5.2 -43 Z"/>
-      <path fill="url(#brand)" d="M0 0 C18 3 40 9 72 9 C40 16 16 12 0 0 Z"/>
-    </g>
-    <text class="disp word" x="202" y="100" fill="url(#brand)">humanizer</text>
-  </g>
-
-  <line x1="176" y1="48" x2="176" y2="146" stroke="url(#ld-rule)" stroke-width="1.5"/>
-
-  <text class="mono tag" x="204" y="130">55 patterns  &#183;  5 voices  &#183;  nothing leaves your machine</text>
+  <text class="mono tag" x="140" y="142">55 patterns  &#183;  5 voices  &#183;  nothing leaves your machine</text>
 </svg>

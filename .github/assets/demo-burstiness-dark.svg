@@ -3,9 +3,9 @@
   <desc>Thirteen sentence-length bars loop from a flat, uniform AI baseline to a varied human skyline (3 to 31 words) and back. Burstiness goes from about zero to plus 0.74.</desc>
   <defs>
     <linearGradient id="bd-ground" x1="0" y1="0" x2="0.35" y2="1">
-      <stop offset="0%" stop-color="#0A0F1C"/>
-      <stop offset="60%" stop-color="#080C16"/>
-      <stop offset="100%" stop-color="#07070C"/>
+      <stop offset="0%" stop-color="#171029"/>
+      <stop offset="60%" stop-color="#0A0F1C"/>
+      <stop offset="100%" stop-color="#080C18"/>
     </linearGradient>
 
     <radialGradient id="bd-bloom" cx="0.5" cy="1" r="0.8">
@@ -24,18 +24,26 @@
       <stop offset="30%" stop-color="#C77DFF" stop-opacity="0.7"/>
       <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0.15"/>
     </linearGradient>
+      <radialGradient id="v2-bloomA" cx="0.18" cy="0.22" r="0.72">
+      <stop offset="0%" stop-color="#C77DFF" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#C77DFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="v2-bloomB" cx="0.84" cy="0.86" r="0.68">
+      <stop offset="0%" stop-color="#FF4D8D" stop-opacity="0.11"/>
+      <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
   <style>
     .disp { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
     .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
-    .lede  { font-size: 13px; fill: #B6C2DA; }
+    .lede  { font-size: 13px; fill: #C2CDE4; }
     .lede b { font-weight: 700; }
     .cardt { font-size: 11px; font-weight: 700; }
-    .cardm { font-size: 10px; fill: #8494B0; }
+    .cardm { font-size: 10px; fill: #93A2BE; }
     .big   { font-size: 20px; font-weight: 800; }
-    .pk    { font-size: 9px; font-weight: 700; fill: #B6C2DA; }
-    .tag   { font-size: 10.5px; letter-spacing: 0.6px; fill: #8494B0; }
+    .pk    { font-size: 9px; font-weight: 700; fill: #C2CDE4; }
+    .tag   { font-size: 10.5px; letter-spacing: 0.6px; fill: #93A2BE; }
     .wm    { font-size: 11px; font-weight: 800; fill: #F2F6FF; }
 
     @keyframes bd-ai    { 0%,40% { opacity: 1; }   48%,92% { opacity: 0; }   100% { opacity: 1; } }
@@ -53,14 +61,17 @@
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
     }
+      @keyframes v2-breathe { 0%,100% { opacity:0.66; } 50% { opacity:1; } }
+    .v2bloom { animation: v2-breathe 11s ease-in-out infinite; }
   </style>
 
   <rect width="720" height="200" fill="url(#bd-ground)"/>
+  <g class="v2bloom"><rect width="720" height="200" fill="url(#v2-bloomA)"/><rect width="720" height="200" fill="url(#v2-bloomB)"/></g>
   <ellipse class="bloom" cx="360" cy="206" rx="470" ry="120" fill="url(#bd-bloom)"/>
 
   <g class="ai" opacity="0">
     <circle cx="44" cy="36" r="4" fill="#5C6A85"/>
-    <text class="disp lede" x="56" y="40"><tspan font-weight="700" fill="#8494B0">AI</tspan>  &#183;  flat, uniform rhythm (every sentence &#8776;18 words)</text>
+    <text class="disp lede" x="56" y="40"><tspan font-weight="700" fill="#93A2BE">AI</tspan>  &#183;  flat, uniform rhythm (every sentence &#8776;18 words)</text>
   </g>
   <g class="hum" opacity="1">
     <circle cx="44" cy="36" r="4" fill="#C77DFF"/>
@@ -68,7 +79,7 @@
   </g>
 
   <line x1="40" y1="104" x2="548" y2="104" stroke="#5C6A85" stroke-width="1.2" stroke-dasharray="4 3" opacity="0.75"/>
-  <text class="mono" x="34" y="107" font-size="8.5" text-anchor="end" fill="#8494B0">&#8776;18</text>
+  <text class="mono" x="34" y="107" font-size="8.5" text-anchor="end" fill="#93A2BE">&#8776;18</text>
 
   <g class="ai" opacity="0" fill="#5C6A85">
     <rect x="40"  y="104" width="28" height="56" rx="4"/>
@@ -118,7 +129,7 @@
 
   <rect x="574" y="56" width="122" height="96" rx="12" fill="#0E1524" stroke="#1E2A42" stroke-width="1"/>
   <g class="ai" opacity="0">
-    <text class="disp cardt" x="590" y="80" fill="#8494B0">AI &#183; uniform</text>
+    <text class="disp cardt" x="590" y="80" fill="#93A2BE">AI &#183; uniform</text>
     <text class="disp cardm" x="590" y="98">18, 18, 19, 18&#8230;</text>
     <text class="disp cardm" x="590" y="122">Burstiness</text>
     <text class="disp big"   x="590" y="142" fill="#FFB341">&#8722;0.02</text>

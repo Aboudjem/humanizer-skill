@@ -1,31 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" fill="none" role="img"
-     aria-label="humanizer: Reads like a person wrote it">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" role="img"
+     aria-label="humanizer: a nib writes a stroke and the stroke becomes lines of text">
   <title>humanizer</title>
+  <desc>Animated dark-mode logo mark. The whole mark is drawn as a muted track; one bright
+  element travels over it, so no frame is an incomplete logo and the reduced-motion resting frame
+  is the finished mark.</desc>
   <defs>
-    <linearGradient id="hm-ground" x1="0" y1="0" x2="0.4" y2="1">
+    <linearGradient id="hm-plate" x1="0" y1="0" x2="0.4" y2="1">
       <stop offset="0%" stop-color="#171029"/>
-      <stop offset="55%" stop-color="#0A0F1C"/>
+      <stop offset="58%" stop-color="#0A0F1C"/>
       <stop offset="100%" stop-color="#080C18"/>
     </linearGradient>
-    <radialGradient id="hm-bloomA" cx="0.15" cy="0.13" r="0.44">
-      <stop offset="0%" stop-color="#C77DFF" stop-opacity="0.26"/>
+    <radialGradient id="hm-bloomA" cx="0.24" cy="0.24" r="0.68">
+      <stop offset="0%" stop-color="#C77DFF" stop-opacity="0.42"/>
       <stop offset="100%" stop-color="#C77DFF" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="hm-bloomB" cx="0.88" cy="0.85" r="0.50">
-      <stop offset="0%" stop-color="#FF4D8D" stop-opacity="0.26"/>
+    <radialGradient id="hm-bloomB" cx="0.80" cy="0.82" r="0.64">
+      <stop offset="0%" stop-color="#FF4D8D" stop-opacity="0.34"/>
       <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="hm-bloomC" cx="0.52" cy="0.04" r="0.36">
-      <stop offset="0%" stop-color="#8E7BFF" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#8E7BFF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="hm-wash" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%"   stop-color="#E0AEFF" stop-opacity="0.20"/>
-      <stop offset="42%"  stop-color="#FF4D8D" stop-opacity="0.124"/>
-      <stop offset="76%"  stop-color="#8E7BFF" stop-opacity="0.046"/>
-      <stop offset="100%" stop-color="#8E7BFF" stop-opacity="0"/>
-    </radialGradient>
-    <clipPath id="hm-frame"><rect width="1280" height="640"/></clipPath>
     <linearGradient id="hm-ink" gradientUnits="userSpaceOnUse" x1="44" y1="84" x2="214" y2="196">
       <stop class="hmk1" offset="0%"   stop-color="#E0AEFF"/>
       <stop class="hmk2" offset="52%"  stop-color="#C77DFF"/>
@@ -41,39 +33,11 @@
     </filter>
     <clipPath id="hm-r1"><rect class="hmw1" x="42" y="158" width="174" height="19"/></clipPath>
     <clipPath id="hm-r2"><rect class="hmw2" x="42" y="190" width="174" height="19"/></clipPath>
-    <linearGradient id="hm-word" x1="0" y1="0" x2="1" y2="0.25">
-      <stop class="hmk1" offset="0%"   stop-color="#E0AEFF"/>
-      <stop class="hmk2" offset="46%"  stop-color="#C77DFF"/>
-      <stop class="hmk3" offset="100%" stop-color="#FF4D8D"/>
-    </linearGradient>
-    <linearGradient id="hm-sheen" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.62"/>
-      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
-    </linearGradient>
-    <clipPath id="hm-wordclip">
-      <text x="96" y="358" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-            font-size="122" font-weight="800" letter-spacing="-4.3">humanizer</text>
-    </clipPath>
   </defs>
 
   <style>
-    .disp { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
-    .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 4.5px; fill: #E0AEFF; }
-    .head    { font-size: 38px; font-weight: 700; fill: #F2F6FF; letter-spacing: -0.5px; }
-    .sub     { font-size: 20px; font-weight: 500; fill: #C2CDE4; }
-    .tag     { font-size: 15px; letter-spacing: 1.6px; fill: #93A2BE; }
-    .chip    { font-size: 11.5px; letter-spacing: 1.2px; fill: #C2CDE4; }
-    .chipbig { font-size: 17px; letter-spacing: 1px; fill: #C2CDE4; }
-    .tagsm { font-size: 12.5px; letter-spacing: 1.6px; fill: #93A2BE; }
-    .eyebrow { font-size: 17px; letter-spacing: 5px; }
     @keyframes hm-breathe { 0%,100% { opacity:0.62; } 50% { opacity:1; } }
-    .hmbloom { animation: hm-breathe 11s ease-in-out infinite; }
-    @keyframes hm-sweep { 0% { transform: translateX(-360px); } 100% { transform: translateX(1640px); } }
-    .hmwash { animation: hm-sweep 19s cubic-bezier(.5,0,.5,1) infinite; }
-    @keyframes hm-sheen { 0% { transform: translateX(0); } 15%,100% { transform: translateX(561px); } }
-    .hmsheen { animation: hm-sheen 8.5s cubic-bezier(.4,0,.3,1) infinite; }
+    .hmbloom { animation: hm-breathe 9s ease-in-out infinite; }
     @keyframes hm-ride{0%{transform:translate(42.0px,102.0px)}2.9%{transform:translate(52.9px,93.2px)}5.7%{transform:translate(66.8px,92.4px)}8.6%{transform:translate(79.7px,98.2px)}11.4%{transform:translate(91.7px,105.5px)}14.3%{transform:translate(104.5px,111.4px)}17.1%{transform:translate(118.2px,111.1px)}20%{transform:translate(129.6px,102.5px)}22.9%{transform:translate(140.0px,93.6px)}25.7%{transform:translate(153.8px,91.9px)}28.6%{transform:translate(166.7px,97.1px)}31.4%{transform:translate(178.9px,104.1px)}34.3%{transform:translate(192.0px,109.3px)}37.1%{transform:translate(205.6px,107.3px)}40%{transform:translate(216.0px,98.0px)}88%{transform:translate(216.0px,98.0px)}100%{transform:translate(42.0px,102.0px)}}
     @keyframes hm-draw { 0% { stroke-dashoffset: 200; } 40% { stroke-dashoffset: 0; }
                         88% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 200; } }
@@ -93,18 +57,14 @@
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
   </style>
 
-  <rect width="1280" height="640" fill="url(#hm-ground)"/>
+  <rect width="256" height="256" rx="56" fill="url(#hm-plate)"/>
   <g class="hmbloom">
-    <rect width="1280" height="640" fill="url(#hm-bloomA)"/>
-    <rect width="1280" height="640" fill="url(#hm-bloomB)"/>
-    <rect width="1280" height="640" fill="url(#hm-bloomC)"/>
+    <rect width="256" height="256" rx="56" fill="url(#hm-bloomA)"/>
+    <rect width="256" height="256" rx="56" fill="url(#hm-bloomB)"/>
   </g>
-  <g clip-path="url(#hm-frame)">
-    <g transform="translate(0,320)">
-      <ellipse class="hmwash" cx="0" cy="0" rx="520" ry="380" fill="url(#hm-wash)"/>
-    </g>
-  </g>
-  <g transform="translate(872,126) scale(1.2188)">
+  <rect x="0.9" y="0.9" width="254.2" height="254.2" rx="55.2" fill="none"
+        stroke="#22314D" stroke-width="1.8"/>
+
   <g opacity="0.32">
     <path d="M42 102 C72 66, 100 138, 130 102 C160 66, 186 136, 216 98" fill="none" stroke="url(#hm-ink)" stroke-width="13" stroke-linecap="round"/>
     <g fill="url(#hm-ink)"><rect x="42" y="158" width="74" height="17" rx="8.5"/><rect x="128" y="158" width="88" height="17" rx="8.5"/><rect x="42" y="190" width="96" height="17" rx="8.5"/><rect x="150" y="190" width="66" height="17" rx="8.5"/></g>
@@ -123,19 +83,4 @@
     </g>
     <g filter="url(#hm-glow-sm)"><circle r="6" fill="#FFFFFF"/></g>
   </g>
-  </g>
-  <g filter="url(#hm-glow)">
-    <text class="disp" x="96" y="358" font-size="122" font-weight="800"
-          letter-spacing="-4.3" fill="url(#hm-word)">humanizer</text>
-  </g>
-  <g clip-path="url(#hm-wordclip)">
-    <g transform="skewX(-18)">
-      <rect class="hmsheen" x="-38" y="236" width="56"
-            height="165" fill="url(#hm-sheen)" opacity="0.45"/>
-    </g>
-  </g>
-  <text class="mono eyebrow" x="96" y="258">AI WRITING HUMANIZER AND DETECTOR</text>
-  <text class="disp head" x="96" y="416">Reads like a person wrote it</text>
-  <text class="disp sub" x="96" y="458">55 patterns, 5 voices, zero setup, and nothing leaves your machine.</text>
-  <text class="mono tag" x="96" y="604">github.com/Aboudjem/humanizer-skill</text>
 </svg>

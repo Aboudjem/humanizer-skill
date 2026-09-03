@@ -1,31 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" fill="none" role="img"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="none" role="img"
      aria-label="humanizer: a nib writes a stroke and the stroke becomes lines of text">
   <title>humanizer</title>
+  <desc>Animated light-mode logo mark. The whole mark is drawn as a muted track; one bright
+  element travels over it, so no frame is an incomplete logo and the reduced-motion resting frame
+  is the finished mark.</desc>
   <defs>
-    <linearGradient id="hm-ground" x1="0" y1="0" x2="0.4" y2="1">
+    <linearGradient id="hm-plate" x1="0" y1="0" x2="0.4" y2="1">
       <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="55%" stop-color="#F7F8FB"/>
+      <stop offset="58%" stop-color="#F7F8FB"/>
       <stop offset="100%" stop-color="#EEF1F7"/>
     </linearGradient>
-    <radialGradient id="hm-bloomA" cx="0.15" cy="0.13" r="0.44">
-      <stop offset="0%" stop-color="#8A2CD1" stop-opacity="0.10"/>
+    <radialGradient id="hm-bloomA" cx="0.24" cy="0.24" r="0.68">
+      <stop offset="0%" stop-color="#8A2CD1" stop-opacity="0.16"/>
       <stop offset="100%" stop-color="#8A2CD1" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="hm-bloomB" cx="0.88" cy="0.85" r="0.50">
-      <stop offset="0%" stop-color="#C10045" stop-opacity="0.09"/>
+    <radialGradient id="hm-bloomB" cx="0.80" cy="0.82" r="0.64">
+      <stop offset="0%" stop-color="#C10045" stop-opacity="0.12"/>
       <stop offset="100%" stop-color="#C10045" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="hm-bloomC" cx="0.52" cy="0.04" r="0.36">
-      <stop offset="0%" stop-color="#5D4BD1" stop-opacity="0.06"/>
-      <stop offset="100%" stop-color="#5D4BD1" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="hm-wash" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%"   stop-color="#8A2CD1" stop-opacity="0.07"/>
-      <stop offset="42%"  stop-color="#C10045" stop-opacity="0.043"/>
-      <stop offset="76%"  stop-color="#5D4BD1" stop-opacity="0.016"/>
-      <stop offset="100%" stop-color="#5D4BD1" stop-opacity="0"/>
-    </radialGradient>
-    <clipPath id="hm-frame"><rect width="720" height="200"/></clipPath>
     <linearGradient id="hm-ink" gradientUnits="userSpaceOnUse" x1="44" y1="84" x2="214" y2="196">
       <stop class="hmk1" offset="0%"   stop-color="#8A2CD1"/>
       <stop class="hmk2" offset="52%"  stop-color="#8A2CD1"/>
@@ -33,25 +25,11 @@
     </linearGradient>
     <clipPath id="hm-r1"><rect class="hmw1" x="42" y="158" width="174" height="19"/></clipPath>
     <clipPath id="hm-r2"><rect class="hmw2" x="42" y="190" width="174" height="19"/></clipPath>
-    <linearGradient id="hm-word" x1="0" y1="0" x2="1" y2="0.25">
-      <stop class="hmk1" offset="0%"   stop-color="#8A2CD1"/>
-      <stop class="hmk2" offset="46%"  stop-color="#8A2CD1"/>
-      <stop class="hmk3" offset="100%" stop-color="#C10045"/>
-    </linearGradient>
   </defs>
 
   <style>
-    .disp { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
-    .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 4.5px; fill: #8A2CD1; }
-    .head    { font-size: 22px; font-weight: 700; fill: #1A2233; letter-spacing: -0.5px; }
-    .sub     { font-size: 16.5px; font-weight: 500; fill: #48546B; }
-    .tag     { font-size: 11.5px; letter-spacing: 1.6px; fill: #48546B; }
-    .chip    { font-size: 11.5px; letter-spacing: 1.2px; fill: #48546B; }
     @keyframes hm-breathe { 0%,100% { opacity:0.72; } 50% { opacity:1; } }
-    .hmbloom { animation: hm-breathe 11s ease-in-out infinite; }
-    @keyframes hm-sweep { 0% { transform: translateX(-360px); } 100% { transform: translateX(1080px); } }
-    .hmwash { animation: hm-sweep 15s cubic-bezier(.5,0,.5,1) infinite; }
+    .hmbloom { animation: hm-breathe 9s ease-in-out infinite; }
     @keyframes hm-ride{0%{transform:translate(42.0px,102.0px)}2.9%{transform:translate(52.9px,93.2px)}5.7%{transform:translate(66.8px,92.4px)}8.6%{transform:translate(79.7px,98.2px)}11.4%{transform:translate(91.7px,105.5px)}14.3%{transform:translate(104.5px,111.4px)}17.1%{transform:translate(118.2px,111.1px)}20%{transform:translate(129.6px,102.5px)}22.9%{transform:translate(140.0px,93.6px)}25.7%{transform:translate(153.8px,91.9px)}28.6%{transform:translate(166.7px,97.1px)}31.4%{transform:translate(178.9px,104.1px)}34.3%{transform:translate(192.0px,109.3px)}37.1%{transform:translate(205.6px,107.3px)}40%{transform:translate(216.0px,98.0px)}88%{transform:translate(216.0px,98.0px)}100%{transform:translate(42.0px,102.0px)}}
     @keyframes hm-draw { 0% { stroke-dashoffset: 200; } 40% { stroke-dashoffset: 0; }
                         88% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 200; } }
@@ -71,18 +49,14 @@
     @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
   </style>
 
-  <rect width="720" height="200" fill="url(#hm-ground)"/>
+  <rect width="256" height="256" rx="56" fill="url(#hm-plate)"/>
   <g class="hmbloom">
-    <rect width="720" height="200" fill="url(#hm-bloomA)"/>
-    <rect width="720" height="200" fill="url(#hm-bloomB)"/>
-    <rect width="720" height="200" fill="url(#hm-bloomC)"/>
+    <rect width="256" height="256" rx="56" fill="url(#hm-bloomA)"/>
+    <rect width="256" height="256" rx="56" fill="url(#hm-bloomB)"/>
   </g>
-  <g clip-path="url(#hm-frame)">
-    <g transform="translate(0,100)">
-      <ellipse class="hmwash" cx="0" cy="0" rx="300" ry="180" fill="url(#hm-wash)"/>
-    </g>
-  </g>
-  <g transform="translate(30,50) scale(0.3906)">
+  <rect x="0.9" y="0.9" width="254.2" height="254.2" rx="55.2" fill="none"
+        stroke="#D8DEE9" stroke-width="1.8"/>
+
   <g opacity="0.26">
     <path d="M42 102 C72 66, 100 138, 130 102 C160 66, 186 136, 216 98" fill="none" stroke="url(#hm-ink)" stroke-width="13" stroke-linecap="round"/>
     <g fill="url(#hm-ink)"><rect x="42" y="158" width="74" height="17" rx="8.5"/><rect x="128" y="158" width="88" height="17" rx="8.5"/><rect x="42" y="190" width="96" height="17" rx="8.5"/><rect x="150" y="190" width="66" height="17" rx="8.5"/></g>
@@ -101,10 +75,4 @@
     </g>
     <g><circle r="6" fill="#8A2CD1"/><circle r="6" fill="none" stroke="#FFFFFF" stroke-width="2.4"/></g>
   </g>
-  </g>
-  <g>
-    <text class="disp" x="140" y="108" font-size="62" font-weight="800"
-          letter-spacing="-1.9" fill="url(#hm-word)">humanizer</text>
-  </g>
-  <text class="mono tag" x="140" y="142">55 patterns  &#183;  5 voices  &#183;  nothing leaves your machine</text>
 </svg>

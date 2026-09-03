@@ -3,9 +3,9 @@
   <desc>The command /humanizer "This comprehensive guide…" --voice technical --score runs. The AI phrase has comprehensive, delves into, and pivotal struck through. The clean rewrite reads: the auth system uses JWTs, tokens expire after 15 min. The AI-tell score falls from 84 to 12.</desc>
   <defs>
     <linearGradient id="td-ground" x1="0" y1="0" x2="0.35" y2="1">
-      <stop offset="0%" stop-color="#0A0F1C"/>
-      <stop offset="60%" stop-color="#080C16"/>
-      <stop offset="100%" stop-color="#07070C"/>
+      <stop offset="0%" stop-color="#171029"/>
+      <stop offset="60%" stop-color="#0A0F1C"/>
+      <stop offset="100%" stop-color="#080C18"/>
     </linearGradient>
 
     <radialGradient id="td-bloom" cx="0.5" cy="1" r="0.8">
@@ -22,6 +22,14 @@
 
     <clipPath id="td-cmdclip"><rect class="type" x="26" y="42" width="530" height="24"/></clipPath>
     <clipPath id="td-humclip"><rect class="reveal" x="384" y="104" width="210" height="94"/></clipPath>
+      <radialGradient id="v2-bloomA" cx="0.18" cy="0.22" r="0.72">
+      <stop offset="0%" stop-color="#C77DFF" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#C77DFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="v2-bloomB" cx="0.84" cy="0.86" r="0.68">
+      <stop offset="0%" stop-color="#FF4D8D" stop-opacity="0.11"/>
+      <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
   <style>
@@ -29,7 +37,7 @@
     .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
     .cmd   { font-size: 13px; }
     .badge { font-size: 10px; font-weight: 700; letter-spacing: 1px; }
-    .prose { font-size: 16px; fill: #B6C2DA; }
+    .prose { font-size: 16px; fill: #C2CDE4; }
     .lead  { font-size: 16px; font-weight: 700; fill: #F2F6FF; }
     .wm    { font-size: 11px; font-weight: 800; fill: #F2F6FF; }
 
@@ -46,7 +54,7 @@
     .s2 { animation: td-s2 7s ease-out infinite; }
     .s3 { animation: td-s3 7s ease-out infinite; }
 
-    @keyframes td-flag { 0%,26% { fill: #B6C2DA; } 34%,92% { fill: #FF4D8D; } 100% { fill: #B6C2DA; } }
+    @keyframes td-flag { 0%,26% { fill: #C2CDE4; } 34%,92% { fill: #FF4D8D; } 100% { fill: #C2CDE4; } }
     .flag { animation: td-flag 7s ease-in-out infinite; }
 
     @keyframes td-score { 0%,56% { opacity: 0; } 66%,92% { opacity: 1; } 100% { opacity: 0; } }
@@ -64,14 +72,17 @@
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; }
     }
+      @keyframes v2-breathe { 0%,100% { opacity:0.66; } 50% { opacity:1; } }
+    .v2bloom { animation: v2-breathe 11s ease-in-out infinite; }
   </style>
 
   <rect width="720" height="236" fill="url(#td-ground)"/>
+  <g class="v2bloom"><rect width="720" height="236" fill="url(#v2-bloomA)"/><rect width="720" height="236" fill="url(#v2-bloomB)"/></g>
   <ellipse class="bloom" cx="360" cy="242" rx="470" ry="130" fill="url(#td-bloom)"/>
 
   <g clip-path="url(#td-cmdclip)" class="mono cmd">
     <text x="26" y="59" fill="#C77DFF" font-weight="700">/humanizer</text>
-    <text x="110" y="59" fill="#8494B0">"This comprehensive guide&#8230;"</text>
+    <text x="110" y="59" fill="#93A2BE">"This comprehensive guide&#8230;"</text>
     <text x="338" y="59" fill="#FF4D8D" font-weight="700">--voice</text>
     <text x="396" y="59" fill="#F2F6FF">technical</text>
     <text x="474" y="59" fill="#FF4D8D" font-weight="700">--score</text>
