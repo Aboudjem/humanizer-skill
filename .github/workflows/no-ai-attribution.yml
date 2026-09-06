@@ -1,0 +1,64 @@
+name: No AI attribution
+
+# A local `commit-msg` hook cannot cover every path. `git rebase` does not run it,
+# `--no-verify` skips it, and commits created server-side (the squash-merge button
+# on github.com, the REST API, or another workflow) never touch a local hook at all.
+# This is the backstop for those.
+#
+# It matches attribution TRAILERS only. Prose that names Claude Code is expected and
+# allowed, because these repositories are Claude Code plugins and have to name the
+# product they plug into.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: No AI attribution in commit messages
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Scan commit messages
+        run: |
+          set -u
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            RANGE="origin/${{ github.base_ref }}..HEAD"
+            git fetch -q origin "${{ github.base_ref }}" || true
+          else
+            BEFORE="${{ github.event.before }}"
+            if [ -n "$BEFORE" ] && git rev-parse -q --verify "$BEFORE^{commit}" >/dev/null 2>&1; then
+              RANGE="$BEFORE..${{ github.sha }}"
+            else
+              RANGE="${{ github.sha }} -1"
+            fi
+          fi
+          echo "Scanning: $RANGE"
+
+          BAD=$(git log --format='%H%x09%s%x0a%b' $RANGE 2>/dev/null | grep -n -i -E \
+            -e '^[[:space:]]*Claude-Session:[[:space:]]' \
+            -e '^[[:space:]]*Co-?Authored-?By:[[:space:]]*Claude' \
+            -e '^[[:space:]]*Co-?Authored-?By:.*@anthropic\.com' \
+            -e '^[[:space:]]*Assisted-?By:[[:space:]]*Claude' \
+            -e '^[[:space:]]*(Generated|Co-created) with .*Claude' || true)
+
+          if [ -n "$BAD" ]; then
+            echo "::error::AI attribution trailer found in a commit message."
+            echo "$BAD"
+            echo ""
+            echo "These repos are published under a human byline. Attribution trailers do not ship."
+            echo ""
+            echo "Fix the commit:   git rebase -i <base>   then reword"
+            echo "Prevent locally:  git config --global core.hooksPath ~/.config/git/hooks"
+            exit 1
+          fi
+          echo "No AI attribution trailers found."
