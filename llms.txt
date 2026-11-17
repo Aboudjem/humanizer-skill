@@ -11,8 +11,8 @@
 
 ## Install
 
-- Claude Code: `claude plugin marketplace add Aboudjem/10x` then `claude plugin install humanizer@10x`
-- Any agent the skills CLI supports, for all your projects: `npx skills add Aboudjem/humanizer-skill -g` (add `-a codex` or another agent code to pick one; drop `-g` for one project)
+- Recommended, the Vercel skills CLI (78 agents, pick yours in the menu): `npx skills add Aboudjem/humanizer-skill -g`. Add `-a codex` or another agent code to install straight into one agent; drop `-g` for one project. Page: https://skills.sh/aboudjem/humanizer-skill
+- Claude Code plugin (the same skill, no extra command or hook): `claude plugin marketplace add Aboudjem/10x` then `claude plugin install humanizer@10x`
 - [Per-editor paths](https://github.com/Aboudjem/humanizer-skill/blob/main/docs/editors.md): Cursor, Codex, Copilot, Gemini CLI, OpenCode, Windsurf, Zed, Kimi Code CLI, and the manual copy
 
 ## Use

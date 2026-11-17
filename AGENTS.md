@@ -50,16 +50,18 @@ npx --yes skills@1.9.0 add . --list
 
 ## How users install the skill
 
-```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
-```
+Recommended, the Vercel skills CLI. It installs for all the user's projects; drop `-g` for one project only:
 
 ```bash
 npx skills add Aboudjem/humanizer-skill -g
 ```
 
-`-g` installs for all the user's projects. Drop it for one project only.
+Claude Code plugin, the same skill with no extra command or hook:
+
+```bash
+claude plugin marketplace add Aboudjem/10x
+claude plugin install humanizer@10x
+```
 
 The repo is also its own single-plugin marketplace (`.claude-plugin/marketplace.json`).
 
