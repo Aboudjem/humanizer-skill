@@ -161,7 +161,7 @@ node tools/humanizer-skill/cli/index.js scan . --fail-above 40
 npm test
 ```
 
-Run it from the repo root. It is `cd cli && node --test`: 77 tests, no dependencies, and the last lines print the count. The suite covers tokenization, every metric, the composite score and its per-signal breakdown, the verdict-first report and its actions, code and quote masking, the vocabulary layer, fact extraction and the fact-loss diff, multi-path scanning, `--exclude`, the short-sample rule, the bundled example pair, the packaged bin, and the CLI exit codes.
+Run it from the repo root. It is `cd cli && node --test`: 90 tests, no dependencies, and the last lines print the count. The suite covers tokenization, every metric, the composite score and its per-signal breakdown, the verdict-first report and its actions, code and quote masking, the vocabulary layer, fact extraction and the fact-loss diff, multi-path scanning, `--exclude`, the short-sample rule, the bundled example pair, the packaged bin, and the CLI exit codes. It also checks that each README translation keeps the English code blocks and heading levels.
 
 Running the CLI needs Node 18 or newer, and CI runs the suite on both 18 and 20. Contributing or publishing needs Node 20.19 or newer, because eslint 10 does not run on 18.
 

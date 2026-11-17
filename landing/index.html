@@ -277,7 +277,7 @@
   </header>
 
   <section class="card">
-    <textarea id="input" placeholder="Paste AI-generated text here. Try something with 'delves into', 'pivotal moment', or 'comprehensive guide' to see how the detector responds.">In today's rapidly evolving technological landscape, artificial intelligence is reshaping how we think about creativity. This comprehensive guide delves into the intricate interplay between innovation and artistic expression, marking a pivotal moment in human history. It's not just a shift, it's a testament to our enduring commitment to progress.</textarea>
+    <textarea id="input" placeholder="Paste AI-generated text here. Try something with 'delves into', 'pivotal moment', or 'comprehensive guide' to see how the checker responds.">In today's rapidly evolving technological landscape, artificial intelligence is reshaping how we think about creativity. This comprehensive guide delves into the intricate interplay between innovation and artistic expression, marking a pivotal moment in human history. It's not just a shift, it's a testament to our enduring commitment to progress.</textarea>
     <div class="toolbar">
       <button id="scan-btn">Score this text</button>
       <button class="secondary" id="clear-btn">Clear</button>
@@ -291,7 +291,7 @@
 
   <section class="card">
     <h2 style="margin:0 0 8px;font-size:20px;">Run it in your editor (one command)</h2>
-    <p style="margin:0 0 12px;color:var(--muted);font-size:14px;">The browser detector covers ~21 mechanical patterns. The full skill catches all 55 and rewrites the text in five voice profiles.</p>
+    <p style="margin:0 0 12px;color:var(--muted);font-size:14px;">The browser checker covers ~21 mechanical patterns. The full skill catches all 55 and rewrites the text in five voice profiles.</p>
     <div class="install"><span class="prompt">$</span> mkdir -p ~/.claude/skills/humanizer && curl -sL \
   https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md \
   -o ~/.claude/skills/humanizer/SKILL.md</div>
@@ -309,7 +309,7 @@
 </div>
 
 <script>
-// Client-side detector. Subset of P1-P55 that work as pure regex.
+// Client-side pattern checker. Subset of P1-P55 that work as pure regex.
 // Full ruleset (55 patterns + rewriting) lives at github.com/Aboudjem/humanizer-skill/blob/main/skills/humanizer/SKILL.md
 const patterns = [
   { id: 'P1', name: 'Significance Inflation', re: /\b(pivotal moment|testament to|marks? an? (pivotal|important|significant) (moment|chapter|milestone)|underscor(?:e|es|ing) the importance|reflects? broader|setting the stage|indelible mark)\b/gi, weight: 4 },

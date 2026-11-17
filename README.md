@@ -23,7 +23,7 @@ claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
 
-Then type `/humanizer --file draft.md` in your editor, where `draft.md` is any Markdown file of yours. The skill rewrites the file. The rewrite runs on your editor's model.
+Then type `/humanizer --file draft.md` in your editor, where `draft.md` is any Markdown file of yours. By default it prints the rewrite in chat and leaves the file as it is. Add `--mode edit` to change the file in place.
 
 Here is the bundled example, before and after, scored by the CLI:
 
@@ -202,13 +202,13 @@ The core catalog (P1-P30) draws on [Wikipedia: Signs of AI writing](https://en.w
 
 ## Works with
 
-| Agent               | Install                                                 | Check that ran                                                         | Tested     |
-| :------------------ | :------------------------------------------------------ | :--------------------------------------------------------------------- | :--------- |
-| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | Installed from the 10x marketplace and validated in strict mode       | 2026-11-17 |
-| Codex CLI 0.169.0   | `npx skills add Aboudjem/humanizer-skill -a codex`      | Installed, and the skill rewrote a sentence                            | 2026-11-17 |
-| Gemini CLI          | `npx skills add Aboudjem/humanizer-skill -a gemini-cli` | Install only. The skill file landed in `.agents/skills/`               | 2026-11-17 |
-| Cursor              | `npx skills add Aboudjem/humanizer-skill -a cursor`     | Install only. The skill file landed in `.agents/skills/`               | 2026-11-17 |
-| OpenCode            | `npx skills add Aboudjem/humanizer-skill -a opencode`   | Install only. The skill file landed in `.agents/skills/`               | 2026-11-17 |
+| Agent               | Install                                                 | Check that ran                                                  | Tested     |
+| :------------------ | :------------------------------------------------------ | :-------------------------------------------------------------- | :--------- |
+| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | Installed from the 10x marketplace and validated in strict mode | 2026-11-17 |
+| Codex CLI 0.169.0   | `npx skills add Aboudjem/humanizer-skill -a codex`      | Installed, and the skill rewrote a sentence                     | 2026-11-17 |
+| Gemini CLI          | `npx skills add Aboudjem/humanizer-skill -a gemini-cli` | Install only. The skill file landed in `.agents/skills/`        | 2026-11-17 |
+| Cursor              | `npx skills add Aboudjem/humanizer-skill -a cursor`     | Install only. The skill file landed in `.agents/skills/`        | 2026-11-17 |
+| OpenCode            | `npx skills add Aboudjem/humanizer-skill -a opencode`   | Install only. The skill file landed in `.agents/skills/`        | 2026-11-17 |
 
 Documented, not tested: Copilot, Windsurf, Zed, Kimi Code CLI and the other agents in [docs/editors.md](docs/editors.md).
 
@@ -220,7 +220,7 @@ Every number on this page comes from a command you can run in a clone.
 
 | Claim                                           | Command                                                                            | It prints                            |
 | :---------------------------------------------- | :--------------------------------------------------------------------------------- | :----------------------------------- |
-| 77 tests pass                                   | `npm test`                                                                         | `# pass 77` and `# fail 0`           |
+| 90 tests pass                                   | `npm test`                                                                         | `# pass 90` and `# fail 0`           |
 | 55 patterns                                     | `grep -cE '^\*\*P[0-9]+: ' skills/humanizer/SKILL.md`                              | `55`                                 |
 | The repo passes its own gate                    | `npm run selfcheck`                                                                | `Result: PASS` three times           |
 | The example goes from 57 to 6 and keeps 7 facts | the `compare` command in [Use it](#use-it)                                         | `Score: 57 -> 6` and `All 7 fact(s)` |

@@ -11,7 +11,8 @@ Invoke the skill with `/humanizer` followed by your text and any flags.
 /humanizer "text"                                   rewrite with the default voice
 /humanizer "text" --voice casual                    pick a voice profile
 /humanizer "text" --mode detect --score             scan only, add a 0-100 score
-/humanizer --file docs/README.md --voice technical  edit a file in place
+/humanizer --file docs/README.md --voice technical  rewrite a file, print the result
+/humanizer --file docs/README.md --mode edit        edit a file in place
 /humanizer "text" --aggressive --iterate 3          heavy rewrite, converge to zero patterns
 ```
 
