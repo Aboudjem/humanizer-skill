@@ -166,11 +166,12 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'  # skills@1.9.0 needs Node 22.20 or newer
 
       # Both tools are pinned on purpose. Bump them deliberately.
       - name: The skills CLI finds the skill
         run: |
+          set -o pipefail
           npx --yes skills@1.9.0 add . --list | tee /tmp/skills.txt
           grep -q "humanizer" /tmp/skills.txt
 
