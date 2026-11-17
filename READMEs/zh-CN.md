@@ -94,7 +94,7 @@ Detail:
 npx skills add Aboudjem/humanizer-skill -g
 ```
 
-支持 78 个代理：在菜单里选你的（[支持的代理](https://github.com/vercel-labs/skills#supported-agents)）。它会为你的所有项目安装。
+支持 70 多个代理：在菜单里选你的（[支持的代理](https://github.com/vercel-labs/skills#supported-agents)）。它会为你的所有项目安装。
 
 在终端里，这条命令会显示代理菜单。没有交互式终端时，它会装进每个代理的文件夹，所以在脚本里请用 `-a <agent>`。
 

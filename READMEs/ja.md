@@ -94,7 +94,7 @@ Detail:
 npx skills add Aboudjem/humanizer-skill -g
 ```
 
-78 のエージェントで動きます。メニューで自分のものを選んでください ([対応エージェント](https://github.com/vercel-labs/skills#supported-agents))。すべてのプロジェクトにインストールします。
+70 を超えるエージェントで動きます。メニューで自分のものを選んでください ([対応エージェント](https://github.com/vercel-labs/skills#supported-agents))。すべてのプロジェクトにインストールします。
 
 ターミナルでは、このコマンドがエージェントのメニューを表示します。対話できるターミナルがないと、すべてのエージェントのフォルダにインストールします。スクリプトでは `-a <agent>` を使ってください。
 

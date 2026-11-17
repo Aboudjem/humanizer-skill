@@ -94,7 +94,7 @@ Detail:
 npx skills add Aboudjem/humanizer-skill -g
 ```
 
-Fonctionne dans 78 agents : choisissez le vôtre dans le menu ([agents pris en charge](https://github.com/vercel-labs/skills#supported-agents)). Il installe pour tous vos projets.
+Fonctionne dans plus de 70 agents : choisissez le vôtre dans le menu ([agents pris en charge](https://github.com/vercel-labs/skills#supported-agents)). Il installe pour tous vos projets.
 
 Dans un terminal, la commande affiche le menu des agents. Sans terminal interactif, elle installe dans le dossier de chaque agent : utilisez donc `-a <agent>` dans les scripts.
 
