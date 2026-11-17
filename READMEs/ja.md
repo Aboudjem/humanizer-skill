@@ -96,6 +96,8 @@ npx skills add Aboudjem/humanizer-skill -g
 
 78 のエージェントで動きます。メニューで自分のものを選んでください ([対応エージェント](https://github.com/vercel-labs/skills#supported-agents))。すべてのプロジェクトにインストールします。
 
+ターミナルでは、このコマンドがエージェントのメニューを表示します。対話できるターミナルがないと、すべてのエージェントのフォルダにインストールします。スクリプトでは `-a <agent>` を使ってください。
+
 <a href="https://skills.sh/aboudjem/humanizer-skill"><img src="https://img.shields.io/badge/skills.sh-000000?style=flat-square&logo=vercel&logoColor=white" alt="skills.sh" height="24"></a> Humanizer のページ: [skills.sh/aboudjem/humanizer-skill](https://skills.sh/aboudjem/humanizer-skill).
 
 **または、1 つのエージェントに直接インストールする。** どのコマンドも、すべてのプロジェクトにインストールします。

@@ -15,7 +15,7 @@ The [skills CLI](https://github.com/vercel-labs/skills) auto-discovers the stand
 npx skills add Aboudjem/humanizer-skill -g
 ```
 
-`-g` installs it for all your projects. Only this project: drop `-g`.
+`-g` installs it for all your projects. Only this project: drop `-g`. In a terminal, the command shows the agent menu. Without an interactive terminal, it installs into every agent folder, so use `-a <agent>` in scripts. Humanizer's page: [skills.sh/aboudjem/humanizer-skill](https://skills.sh/aboudjem/humanizer-skill).
 
 Target a single agent, or list what the repo ships first:
 
