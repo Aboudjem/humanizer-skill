@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../.github/assets/hero-light.svg">
-  <img alt="humanizer。AI 文章のヒューマナイザー。AI っぽい？ その理由が正確にわかります。名前付きの 55 パターン、0 から 100 のスコア、選んだボイスでの書き直し。独自のネットワーク呼び出しはありません。" src="../.github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer: AI っぽく聞こえる理由を見る。2 枚のターミナルカード: Before は 100 点中 57 点で決まり文句に下線、After は 6 点。事実チェック OK、7 つの事実はすべて残る。" src="../.github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,18 +14,26 @@
   <a href="../README.md">English</a> · <a href="zh-CN.md">简体中文</a> · <b>日本語</b> · <a href="es.md">Español</a> · <a href="fr.md">Français</a>
 </p>
 
-**下書きが AI っぽく聞こえる原因を見つけて、直す。**
+**下書きが AI っぽく聞こえる理由を見て、直す。**
 
-Humanizer は文章を AI が書いたように見せるクセを見つけ、選んだボイスで書き直します。
+Humanizer は機械っぽく聞こえる語を引用し、下書きを書き直します。
+
+| どの語かわかる | 人間らしく読める | 事実が残る |
+|:--|:--|:--|
+| AI っぽい語を一つずつ引用します。CLI はそれを「Fix first」リストに並べます。 | 同梱の例は 100 点中 57 点から 6 点に下がります。低いほど人間らしい文章です。 | CLI の `compare --check-facts` は、数字、日付、バージョン、URL を失った書き直しを失敗にします。 |
+
+**対応:** スキルを読むすべてのエージェント。特定のモデルに縛られません。スキルは 1 つの Markdown ファイルで、エージェントのモデルが実行します。
+
+テスト済み: Codex CLI。インストールのみテスト済み: Claude Code、Cursor、Gemini CLI、GitHub Copilot、OpenCode。
+
+すべてのプロジェクトにインストールします:
 
 ```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
+npx skills add Aboudjem/humanizer-skill -g
+# then, in your agent: /humanizer --file draft.md --voice casual
 ```
 
-あとはエディタで `/humanizer --file draft.md` と入力します。`draft.md` は手元の任意の Markdown ファイルです。既定では書き直しをチャットに表示し、ファイルはそのまま残します。ファイルをその場で書き換えるには `--mode edit` を付けます。
-
-同梱の例の書き直し前と後を、CLI で採点した結果です。
+リポジトリに同梱の[例](../examples/blog-post/README.md)の、書き直し前と後を CLI で採点した結果です:
 
 ```text
 Before   57/100  Mixed
@@ -38,17 +46,15 @@ After     6/100  Pristine
 Fact check: OK. All 7 fact(s) in the original survive the rewrite.
 ```
 
-スコアは低いほど人間らしい文章です。2 行とも[例のペア](../examples/blog-post/README.md)の冒頭で、数字を出すコマンドは[根拠](#根拠)にあります。
+スコアは低いほど人間らしい文章です。数字を出すコマンドは[根拠](#根拠)にあります。
 
-README がチャットボットの書いたように読めるのに、どの語が原因か指させない。決まり文句が積み重なり、どの文もだいたい同じ長さになる。Humanizer はそのクセに名前を付けて、下書きを 0 から 100 で採点します。そのうえで書き直します。
+**これは何か:** 文章の中の AI っぽい語を見つけて書き直すスキルです。
 
-## 使う理由
+**いつ使うか:** AI の助けで書いた README、ブログ記事、メールを公開する前です。
 
-- **何を直すかがわかる。** 番号付きの 55 パターンと、点数を下げている語を引用する「Fix first」リスト。[得られるもの](#得られるもの)に実例があります。
-- **事実を守る。** `compare --check-facts` は、数値、日付、バージョン、URL を落とした書き直しを失敗にします。上の例は 7 つすべてを保っています。
-- **CI で止める。** `scan --fail-above 40` はスコアが高すぎる下書きで終了コード 1 を返します。[pre-commit フック](../docs/pre-commit.md)はステージしたファイルだけを調べます。
+**何が得られるか:** 5 つのボイスのどれかで書き直した文章がチャットに出ます。ファイルが変わるのは `--mode edit` を付けたときだけです。
 
-AI 検出器を出し抜くためのツールではなく、検出器でもありません。文章そのものを直します。
+AI 検出器ではなく、検出器を通ることも約束しません。
 
 ## 得られるもの
 
@@ -82,58 +88,93 @@ Detail:
 
 ## インストール
 
-Claude Code では 10x マーケットプレイスから入れます。
+**エージェントを選ぶ。** どのコマンドも、すべてのプロジェクトに Humanizer をインストールします。
+
+<p align="center">
+  <a href="#install-codex"><img src="https://img.shields.io/badge/Codex-000000?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHRpdGxlPk9wZW5BSTwvdGl0bGU%2BPHBhdGggZD0iTTIyLjI4MTkgOS44MjExYTUuOTg0NyA1Ljk4NDcgMCAwIDAtLjUxNTctNC45MTA4IDYuMDQ2MiA2LjA0NjIgMCAwIDAtNi41MDk4LTIuOUE2LjA2NTEgNi4wNjUxIDAgMCAwIDQuOTgwNyA0LjE4MThhNS45ODQ3IDUuOTg0NyAwIDAgMC0zLjk5NzcgMi45IDYuMDQ2MiA2LjA0NjIgMCAwIDAgLjc0MjcgNy4wOTY2IDUuOTggNS45OCAwIDAgMCAuNTExIDQuOTEwNyA2LjA1MSA2LjA1MSAwIDAgMCA2LjUxNDYgMi45MDAxQTUuOTg0NyA1Ljk4NDcgMCAwIDAgMTMuMjU5OSAyNGE2LjA1NTcgNi4wNTU3IDAgMCAwIDUuNzcxOC00LjIwNTggNS45ODk0IDUuOTg5NCAwIDAgMCAzLjk5NzctMi45MDAxIDYuMDU1NyA2LjA1NTcgMCAwIDAtLjc0NzUtNy4wNzI5em0tOS4wMjIgMTIuNjA4MWE0LjQ3NTUgNC40NzU1IDAgMCAxLTIuODc2NC0xLjA0MDhsLjE0MTktLjA4MDQgNC43NzgzLTIuNzU4MmEuNzk0OC43OTQ4IDAgMCAwIC4zOTI3LS42ODEzdi02LjczNjlsMi4wMiAxLjE2ODZhLjA3MS4wNzEgMCAwIDEgLjAzOC4wNTJ2NS41ODI2YTQuNTA0IDQuNTA0IDAgMCAxLTQuNDk0NSA0LjQ5NDR6bS05LjY2MDctNC4xMjU0YTQuNDcwOCA0LjQ3MDggMCAwIDEtLjUzNDYtMy4wMTM3bC4xNDIuMDg1MiA0Ljc4MyAyLjc1ODJhLjc3MTIuNzcxMiAwIDAgMCAuNzgwNiAwbDUuODQyOC0zLjM2ODV2Mi4zMzI0YS4wODA0LjA4MDQgMCAwIDEtLjAzMzIuMDYxNUw5Ljc0IDE5Ljk1MDJhNC40OTkyIDQuNDk5MiAwIDAgMS02LjE0MDgtMS42NDY0ek0yLjM0MDggNy44OTU2YTQuNDg1IDQuNDg1IDAgMCAxIDIuMzY1NS0xLjk3MjhWMTEuNmEuNzY2NC43NjY0IDAgMCAwIC4zODc5LjY3NjVsNS44MTQ0IDMuMzU0My0yLjAyMDEgMS4xNjg1YS4wNzU3LjA3NTcgMCAwIDEtLjA3MSAwbC00LjgzMDMtMi43ODY1QTQuNTA0IDQuNTA0IDAgMCAxIDIuMzQwOCA3Ljg3MnptMTYuNTk2MyAzLjg1NThMMTMuMTAzOCA4LjM2NCAxNS4xMTkyIDcuMmEuMDc1Ny4wNzU3IDAgMCAxIC4wNzEgMGw0LjgzMDMgMi43OTEzYTQuNDk0NCA0LjQ5NDQgMCAwIDEtLjY3NjUgOC4xMDQydi01LjY3NzJhLjc5Ljc5IDAgMCAwLS40MDctLjY2N3ptMi4wMTA3LTMuMDIzMWwtLjE0Mi0uMDg1Mi00Ljc3MzUtMi43ODE4YS43NzU5Ljc3NTkgMCAwIDAtLjc4NTQgMEw5LjQwOSA5LjIyOTdWNi44OTc0YS4wNjYyLjA2NjIgMCAwIDEgLjAyODQtLjA2MTVsNC44MzAzLTIuNzg2NmE0LjQ5OTIgNC40OTkyIDAgMCAxIDYuNjgwMiA0LjY2ek04LjMwNjUgMTIuODYzbC0yLjAyLTEuMTYzOGEuMDgwNC4wODA0IDAgMCAxLS4wMzgtLjA1NjdWNi4wNzQyYTQuNDk5MiA0LjQ5OTIgMCAwIDEgNy4zNzU3LTMuNDUzN2wtLjE0Mi4wODA1TDguNzA0IDUuNDU5YS43OTQ4Ljc5NDggMCAwIDAtLjM5MjcuNjgxM3ptMS4wOTc2LTIuMzY1NGwyLjYwMi0xLjQ5OTggMi42MDY5IDEuNDk5OHYyLjk5OTRsLTIuNTk3NCAxLjQ5OTctMi42MDY3LTEuNDk5N1oiLz48L3N2Zz4%3D" alt="Codex"></a>
+  <a href="#install-claude-code"><img src="https://img.shields.io/badge/Claude_Code-D97757?style=for-the-badge&logo=claude&logoColor=white" alt="Claude Code"></a>
+  <a href="#install-cursor"><img src="https://img.shields.io/badge/Cursor-3B3B3B?style=for-the-badge&logo=cursor&logoColor=white" alt="Cursor"></a>
+  <a href="#install-gemini-cli"><img src="https://img.shields.io/badge/Gemini_CLI-1A73E8?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini CLI"></a>
+  <a href="#install-github-copilot"><img src="https://img.shields.io/badge/GitHub_Copilot-24292F?style=for-the-badge&logo=githubcopilot&logoColor=white" alt="GitHub Copilot"></a>
+  <a href="#install-opencode"><img src="https://img.shields.io/badge/OpenCode-4A4A4A?style=for-the-badge&logo=opencode&logoColor=white" alt="OpenCode"></a>
+</p>
+
+<a id="install-codex"></a>**Codex**、テスト済み:
 
 ```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
+npx skills add Aboudjem/humanizer-skill -g -a codex
 ```
 
-ほかのエージェントでは、[skills CLI](https://github.com/vercel-labs/skills) で 1 行です。
+<a id="install-claude-code"></a>**Claude Code**、インストールのみテスト済み:
 
 ```bash
-npx skills add Aboudjem/humanizer-skill
+claude plugin marketplace add Aboudjem/10x && claude plugin install humanizer@10x
 ```
 
-特定のエージェントだけに入れるには `-a codex`、`-a cursor` などのコードを付けます。コードの一覧は [docs/editors.md](../docs/editors.md) にあります。
+<a id="install-cursor"></a>**Cursor**、インストールのみテスト済み:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a cursor
+```
+
+<a id="install-gemini-cli"></a>**Gemini CLI**、インストールのみテスト済み:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a gemini-cli
+```
+
+<a id="install-github-copilot"></a>**GitHub Copilot**、インストールのみテスト済み:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a github-copilot
+```
+
+<a id="install-opencode"></a>**OpenCode**、インストールのみテスト済み:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a opencode
+```
+
+このプロジェクトだけなら `-g` を外します。ほかのエージェントの `-a` コードは [docs/editors.md](../docs/editors.md) にあります。
 
 <details>
-<summary>インストーラなしで入れる（curl）</summary>
+<summary>インストーラーなしでインストール (curl)</summary>
 
-スキルに必要な唯一のファイルをプロジェクトにコピーします。
+スキルに必要な 1 つのファイルをプロジェクトにコピーします:
 
 ```bash
 mkdir -p .claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o .claude/skills/humanizer/SKILL.md
 ```
 
-`.claude/skills/` はエージェントが読むフォルダに置き換えてください。全体に入れるなら `~/.claude/skills/` を使います。
+`.claude/skills/` はエージェントが読むフォルダに置き換えてください。グローバルにインストールするなら `~/.claude/skills/` を使います。
 
 </details>
 
 ## 使い方
 
-**1. 下書きを書き直す。** エディタで、自分のファイルに対してスキルを呼びます。
+**1. 下書きを書き直す。** エージェントで、自分のファイルにスキルを呼び出します:
 
 ```text
 /humanizer --file draft.md --voice technical
 ```
 
-> **前：** This comprehensive guide delves into the intricacies of our authentication system.
+> **Before:** This comprehensive guide delves into the intricacies of our authentication system.
 >
-> **後：** This guide explains how our authentication system works.
+> **After:** This guide explains how our authentication system works.
 
-書き直しは AI のクセを削ります。元の文章にない事実を足すことはありません。
+書き直しは AI のクセを取り除きます。元の文章にない事実は決して足しません。
+標準では書き直しをチャットに表示し、ファイルはそのままです。ファイルを直接変えるには `--mode edit` を付けます。
 
-**2. ファイルを採点する。** CLI は任意で、クローンから実行します。ファイルを読むだけで、何も変更しません。
+**2. ファイルを採点する。** CLI は任意で、クローンから動かします。ファイルを読むだけで、何も変えません:
 
 ```bash
 git clone https://github.com/Aboudjem/humanizer-skill && cd humanizer-skill
 node cli/index.js score examples/blog-post/before.md
 ```
 
-出力は[得られるもの](#得られるもの)のレポートです。パスを自分のファイルに置き換えてください。
+出力は[得られるもの](#得られるもの)のレポートです。自分のファイルのパスに置き換えてください。
 
-**3. 書き直しが事実を保ったか確かめる。** 本当のリスクは、数値が黙って消える書き直しです。
+**3. 書き直しが事実を残したか確かめる。** 本当の危険は、数字を落とす書き直しです:
 
 ```bash
 node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md --check-facts
@@ -147,9 +188,9 @@ Fact check:
   OK. All 7 fact(s) in the original survive the rewrite.
 ```
 
-何かが失われていれば、終了コード 1 を返してそれを名指しします。
+終了コード 1 で終わり、失われたものを示します。
 
-**4. フォルダをゲートする。** CI 用の 1 行です。出力の 1 行目は `Result: PASS` か `Result: FAIL` です。
+**4. 悪い下書きを CI で止める** (自動チェック)。`scan --fail-above 40` はスコアが高すぎる下書きで終了コード 1 を返します。出力の 1 行目は `Result: PASS` か `Result: FAIL` です:
 
 ```bash
 node cli/index.js scan docs --fail-above 40
@@ -157,14 +198,15 @@ node cli/index.js scan docs --fail-above 40
 
 ## 仕組み
 
-AI が書いた文章には測れるクセがあります。文の長さがそろい、同じ無難な語が繰り返され、つなぎの言葉がすき間を埋めます。
+README がチャットボットの書いたように読める。でも、どの語が原因かは言えない。
+AI が書いた文章には測れるクセがあります。どの文もだいたい同じ長さです。同じ無難な言い回しが何度も出てきます。
 
 | 部分   | 役割                                                            | 動く場所            |
 | :----- | :-------------------------------------------------------------- | :------------------ |
-| スキル | 55 パターンに名前を付け、文章から見つけ、選んだボイスで書き直す | エディタのモデル    |
+| スキル | 55 パターンに名前を付け、文章から見つけ、5 つのボイスのどれかで書き直す | エージェントのモデル |
 | CLI    | 4 つのシグナルから 0 から 100 のスコアを計算する                | 手元のマシンの Node |
 
-スキルは 1 枚の Markdown ファイル、[`SKILL.md`](../skills/humanizer/SKILL.md) です。`/humanizer` と入力すると、エディタがこれを読みます。
+スキルは 1 枚の Markdown ファイル、[`SKILL.md`](../skills/humanizer/SKILL.md) です。`/humanizer` と入力すると、エージェントがこれを読みます。
 
 CLI のスコアは単純な計算なので、同じファイルはいつも同じ数字になります。
 
@@ -202,17 +244,18 @@ _burstiness_ は文の長さのばらつきのことです。_AI tell_ はそう
 
 ## 対応エージェント
 
-| エージェント        | インストール                                            | 実施した確認                                            | テスト日   |
-| :------------------ | :------------------------------------------------------ | :------------------------------------------------------ | :--------- |
-| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | 10x マーケットプレイスから導入し、strict モードで検証   | 2026-11-17 |
-| Codex CLI 0.169.0   | `npx skills add Aboudjem/humanizer-skill -a codex`      | 導入し、スキルが 1 文を書き直した                       | 2026-11-17 |
-| Gemini CLI          | `npx skills add Aboudjem/humanizer-skill -a gemini-cli` | 導入のみ。スキルのファイルが `.agents/skills/` に入った | 2026-11-17 |
-| Cursor              | `npx skills add Aboudjem/humanizer-skill -a cursor`     | 導入のみ。スキルのファイルが `.agents/skills/` に入った | 2026-11-17 |
-| OpenCode            | `npx skills add Aboudjem/humanizer-skill -a opencode`   | 導入のみ。スキルのファイルが `.agents/skills/` に入った | 2026-11-17 |
+| エージェント | インストール | 実施した確認 | テスト日 |
+| :-- | :-- | :-- | :-- |
+| Claude Code 2.1.326 | `claude plugin install humanizer@10x` | 10x マーケットプレイスからユーザー向けにインストールし、strict モードで検証 | 2026-11-17 |
+| Codex CLI 0.169.0 | `npx skills add Aboudjem/humanizer-skill -g -a codex` | インストールし、スキルが 1 文を書き直した (プロジェクトへのインストール) | 2026-11-17 |
+| Gemini CLI | `npx skills add Aboudjem/humanizer-skill -g -a gemini-cli` | インストールのみ。スキルのファイルが `~/.agents/skills/` に入った | 2026-11-17 |
+| Cursor | `npx skills add Aboudjem/humanizer-skill -g -a cursor` | インストールのみ。スキルのファイルが `~/.agents/skills/` に入った | 2026-11-17 |
+| GitHub Copilot | `npx skills add Aboudjem/humanizer-skill -g -a github-copilot` | インストールのみ。スキルのファイルが `~/.agents/skills/` に入った | 2026-11-17 |
+| OpenCode | `npx skills add Aboudjem/humanizer-skill -g -a opencode` | インストールのみ。スキルのファイルが `~/.agents/skills/` に入った | 2026-11-17 |
 
-文書化のみで未検証のもの：Copilot、Windsurf、Zed、Kimi Code CLI、そのほか [docs/editors.md](../docs/editors.md) にあるエージェント。
+どのグローバルインストールも、2026-11-17 に空のホームフォルダで実行しました。文書化のみで未検証のもの：Windsurf、Zed、Kimi Code CLI、そのほか [docs/editors.md](../docs/editors.md) にあるエージェント。
 
-スキルは Markdown なので、エディタが使うモデルの上でそのまま動きます。
+スキルは Markdown なので、エージェントが使うモデルで動きます。特定のモデルには縛られません。
 
 ## 根拠
 
@@ -236,7 +279,7 @@ _burstiness_ は文の長さのばらつきのことです。_AI tell_ はそう
 
 Humanizer 自身からは出ません。スキルと CLI は独自のネットワーク呼び出しをしません。テレメトリも、アカウントも、API キーもありません。
 
-書き直しはエディタのモデルで動きます。そのモデルがホストされていれば、ほかのプロンプトと同じく文章はそこへ送られます。CLI のスコアは手元のマシンだけで計算します。
+書き直しはエージェントのモデルで動きます。そのモデルがホストされていれば、ほかのプロンプトと同じく文章はそこへ送られます。CLI のスコアは手元のマシンだけで計算します。
 
 ### AI 検出器を通るようになりますか
 
@@ -248,7 +291,7 @@ Humanizer 自身からは出ません。スキルと CLI は独自のネット�
 
 ### どのモデルで動きますか
 
-エディタが使っているモデルです。このページの実行では、Claude Code の Claude Sonnet と Codex CLI の既定モデルを使いました。
+エージェントが使っているモデルです。このページの実行では、Claude Code の Claude Sonnet と Codex CLI の既定モデルを使いました。
 
 ### CLI は必要ですか
 

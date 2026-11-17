@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.4] - 2026-11-17
+
+A shorter first screen, one install command per agent, and new images. No behaviour change.
+
+### Changed
+
+- **README first screen.** One line, one sentence, three benefits with their proof, what it works
+  with, one install command, the real sample, then three short answers: what it is, when to use it,
+  what you get. The same change is in the four translations.
+- **Pick your agent.** The Install section starts with a row of agent logos. Each one links to one
+  command that installs Humanizer for all your projects (`-g`). Each command was run into an empty
+  home folder on 2026-11-17. Drop `-g` to install for one project only.
+- **Works with table.** It now lists GitHub Copilot (install tested) and the global commands.
+- **New hero and social preview.** Both show the real Before and After lines (57 and 6 out of 100),
+  the fact check line, the three benefits and the install command. `tools/build-visuals.js` writes
+  the SVG files, and headless Chrome renders the PNG.
+- **New descriptions.** GitHub: "See why a draft sounds like AI and rewrite it in one of five
+  voices". Listing: "See which words make a draft sound like AI, then rewrite it in one of five
+  voices."
+- **Docs site intro.** It no longer calls Humanizer a detector. It is not one.
+- The `description` in `skills/humanizer/SKILL.md` is unchanged, so skill matching works as before.
+
 ## [0.8.3] - 2026-11-17
 
 The score scale no longer promises a detector outcome, and the maintainer contact is now a private GitHub form.

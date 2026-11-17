@@ -12,13 +12,15 @@ The skill core is a single Markdown file. Install it once and every supported ed
 The [skills CLI](https://github.com/vercel-labs/skills) auto-discovers the standard `skills/humanizer/SKILL.md` layout and installs it for Claude Code, Cursor, Codex, opencode, and 70+ agents:
 
 ```bash
-npx skills add Aboudjem/humanizer-skill
+npx skills add Aboudjem/humanizer-skill -g
 ```
+
+`-g` installs it for all your projects. Only this project: drop `-g`.
 
 Target a single agent, or list what the repo ships first:
 
 ```bash
-npx skills add Aboudjem/humanizer-skill -a claude-code
+npx skills add Aboudjem/humanizer-skill -g -a claude-code
 ```
 
 ```bash

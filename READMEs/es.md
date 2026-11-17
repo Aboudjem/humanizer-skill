@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../.github/assets/hero-light.svg">
-  <img alt="humanizer. Humanizador de escritura con IA. ¿Suena a IA? Mira exactamente por qué. 55 patrones con nombre, una puntuación de 0 a 100, una reescritura en la voz que elijas. Sin llamadas de red propias." src="../.github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer: mira por qué suena a IA. Dos tarjetas de terminal: Antes puntúa 57 de 100, con frases hechas subrayadas, Después puntúa 6. Comprobación de datos OK, los 7 datos se conservan." src="../.github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,18 +14,26 @@
   <a href="../README.md">English</a> · <a href="zh-CN.md">简体中文</a> · <a href="ja.md">日本語</a> · <b>Español</b> · <a href="fr.md">Français</a>
 </p>
 
-**Descubre qué hace que tu borrador suene a IA. Arréglalo.**
+**Mira por qué tu borrador suena a IA, y luego arréglalo.**
 
-Humanizer encuentra las costumbres que hacen que un texto parezca escrito por una IA. Luego lo reescribe en la voz que elijas.
+Humanizer cita las palabras que suenan a máquina y luego reescribe tu borrador.
+
+| Saber qué palabras | Se lee más humano | Datos conservados |
+|:--|:--|:--|
+| Cita cada palabra que suena a IA. El CLI las ordena en una lista "Fix first". | El ejemplo incluido baja de 57 a 6 sobre 100. Más bajo es más humano. | `compare --check-facts` (CLI) falla si la reescritura perdió un número, una fecha, una versión o una URL. |
+
+**Funciona con:** cualquier agente que lea skills. No depende de un modelo: la skill es un solo archivo Markdown, y el modelo de tu agente la ejecuta.
+
+Probado: Codex CLI. Instalación probada: Claude Code, Cursor, Gemini CLI, GitHub Copilot, OpenCode.
+
+Se instala para todos tus proyectos:
 
 ```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
+npx skills add Aboudjem/humanizer-skill -g
+# then, in your agent: /humanizer --file draft.md --voice casual
 ```
 
-Después escribe `/humanizer --file draft.md` en tu editor, donde `draft.md` es cualquier archivo Markdown tuyo. Por defecto muestra la reescritura en el chat y deja el archivo como está. Añade `--mode edit` para cambiar el archivo en su sitio.
-
-Este es el ejemplo incluido, antes y después, puntuado por el CLI:
+[El ejemplo](../examples/blog-post/README.md) que viene con el repo, antes y después, puntuado por el CLI:
 
 ```text
 Before   57/100  Mixed
@@ -38,17 +46,15 @@ After     6/100  Pristine
 Fact check: OK. All 7 fact(s) in the original survive the rewrite.
 ```
 
-Cuanto más baja la puntuación, más humano el texto. Ambas líneas abren [el par de ejemplo](../examples/blog-post/README.md), y [Pruebas](#pruebas) da el comando que imprime estas cifras.
+Cuanto más baja la puntuación, más humano el texto. [Pruebas](#pruebas) da el comando que imprime estas cifras.
 
-Tu README suena a chatbot, y no sabes señalar qué palabras fallan. Las frases hechas se acumulan, y todas las frases miden más o menos lo mismo. Humanizer nombra cada costumbre y puntúa el borrador de 0 a 100. Luego lo reescribe.
+**Qué es:** una skill que encuentra las palabras que suenan a IA en tu texto y las reescribe.
 
-## Por qué usarlo
+**Cuándo usarla:** antes de publicar un README, un artículo o un correo escrito con ayuda de una IA.
 
-- **Saber qué cambiar.** 55 patrones numerados, y una lista "Fix first" que cita las palabras que restan puntos. [Qué obtienes](#qué-obtienes) muestra una.
-- **Conservar tus datos.** `compare --check-facts` hace fallar una reescritura que perdió un número, una fecha, una versión o una URL. El ejemplo de arriba conserva los 7.
-- **Bloquear en CI.** `scan --fail-above 40` sale con código 1 si un borrador puntúa demasiado alto. Un [hook de pre-commit](../docs/pre-commit.md) revisa solo los archivos preparados.
+**Qué obtienes:** la reescritura en el chat, en una de cinco voces. Tu archivo solo cambia con `--mode edit`.
 
-No intenta burlar a un detector de IA, y no es uno. Arregla la escritura.
+No es un detector de IA, y no promete pasar uno.
 
 ## Qué obtienes
 
@@ -82,20 +88,54 @@ Detail:
 
 ## Instalación
 
-En Claude Code, a través del marketplace 10x:
+**Elige tu agente.** Cada comando instala Humanizer para todos tus proyectos.
+
+<p align="center">
+  <a href="#install-codex"><img src="https://img.shields.io/badge/Codex-000000?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHRpdGxlPk9wZW5BSTwvdGl0bGU%2BPHBhdGggZD0iTTIyLjI4MTkgOS44MjExYTUuOTg0NyA1Ljk4NDcgMCAwIDAtLjUxNTctNC45MTA4IDYuMDQ2MiA2LjA0NjIgMCAwIDAtNi41MDk4LTIuOUE2LjA2NTEgNi4wNjUxIDAgMCAwIDQuOTgwNyA0LjE4MThhNS45ODQ3IDUuOTg0NyAwIDAgMC0zLjk5NzcgMi45IDYuMDQ2MiA2LjA0NjIgMCAwIDAgLjc0MjcgNy4wOTY2IDUuOTggNS45OCAwIDAgMCAuNTExIDQuOTEwNyA2LjA1MSA2LjA1MSAwIDAgMCA2LjUxNDYgMi45MDAxQTUuOTg0NyA1Ljk4NDcgMCAwIDAgMTMuMjU5OSAyNGE2LjA1NTcgNi4wNTU3IDAgMCAwIDUuNzcxOC00LjIwNTggNS45ODk0IDUuOTg5NCAwIDAgMCAzLjk5NzctMi45MDAxIDYuMDU1NyA2LjA1NTcgMCAwIDAtLjc0NzUtNy4wNzI5em0tOS4wMjIgMTIuNjA4MWE0LjQ3NTUgNC40NzU1IDAgMCAxLTIuODc2NC0xLjA0MDhsLjE0MTktLjA4MDQgNC43NzgzLTIuNzU4MmEuNzk0OC43OTQ4IDAgMCAwIC4zOTI3LS42ODEzdi02LjczNjlsMi4wMiAxLjE2ODZhLjA3MS4wNzEgMCAwIDEgLjAzOC4wNTJ2NS41ODI2YTQuNTA0IDQuNTA0IDAgMCAxLTQuNDk0NSA0LjQ5NDR6bS05LjY2MDctNC4xMjU0YTQuNDcwOCA0LjQ3MDggMCAwIDEtLjUzNDYtMy4wMTM3bC4xNDIuMDg1MiA0Ljc4MyAyLjc1ODJhLjc3MTIuNzcxMiAwIDAgMCAuNzgwNiAwbDUuODQyOC0zLjM2ODV2Mi4zMzI0YS4wODA0LjA4MDQgMCAwIDEtLjAzMzIuMDYxNUw5Ljc0IDE5Ljk1MDJhNC40OTkyIDQuNDk5MiAwIDAgMS02LjE0MDgtMS42NDY0ek0yLjM0MDggNy44OTU2YTQuNDg1IDQuNDg1IDAgMCAxIDIuMzY1NS0xLjk3MjhWMTEuNmEuNzY2NC43NjY0IDAgMCAwIC4zODc5LjY3NjVsNS44MTQ0IDMuMzU0My0yLjAyMDEgMS4xNjg1YS4wNzU3LjA3NTcgMCAwIDEtLjA3MSAwbC00LjgzMDMtMi43ODY1QTQuNTA0IDQuNTA0IDAgMCAxIDIuMzQwOCA3Ljg3MnptMTYuNTk2MyAzLjg1NThMMTMuMTAzOCA4LjM2NCAxNS4xMTkyIDcuMmEuMDc1Ny4wNzU3IDAgMCAxIC4wNzEgMGw0LjgzMDMgMi43OTEzYTQuNDk0NCA0LjQ5NDQgMCAwIDEtLjY3NjUgOC4xMDQydi01LjY3NzJhLjc5Ljc5IDAgMCAwLS40MDctLjY2N3ptMi4wMTA3LTMuMDIzMWwtLjE0Mi0uMDg1Mi00Ljc3MzUtMi43ODE4YS43NzU5Ljc3NTkgMCAwIDAtLjc4NTQgMEw5LjQwOSA5LjIyOTdWNi44OTc0YS4wNjYyLjA2NjIgMCAwIDEgLjAyODQtLjA2MTVsNC44MzAzLTIuNzg2NmE0LjQ5OTIgNC40OTkyIDAgMCAxIDYuNjgwMiA0LjY2ek04LjMwNjUgMTIuODYzbC0yLjAyLTEuMTYzOGEuMDgwNC4wODA0IDAgMCAxLS4wMzgtLjA1NjdWNi4wNzQyYTQuNDk5MiA0LjQ5OTIgMCAwIDEgNy4zNzU3LTMuNDUzN2wtLjE0Mi4wODA1TDguNzA0IDUuNDU5YS43OTQ4Ljc5NDggMCAwIDAtLjM5MjcuNjgxM3ptMS4wOTc2LTIuMzY1NGwyLjYwMi0xLjQ5OTggMi42MDY5IDEuNDk5OHYyLjk5OTRsLTIuNTk3NCAxLjQ5OTctMi42MDY3LTEuNDk5N1oiLz48L3N2Zz4%3D" alt="Codex"></a>
+  <a href="#install-claude-code"><img src="https://img.shields.io/badge/Claude_Code-D97757?style=for-the-badge&logo=claude&logoColor=white" alt="Claude Code"></a>
+  <a href="#install-cursor"><img src="https://img.shields.io/badge/Cursor-3B3B3B?style=for-the-badge&logo=cursor&logoColor=white" alt="Cursor"></a>
+  <a href="#install-gemini-cli"><img src="https://img.shields.io/badge/Gemini_CLI-1A73E8?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini CLI"></a>
+  <a href="#install-github-copilot"><img src="https://img.shields.io/badge/GitHub_Copilot-24292F?style=for-the-badge&logo=githubcopilot&logoColor=white" alt="GitHub Copilot"></a>
+  <a href="#install-opencode"><img src="https://img.shields.io/badge/OpenCode-4A4A4A?style=for-the-badge&logo=opencode&logoColor=white" alt="OpenCode"></a>
+</p>
+
+<a id="install-codex"></a>**Codex**, probado:
 
 ```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
+npx skills add Aboudjem/humanizer-skill -g -a codex
 ```
 
-En cualquier otro agente, una línea con el [CLI de skills](https://github.com/vercel-labs/skills):
+<a id="install-claude-code"></a>**Claude Code**, instalación probada:
 
 ```bash
-npx skills add Aboudjem/humanizer-skill
+claude plugin marketplace add Aboudjem/10x && claude plugin install humanizer@10x
 ```
 
-Añade `-a codex`, `-a cursor` u otro código de agente para elegir un solo agente. Los códigos están en [docs/editors.md](../docs/editors.md).
+<a id="install-cursor"></a>**Cursor**, instalación probada:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a cursor
+```
+
+<a id="install-gemini-cli"></a>**Gemini CLI**, instalación probada:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a gemini-cli
+```
+
+<a id="install-github-copilot"></a>**GitHub Copilot**, instalación probada:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a github-copilot
+```
+
+<a id="install-opencode"></a>**OpenCode**, instalación probada:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a opencode
+```
+
+Solo este proyecto: quita `-g`. Otro agente: su código `-a` está en [docs/editors.md](../docs/editors.md).
 
 <details>
 <summary>Instalar sin instalador (curl)</summary>
@@ -112,7 +152,7 @@ Cambia `.claude/skills/` por la carpeta que lee tu agente. Usa `~/.claude/skills
 
 ## Uso
 
-**1. Reescribe un borrador.** En tu editor, llama a la skill sobre tu propio archivo:
+**1. Reescribe un borrador.** En tu agente, llama a la skill sobre tu propio archivo:
 
 ```text
 /humanizer --file draft.md --voice technical
@@ -122,7 +162,8 @@ Cambia `.claude/skills/` por la carpeta que lee tu agente. Usa `~/.claude/skills
 >
 > **Después:** This guide explains how our authentication system works.
 
-La reescritura quita los tics. Nunca añade un dato que la fuente no tuviera.
+La reescritura quita las costumbres de IA. Nunca añade un dato que la fuente no tenía.
+Por defecto muestra la reescritura en el chat y deja el archivo como está. Añade `--mode edit` para cambiar el archivo en su sitio.
 
 **2. Puntúa un archivo.** El CLI es opcional y se ejecuta desde un clon. Lee el archivo y no cambia nada:
 
@@ -131,9 +172,9 @@ git clone https://github.com/Aboudjem/humanizer-skill && cd humanizer-skill
 node cli/index.js score examples/blog-post/before.md
 ```
 
-La salida es el informe de [Qué obtienes](#qué-obtienes). Pon la ruta de tu propio archivo.
+La salida es el informe de [Qué obtienes](#qué-obtienes). Usa la ruta de tu propio archivo.
 
-**3. Comprueba que la reescritura conservó los datos.** El riesgo real es una reescritura que pierde un número sin avisar:
+**3. Comprueba que la reescritura conservó los datos.** El riesgo real es una reescritura que pierde un número:
 
 ```bash
 node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md --check-facts
@@ -149,7 +190,7 @@ Fact check:
 
 Sale con código 1 y nombra todo lo que se perdió.
 
-**4. Controla una carpeta.** Una línea para CI. La primera línea de la salida es `Result: PASS` o `Result: FAIL`:
+**4. Para los malos borradores en CI** (tus comprobaciones automáticas). `scan --fail-above 40` sale con código 1 si un borrador puntúa demasiado alto. La primera línea es `Result: PASS` o `Result: FAIL`:
 
 ```bash
 node cli/index.js scan docs --fail-above 40
@@ -157,14 +198,15 @@ node cli/index.js scan docs --fail-above 40
 
 ## Cómo funciona
 
-El texto escrito por IA tiene costumbres que se pueden medir. Las frases miden más o menos lo mismo, vuelven las mismas palabras seguras y el relleno tapa los huecos.
+Tu README suena a chatbot. No sabes decir qué palabras lo causan.
+El texto escrito por IA tiene costumbres que se pueden medir. Cada frase mide más o menos lo mismo. Las mismas frases seguras aparecen una y otra vez.
 
 | Parte    | Qué hace                                                                       | Dónde se ejecuta       |
 | :------- | :----------------------------------------------------------------------------- | :--------------------- |
-| La skill | Nombra 55 patrones, los encuentra en tu texto y reescribe en la voz que elijas | El modelo de tu editor |
+| La skill | Nombra 55 patrones, los encuentra en tu texto y reescribe en una de cinco voces | El modelo de tu agente |
 | El CLI   | Calcula la puntuación de 0 a 100 a partir de cuatro señales                    | Node en tu máquina     |
 
-La skill es un solo archivo Markdown, [`SKILL.md`](../skills/humanizer/SKILL.md). Tu editor lo lee cuando escribes `/humanizer`.
+La skill es un solo archivo Markdown, [`SKILL.md`](../skills/humanizer/SKILL.md). Tu agente lo lee cuando escribes `/humanizer`.
 
 La puntuación del CLI es aritmética simple, así que el mismo archivo siempre obtiene la misma cifra:
 
@@ -202,17 +244,18 @@ El catálogo principal (P1-P30) se basa en [Wikipedia: Signs of AI writing](http
 
 ## Compatibilidad
 
-| Agente              | Instalación                                             | Comprobación hecha                                                 | Probado    |
-| :------------------ | :------------------------------------------------------ | :----------------------------------------------------------------- | :--------- |
-| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | Instalado desde el marketplace 10x y validado en modo estricto     | 2026-11-17 |
-| Codex CLI 0.169.0   | `npx skills add Aboudjem/humanizer-skill -a codex`      | Instalado, y la skill reescribió una frase                         | 2026-11-17 |
-| Gemini CLI          | `npx skills add Aboudjem/humanizer-skill -a gemini-cli` | Solo instalación. El archivo de la skill llegó a `.agents/skills/` | 2026-11-17 |
-| Cursor              | `npx skills add Aboudjem/humanizer-skill -a cursor`     | Solo instalación. El archivo de la skill llegó a `.agents/skills/` | 2026-11-17 |
-| OpenCode            | `npx skills add Aboudjem/humanizer-skill -a opencode`   | Solo instalación. El archivo de la skill llegó a `.agents/skills/` | 2026-11-17 |
+| Agente | Instalación | Comprobación hecha | Probado |
+| :-- | :-- | :-- | :-- |
+| Claude Code 2.1.326 | `claude plugin install humanizer@10x` | Instalado para el usuario desde el marketplace 10x, y validado en modo estricto | 2026-11-17 |
+| Codex CLI 0.169.0 | `npx skills add Aboudjem/humanizer-skill -g -a codex` | Instalado, y la skill reescribió una frase (instalación en el proyecto) | 2026-11-17 |
+| Gemini CLI | `npx skills add Aboudjem/humanizer-skill -g -a gemini-cli` | Solo instalación. El archivo de la skill llegó a `~/.agents/skills/` | 2026-11-17 |
+| Cursor | `npx skills add Aboudjem/humanizer-skill -g -a cursor` | Solo instalación. El archivo de la skill llegó a `~/.agents/skills/` | 2026-11-17 |
+| GitHub Copilot | `npx skills add Aboudjem/humanizer-skill -g -a github-copilot` | Solo instalación. El archivo de la skill llegó a `~/.agents/skills/` | 2026-11-17 |
+| OpenCode | `npx skills add Aboudjem/humanizer-skill -g -a opencode` | Solo instalación. El archivo de la skill llegó a `~/.agents/skills/` | 2026-11-17 |
 
-Documentados, sin probar: Copilot, Windsurf, Zed, Kimi Code CLI y los demás agentes de [docs/editors.md](../docs/editors.md).
+Cada instalación global se ejecutó en una carpeta personal vacía el 2026-11-17. Documentados, sin probar: Windsurf, Zed, Kimi Code CLI y los demás agentes de [docs/editors.md](../docs/editors.md).
 
-La skill es Markdown, así que se ejecuta en el modelo al que apunte tu editor.
+La skill es Markdown, así que funciona con el modelo que use tu agente. No depende de un modelo.
 
 ## Pruebas
 
@@ -236,7 +279,7 @@ Cada cifra de esta página sale de un comando que puedes ejecutar en un clon.
 
 No desde Humanizer. La skill y el CLI no hacen llamadas de red propias. No hay telemetría, ni cuenta, ni clave de API.
 
-La reescritura se ejecuta en el modelo de tu editor. Si ese modelo está alojado, tu texto le llega, como con cualquier prompt. La puntuación del CLI se calcula solo en tu máquina.
+La reescritura se ejecuta en el modelo de tu agente. Si ese modelo está alojado, tu texto le llega, como con cualquier prompt. La puntuación del CLI se calcula solo en tu máquina.
 
 ### ¿Hará que mi texto pase un detector de IA?
 
@@ -248,7 +291,7 @@ Probablemente no, pero puede equivocarse contigo. Hay personas que escriben fras
 
 ### ¿En qué modelos funciona?
 
-En el que use tu editor. Las pruebas de esta página usaron Claude Sonnet en Claude Code y el modelo por defecto de Codex CLI.
+En el que use tu agente. Las pruebas de esta página usaron Claude Sonnet en Claude Code y el modelo por defecto de Codex CLI.
 
 ### ¿Necesito el CLI?
 

@@ -1,143 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" fill="none" role="img"
-     aria-label="humanizer: Reads like a person wrote it">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img"
+     aria-label="humanizer: See why it sounds like AI. Before, 57 out of 100, with stock phrases underlined. After, 6 out of 100. Fact check OK, all 7 facts kept.">
   <title>humanizer</title>
   <defs>
-    <linearGradient id="hm-ground" x1="0" y1="0" x2="0.4" y2="1">
-      <stop offset="0%" stop-color="#171029"/>
-      <stop offset="55%" stop-color="#0A0F1C"/>
-      <stop offset="100%" stop-color="#080C18"/>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0" stop-color="#171029"/>
+      <stop offset="1" stop-color="#0A0F1C"/>
     </linearGradient>
-    <radialGradient id="hm-bloomA" cx="0.15" cy="0.13" r="0.44">
-      <stop offset="0%" stop-color="#C77DFF" stop-opacity="0.26"/>
-      <stop offset="100%" stop-color="#C77DFF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="hm-bloomB" cx="0.88" cy="0.85" r="0.50">
-      <stop offset="0%" stop-color="#FF4D8D" stop-opacity="0.26"/>
-      <stop offset="100%" stop-color="#FF4D8D" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="hm-bloomC" cx="0.52" cy="0.04" r="0.36">
-      <stop offset="0%" stop-color="#8E7BFF" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#8E7BFF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="hm-wash" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%"   stop-color="#E0AEFF" stop-opacity="0.20"/>
-      <stop offset="42%"  stop-color="#FF4D8D" stop-opacity="0.124"/>
-      <stop offset="76%"  stop-color="#8E7BFF" stop-opacity="0.046"/>
-      <stop offset="100%" stop-color="#8E7BFF" stop-opacity="0"/>
-    </radialGradient>
-    <clipPath id="hm-frame"><rect width="1280" height="640"/></clipPath>
-    <linearGradient id="hm-ink" gradientUnits="userSpaceOnUse" x1="44" y1="84" x2="214" y2="196">
-      <stop class="hmk1" offset="0%"   stop-color="#E0AEFF"/>
-      <stop class="hmk2" offset="52%"  stop-color="#C77DFF"/>
-      <stop class="hmk3" offset="100%" stop-color="#FF4D8D"/>
+    <linearGradient id="word" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C77DFF"/>
+      <stop offset="1" stop-color="#FF4D8D"/>
     </linearGradient>
-    <filter id="hm-glow" x="-45%" y="-45%" width="190%" height="190%">
-      <feGaussianBlur stdDeviation="5.5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="hm-glow-sm" x="-150%" y="-150%" width="400%" height="400%">
-      <feGaussianBlur stdDeviation="3.8" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <clipPath id="hm-r1"><rect class="hmw1" x="42" y="158" width="174" height="19"/></clipPath>
-    <clipPath id="hm-r2"><rect class="hmw2" x="42" y="190" width="174" height="19"/></clipPath>
-    <linearGradient id="hm-word" x1="0" y1="0" x2="1" y2="0.25">
-      <stop class="hmk1" offset="0%"   stop-color="#E0AEFF"/>
-      <stop class="hmk2" offset="46%"  stop-color="#C77DFF"/>
-      <stop class="hmk3" offset="100%" stop-color="#FF4D8D"/>
-    </linearGradient>
-    <linearGradient id="hm-sheen" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.62"/>
-      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
-    </linearGradient>
-    <clipPath id="hm-wordclip">
-      <text x="96" y="358" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
-            font-size="122" font-weight="800" letter-spacing="-4.3">humanizer</text>
-    </clipPath>
   </defs>
-
-  <style>
-    .disp { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
-    .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 4.5px; fill: #E0AEFF; }
-    .head    { font-size: 38px; font-weight: 700; fill: #F2F6FF; letter-spacing: -0.5px; }
-    .sub     { font-size: 20px; font-weight: 500; fill: #C2CDE4; }
-    .tag     { font-size: 15px; letter-spacing: 1.6px; fill: #93A2BE; }
-    .chip    { font-size: 11.5px; letter-spacing: 1.2px; fill: #C2CDE4; }
-    .chipbig { font-size: 17px; letter-spacing: 1px; fill: #C2CDE4; }
-    .tagsm { font-size: 12.5px; letter-spacing: 1.6px; fill: #93A2BE; }
-    .eyebrow { font-size: 17px; letter-spacing: 5px; }
-    @keyframes hm-breathe { 0%,100% { opacity:0.62; } 50% { opacity:1; } }
-    .hmbloom { animation: hm-breathe 11s ease-in-out infinite; }
-    @keyframes hm-sweep { 0% { transform: translateX(-360px); } 100% { transform: translateX(1640px); } }
-    .hmwash { animation: hm-sweep 19s cubic-bezier(.5,0,.5,1) infinite; }
-    @keyframes hm-sheen { 0% { transform: translateX(0); } 15%,100% { transform: translateX(561px); } }
-    .hmsheen { animation: hm-sheen 8.5s cubic-bezier(.4,0,.3,1) infinite; }
-    @keyframes hm-ride{0%{transform:translate(42.0px,102.0px)}2.9%{transform:translate(52.9px,93.2px)}5.7%{transform:translate(66.8px,92.4px)}8.6%{transform:translate(79.7px,98.2px)}11.4%{transform:translate(91.7px,105.5px)}14.3%{transform:translate(104.5px,111.4px)}17.1%{transform:translate(118.2px,111.1px)}20%{transform:translate(129.6px,102.5px)}22.9%{transform:translate(140.0px,93.6px)}25.7%{transform:translate(153.8px,91.9px)}28.6%{transform:translate(166.7px,97.1px)}31.4%{transform:translate(178.9px,104.1px)}34.3%{transform:translate(192.0px,109.3px)}37.1%{transform:translate(205.6px,107.3px)}40%{transform:translate(216.0px,98.0px)}88%{transform:translate(216.0px,98.0px)}100%{transform:translate(42.0px,102.0px)}}
-    @keyframes hm-draw { 0% { stroke-dashoffset: 200; } 40% { stroke-dashoffset: 0; }
-                        88% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 200; } }
-    @keyframes hm-w1 { 0%,40% { width: 0; } 54%,90% { width: 174px; } 98%,100% { width: 0; } }
-    @keyframes hm-w2 { 0%,48% { width: 0; } 62%,90% { width: 174px; } 98%,100% { width: 0; } }
-    /* V3a: the nib and the ink it lays down must both be linear or the nib lags the stroke */
-    .hmnib { transform: translate(216px, 98px); animation: hm-ride 7s linear infinite; }
-    .hmstroke { stroke-dasharray: 200; animation: hm-draw 7s linear infinite; }
-    .hmw1 { animation: hm-w1 7s cubic-bezier(.3,0,.2,1) infinite; }
-    .hmw2 { animation: hm-w2 7s cubic-bezier(.3,0,.2,1) infinite; }
-    @keyframes hm-k1 { 0%,100% { stop-color:#E0AEFF; } 50% { stop-color:#C77DFF; } }
-    @keyframes hm-k2 { 0%,100% { stop-color:#C77DFF; } 50% { stop-color:#E86BC8; } }
-    @keyframes hm-k3 { 0%,100% { stop-color:#FF4D8D; } 50% { stop-color:#C77DFF; } }
-    .hmk1 { animation: hm-k1 14s ease-in-out infinite; }
-    .hmk2 { animation: hm-k2 14s ease-in-out infinite; }
-    .hmk3 { animation: hm-k3 14s ease-in-out infinite; }
-    @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
-  </style>
-
-  <rect width="1280" height="640" fill="url(#hm-ground)"/>
-  <g class="hmbloom">
-    <rect width="1280" height="640" fill="url(#hm-bloomA)"/>
-    <rect width="1280" height="640" fill="url(#hm-bloomB)"/>
-    <rect width="1280" height="640" fill="url(#hm-bloomC)"/>
-  </g>
-  <g clip-path="url(#hm-frame)">
-    <g transform="translate(0,320)">
-      <ellipse class="hmwash" cx="0" cy="0" rx="520" ry="380" fill="url(#hm-wash)"/>
-    </g>
-  </g>
-  <g transform="translate(872,126) scale(1.2188)">
-  <g opacity="0.32">
-    <path d="M42 102 C72 66, 100 138, 130 102 C160 66, 186 136, 216 98" fill="none" stroke="url(#hm-ink)" stroke-width="13" stroke-linecap="round"/>
-    <g fill="url(#hm-ink)"><rect x="42" y="158" width="74" height="17" rx="8.5"/><rect x="128" y="158" width="88" height="17" rx="8.5"/><rect x="42" y="190" width="96" height="17" rx="8.5"/><rect x="150" y="190" width="66" height="17" rx="8.5"/></g>
-  </g>
-  <g filter="url(#hm-glow)">
-    <path class="hmstroke" d="M42 102 C72 66, 100 138, 130 102 C160 66, 186 136, 216 98" pathLength="200" fill="none"
-          stroke="url(#hm-ink)" stroke-width="13" stroke-linecap="round"/>
-  </g>
-  <g fill="url(#hm-ink)" opacity="0.95"><g clip-path="url(#hm-r1)"><rect x="42" y="158" width="74" height="17" rx="8.5"/><rect x="128" y="158" width="88" height="17" rx="8.5"/></g><g clip-path="url(#hm-r2)"><rect x="42" y="190" width="96" height="17" rx="8.5"/><rect x="150" y="190" width="66" height="17" rx="8.5"/></g></g>
-  <g class="hmnib">
-    <g transform="rotate(-15)">
-      <path fill="url(#hm-ink)" fill-rule="evenodd"
-            d="M0 0 L-13 -38 C-15.5 -49 -13 -63 0 -72 C13 -63 15.5 -49 13 -38 Z
-               M-2.2 -15 L-2.2 -43 L2.2 -43 L2.2 -15 Z
-               M-6.4 -52 A6.4 6.4 0 1 0 6.4 -52 A6.4 6.4 0 1 0 -6.4 -52 Z"/>
-    </g>
-    <g filter="url(#hm-glow-sm)"><circle r="6" fill="#FFFFFF"/></g>
-  </g>
-  </g>
-  <g filter="url(#hm-glow)">
-    <text class="disp" x="96" y="358" font-size="122" font-weight="800"
-          letter-spacing="-4.3" fill="url(#hm-word)">humanizer</text>
-  </g>
-  <g clip-path="url(#hm-wordclip)">
-    <g transform="skewX(-18)">
-      <rect class="hmsheen" x="-38" y="236" width="56"
-            height="165" fill="url(#hm-sheen)" opacity="0.45"/>
-    </g>
-  </g>
-  <text class="mono eyebrow" x="96" y="258">AI WRITING HUMANIZER</text>
-  <text class="disp head" x="96" y="416">Sounds like AI? See exactly why.</text>
-  <text class="disp sub" x="96" y="458">55 named patterns, a 0 to 100 score, a rewrite in a voice you pick.</text>
-  <rect x="96" y="508" width="372" height="48" rx="10" fill="#0B1020" fill-opacity="0.7" stroke="#7C3AED" stroke-opacity="0.55"/>
-  <text class="mono chipbig" x="116" y="539" fill="#F2F6FF">/humanizer --file draft.md</text>
-  <text class="mono tag" x="96" y="604">github.com/Aboudjem/humanizer-skill</text>
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <text x="64" y="70" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="32" font-weight="800" fill="url(#word)">humanizer</text>
+  <text x="64" y="148" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="72" font-weight="800" fill="#F4F0FF">See why it sounds like AI</text>
+<g>
+  <rect x="64" y="176" width="560" height="236" rx="18" fill="#121829" stroke="#2C3352" stroke-width="2"/>
+  <circle cx="90" cy="200" r="6" fill="#2C3352"/>
+  <circle cx="110" cy="200" r="6" fill="#2C3352"/>
+  <circle cx="130" cy="200" r="6" fill="#2C3352"/>
+  <text x="92" y="252" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="28" font-weight="700" fill="#F4F0FF" xml:space="preserve">Before   57/100</text>
+  <rect x="92" y="270" width="504" height="12" rx="6" fill="#262C45"/>
+  <rect x="92" y="270" width="287.28" height="12" rx="6" fill="#FF4D8D"/>
+  <text x="92" y="322" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="20" fill="#B9B2D6" xml:space="preserve">In today's rapidly evolving technological</text>
+  <text x="92" y="354" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="20" fill="#B9B2D6" xml:space="preserve">landscape, artificial intelligence is</text>
+  <text x="92" y="386" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="20" fill="#B9B2D6" xml:space="preserve">reshaping how we think about...</text>
+  <rect x="92.0" y="328" width="120.4" height="4" rx="2" fill="#FF4D8D"/>
+  <rect x="224.4" y="328" width="192.6" height="4" rx="2" fill="#FF4D8D"/>
+</g>
+<g>
+  <rect x="656" y="176" width="560" height="236" rx="18" fill="#121829" stroke="#2C3352" stroke-width="2"/>
+  <circle cx="682" cy="200" r="6" fill="#2C3352"/>
+  <circle cx="702" cy="200" r="6" fill="#2C3352"/>
+  <circle cx="722" cy="200" r="6" fill="#2C3352"/>
+  <text x="684" y="252" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="28" font-weight="700" fill="#F4F0FF" xml:space="preserve">After     6/100</text>
+  <rect x="684" y="270" width="504" height="12" rx="6" fill="#262C45"/>
+  <rect x="684" y="270" width="30.24" height="12" rx="6" fill="#5EE6A0"/>
+  <text x="684" y="322" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="20" fill="#B9B2D6" xml:space="preserve">Stable Diffusion 1.4 was released on</text>
+  <text x="684" y="354" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="20" fill="#B9B2D6" xml:space="preserve">22 August 2022.</text>
+</g>
+  <text x="64" y="452" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="22" font-weight="700" fill="#5EE6A0">Fact check: OK. All 7 fact(s) in the original survive the rewrite.</text>
+<rect x="64" y="478" width="259" height="48" rx="24" fill="#1B1630" stroke="#C77DFF" stroke-width="2"/>
+<text x="193.5" y="510" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="600" fill="#F4F0FF">Know which words</text>
+<rect x="339" y="478" width="259" height="48" rx="24" fill="#1B1630" stroke="#C77DFF" stroke-width="2"/>
+<text x="468.5" y="510" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="600" fill="#F4F0FF">Reads more human</text>
+<rect x="614" y="478" width="180" height="48" rx="24" fill="#1B1630" stroke="#C77DFF" stroke-width="2"/>
+<text x="704" y="510" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="24" font-weight="600" fill="#F4F0FF">Facts kept</text>
+  <rect x="64" y="554" width="628" height="54" rx="12" fill="#121829" stroke="#2C3352" stroke-width="2"/>
+  <text x="84" y="589" font-family="'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace" font-size="22" fill="#F4F0FF" xml:space="preserve"><tspan fill="#C77DFF">$</tspan> npx skills add Aboudjem/humanizer-skill -g</text>
+  <text x="1216" y="576" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="19" font-weight="600" fill="#F4F0FF">Agent skills: Claude Code, Codex CLI, Cursor, Gemini CLI</text>
+  <text x="1216" y="604" text-anchor="end" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="20" fill="#B9B2D6">Runs on your agent's model</text>
 </svg>

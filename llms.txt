@@ -1,6 +1,6 @@
 # Humanizer
 
-> Humanizer finds the habits that make text read as AI-written, then rewrites it in a voice you pick. It is a Markdown skill for coding agents: it names 55 AI writing patterns, rewrites text in one of five preset voices, and reports a 0 to 100 AI-tell score. The skill and the optional zero-dependency Node CLI make no network call of their own; the rewrite runs on the agent's model. MIT license. Last updated 2026-11-17 for v0.8.3.
+> See why your draft sounds like AI, then fix it. Humanizer quotes the words that sound machine-written, then rewrites the draft in one of five voices. It is a Markdown skill for coding agents: it names 55 AI writing patterns and reports a 0 to 100 AI-tell score. The skill and the optional zero-dependency Node CLI make no network call of their own; the rewrite runs on the agent's model. MIT license. Last updated 2026-11-17 for v0.8.4.
 
 ## Start here
 
@@ -12,7 +12,7 @@
 ## Install
 
 - Claude Code: `claude plugin marketplace add Aboudjem/10x` then `claude plugin install humanizer@10x`
-- Any agent the skills CLI supports: `npx skills add Aboudjem/humanizer-skill`
+- Any agent the skills CLI supports, for all your projects: `npx skills add Aboudjem/humanizer-skill -g` (add `-a codex` or another agent code to pick one; drop `-g` for one project)
 - [Per-editor paths](https://github.com/Aboudjem/humanizer-skill/blob/main/docs/editors.md): Cursor, Codex, Copilot, Gemini CLI, OpenCode, Windsurf, Zed, Kimi Code CLI, and the manual copy
 
 ## Use

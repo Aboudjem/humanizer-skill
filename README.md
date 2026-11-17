@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/hero-light.svg">
-  <img alt="humanizer. AI writing humanizer. Sounds like AI? See exactly why. 55 named patterns, a 0 to 100 score, a rewrite in a voice you pick. No network calls of its own." src=".github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer: See why it sounds like AI. Two terminal cards: Before scores 57 out of 100 with stock phrases underlined, After scores 6. Fact check OK, all 7 facts kept." src=".github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,18 +14,26 @@
   <b>English</b> · <a href="READMEs/zh-CN.md">简体中文</a> · <a href="READMEs/ja.md">日本語</a> · <a href="READMEs/es.md">Español</a> · <a href="READMEs/fr.md">Français</a>
 </p>
 
-**Find what makes your draft sound like AI. Fix it.**
+**See why your draft sounds like AI, then fix it.**
 
-Humanizer finds the habits that make text read as AI-written, then rewrites it in a voice you pick.
+Humanizer quotes the words that sound machine-written, then rewrites your draft.
+
+| Know which words | Reads more human | Facts kept |
+|:--|:--|:--|
+| It quotes each word that sounds like AI. The CLI ranks them in a "Fix first" list. | The bundled example drops from 57 to 6 out of 100. Lower is more human. | The CLI's `compare --check-facts` fails a rewrite that lost a number, date, version or URL. |
+
+**Works with:** any agent that reads skills. It is not tied to one model: the skill is one Markdown file, and your agent's model runs it.
+
+Tested: Codex CLI. Install tested: Claude Code, Cursor, Gemini CLI, GitHub Copilot, OpenCode.
+
+Installs for all your projects:
 
 ```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
+npx skills add Aboudjem/humanizer-skill -g
+# then, in your agent: /humanizer --file draft.md --voice casual
 ```
 
-Then type `/humanizer --file draft.md` in your editor, where `draft.md` is any Markdown file of yours. By default it prints the rewrite in chat and leaves the file as it is. Add `--mode edit` to change the file in place.
-
-Here is the bundled example, before and after, scored by the CLI:
+[The example](examples/blog-post/README.md) that ships with the repo, before and after, scored by the CLI:
 
 ```text
 Before   57/100  Mixed
@@ -38,17 +46,15 @@ After     6/100  Pristine
 Fact check: OK. All 7 fact(s) in the original survive the rewrite.
 ```
 
-Lower is more human. Both lines open [the example pair](examples/blog-post/README.md), and [Proof](#proof) names the command that prints the numbers.
+Lower is more human. [Proof](#proof) names the command that prints these numbers.
 
-Your README reads like a chatbot wrote it, and you cannot point at the words. Stock phrases pile up, and every sentence runs about the same length. Humanizer names each habit and scores the draft from 0 to 100. Then it rewrites the draft.
+**What it is:** a skill that finds the words that sound like AI in your text, and rewrites them.
 
-## Why use it
+**When to use it:** before you publish a README, blog post or email that you wrote with AI help.
 
-- **Know what to change.** 55 numbered patterns, and a "Fix first" list that quotes the words costing points. [What you get](#what-you-get) shows one.
-- **Keep your facts.** `compare --check-facts` fails a rewrite that lost a number, date, version or URL. The example above keeps all 7.
-- **Gate it in CI.** `scan --fail-above 40` exits 1 on a draft that scores too high. A [pre-commit hook](docs/pre-commit.md) checks staged files only.
+**What you get:** the rewrite in chat, in one of five voices. Your file changes only with `--mode edit`.
 
-It does not try to beat an AI detector, and it is not one. It fixes the writing.
+It is not an AI detector, and it does not promise to pass one.
 
 ## What you get
 
@@ -82,20 +88,54 @@ Detail:
 
 ## Install
 
-In Claude Code, through the 10x marketplace:
+**Pick your agent.** Each command installs Humanizer for all your projects.
+
+<p align="center">
+  <a href="#install-codex"><img src="https://img.shields.io/badge/Codex-000000?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHRpdGxlPk9wZW5BSTwvdGl0bGU%2BPHBhdGggZD0iTTIyLjI4MTkgOS44MjExYTUuOTg0NyA1Ljk4NDcgMCAwIDAtLjUxNTctNC45MTA4IDYuMDQ2MiA2LjA0NjIgMCAwIDAtNi41MDk4LTIuOUE2LjA2NTEgNi4wNjUxIDAgMCAwIDQuOTgwNyA0LjE4MThhNS45ODQ3IDUuOTg0NyAwIDAgMC0zLjk5NzcgMi45IDYuMDQ2MiA2LjA0NjIgMCAwIDAgLjc0MjcgNy4wOTY2IDUuOTggNS45OCAwIDAgMCAuNTExIDQuOTEwNyA2LjA1MSA2LjA1MSAwIDAgMCA2LjUxNDYgMi45MDAxQTUuOTg0NyA1Ljk4NDcgMCAwIDAgMTMuMjU5OSAyNGE2LjA1NTcgNi4wNTU3IDAgMCAwIDUuNzcxOC00LjIwNTggNS45ODk0IDUuOTg5NCAwIDAgMCAzLjk5NzctMi45MDAxIDYuMDU1NyA2LjA1NTcgMCAwIDAtLjc0NzUtNy4wNzI5em0tOS4wMjIgMTIuNjA4MWE0LjQ3NTUgNC40NzU1IDAgMCAxLTIuODc2NC0xLjA0MDhsLjE0MTktLjA4MDQgNC43NzgzLTIuNzU4MmEuNzk0OC43OTQ4IDAgMCAwIC4zOTI3LS42ODEzdi02LjczNjlsMi4wMiAxLjE2ODZhLjA3MS4wNzEgMCAwIDEgLjAzOC4wNTJ2NS41ODI2YTQuNTA0IDQuNTA0IDAgMCAxLTQuNDk0NSA0LjQ5NDR6bS05LjY2MDctNC4xMjU0YTQuNDcwOCA0LjQ3MDggMCAwIDEtLjUzNDYtMy4wMTM3bC4xNDIuMDg1MiA0Ljc4MyAyLjc1ODJhLjc3MTIuNzcxMiAwIDAgMCAuNzgwNiAwbDUuODQyOC0zLjM2ODV2Mi4zMzI0YS4wODA0LjA4MDQgMCAwIDEtLjAzMzIuMDYxNUw5Ljc0IDE5Ljk1MDJhNC40OTkyIDQuNDk5MiAwIDAgMS02LjE0MDgtMS42NDY0ek0yLjM0MDggNy44OTU2YTQuNDg1IDQuNDg1IDAgMCAxIDIuMzY1NS0xLjk3MjhWMTEuNmEuNzY2NC43NjY0IDAgMCAwIC4zODc5LjY3NjVsNS44MTQ0IDMuMzU0My0yLjAyMDEgMS4xNjg1YS4wNzU3LjA3NTcgMCAwIDEtLjA3MSAwbC00LjgzMDMtMi43ODY1QTQuNTA0IDQuNTA0IDAgMCAxIDIuMzQwOCA3Ljg3MnptMTYuNTk2MyAzLjg1NThMMTMuMTAzOCA4LjM2NCAxNS4xMTkyIDcuMmEuMDc1Ny4wNzU3IDAgMCAxIC4wNzEgMGw0LjgzMDMgMi43OTEzYTQuNDk0NCA0LjQ5NDQgMCAwIDEtLjY3NjUgOC4xMDQydi01LjY3NzJhLjc5Ljc5IDAgMCAwLS40MDctLjY2N3ptMi4wMTA3LTMuMDIzMWwtLjE0Mi0uMDg1Mi00Ljc3MzUtMi43ODE4YS43NzU5Ljc3NTkgMCAwIDAtLjc4NTQgMEw5LjQwOSA5LjIyOTdWNi44OTc0YS4wNjYyLjA2NjIgMCAwIDEgLjAyODQtLjA2MTVsNC44MzAzLTIuNzg2NmE0LjQ5OTIgNC40OTkyIDAgMCAxIDYuNjgwMiA0LjY2ek04LjMwNjUgMTIuODYzbC0yLjAyLTEuMTYzOGEuMDgwNC4wODA0IDAgMCAxLS4wMzgtLjA1NjdWNi4wNzQyYTQuNDk5MiA0LjQ5OTIgMCAwIDEgNy4zNzU3LTMuNDUzN2wtLjE0Mi4wODA1TDguNzA0IDUuNDU5YS43OTQ4Ljc5NDggMCAwIDAtLjM5MjcuNjgxM3ptMS4wOTc2LTIuMzY1NGwyLjYwMi0xLjQ5OTggMi42MDY5IDEuNDk5OHYyLjk5OTRsLTIuNTk3NCAxLjQ5OTctMi42MDY3LTEuNDk5N1oiLz48L3N2Zz4%3D" alt="Codex"></a>
+  <a href="#install-claude-code"><img src="https://img.shields.io/badge/Claude_Code-D97757?style=for-the-badge&logo=claude&logoColor=white" alt="Claude Code"></a>
+  <a href="#install-cursor"><img src="https://img.shields.io/badge/Cursor-3B3B3B?style=for-the-badge&logo=cursor&logoColor=white" alt="Cursor"></a>
+  <a href="#install-gemini-cli"><img src="https://img.shields.io/badge/Gemini_CLI-1A73E8?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini CLI"></a>
+  <a href="#install-github-copilot"><img src="https://img.shields.io/badge/GitHub_Copilot-24292F?style=for-the-badge&logo=githubcopilot&logoColor=white" alt="GitHub Copilot"></a>
+  <a href="#install-opencode"><img src="https://img.shields.io/badge/OpenCode-4A4A4A?style=for-the-badge&logo=opencode&logoColor=white" alt="OpenCode"></a>
+</p>
+
+<a id="install-codex"></a>**Codex**, tested:
 
 ```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
+npx skills add Aboudjem/humanizer-skill -g -a codex
 ```
 
-In any other agent, one line with the [skills CLI](https://github.com/vercel-labs/skills):
+<a id="install-claude-code"></a>**Claude Code**, install tested:
 
 ```bash
-npx skills add Aboudjem/humanizer-skill
+claude plugin marketplace add Aboudjem/10x && claude plugin install humanizer@10x
 ```
 
-Add `-a codex`, `-a cursor` or another agent code to pick one agent. The codes are in [docs/editors.md](docs/editors.md).
+<a id="install-cursor"></a>**Cursor**, install tested:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a cursor
+```
+
+<a id="install-gemini-cli"></a>**Gemini CLI**, install tested:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a gemini-cli
+```
+
+<a id="install-github-copilot"></a>**GitHub Copilot**, install tested:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a github-copilot
+```
+
+<a id="install-opencode"></a>**OpenCode**, install tested:
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a opencode
+```
+
+Only this project: drop `-g`. Another agent: find its `-a` code in [docs/editors.md](docs/editors.md).
 
 <details>
 <summary>Install without an installer (curl)</summary>
@@ -112,7 +152,7 @@ Swap `.claude/skills/` for the folder your agent reads. Use `~/.claude/skills/` 
 
 ## Use it
 
-**1. Rewrite a draft.** In your editor, call the skill on your own file:
+**1. Rewrite a draft.** In your agent, call the skill on your own file:
 
 ```text
 /humanizer --file draft.md --voice technical
@@ -122,7 +162,8 @@ Swap `.claude/skills/` for the folder your agent reads. Use `~/.claude/skills/` 
 >
 > **After:** This guide explains how our authentication system works.
 
-The rewrite cuts the tells. It never adds a fact the source did not have.
+The rewrite cuts the AI habits. It never adds a fact the source did not have.
+By default it prints the rewrite in chat and leaves the file as it is. Add `--mode edit` to change the file in place.
 
 **2. Score a file.** The CLI is optional and runs from a clone. It reads the file and changes nothing:
 
@@ -131,9 +172,9 @@ git clone https://github.com/Aboudjem/humanizer-skill && cd humanizer-skill
 node cli/index.js score examples/blog-post/before.md
 ```
 
-The output is the report under [What you get](#what-you-get). Swap in the path of your own file.
+The output is the report under [What you get](#what-you-get). Use the path of your own file.
 
-**3. Check the rewrite kept the facts.** A rewrite that quietly drops a number is the real risk:
+**3. Check the rewrite kept the facts.** The real risk is a rewrite that drops a number:
 
 ```bash
 node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md --check-facts
@@ -149,7 +190,7 @@ Fact check:
 
 It exits 1 and names anything lost.
 
-**4. Gate a folder.** One line for CI. The first line of the output is `Result: PASS` or `Result: FAIL`:
+**4. Stop bad drafts in CI** (your automatic checks). `scan --fail-above 40` exits 1 when a draft scores too high. The first output line is `Result: PASS` or `Result: FAIL`:
 
 ```bash
 node cli/index.js scan docs --fail-above 40
@@ -157,14 +198,15 @@ node cli/index.js scan docs --fail-above 40
 
 ## How it works
 
-AI-written text has habits you can measure. Sentences run about the same length, the same safe words come back, and filler pads the gaps.
+Your README sounds like a chatbot wrote it. You cannot say which words cause it.
+AI-written text has habits you can measure. Every sentence has about the same length. The same safe phrases appear again and again.
 
 | Part      | What it does                                                                   | Where it runs        |
 | :-------- | :----------------------------------------------------------------------------- | :------------------- |
-| The skill | Names 55 patterns, finds them in your text, and rewrites in the voice you pick | Your editor's model  |
+| The skill | Names 55 patterns, finds them in your text, and rewrites in one of five voices | Your agent's model   |
 | The CLI   | Computes the 0 to 100 score from four signals                                  | Node on your machine |
 
-The skill is one Markdown file, [`SKILL.md`](skills/humanizer/SKILL.md). Your editor reads it when you type `/humanizer`.
+The skill is one Markdown file, [`SKILL.md`](skills/humanizer/SKILL.md). Your agent reads it when you type `/humanizer`.
 
 The CLI score is plain arithmetic, so the same file always gets the same number:
 
@@ -204,15 +246,16 @@ The core catalog (P1-P30) draws on [Wikipedia: Signs of AI writing](https://en.w
 
 | Agent               | Install                                                 | Check that ran                                                  | Tested     |
 | :------------------ | :------------------------------------------------------ | :-------------------------------------------------------------- | :--------- |
-| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | Installed from the 10x marketplace and validated in strict mode | 2026-11-17 |
-| Codex CLI 0.169.0   | `npx skills add Aboudjem/humanizer-skill -a codex`      | Installed, and the skill rewrote a sentence                     | 2026-11-17 |
-| Gemini CLI          | `npx skills add Aboudjem/humanizer-skill -a gemini-cli` | Install only. The skill file landed in `.agents/skills/`        | 2026-11-17 |
-| Cursor              | `npx skills add Aboudjem/humanizer-skill -a cursor`     | Install only. The skill file landed in `.agents/skills/`        | 2026-11-17 |
-| OpenCode            | `npx skills add Aboudjem/humanizer-skill -a opencode`   | Install only. The skill file landed in `.agents/skills/`        | 2026-11-17 |
+| Claude Code 2.1.326 | `claude plugin install humanizer@10x` | Installed for the user from the 10x marketplace, and validated in strict mode | 2026-11-17 |
+| Codex CLI 0.169.0 | `npx skills add Aboudjem/humanizer-skill -g -a codex` | Installed, and the skill rewrote a sentence (project install) | 2026-11-17 |
+| Gemini CLI | `npx skills add Aboudjem/humanizer-skill -g -a gemini-cli` | Install only. The skill file landed in `~/.agents/skills/` | 2026-11-17 |
+| Cursor | `npx skills add Aboudjem/humanizer-skill -g -a cursor` | Install only. The skill file landed in `~/.agents/skills/` | 2026-11-17 |
+| GitHub Copilot | `npx skills add Aboudjem/humanizer-skill -g -a github-copilot` | Install only. The skill file landed in `~/.agents/skills/` | 2026-11-17 |
+| OpenCode | `npx skills add Aboudjem/humanizer-skill -g -a opencode` | Install only. The skill file landed in `~/.agents/skills/` | 2026-11-17 |
 
-Documented, not tested: Copilot, Windsurf, Zed, Kimi Code CLI and the other agents in [docs/editors.md](docs/editors.md).
+Each global install was run into an empty home folder on 2026-11-17. Documented, not tested: Windsurf, Zed, Kimi Code CLI and the other agents in [docs/editors.md](docs/editors.md).
 
-The skill is Markdown, so it runs on whatever model your editor points at.
+The skill is Markdown, so it runs on whatever model your agent uses. It is not tied to one model.
 
 ## Proof
 
@@ -236,19 +279,19 @@ Every number on this page comes from a command you can run in a clone.
 
 Not from Humanizer itself. The skill and the CLI make no network call of their own. There is no telemetry, no account and no API key.
 
-The rewrite runs on your editor's model. If that model is hosted, your text goes to it, as with any prompt. The CLI score runs on your machine only.
+The rewrite runs on your agent's model. If that model is hosted, your text goes to it, as with any prompt. The CLI score runs on your machine only.
 
 ### Will it make my text pass an AI detector?
 
-That is the wrong goal, and no honest tool can promise it. Detectors change often, and their accuracy on rewritten text is contested. Writing with real variation and concrete detail reads better to people.
+That is the wrong goal, and no honest tool can promise it. Detectors change often, and nobody agrees on how well they work on rewritten text. Writing with real variation and concrete detail reads better to people.
 
 ### It flagged text I wrote myself. Is it broken?
 
-Probably not, but it can be wrong about you. Some people write even sentences by habit. Detectors also misfire on non-native English writing ([Liang et al.](https://arxiv.org/abs/2304.02819)). Treat the score as a signal.
+Probably not, but it can be wrong about you. Some people write even sentences by habit. Detectors also make more mistakes on non-native English writing ([Liang et al.](https://arxiv.org/abs/2304.02819)). Treat the score as a signal.
 
 ### Which models does it run on?
 
-Whichever one your editor points at. The runs on this page used Claude Sonnet in Claude Code and the default model in Codex CLI.
+Whichever one your agent uses. The runs on this page used Claude Sonnet in Claude Code and the default model in Codex CLI.
 
 ### Do I need the CLI?
 

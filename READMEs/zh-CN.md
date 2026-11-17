@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../.github/assets/hero-light.svg">
-  <img alt="humanizer。AI 写作人性化工具。读起来像 AI？看清到底为什么。55 个有名字的模式，0 到 100 的分数，用你选的语音风格重写。自身不发任何网络请求。" src="../.github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer：看清它为什么像 AI。两张终端卡片：之前 57 分（满分 100），套话加了下划线；之后 6 分。事实检查 OK，7 个事实都保留。" src="../.github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,18 +14,26 @@
   <a href="../README.md">English</a> · <b>简体中文</b> · <a href="ja.md">日本語</a> · <a href="es.md">Español</a> · <a href="fr.md">Français</a>
 </p>
 
-**找出让你的草稿读起来像 AI 的地方，然后改掉。**
+**看清你的草稿为什么像 AI，然后改掉。**
 
-Humanizer 找出让文字读起来像 AI 写的习惯，再用你选的语音风格重写。
+Humanizer 引出听起来像机器写的词，然后重写你的草稿。
+
+| 知道是哪些词 | 读起来更像人 | 事实保留 |
+|:--|:--|:--|
+| 它引出每个像 AI 的词。CLI 把它们排进“Fix first”清单。 | 自带的示例从 57 分降到 6 分（满分 100）。越低越像人写的。 | CLI 的 `compare --check-facts` 会让丢了数字、日期、版本或 URL 的重写失败。 |
+
+**支持：** 任何能读 skill 的代理。它不绑定某个模型：skill 只是一个 Markdown 文件，由你的代理的模型运行。
+
+已测试：Codex CLI。已测试安装：Claude Code、Cursor、Gemini CLI、GitHub Copilot、OpenCode。
+
+为你的所有项目安装：
 
 ```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
+npx skills add Aboudjem/humanizer-skill -g
+# then, in your agent: /humanizer --file draft.md --voice casual
 ```
 
-然后在编辑器里输入 `/humanizer --file draft.md`，其中 `draft.md` 是你自己的任意 Markdown 文件。默认情况下，重写结果显示在聊天里，文件保持不变。加上 `--mode edit` 才会直接修改文件。
-
-下面是自带的示例，改写前后由 CLI 打分：
+仓库自带的[示例](../examples/blog-post/README.md)，重写前后，由 CLI 打分：
 
 ```text
 Before   57/100  Mixed
@@ -38,17 +46,15 @@ After     6/100  Pristine
 Fact check: OK. All 7 fact(s) in the original survive the rewrite.
 ```
 
-分数越低，越像人写的。两行分别是[示例对](../examples/blog-post/README.md)的开头，打印这些数字的命令见[证据](#证据)。
+分数越低，越像人写的。打印这些数字的命令见[证据](#证据)。
 
-你的 README 读起来像聊天机器人写的，可你指不出是哪些词。套话越堆越多，每个句子都差不多长。Humanizer 给每个习惯起名字，并给草稿打 0 到 100 分。然后它重写草稿。
+**它是什么：** 一个 skill，找出你文字里像 AI 的词，并重写它们。
 
-## 为什么用它
+**什么时候用：** 在发布借助 AI 写的 README、博客文章或邮件之前。
 
-- **知道该改什么。** 55 个编号的模式，外加一份「Fix first」清单，引用扣分的原词。[你会得到什么](#你会得到什么)里有一个例子。
-- **保住你的事实。** `compare --check-facts` 会让丢了数字、日期、版本号或 URL 的重写失败。上面的例子 7 个事实全部保留。
-- **在 CI 里把关。** 草稿分数过高时，`scan --fail-above 40` 以退出码 1 结束。[pre-commit 钩子](../docs/pre-commit.md)只检查暂存的文件。
+**你会得到：** 聊天里的重写结果，用五种风格之一。只有加上 `--mode edit`，你的文件才会改动。
 
-它不试图骗过 AI 检测器，它本身也不是检测器。它修的是文字本身。
+它不是 AI 检测器，也不承诺能通过检测器。
 
 ## 你会得到什么
 
@@ -82,25 +88,59 @@ Detail:
 
 ## 安装
 
-在 Claude Code 里，通过 10x 插件市场安装：
+**选择你的代理。** 每条命令都会为你的所有项目安装 Humanizer。
+
+<p align="center">
+  <a href="#install-codex"><img src="https://img.shields.io/badge/Codex-000000?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyBmaWxsPSJ3aGl0ZSIgcm9sZT0iaW1nIiB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHRpdGxlPk9wZW5BSTwvdGl0bGU%2BPHBhdGggZD0iTTIyLjI4MTkgOS44MjExYTUuOTg0NyA1Ljk4NDcgMCAwIDAtLjUxNTctNC45MTA4IDYuMDQ2MiA2LjA0NjIgMCAwIDAtNi41MDk4LTIuOUE2LjA2NTEgNi4wNjUxIDAgMCAwIDQuOTgwNyA0LjE4MThhNS45ODQ3IDUuOTg0NyAwIDAgMC0zLjk5NzcgMi45IDYuMDQ2MiA2LjA0NjIgMCAwIDAgLjc0MjcgNy4wOTY2IDUuOTggNS45OCAwIDAgMCAuNTExIDQuOTEwNyA2LjA1MSA2LjA1MSAwIDAgMCA2LjUxNDYgMi45MDAxQTUuOTg0NyA1Ljk4NDcgMCAwIDAgMTMuMjU5OSAyNGE2LjA1NTcgNi4wNTU3IDAgMCAwIDUuNzcxOC00LjIwNTggNS45ODk0IDUuOTg5NCAwIDAgMCAzLjk5NzctMi45MDAxIDYuMDU1NyA2LjA1NTcgMCAwIDAtLjc0NzUtNy4wNzI5em0tOS4wMjIgMTIuNjA4MWE0LjQ3NTUgNC40NzU1IDAgMCAxLTIuODc2NC0xLjA0MDhsLjE0MTktLjA4MDQgNC43NzgzLTIuNzU4MmEuNzk0OC43OTQ4IDAgMCAwIC4zOTI3LS42ODEzdi02LjczNjlsMi4wMiAxLjE2ODZhLjA3MS4wNzEgMCAwIDEgLjAzOC4wNTJ2NS41ODI2YTQuNTA0IDQuNTA0IDAgMCAxLTQuNDk0NSA0LjQ5NDR6bS05LjY2MDctNC4xMjU0YTQuNDcwOCA0LjQ3MDggMCAwIDEtLjUzNDYtMy4wMTM3bC4xNDIuMDg1MiA0Ljc4MyAyLjc1ODJhLjc3MTIuNzcxMiAwIDAgMCAuNzgwNiAwbDUuODQyOC0zLjM2ODV2Mi4zMzI0YS4wODA0LjA4MDQgMCAwIDEtLjAzMzIuMDYxNUw5Ljc0IDE5Ljk1MDJhNC40OTkyIDQuNDk5MiAwIDAgMS02LjE0MDgtMS42NDY0ek0yLjM0MDggNy44OTU2YTQuNDg1IDQuNDg1IDAgMCAxIDIuMzY1NS0xLjk3MjhWMTEuNmEuNzY2NC43NjY0IDAgMCAwIC4zODc5LjY3NjVsNS44MTQ0IDMuMzU0My0yLjAyMDEgMS4xNjg1YS4wNzU3LjA3NTcgMCAwIDEtLjA3MSAwbC00LjgzMDMtMi43ODY1QTQuNTA0IDQuNTA0IDAgMCAxIDIuMzQwOCA3Ljg3MnptMTYuNTk2MyAzLjg1NThMMTMuMTAzOCA4LjM2NCAxNS4xMTkyIDcuMmEuMDc1Ny4wNzU3IDAgMCAxIC4wNzEgMGw0LjgzMDMgMi43OTEzYTQuNDk0NCA0LjQ5NDQgMCAwIDEtLjY3NjUgOC4xMDQydi01LjY3NzJhLjc5Ljc5IDAgMCAwLS40MDctLjY2N3ptMi4wMTA3LTMuMDIzMWwtLjE0Mi0uMDg1Mi00Ljc3MzUtMi43ODE4YS43NzU5Ljc3NTkgMCAwIDAtLjc4NTQgMEw5LjQwOSA5LjIyOTdWNi44OTc0YS4wNjYyLjA2NjIgMCAwIDEgLjAyODQtLjA2MTVsNC44MzAzLTIuNzg2NmE0LjQ5OTIgNC40OTkyIDAgMCAxIDYuNjgwMiA0LjY2ek04LjMwNjUgMTIuODYzbC0yLjAyLTEuMTYzOGEuMDgwNC4wODA0IDAgMCAxLS4wMzgtLjA1NjdWNi4wNzQyYTQuNDk5MiA0LjQ5OTIgMCAwIDEgNy4zNzU3LTMuNDUzN2wtLjE0Mi4wODA1TDguNzA0IDUuNDU5YS43OTQ4Ljc5NDggMCAwIDAtLjM5MjcuNjgxM3ptMS4wOTc2LTIuMzY1NGwyLjYwMi0xLjQ5OTggMi42MDY5IDEuNDk5OHYyLjk5OTRsLTIuNTk3NCAxLjQ5OTctMi42MDY3LTEuNDk5N1oiLz48L3N2Zz4%3D" alt="Codex"></a>
+  <a href="#install-claude-code"><img src="https://img.shields.io/badge/Claude_Code-D97757?style=for-the-badge&logo=claude&logoColor=white" alt="Claude Code"></a>
+  <a href="#install-cursor"><img src="https://img.shields.io/badge/Cursor-3B3B3B?style=for-the-badge&logo=cursor&logoColor=white" alt="Cursor"></a>
+  <a href="#install-gemini-cli"><img src="https://img.shields.io/badge/Gemini_CLI-1A73E8?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Gemini CLI"></a>
+  <a href="#install-github-copilot"><img src="https://img.shields.io/badge/GitHub_Copilot-24292F?style=for-the-badge&logo=githubcopilot&logoColor=white" alt="GitHub Copilot"></a>
+  <a href="#install-opencode"><img src="https://img.shields.io/badge/OpenCode-4A4A4A?style=for-the-badge&logo=opencode&logoColor=white" alt="OpenCode"></a>
+</p>
+
+<a id="install-codex"></a>**Codex**，已测试：
 
 ```bash
-claude plugin marketplace add Aboudjem/10x
-claude plugin install humanizer@10x
+npx skills add Aboudjem/humanizer-skill -g -a codex
 ```
 
-在其他任何代理里，用 [skills CLI](https://github.com/vercel-labs/skills) 一行搞定：
+<a id="install-claude-code"></a>**Claude Code**，已测试安装：
 
 ```bash
-npx skills add Aboudjem/humanizer-skill
+claude plugin marketplace add Aboudjem/10x && claude plugin install humanizer@10x
 ```
 
-加上 `-a codex`、`-a cursor` 或其他代理代码，只装到一个代理。代码列表见 [docs/editors.md](../docs/editors.md)。
+<a id="install-cursor"></a>**Cursor**，已测试安装：
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a cursor
+```
+
+<a id="install-gemini-cli"></a>**Gemini CLI**，已测试安装：
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a gemini-cli
+```
+
+<a id="install-github-copilot"></a>**GitHub Copilot**，已测试安装：
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a github-copilot
+```
+
+<a id="install-opencode"></a>**OpenCode**，已测试安装：
+
+```bash
+npx skills add Aboudjem/humanizer-skill -g -a opencode
+```
+
+只装在当前项目：去掉 `-g`。其他代理：它的 `-a` 代码见 [docs/editors.md](../docs/editors.md)。
 
 <details>
 <summary>不用安装器安装（curl）</summary>
 
-这条命令把 skill 唯一需要的文件复制到你的项目里：
+这会把 skill 需要的唯一文件复制到你的项目里：
 
 ```bash
 mkdir -p .claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/Aboudjem/humanizer-skill/main/skills/humanizer/SKILL.md -o .claude/skills/humanizer/SKILL.md
@@ -112,7 +152,7 @@ mkdir -p .claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/
 
 ## 使用
 
-**1. 重写一份草稿。** 在编辑器里，对你自己的文件调用这个 skill：
+**1. 重写草稿。** 在你的代理里，对你自己的文件调用 skill：
 
 ```text
 /humanizer --file draft.md --voice technical
@@ -122,18 +162,19 @@ mkdir -p .claude/skills/humanizer && curl -sL https://raw.githubusercontent.com/
 >
 > **之后：** This guide explains how our authentication system works.
 
-重写会删掉那些痕迹。它从不添加原文没有的事实。
+重写会去掉 AI 的习惯。它从不添加原文没有的事实。
+默认情况下，它在聊天里显示重写结果，文件保持不变。加上 `--mode edit` 才会直接修改文件。
 
-**2. 给文件打分。** CLI 是可选的，从克隆的仓库运行。它只读文件，不做任何修改：
+**2. 给文件打分。** CLI 是可选的，从克隆的仓库运行。它只读文件，不改任何东西：
 
 ```bash
 git clone https://github.com/Aboudjem/humanizer-skill && cd humanizer-skill
 node cli/index.js score examples/blog-post/before.md
 ```
 
-输出就是[你会得到什么](#你会得到什么)里的报告。把路径换成你自己的文件。
+输出就是[你会得到什么](#你会得到什么)里的报告。换成你自己文件的路径。
 
-**3. 检查重写有没有保住事实。** 真正的风险是重写悄悄丢掉一个数字：
+**3. 检查重写有没有保住事实。** 真正的风险是重写丢掉一个数字：
 
 ```bash
 node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md --check-facts
@@ -147,9 +188,9 @@ Fact check:
   OK. All 7 fact(s) in the original survive the rewrite.
 ```
 
-丢了东西时，它以退出码 1 结束，并点名丢了什么。
+它以退出码 1 结束，并列出丢失的内容。
 
-**4. 给一个文件夹把关。** CI 里一行就够。输出的第一行是 `Result: PASS` 或 `Result: FAIL`：
+**4. 在 CI 里拦下不好的草稿**（你的自动检查）。草稿分数太高时，`scan --fail-above 40` 以退出码 1 结束。输出第一行是 `Result: PASS` 或 `Result: FAIL`：
 
 ```bash
 node cli/index.js scan docs --fail-above 40
@@ -157,14 +198,15 @@ node cli/index.js scan docs --fail-above 40
 
 ## 工作原理
 
-AI 写的文字有可以测量的习惯。句子长度差不多，同样稳妥的词反复出现，填充语塞满空隙。
+你的 README 读起来像聊天机器人写的。你说不出是哪些词造成的。
+AI 写的文字有可以测量的习惯。每个句子都差不多长。同样稳妥的说法一再出现。
 
 | 部分  | 做什么                                                     | 在哪里运行      |
 | :---- | :--------------------------------------------------------- | :-------------- |
-| skill | 给 55 个模式命名，在你的文字里找出它们，并用你选的风格重写 | 你编辑器的模型  |
+| skill | 给 55 个模式命名，在你的文字里找出它们，并用五种风格之一重写 | 你的代理的模型 |
 | CLI   | 根据四个信号计算 0 到 100 的分数                           | 你机器上的 Node |
 
-这个 skill 是一个 Markdown 文件，[`SKILL.md`](../skills/humanizer/SKILL.md)。你输入 `/humanizer` 时，编辑器会读取它。
+这个 skill 是一个 Markdown 文件，[`SKILL.md`](../skills/humanizer/SKILL.md)。你输入 `/humanizer` 时，代理会读取它。
 
 CLI 的分数是简单的算术，所以同一个文件总是得到同一个数字：
 
@@ -202,17 +244,18 @@ _burstiness_ 指句子长度的变化程度。_AI tell_ 指暴露 AI 痕迹的�
 
 ## 支持的代理
 
-| 代理                | 安装                                                    | 做过的检查                                 | 测试日期   |
-| :------------------ | :------------------------------------------------------ | :----------------------------------------- | :--------- |
-| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | 从 10x 插件市场安装，并在严格模式下验证    | 2026-11-17 |
-| Codex CLI 0.169.0   | `npx skills add Aboudjem/humanizer-skill -a codex`      | 已安装，skill 重写了一个句子               | 2026-11-17 |
-| Gemini CLI          | `npx skills add Aboudjem/humanizer-skill -a gemini-cli` | 仅安装。skill 文件已放入 `.agents/skills/` | 2026-11-17 |
-| Cursor              | `npx skills add Aboudjem/humanizer-skill -a cursor`     | 仅安装。skill 文件已放入 `.agents/skills/` | 2026-11-17 |
-| OpenCode            | `npx skills add Aboudjem/humanizer-skill -a opencode`   | 仅安装。skill 文件已放入 `.agents/skills/` | 2026-11-17 |
+| 代理 | 安装 | 做过的检查 | 测试日期 |
+| :-- | :-- | :-- | :-- |
+| Claude Code 2.1.326 | `claude plugin install humanizer@10x` | 从 10x 市场为用户安装，并在严格模式下验证 | 2026-11-17 |
+| Codex CLI 0.169.0 | `npx skills add Aboudjem/humanizer-skill -g -a codex` | 已安装，skill 重写了一个句子（项目内安装） | 2026-11-17 |
+| Gemini CLI | `npx skills add Aboudjem/humanizer-skill -g -a gemini-cli` | 仅安装。skill 文件已放入 `~/.agents/skills/` | 2026-11-17 |
+| Cursor | `npx skills add Aboudjem/humanizer-skill -g -a cursor` | 仅安装。skill 文件已放入 `~/.agents/skills/` | 2026-11-17 |
+| GitHub Copilot | `npx skills add Aboudjem/humanizer-skill -g -a github-copilot` | 仅安装。skill 文件已放入 `~/.agents/skills/` | 2026-11-17 |
+| OpenCode | `npx skills add Aboudjem/humanizer-skill -g -a opencode` | 仅安装。skill 文件已放入 `~/.agents/skills/` | 2026-11-17 |
 
-有文档但未验证：Copilot、Windsurf、Zed、Kimi Code CLI，以及 [docs/editors.md](../docs/editors.md) 里的其他代理。
+每个全局安装都在 2026-11-17 于一个空的主文件夹里运行过。有文档但未验证：Windsurf、Zed、Kimi Code CLI，以及 [docs/editors.md](../docs/editors.md) 里的其他代理。
 
-skill 是 Markdown，所以你的编辑器指向哪个模型，它就在哪个模型上运行。
+skill 是 Markdown，所以它在你的代理所用的模型上运行。它不绑定某个模型。
 
 ## 证据
 
@@ -236,7 +279,7 @@ skill 是 Markdown，所以你的编辑器指向哪个模型，它就在哪个�
 
 Humanizer 本身不会。skill 和 CLI 自身不发任何网络请求。没有遥测，不需要账号，不需要 API key。
 
-重写由你编辑器的模型完成。如果那个模型托管在云端，你的文字会像任何提示词一样发给它。CLI 的分数只在你的机器上计算。
+重写由你的代理的模型完成。如果那个模型托管在云端，你的文字会像任何提示词一样发给它。CLI 的分数只在你的机器上计算。
 
 ### 它能让我的文字通过 AI 检测器吗？
 
@@ -248,7 +291,7 @@ Humanizer 本身不会。skill 和 CLI 自身不发任何网络请求。没有�
 
 ### 它在哪些模型上运行？
 
-你的编辑器指向哪个就是哪个。本页的运行用的是 Claude Code 里的 Claude Sonnet，和 Codex CLI 的默认模型。
+你的代理用哪个就是哪个。本页的运行用的是 Claude Code 里的 Claude Sonnet，和 Codex CLI 的默认模型。
 
 ### 我需要 CLI 吗？
 

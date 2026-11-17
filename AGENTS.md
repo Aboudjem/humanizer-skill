@@ -4,7 +4,7 @@ Context for any coding agent that works in this repo. The human overview is in [
 
 ## What this repo is
 
-Humanizer is one Markdown skill. It names 55 AI writing patterns, rewrites text in one of five voices, and reports a 0 to 100 AI-tell score. The skill is `skills/humanizer/SKILL.md` and needs nothing else. The repo also ships an optional Node CLI in `cli/` that computes the score with no dependency and no network call.
+Humanizer shows why a draft sounds like AI, then fixes it. It is one Markdown skill. It names 55 AI writing patterns, rewrites text in one of five voices, and reports a 0 to 100 AI-tell score. The skill is `skills/humanizer/SKILL.md` and needs nothing else. The repo also ships an optional Node CLI in `cli/` that computes the score with no dependency and no network call.
 
 Other repos install this one. Do not rename the skill (`humanizer`), move `skills/humanizer/SKILL.md`, or change the install commands below.
 
@@ -56,8 +56,10 @@ claude plugin install humanizer@10x
 ```
 
 ```bash
-npx skills add Aboudjem/humanizer-skill
+npx skills add Aboudjem/humanizer-skill -g
 ```
+
+`-g` installs for all the user's projects. Drop it for one project only.
 
 The repo is also its own single-plugin marketplace (`.claude-plugin/marketplace.json`).
 

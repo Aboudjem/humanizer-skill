@@ -1,13 +1,13 @@
 ---
 slug: /
 sidebar_position: 1
-title: Humanizer, an AI writing humanizer and detector for Claude Code
-description: Humanizer is a free, open-source AI writing humanizer skill that detects 55 AI writing patterns and rewrites text in 5 voice profiles, with a 0-100 AI-tell score, zero dependencies, and no network calls.
+title: Humanizer, see why your draft sounds like AI, then fix it
+description: See which words make a draft sound like AI, then rewrite it in one of five voices. Optional 0 to 100 score. No network calls of its own.
 ---
 
-# Humanizer: an AI writing humanizer and detector
+# Humanizer: see why your draft sounds like AI, then fix it
 
-Humanizer is an open-source [Claude Code](https://github.com/Aboudjem/humanizer-skill) skill, an **AI writing humanizer**, that detects **55 AI writing patterns** and rewrites text in **5 voice profiles**, scoring every draft on a 0-100 AI-tell scale. The skill core is a single Markdown file with zero dependencies and no network calls of its own. The rewrite runs on your editor's model, so your text goes wherever that model runs.
+Humanizer quotes the words that sound machine-written, then rewrites your draft. It is an open-source [agent skill](https://github.com/Aboudjem/humanizer-skill) that finds **55 AI writing patterns** and rewrites text in **5 voice profiles**, scoring every draft on a 0-100 AI-tell scale. The skill core is a single Markdown file with zero dependencies and no network calls of its own. The rewrite runs on your agent's model, so your text goes wherever that model runs.
 
 AI text scores about 0.00 burstiness, according to GPTZero's own detection research. Human writing scores around plus 0.70. Humanizer rewrites the gap: it strips the mechanical tells and restores the sentence-length variation and specificity that make writing read like a person wrote it.
 
