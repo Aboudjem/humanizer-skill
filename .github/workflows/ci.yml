@@ -53,15 +53,14 @@ jobs:
           fi
           echo "Pattern count OK: $COUNT patterns (>= $EXPECTED)"
 
-      - name: No em dashes in SKILL.md or README
+      - name: No banned dash in any doc or manifest
         run: |
-          # SKILL.md treats em dashes as a banned pattern (P13). Skill itself must not violate its own rule.
-          if grep -lP '[\x{2014}]' skills/humanizer/SKILL.md README.md 2>/dev/null; then
-            echo "FAIL: em dash (U+2014) found in core docs (violates P13)"
-            grep -nP '[\x{2014}]' skills/humanizer/SKILL.md README.md || true
-            exit 1
-          fi
-          echo "Zero em dashes in core docs"
+          # The skill lists dash overuse as a pattern (P13), so every tracked doc, manifest,
+          # YAML and SVG must be free of U+2014 and its stand-ins. The script lists the forms.
+          node tools/check-dashes.js
+
+      - name: Every manifest carries the same version
+        run: node tools/check-versions.js
 
       - name: Pattern badge matches actual count
         run: |
@@ -78,9 +77,9 @@ jobs:
           # Check git-tracking, not on-disk existence: local dev dirs (.omc, .goal)
           # are gitignored and never checked out in CI, but this keeps local and CI runs in agreement.
           FOUND=0
-          for dir in .planning .deep-research .omc .goal; do
+          for dir in .planning .deep-research .omc .goal submissions docs/LAUNCH-PLAN.md docs/VIRAL-AUDIT.md; do
             if [ -n "$(git ls-files "$dir")" ]; then
-              echo "FAIL: Internal directory $dir is tracked in git"
+              echo "FAIL: Internal path $dir is tracked in git"
               FOUND=1
             fi
           done
@@ -127,14 +126,16 @@ jobs:
         working-directory: cli
         run: npx eslint .
 
-      - name: Unit and smoke tests (zero dependencies)
-        working-directory: cli
-        run: node --test
+      - name: Unit and smoke tests (the declared test command, zero dependencies)
+        run: npm test
 
-      - name: CLI smoke run
+      - name: The repo passes its own scan
+        run: npm run scan
+
+      - name: The bundled example keeps its facts
         run: |
           node cli/index.js score examples/blog-post/after.md
-          node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md
+          node cli/index.js compare --before examples/blog-post/before.md --after examples/blog-post/after.md --check-facts
 
       - name: Pre-commit hook manifest is well-formed
         run: |
@@ -154,3 +155,24 @@ jobs:
             if (!(mode & 0o111)) throw new Error('cli/index.js is not executable (required for language: script)');
             console.log('.pre-commit-hooks.yaml OK');
           "
+
+  install-rails:
+    name: Install rails (skills CLI + Claude Code plugin)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Both tools are pinned on purpose. Bump them deliberately.
+      - name: The skills CLI finds the skill
+        run: |
+          npx --yes skills@1.9.0 add . --list | tee /tmp/skills.txt
+          grep -q "humanizer" /tmp/skills.txt
+
+      - name: The Claude Code plugin validates in strict mode
+        run: npx --yes @anthropic-ai/claude-code@2.1.326 plugin validate . --strict

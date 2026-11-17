@@ -1,6 +1,6 @@
 ---
-name: Feature request
-about: New pattern, new voice, new mode, or an improvement to an existing one
+name: New pattern or feature
+about: A new AI writing pattern, a new voice or mode, or an improvement to an existing one
 title: "[FEATURE] "
 labels: enhancement
 assignees: Aboudjem
@@ -12,8 +12,8 @@ assignees: Aboudjem
 
 ## Is this a new AI pattern?
 
-- [ ] Yes — new pattern (P54+)
-- [ ] No — improvement to an existing pattern or another feature
+- [ ] Yes, a new pattern (P56 or later)
+- [ ] No, an improvement to an existing pattern or another feature
 
 ### If it's a new pattern: before/after example
 
@@ -36,7 +36,7 @@ assignees: Aboudjem
 
 ## Source / evidence (optional)
 
-<!-- A link to a study, a blog post, an editorial guideline, a HackerNews discussion — anything that backs up the pattern claim. The strongest PRs include a source. -->
+<!-- A link to a study, a blog post, an editorial guideline, a HackerNews discussion: anything that backs up the pattern claim. The strongest PRs include a source. -->
 
 ## Would you like to contribute it yourself?
 

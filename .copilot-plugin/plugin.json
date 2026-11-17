@@ -1,6 +1,6 @@
 {
   "name": "humanizer",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Detects 55 AI writing patterns and rewrites text in five voice profiles with a 0-100 AI-tell score, entirely on your machine.",
   "author": {
     "name": "Adam Boudjemaa",

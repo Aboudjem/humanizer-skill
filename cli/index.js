@@ -25,6 +25,7 @@ Options:
   --write-baseline        Write current scores to --baseline and exit 0
   --fail-on-regression    Exit 1 if any file scores worse than its baseline
   --ext <csv>             Extensions for scan (default: md,markdown,txt)
+  --exclude <csv>         Paths scan skips: a file, a folder, or a name with *
   --ignore-code           Mask fenced/inline code before scoring
   --ignore-quotes         Mask Markdown block quotes before scoring
   --check-facts           On compare, exit 1 if the rewrite lost a fact
@@ -53,6 +54,11 @@ function parseArgs(argv) {
     else if (a === '--before') opts.before = argv[++i];
     else if (a === '--after') opts.after = argv[++i];
     else if (a === '--ext') opts.ext = argv[++i];
+    else if (a === '--exclude') {
+      const v = argv[++i];
+      if (!v || v.startsWith('--')) throw new UsageError('--exclude requires a path or a comma-separated list');
+      opts.exclude = (opts.exclude || []).concat(v.split(',').map((s) => s.trim()).filter(Boolean));
+    }
     else if (a.startsWith('--')) throw new UsageError('Unknown option: ' + a);
     else opts._.push(a);
   }
@@ -105,7 +111,7 @@ function run(argv) {
     const targets = opts._.slice(1);
     if (!targets.length) throw new UsageError('scan needs at least one directory or file');
     const exts = opts.ext ? opts.ext.split(',').map((s) => s.trim().toLowerCase()) : undefined;
-    const scan = scanPaths(targets, { ...scoreOpts, exts });
+    const scan = scanPaths(targets, { ...scoreOpts, exts, exclude: opts.exclude });
     if (opts.writeBaseline && opts.baseline) {
       const base = {};
       for (const f of scan.files) base[f.file] = f.score;
@@ -162,7 +168,8 @@ function gate(score, target, opts) {
 function gateScan(scan, opts) {
   let code = 0;
   if (opts.failAbove != null) {
-    const bad = scan.files.filter((f) => f.score > opts.failAbove);
+    // A sample under 40 words is low-confidence, so it never trips the gate.
+    const bad = scan.files.filter((f) => !f.shortSample && f.score > opts.failAbove);
     if (bad.length) {
       process.stderr.write(`FAIL: ${bad.length} file(s) above --fail-above ${opts.failAbove}\n`);
       code = 1;

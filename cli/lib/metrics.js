@@ -187,6 +187,66 @@ function aiTellScore(m, anchors = ANCHORS) {
   return Math.round(aiTellScoreRaw(m, anchors));
 }
 
+/** The word trigrams that occur more than once, most repeated first, then in text order. */
+function repeatedTrigrams(tokens) {
+  const counts = new Map();
+  for (let i = 0; i + 3 <= tokens.length; i++) {
+    const g = tokens[i] + ' ' + tokens[i + 1] + ' ' + tokens[i + 2];
+    counts.set(g, (counts.get(g) || 0) + 1);
+  }
+  return [...counts.entries()]
+    .filter(([, n]) => n > 1)
+    .map(([phrase, count]) => ({ phrase, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+/**
+ * The evidence behind each signal: which stock words were found, which phrases
+ * repeat, and how far sentence lengths spread. Reads the same masked text as analyze.
+ */
+function diagnose(rawText, options = {}) {
+  const text = stripMarked(String(rawText || ''), options);
+  const tokens = wordTokens(text);
+  const lengths = splitSentences(text).map((s) => wordTokens(s).length);
+  return {
+    vocabHits: lexicalTells(text, tokens).hits,
+    repeatedTrigrams: repeatedTrigrams(tokens),
+    shortestSentence: lengths.length ? Math.min(...lengths) : 0,
+    longestSentence: lengths.length ? Math.max(...lengths) : 0,
+  };
+}
+
+const quoteList = (items) => items.map((x) => '"' + x + '"').join(', ');
+
+/**
+ * What to fix first: one action per signal that costs at least one point, the
+ * most expensive first, three at most. Each action names its evidence, so the
+ * reader edits a word or a sentence instead of decoding a metric.
+ */
+function buildActions(signals, metrics, evidence, anchors = ANCHORS) {
+  const write = {
+    lexical: () => {
+      const n = metrics.vocabTells;
+      const top = evidence.vocabHits.slice(0, 4).map((h) => h.term);
+      return `Cut the stock AI words: ${n} found (${quoteList(top)}${evidence.vocabHits.length > 4 ? ', ...' : ''}).`;
+    },
+    repetition: () => {
+      const top = evidence.repeatedTrigrams.slice(0, 3).map((t) => `"${t.phrase}" x${t.count}`);
+      return `Reword the repeated phrases: ${top.join(', ')}.`;
+    },
+    burstiness: () =>
+      `Vary the sentence lengths: they run from ${evidence.shortestSentence} to ${evidence.longestSentence} words ` +
+      `(mean ${metrics.meanSentenceLength}). Split a long one and add a short one.`,
+    diversity: () =>
+      `Use a wider vocabulary: MATTR is ${metrics.mattr}, and ${anchors.ttrHigh} or more reads human.`,
+  };
+  return signals
+    .filter((s) => s.points >= 1)
+    .sort((a, b) => b.points - a.points)
+    .slice(0, 3)
+    .map((s) => ({ signal: s.name, points: round(s.points, 1), text: write[s.name]() }));
+}
+
 function verdict(score) {
   if (score <= 20) return 'Pristine';
   if (score <= 40) return 'Mostly human';
@@ -201,6 +261,8 @@ function scoreText(rawText, options = {}) {
   const scoreRaw = 100 * signals.reduce((a, s) => a + s.weight * s.normalized, 0);
   const score = Math.round(scoreRaw);
   const label = metrics.wordCount === 0 ? 'No text' : verdict(score);
+  // A text in the lowest band has nothing worth a rewrite, so it gets no action list.
+  const actions = score <= 20 ? [] : buildActions(signals, metrics, diagnose(rawText, options));
   return {
     metrics,
     score,
@@ -216,6 +278,8 @@ function scoreText(rawText, options = {}) {
       weight: s.weight,
       points: round(s.points, 3),
     })),
+    // What to fix first, most expensive signal first. Empty in the lowest band (0 to 20).
+    actions,
   };
 }
 
@@ -230,6 +294,9 @@ module.exports = {
   scoreSignals,
   aiTellScoreRaw,
   aiTellScore,
+  repeatedTrigrams,
+  diagnose,
+  buildActions,
   verdict,
   scoreText,
   ANCHORS,

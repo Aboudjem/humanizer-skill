@@ -35,6 +35,9 @@ node cli/index.js score docs/api.md --ignore-code --ignore-quotes
 node cli/index.js scan docs/
 node cli/index.js scan README.md docs/faq.md
 
+# Leave out a file, a folder, or a name with * (comma-separated)
+node cli/index.js scan . --exclude examples/blog-post/before.md,drafts
+
 # Show the before/after delta
 node cli/index.js compare --before draft.md --after final.md
 
@@ -44,6 +47,35 @@ node cli/index.js compare --before draft.md --after final.md --check-facts
 # JSON for tooling
 node cli/index.js score README.md --json
 ```
+
+## What the report looks like
+
+The verdict comes first, then what to fix, then the detail. This is a real run on the bundled specimen:
+
+```bash
+node cli/index.js score examples/blog-post/before.md
+```
+
+```text
+examples/blog-post/before.md
+Score: 57/100  (Mixed)
+Fix first:
+  1. Cut the stock AI words: 19 found ("it is worth noting", "it is important to note", "in today's", "rapidly evolving", ...). Costs 40.0 points (lexical).
+  2. Vary the sentence lengths: they run from 13 to 37 words (mean 24.4). Split a long one and add a short one. Costs 16.8 points (burstiness).
+  3. Rewrite it with the skill (/humanizer --file examples/blog-post/before.md), then run "compare --check-facts" on the pair.
+Detail:
+  Signal breakdown (points out of 100):
+    lexical     40.0   weight 0.4   vocabTellDensity 0.0697
+    burstiness  16.8   weight 0.28  burstiness 0.263
+    repetition  0.3    weight 0.14  trigramRepetition 0.004
+    diversity   0.0    weight 0.18  mattr 0.843
+  ... then 12 metric lines
+```
+
+- "Fix first" lists one action per signal that costs a point or more, the most expensive first, three at most.
+- A text that scores 20 or less gets one line instead: `Nothing to fix first`.
+- `--json` carries the same list as `actions`, next to `score`, `verdict`, `signals` and `metrics`.
+- `scan` with `--fail-above` opens with `Result: PASS` or `Result: FAIL`, then lists the files, worst first.
 
 ## Checking that a rewrite kept the facts
 
@@ -88,6 +120,8 @@ node cli/index.js scan docs/ --baseline .humanizer-baseline.json --fail-on-regre
 
 Exit codes: `0` pass, `1` gate failed, `2` usage or IO error.
 
+A file under 40 words is listed as `short sample, not gated`. Its score is low-confidence, so `scan` never fails on it. `score` on one named file still applies `--fail-above` to it.
+
 ### GitHub Action
 
 A reusable composite action lives at `.github/actions/humanizer-gate`:
@@ -124,10 +158,10 @@ node tools/humanizer-skill/cli/index.js scan . --fail-above 40
 ## Tests
 
 ```bash
-cd cli && node --test
+npm test
 ```
 
-64 tests, no dependencies. Covers tokenization, every metric, the composite score and its per-signal breakdown, code/quote masking, the vocabulary layer, fact extraction and the fact-loss diff, multi-path scanning, the packaged bin (shebang, executable bit, and that no shipped module requires a file outside the tarball), and CLI exit codes (threshold gate, baseline regression, fact check, bad input).
+Run it from the repo root. It is `cd cli && node --test`: 77 tests, no dependencies, and the last lines print the count. The suite covers tokenization, every metric, the composite score and its per-signal breakdown, the verdict-first report and its actions, code and quote masking, the vocabulary layer, fact extraction and the fact-loss diff, multi-path scanning, `--exclude`, the short-sample rule, the bundled example pair, the packaged bin, and the CLI exit codes.
 
 Running the CLI needs Node 18 or newer, and CI runs the suite on both 18 and 20. Contributing or publishing needs Node 20.19 or newer, because eslint 10 does not run on 18.
 

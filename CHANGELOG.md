@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2026-11-17
+
+The score report now says what to fix, and the repo passes its own checks.
+
+### Added
+
+- **`score` puts the verdict first, then a "Fix first" list.** Up to two actions name the words or
+  sentences that cost the most points, then the rewrite and fact-check step. `--json` keeps every
+  field and gains `actions`.
+- **`scan --exclude`** skips a file, a folder or a `*` pattern.
+- **`npm test`** at the repo root runs the full CLI suite (77 tests). CI runs it on every push and
+  pull request, plus `npm run selfcheck`: the repo's own scan, a dash check and a version check.
+- **CI checks both install paths**, pinned: `skills@1.9.0 add . --list` and
+  `claude plugin validate . --strict`.
+- `.claude-plugin/icon.png`, drawn from the existing logo mark.
+
+### Changed
+
+- **`scan` no longer fails on a sample under 40 words.** It still lists it, marked as short.
+  `scan --fail-above` now opens with `Result: PASS` or `Result: FAIL`.
+- **The bundled example is a clean pair.** `before.md` and `after.md` hold only the text, the notes
+  moved to `examples/blog-post/README.md`, and the rewrite keeps all 7 facts (`compare --check-facts`
+  exits 0). The old rewrite invented a personal story.
+- README rewritten: install, how it works, proof, FAQ, limits, and a real run on the first screen.
+  Translations updated to the new numbers.
+- Every manifest carries one version: plugin, Cursor, Copilot, root and CLI `package.json`.
+- Issue templates are named after what people report: wrong detection or bad rewrite, new pattern.
+- Release notes now come from this CHANGELOG instead of an auto-generated list.
+
+### Removed
+
+- Internal launch notes (`docs/LAUNCH-PLAN.md`, `docs/VIRAL-AUDIT.md`, `submissions/`). CI fails if
+  they come back.
+- The stars badge.
+
 ## [0.7.1] - 2026-09-03
 
 A motion identity, and the literal synthwave scenery removed. No behaviour changes.

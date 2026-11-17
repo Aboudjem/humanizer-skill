@@ -78,8 +78,9 @@ function countWord(tokens, wordSet) {
 
 /**
  * Count AI-vocabulary tells in text.
- * Returns { tier1, tier2, phrases, weighted, density } where density is
- * weighted hits divided by word count.
+ * Returns { tier1, tier2, phrases, weighted, density, hits } where density is
+ * weighted hits divided by word count and hits lists each matched term with its
+ * count, most frequent first (ties keep catalog order).
  */
 function lexicalTells(text, tokens) {
   const lower = text.toLowerCase();
@@ -87,17 +88,25 @@ function lexicalTells(text, tokens) {
   const t2set = new Set(TIER2_WORDS);
   const tier1 = countWord(tokens, t1set);
   const tier2 = countWord(tokens, t2set);
+  const counts = new Map();
+  const bump = (term) => counts.set(term, (counts.get(term) || 0) + 1);
+  for (const t of tokens) if (t1set.has(t) || t2set.has(t)) bump(t);
   let phrases = 0;
   for (const p of PHRASES) {
     let idx = lower.indexOf(p);
     while (idx !== -1) {
       phrases++;
+      bump(p);
       idx = lower.indexOf(p, idx + p.length);
     }
   }
   const weighted = tier1 * W_TIER1 + tier2 * W_TIER2 + phrases * W_PHRASE;
   const density = tokens.length ? weighted / tokens.length : 0;
-  return { tier1, tier2, phrases, weighted, density };
+  const order = [...PHRASES, ...TIER1_WORDS, ...TIER2_WORDS];
+  const hits = [...counts.entries()]
+    .map(([term, count]) => ({ term, count }))
+    .sort((a, b) => b.count - a.count || order.indexOf(a.term) - order.indexOf(b.term));
+  return { tier1, tier2, phrases, weighted, density, hits };
 }
 
 module.exports = { lexicalTells, TIER1_WORDS, TIER2_WORDS, PHRASES };

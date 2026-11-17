@@ -41,6 +41,25 @@ function formatSignals(signals) {
   return lines.join('\n');
 }
 
+/**
+ * What to do, straight under the verdict. A file with nothing to fix says so in
+ * one line, so the reader never has to infer it from an empty list.
+ */
+function formatActions(result, label) {
+  const actions = result.actions || [];
+  if (!actions.length) return ['Nothing to fix first: the score is in the lowest band (0 to 20).'];
+  const lines = ['Fix first:'];
+  actions.forEach((a, i) => {
+    lines.push(`  ${i + 1}. ${a.text} Costs ${a.points.toFixed(1)} points (${a.signal}).`);
+  });
+  // The last step is always the same loop: rewrite, then prove nothing was lost.
+  const file = label && label !== 'stdin' ? ` --file ${label}` : '';
+  lines.push(
+    `  ${actions.length + 1}. Rewrite it with the skill (/humanizer${file}), then run "compare --check-facts" on the pair.`
+  );
+  return lines;
+}
+
 function formatScore(result, label) {
   const lines = [];
   if (label) lines.push(label);
@@ -48,17 +67,35 @@ function formatScore(result, label) {
   if (result.metrics.shortSample) {
     lines.push('  note: short sample (< 40 words) - score is low-confidence');
   }
+  lines.push(...formatActions(result, label));
+  lines.push('Detail:');
   if (result.signals) lines.push(formatSignals(result.signals));
   lines.push(formatMetrics(result.metrics));
   return lines.join('\n');
 }
 
+/**
+ * Verdict first: with a gate, the first line says PASS or FAIL and how many files
+ * are over it. The files follow, worst first, so the ones to fix are on top.
+ * A sample under 40 words is listed but never gated: its score is low-confidence.
+ */
 function formatScan(scan, { failAbove } = {}) {
   const lines = [];
+  const gated = failAbove != null;
+  const over = (f) => gated && !f.shortSample && f.score > failAbove;
+  const bad = scan.files.filter(over);
+  if (gated) {
+    lines.push(
+      bad.length
+        ? `Result: FAIL. ${bad.length} of ${scan.files.length} file(s) score above ${failAbove}.`
+        : `Result: PASS. No file scores above ${failAbove}.`
+    );
+  }
   lines.push(`Scanned ${scan.files.length} file(s). mean=${scan.meanScore} max=${scan.maxScore}`);
   lines.push('');
-  for (const f of scan.files) {
-    const flag = failAbove != null && f.score > failAbove ? '  FAIL' : '';
+  const ordered = scan.files.slice().sort((a, b) => b.score - a.score || (a.file < b.file ? -1 : 1));
+  for (const f of ordered) {
+    const flag = over(f) ? '  FAIL' : f.shortSample ? '  (short sample, not gated)' : '';
     lines.push(`  ${pad(f.score + '/100', 8)} ${pad(f.verdict, 14)} ${f.file}${flag}`);
   }
   return lines.join('\n');
@@ -116,4 +153,4 @@ function round(x) {
   return Math.round(x * 1000) / 1000;
 }
 
-module.exports = { formatMetrics, formatSignals, formatScore, formatScan, formatCompare, formatFacts };
+module.exports = { formatMetrics, formatSignals, formatActions, formatScore, formatScan, formatCompare, formatFacts };

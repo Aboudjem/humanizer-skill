@@ -8,7 +8,6 @@
   <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-7C3AED?style=flat-square" alt="License: MIT"></a>
   <a href="https://github.com/Aboudjem/humanizer-skill/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Aboudjem/humanizer-skill/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
   <a href="../skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-55-FF006E?style=flat-square" alt="55 AI writing patterns"></a>
-  <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=00D4FF" alt="GitHub stars"></a>
 </p>
 
 <p align="center">
@@ -76,16 +75,13 @@ node cli/index.js score examples/blog-post/before.md
 
 ```text
 examples/blog-post/before.md
-Score: 46/100  (Mixed)
-  Signal breakdown (points out of 100):
-    lexical     40.0   weight 0.4   vocabTellDensity 0.0818
-    repetition  6.0    weight 0.14  trigramRepetition 0.077
-    burstiness  0.0    weight 0.28  burstiness 0.798
-    diversity   0.0    weight 0.18  mattr 0.866
-  words:                        391
-  sentences:                    11
-  mean sentence length:         35.55
-  ... plus 9 more metric lines
+Score: 57/100  (Mixed)
+Fix first:
+  1. Cut the stock AI words: 19 found ("it is worth noting", "it is important to note", "in today's", "rapidly evolving", ...). Costs 40.0 points (lexical).
+  2. Vary the sentence lengths: they run from 13 to 37 words (mean 24.4). Split a long one and add a short one. Costs 16.8 points (burstiness).
+  3. Rewrite it with the skill (/humanizer --file examples/blog-post/before.md), then run "compare --check-facts" on the pair.
+Detail:
+  ... signal breakdown, then 12 metric lines
 ```
 
 Cuanto más bajo, más humano. El desglose indica qué señal costó los puntos, así sabes qué corregir primero.
@@ -159,7 +155,7 @@ La skill es Markdown, así que corre sobre el modelo al que apunte tu editor.
 
 - **El objetivo es escribir mejor**, no burlar a un detector. La prosa limpia ya no trae las costumbres perezosas que buscan los detectores, así que al arreglar la escritura la detección se resuelve sola.
 - **Los falsos positivos ocurren.** Los detectores fallan con la escritura en inglés de personas no nativas ([Liang et al.](https://arxiv.org/abs/2304.02819)), y escribir frases de longitud parecida es simplemente la costumbre de algunas personas. Una guarda contra falsos positivos protege el detalle vivido y la imperfección deliberada.
-- **El número es un sustituto**, no un veredicto. Es reproducible, que es lo que lo hace útil como control, pero lee señales y no significado. 64 pruebas fijan su comportamiento.
+- **El número es un sustituto**, no un veredicto. Es reproducible, que es lo que lo hace útil como control, pero lee señales y no significado. 77 pruebas fijan su comportamiento.
 
 ## Más información
 

@@ -44,18 +44,19 @@ a file you are happy with and use the number it prints:
 node cli/index.js score examples/blog-post/after.md
 ```
 
-```
+```text
 examples/blog-post/after.md
-Score: 21/100  (Mostly human)
+Score: 6/100  (Pristine)
+Nothing to fix first: the score is in the lowest band (0 to 20).
+Detail:
   Signal breakdown (points out of 100):
-    lexical     19.1   weight 0.4   vocabTellDensity 0.0167
-    repetition  1.9    weight 0.14  trigramRepetition 0.024
-    burstiness  0.0    weight 0.28  burstiness 1.291
-    diversity   0.0    weight 0.18  mattr 0.887
+    burstiness  5.3    weight 0.28  burstiness 0.534
+    repetition  0.5    weight 0.14  trigramRepetition 0.007
+    diversity   0.0    weight 0.18  mattr 0.831
 ```
 
-The breakdown says where the points came from, so you can see whether a file is failing on
-vocabulary, on flat sentence lengths, or on repetition.
+A file over the lowest band gets a "Fix first" list right under the score. Each line names the
+words or sentences that cost the points. The breakdown under `Detail:` shows the arithmetic.
 
 To override the threshold, pass your own `args` in `.pre-commit-config.yaml`:
 
@@ -95,3 +96,15 @@ node cli/index.js scan docs --baseline .humanizer-baseline.json --fail-on-regres
 ```
 
 There is also a ready-made composite action at `.github/actions/humanizer-gate/action.yml`.
+
+## Skipping a file that is meant to score high
+
+A specimen or a quoted sample can score high on purpose. Leave it out by name:
+
+```bash
+node cli/index.js scan . --fail-above 40 --exclude examples/blog-post/before.md
+```
+
+`--exclude` takes a file, a folder, or a name with `*`, and a comma-separated list of them.
+A file under 40 words is listed but never fails the gate, because its score is low-confidence.
+This repo runs that exact gate on itself in CI (`npm run scan`).

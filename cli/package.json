@@ -1,6 +1,6 @@
 {
   "name": "humanizer-metrics",
-  "version": "0.3.0",
+  "version": "0.8.0",
   "description": "Zero-dependency writing-metrics and AI-tell scoring CLI for the humanizer skill. Optional companion to the pure-Markdown skill core.",
   "repository": {
     "type": "git",

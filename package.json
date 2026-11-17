@@ -1,0 +1,17 @@
+{
+  "name": "humanizer-skill",
+  "version": "0.8.0",
+  "private": true,
+  "description": "Repo scripts for the humanizer skill. The skill is skills/humanizer/SKILL.md and the optional CLI is cli/. Nothing here is published.",
+  "license": "MIT",
+  "scripts": {
+    "test": "cd cli && node --test",
+    "scan": "node cli/index.js scan . --fail-above 40 --ignore-code --exclude examples/blog-post/before.md",
+    "dashes": "node tools/check-dashes.js",
+    "versions": "node tools/check-versions.js",
+    "selfcheck": "npm run scan && npm run dashes && npm run versions"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

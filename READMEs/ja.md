@@ -8,7 +8,6 @@
   <a href="../LICENSE"><img src="https://img.shields.io/badge/license-MIT-7C3AED?style=flat-square" alt="License: MIT"></a>
   <a href="https://github.com/Aboudjem/humanizer-skill/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/Aboudjem/humanizer-skill/ci.yml?branch=main&style=flat-square&label=CI" alt="CI status"></a>
   <a href="../skills/humanizer/SKILL.md"><img src="https://img.shields.io/badge/patterns-55-FF006E?style=flat-square" alt="55 AI writing patterns"></a>
-  <a href="https://github.com/Aboudjem/humanizer-skill/stargazers"><img src="https://img.shields.io/github/stars/Aboudjem/humanizer-skill?style=flat-square&color=00D4FF" alt="GitHub stars"></a>
 </p>
 
 <p align="center">
@@ -76,16 +75,13 @@ node cli/index.js score examples/blog-post/before.md
 
 ```text
 examples/blog-post/before.md
-Score: 46/100  (Mixed)
-  Signal breakdown (points out of 100):
-    lexical     40.0   weight 0.4   vocabTellDensity 0.0818
-    repetition  6.0    weight 0.14  trigramRepetition 0.077
-    burstiness  0.0    weight 0.28  burstiness 0.798
-    diversity   0.0    weight 0.18  mattr 0.866
-  words:                        391
-  sentences:                    11
-  mean sentence length:         35.55
-  ... plus 9 more metric lines
+Score: 57/100  (Mixed)
+Fix first:
+  1. Cut the stock AI words: 19 found ("it is worth noting", "it is important to note", "in today's", "rapidly evolving", ...). Costs 40.0 points (lexical).
+  2. Vary the sentence lengths: they run from 13 to 37 words (mean 24.4). Split a long one and add a short one. Costs 16.8 points (burstiness).
+  3. Rewrite it with the skill (/humanizer --file examples/blog-post/before.md), then run "compare --check-facts" on the pair.
+Detail:
+  ... signal breakdown, then 12 metric lines
 ```
 
 低いほど人間らしい、という向きです。内訳がどのシグナルで点を失ったかを示すので、どこから直すか分かります。
@@ -159,7 +155,7 @@ node cli/index.js compare --before examples/blog-post/before.md \
 
 - **目的は良い文章を書くこと**であって、検出器を出し抜くことではありません。整った文章はそもそも検出器が探す怠けたクセを含まないので、書き方を直せば検出の話は自然に片づきます。
 - **誤検知は起こります。** 検出器は英語を母語としない書き手の文章で誤作動することが知られており（[Liang ほか](https://arxiv.org/abs/2304.02819)）、文の長さが揃うのは単なる書き癖のこともあります。誤検知ガードが、実体験の細部や意図的な不揃いを守ります。
-- **この数字は代理指標**であって判決ではありません。再現できるからゲートとして使えますが、読んでいるのは意味ではなくシグナルです。64 個のテストがその挙動を固定しています。
+- **この数字は代理指標**であって判決ではありません。再現できるからゲートとして使えますが、読んでいるのは意味ではなくシグナルです。77 個のテストがその挙動を固定しています。
 
 ## もっと知る
 

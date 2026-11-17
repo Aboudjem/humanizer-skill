@@ -1,6 +1,6 @@
 ---
-name: Bug report
-about: Something isn't working — wrong detection, bad rewrite, or a skill crash
+name: Wrong detection or bad rewrite
+about: The skill flagged human text, missed a pattern, lost a fact, or produced a poor rewrite
 title: "[BUG] "
 labels: bug
 assignees: Aboudjem
@@ -41,4 +41,4 @@ assignees: Aboudjem
 
 ## Additional context
 
-<!-- Any other context — screenshots, the full conversation, etc. -->
+<!-- Any other context: screenshots, the full conversation, and so on. -->
