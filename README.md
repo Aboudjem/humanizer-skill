@@ -21,7 +21,9 @@ claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
 
-Then type `/humanizer --file draft.md` in your editor. A real run on the bundled example:
+Then type `/humanizer --file draft.md` in your editor, where `draft.md` is any Markdown file of yours. The skill rewrites the file.
+
+Here is the bundled example, before and after, scored by the CLI:
 
 ```text
 Before   57/100  Mixed
@@ -192,7 +194,7 @@ The core catalog (P1-P30) draws on [Wikipedia: Signs of AI writing](https://en.w
 
 | Agent               | Install                                                 | Check that ran                                                         | Tested     |
 | :------------------ | :------------------------------------------------------ | :--------------------------------------------------------------------- | :--------- |
-| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | Installed, validated in strict mode, and the skill rewrote the example | 2026-11-17 |
+| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | Installed at 0.8.0 and validated in strict mode                        | 2026-11-17 |
 | Codex CLI 0.169.0   | `npx skills add Aboudjem/humanizer-skill -a codex`      | Installed, and the skill rewrote a sentence                            | 2026-11-17 |
 | Gemini CLI          | `npx skills add Aboudjem/humanizer-skill -a gemini-cli` | Install only. The skill file landed in `.agents/skills/`               | 2026-11-17 |
 | Cursor              | `npx skills add Aboudjem/humanizer-skill -a cursor`     | Install only. The skill file landed in `.agents/skills/`               | 2026-11-17 |
@@ -243,6 +245,8 @@ No. The skill alone rewrites text and estimates a score. The CLI exists for a nu
 ### Is the CLI on npm?
 
 No. Run it from a clone with `node cli/index.js`. It needs Node 18 or newer and no install step.
+
+The `npx skills` installer is a separate tool. It needs Node 22 or newer.
 
 More answers are in [docs/faq.md](docs/faq.md).
 
