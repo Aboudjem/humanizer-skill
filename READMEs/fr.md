@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../.github/assets/hero-light.svg">
-  <img alt="humanizer. Humaniseur et détecteur d'écriture IA. Se lit comme si une personne l'avait écrit. 55 motifs, 5 voix, aucune configuration, et rien ne quitte votre machine." src="../.github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer. Humaniseur d'écriture IA. Ça sonne IA ? Voyez exactement pourquoi. 55 motifs nommés, un score de 0 à 100, une réécriture dans une voix que vous choisissez. Aucun appel réseau propre." src="../.github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,7 +14,7 @@
   <a href="../README.md">English</a> · <a href="zh-CN.md">简体中文</a> · <a href="ja.md">日本語</a> · <a href="es.md">Español</a> · <b>Français</b>
 </p>
 
-<p align="center"><b>Humanizer est un humaniseur et détecteur d'écriture IA, gratuit et open source.</b></p>
+<p align="center"><b>Repérez ce qui fait sonner votre brouillon comme une IA. Corrigez-le.</b></p>
 
 <p align="center">
   <a href="#ce-quil-fait">Ce qu'il fait</a> · <a href="#installation">Installation</a> · <a href="#comment-lutiliser">Comment l'utiliser</a> · <a href="#dans-votre-éditeur">Dans votre éditeur</a> · <a href="#pour-aller-plus-loin">Pour aller plus loin</a>
@@ -24,6 +24,20 @@
 claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
+
+Humanizer repère les habitudes qui font lire un texte comme écrit par une IA, puis le réécrit dans une voix que vous choisissez.
+
+Tapez ensuite `/humanizer --file draft.md` dans votre éditeur. La skill réécrit le fichier. La réécriture tourne sur le modèle de votre éditeur.
+
+Votre README sonne comme un chatbot, et vous ne savez pas dire quels mots coincent. Les formules toutes faites s'empilent, et chaque phrase fait à peu près la même longueur. Humanizer nomme chaque habitude et note le brouillon de 0 à 100. Puis il le réécrit.
+
+## Pourquoi l'utiliser
+
+- **Savoir quoi changer.** 55 motifs numérotés, et une liste « Fix first » qui cite les mots qui coûtent des points.
+- **Garder vos faits.** `compare --check-facts` échoue si une réécriture perd un nombre, une date, une version ou une URL. L'exemple fourni garde ses 7 faits.
+- **Bloquer en CI.** `scan --fail-above 40` sort en code 1 sur un brouillon au score trop haut. Un [hook pre-commit](../docs/pre-commit.md) ne vérifie que les fichiers indexés.
+
+Ce n'est pas un détecteur, et il ne cherche pas à en tromper un. Il corrige l'écriture.
 
 ## Ce qu'il fait
 
@@ -151,7 +165,7 @@ La skill est du Markdown, donc elle tourne sur le modèle que vise votre éditeu
 ## Bon à savoir
 
 > [!IMPORTANT]
-> Rien ne quitte votre machine. La skill est un seul fichier Markdown que votre éditeur lit en local, et le CLI de métriques optionnel est du Node simple, sans dépendance ni appel réseau. Pas de télémétrie, pas de compte, pas de clé d'API.
+> Humanizer ne fait aucun appel réseau propre. La skill est un seul fichier Markdown que votre éditeur lit en local, et le CLI de métriques optionnel est du Node simple, sans dépendance ni appel réseau. Pas de télémétrie, pas de compte, pas de clé d'API. La réécriture tourne sur le modèle de votre éditeur : si ce modèle est hébergé, votre texte lui est envoyé, comme pour toute requête.
 
 - **Le but est de mieux écrire**, pas de tromper un détecteur. Une prose propre ne contient déjà plus les habitudes paresseuses que les détecteurs cherchent, donc corriger l'écriture règle la détection toute seule.
 - **Les faux positifs existent.** Les détecteurs se trompent sur l'anglais écrit par des non-anglophones ([Liang et al.](https://arxiv.org/abs/2304.02819)), et écrire des phrases de longueur régulière est simplement l'habitude de certaines personnes. Un garde-fou protège le détail vécu et l'imperfection volontaire.

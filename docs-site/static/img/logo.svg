@@ -106,5 +106,5 @@
     <text class="disp" x="140" y="108" font-size="62" font-weight="800"
           letter-spacing="-1.9" fill="url(#hm-word)">humanizer</text>
   </g>
-  <text class="mono tag" x="140" y="142">55 patterns  &#183;  5 voices  &#183;  nothing leaves your machine</text>
+  <text class="mono tag" x="140" y="142">55 patterns  &#183;  5 voices  &#183;  no network calls of its own</text>
 </svg>

@@ -7,8 +7,10 @@ no binary, no background process. Your editor reads the file when you invoke the
 
 ## Does anything leave my machine?
 
-No. The skill is a prompt your editor already has, and the optional metrics CLI is plain Node with
-no dependencies and no network calls. There is no telemetry, no account, and no API key.
+Not from Humanizer itself. The skill is a prompt your editor already has, and the optional metrics
+CLI is plain Node with no dependencies and no network calls. There is no telemetry, no account, and
+no API key. The rewrite runs on your editor's model: if that model is hosted, your text goes to it,
+as with any prompt. The CLI score runs on your machine only.
 
 ## Which models does it run on?
 

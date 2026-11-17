@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../.github/assets/hero-light.svg">
-  <img alt="humanizer。AI 文章のヒューマナイザーと検出器。人が書いたように読めます。55 個のパターン、5 種類のボイス、設定不要、そして何もマシンの外に出ません。" src="../.github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer。AI 文章のヒューマナイザー。AI っぽい？ その理由が正確にわかります。名前付きの 55 パターン、0 から 100 のスコア、選んだボイスでの書き直し。独自のネットワーク呼び出しはありません。" src="../.github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,7 +14,7 @@
   <a href="../README.md">English</a> · <a href="zh-CN.md">简体中文</a> · <b>日本語</b> · <a href="es.md">Español</a> · <a href="fr.md">Français</a>
 </p>
 
-<p align="center"><b>Humanizer は無料でオープンソースの、AI 文章のヒューマナイザーと検出器です。</b></p>
+<p align="center"><b>下書きが AI っぽく聞こえる原因を見つけて、直す。</b></p>
 
 <p align="center">
   <a href="#できること">できること</a> · <a href="#インストール">インストール</a> · <a href="#使い方">使い方</a> · <a href="#エディタで使う">エディタで使う</a> · <a href="#もっと知る">もっと知る</a>
@@ -24,6 +24,20 @@
 claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
+
+Humanizer は文章を AI が書いたように見せるクセを見つけ、選んだボイスで書き直します。
+
+あとはエディタで `/humanizer --file draft.md` と入力します。スキルがファイルを書き直します。書き直しはエディタのモデルで動きます。
+
+README がチャットボットの書いたように読めるのに、どの語が原因か指させない。決まり文句が積み重なり、どの文もだいたい同じ長さになる。Humanizer はそのクセに名前を付けて、下書きを 0 から 100 で採点します。そのうえで書き直します。
+
+## 使う理由
+
+- **何を直すかがわかる。** 番号付きの 55 パターンと、点を失っている語を引用する「Fix first」リスト。
+- **事実が残る。** `compare --check-facts` は、数値・日付・バージョン・URL を落とした書き直しを失敗にします。同梱の例は 7 個の事実をすべて保ちます。
+- **CI で止められる。** `scan --fail-above 40` はスコアが高すぎる下書きで終了コード 1 を返します。[pre-commit フック](../docs/pre-commit.md)はステージしたファイルだけを確認します。
+
+これは検出器ではなく、検出器を出し抜こうともしません。文章そのものを直します。
 
 ## できること
 
@@ -151,7 +165,7 @@ node cli/index.js compare --before examples/blog-post/before.md \
 ## 知っておきたいこと
 
 > [!IMPORTANT]
-> 何もマシンの外に出ません。スキルはエディタがローカルで読む Markdown ファイル 1 枚で、任意の指標 CLI は依存もネットワーク呼び出しもない素の Node です。テレメトリなし、アカウント不要、API キー不要。
+> Humanizer 自身はネットワーク呼び出しをしません。スキルはエディタがローカルで読む Markdown ファイル 1 枚で、任意の指標 CLI は依存もネットワーク呼び出しもない素の Node です。テレメトリなし、アカウント不要、API キー不要。書き直しはエディタのモデルで動くので、そのモデルがクラウド上にあれば、ほかのプロンプトと同じく文章はそこへ送られます。
 
 - **目的は良い文章を書くこと**であって、検出器を出し抜くことではありません。整った文章はそもそも検出器が探す怠けたクセを含まないので、書き方を直せば検出の話は自然に片づきます。
 - **誤検知は起こります。** 検出器は英語を母語としない書き手の文章で誤作動することが知られており（[Liang ほか](https://arxiv.org/abs/2304.02819)）、文の長さが揃うのは単なる書き癖のこともあります。誤検知ガードが、実体験の細部や意図的な不揃いを守ります。

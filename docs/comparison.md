@@ -5,7 +5,7 @@ Three kinds of tool sit in this space, and they answer different questions.
 | | Humanizer | Hosted rewrite tools | AI detectors | Editing it yourself |
 |:--|:--|:--|:--|:--|
 | Open source | Yes | No | No | Not applicable |
-| Runs with no account and no network | Yes | No | No | Yes |
+| No account, no network call of its own | Yes | No | No | Yes |
 | Names what it found | 55 numbered patterns | No | A score, rarely a reason | Yes |
 | Rewrites in a voice you choose | 5 voice profiles | Usually one | No | Yes |
 | Score you can reproduce | Yes, the CLI is deterministic | No | No, models change | No |
@@ -21,8 +21,9 @@ carries the tell, and it tells you which of the 55 patterns it changed and why.
 
 ## What it does not do
 
-- **It does not call a detector.** No GPTZero, Originality, or Copyleaks API. Your draft never leaves
-  the machine, so no third party sees it and no score comes back from one.
+- **It does not call a detector.** No GPTZero, Originality, or Copyleaks API. Humanizer sends your
+  draft to no third party of its own. The rewrite runs on your editor's model, and the CLI score runs
+  locally.
 - **It does not promise to beat any detector.** Detectors are moving targets and their accuracy on
   paraphrased text is contested. Writing that is genuinely less repetitive tends to score better
   everywhere, which is the durable version of the same outcome.

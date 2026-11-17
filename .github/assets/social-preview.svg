@@ -134,8 +134,10 @@
             height="165" fill="url(#hm-sheen)" opacity="0.45"/>
     </g>
   </g>
-  <text class="mono eyebrow" x="96" y="258">AI WRITING HUMANIZER AND DETECTOR</text>
-  <text class="disp head" x="96" y="416">Reads like a person wrote it</text>
-  <text class="disp sub" x="96" y="458">55 patterns, 5 voices, zero setup, and nothing leaves your machine.</text>
+  <text class="mono eyebrow" x="96" y="258">AI WRITING HUMANIZER</text>
+  <text class="disp head" x="96" y="416">Sounds like AI? See exactly why.</text>
+  <text class="disp sub" x="96" y="458">55 named patterns, a 0 to 100 score, a rewrite in a voice you pick.</text>
+  <rect x="96" y="508" width="372" height="48" rx="10" fill="#0B1020" fill-opacity="0.7" stroke="#7C3AED" stroke-opacity="0.55"/>
+  <text class="mono chipbig" x="116" y="539" fill="#F2F6FF">/humanizer --file draft.md</text>
   <text class="mono tag" x="96" y="604">github.com/Aboudjem/humanizer-skill</text>
 </svg>

@@ -144,10 +144,10 @@
   </g>
   <line x1="500" y1="100" x2="500" y2="300" stroke="url(#hm-rule)" stroke-width="1.5"/>
   <g transform="translate(544,0)">
-    <text class="mono eyebrow" x="0" y="134">AI WRITING HUMANIZER AND DETECTOR</text>
-    <text class="disp head" x="0" y="186">Reads like a person wrote it</text>
-    <text class="disp sub" x="0" y="222">55 patterns, 5 voices, zero setup, and nothing leaves your machine.</text>
+    <text class="mono eyebrow" x="0" y="134">AI WRITING HUMANIZER</text>
+    <text class="disp head" x="0" y="186">Sounds like AI? See exactly why.</text>
+    <text class="disp sub" x="0" y="222">55 named patterns, a 0 to 100 score, a rewrite in a voice you pick.</text>
     <g transform="translate(0,265)"><g class="hmp1"><circle cx="0" cy="0" r="4.5" fill="#C77DFF" filter="url(#hm-glow-sm)"/></g><g class="hmp2"><circle cx="22" cy="0" r="4.5" fill="#C77DFF" filter="url(#hm-glow-sm)"/></g><g class="hmp3"><circle cx="44" cy="0" r="4.5" fill="#C77DFF" filter="url(#hm-glow-sm)"/></g><g class="hmp4"><circle cx="66" cy="0" r="4.5" fill="#C77DFF" filter="url(#hm-glow-sm)"/></g><g class="hmp5"><circle cx="88" cy="0" r="4.5" fill="#C77DFF" filter="url(#hm-glow-sm)"/></g><text class="mono tag" x="124" y="4">FIVE VOICES</text></g>
   </g>
-  <text class="mono tag" x="76" y="352">one markdown file  &#183;  55 patterns  &#183;  nothing leaves your machine</text>
+  <text class="mono tag" x="76" y="352">one markdown file  &#183;  55 patterns  &#183;  no network calls of its own</text>
 </svg>

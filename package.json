@@ -1,6 +1,6 @@
 {
   "name": "humanizer-skill",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "private": true,
   "description": "Repo scripts for the humanizer skill. The skill is skills/humanizer/SKILL.md and the optional CLI is cli/. Nothing here is published.",
   "license": "MIT",

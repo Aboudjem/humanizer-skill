@@ -1,6 +1,6 @@
 # Humanizer
 
-> Humanizer is a Markdown skill for coding agents. It names 55 AI writing patterns, rewrites text in one of five voices, and reports a 0 to 100 AI-tell score. An optional zero-dependency Node CLI computes the same score with no network call. MIT license. Last updated 2026-11-17 for v0.8.0.
+> Humanizer finds the habits that make text read as AI-written, then rewrites it in a voice you pick. It is a Markdown skill for coding agents: it names 55 AI writing patterns, rewrites text in one of five preset voices, and reports a 0 to 100 AI-tell score. The skill and the optional zero-dependency Node CLI make no network call of their own; the rewrite runs on the agent's model. MIT license. Last updated 2026-11-17 for v0.8.2.
 
 ## Start here
 

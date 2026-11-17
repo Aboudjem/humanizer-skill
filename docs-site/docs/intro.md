@@ -7,12 +7,12 @@ description: Humanizer is a free, open-source AI writing humanizer skill that de
 
 # Humanizer: an AI writing humanizer and detector
 
-Humanizer is an open-source [Claude Code](https://github.com/Aboudjem/humanizer-skill) skill, an **AI writing humanizer**, that detects **55 AI writing patterns** and rewrites text in **5 voice profiles**, scoring every draft on a 0-100 AI-tell scale. The skill core is a single Markdown file with zero dependencies and no network calls, so nothing you paste ever leaves your machine.
+Humanizer is an open-source [Claude Code](https://github.com/Aboudjem/humanizer-skill) skill, an **AI writing humanizer**, that detects **55 AI writing patterns** and rewrites text in **5 voice profiles**, scoring every draft on a 0-100 AI-tell scale. The skill core is a single Markdown file with zero dependencies and no network calls of its own. The rewrite runs on your editor's model, so your text goes wherever that model runs.
 
 AI text scores about 0.00 burstiness, according to GPTZero's own detection research. Human writing scores around plus 0.70. Humanizer rewrites the gap: it strips the mechanical tells and restores the sentence-length variation and specificity that make writing read like a person wrote it.
 
 :::tip[Why it exists]
-Readers can feel when text was written by a machine. Humanizer names the specific tells (the em-dash pileups, the rule-of-three cadence, the vague attributions, the "delves into" energy) so you can strip them out while keeping your own voice.
+Readers can feel when text was written by a machine. Humanizer names the specific tells (the em-dash pileups, the rule-of-three cadence, the vague attributions, the "delves into" energy) so you can strip them out, then rewrite in one of five voices you pick.
 :::
 
 ## How it works

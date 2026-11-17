@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../.github/assets/hero-light.svg">
-  <img alt="humanizer。AI 写作人性化工具与检测器。读起来像真人写的。55 个模式，5 种语音，零配置，任何内容都不会离开你的机器。" src="../.github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer。AI 写作人性化工具。读起来像 AI？看清到底为什么。55 个有名字的模式，0 到 100 的分数，用你选的语音风格重写。自身不发任何网络请求。" src="../.github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,7 +14,7 @@
   <a href="../README.md">English</a> · <b>简体中文</b> · <a href="ja.md">日本語</a> · <a href="es.md">Español</a> · <a href="fr.md">Français</a>
 </p>
 
-<p align="center"><b>Humanizer 是一个免费开源的 AI 写作人性化工具与检测器。</b></p>
+<p align="center"><b>找出让你的草稿读起来像 AI 的地方，然后改掉。</b></p>
 
 <p align="center">
   <a href="#它做什么">它做什么</a> · <a href="#安装">安装</a> · <a href="#怎么用">怎么用</a> · <a href="#在你的编辑器里使用">在你的编辑器里使用</a> · <a href="#延伸阅读">延伸阅读</a>
@@ -24,6 +24,20 @@
 claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
+
+Humanizer 找出让文字读起来像 AI 写的习惯，然后用你选的语音风格重写。
+
+然后在编辑器里输入 `/humanizer --file draft.md`。skill 会重写这个文件。重写由你编辑器的模型完成。
+
+你的 README 读起来像聊天机器人写的，可你说不出是哪些词。套话越堆越多，每句话都差不多长。Humanizer 给每种习惯命名，并给草稿打 0 到 100 分。然后再重写。
+
+## 为什么用它
+
+- **知道改哪里。** 55 个编号模式，外加一份引用扣分词句的「Fix first」清单。
+- **事实不丢。** `compare --check-facts` 会让丢了数字、日期、版本号或 URL 的重写失败。自带示例的 7 个事实全部保留。
+- **在 CI 里拦住。** 分数太高时，`scan --fail-above 40` 以退出码 1 结束。一个 [pre-commit 钩子](../docs/pre-commit.md)只检查已暂存的文件。
+
+它不是检测器，也不想骗过检测器。它修的是文字本身。
 
 ## 它做什么
 
@@ -151,7 +165,7 @@ node cli/index.js compare --before examples/blog-post/before.md \
 ## 需要知道的事
 
 > [!IMPORTANT]
-> 任何内容都不会离开你的机器。这个 skill 只是编辑器在本地读取的一个 Markdown 文件，可选的指标 CLI 是纯 Node 实现，没有依赖，也不发任何网络请求。没有遥测，不需要账号，不需要 API key。
+> Humanizer 自身不发任何网络请求。这个 skill 只是编辑器在本地读取的一个 Markdown 文件，可选的指标 CLI 是纯 Node 实现，没有依赖，也不发任何网络请求。没有遥测，不需要账号，不需要 API key。重写由你编辑器的模型完成：如果那个模型托管在云端，你的文字会像任何提示词一样发给它。
 
 - **目标是把文字写好**，不是骗过检测器。干净的文字本来就不带检测器盯着的那些懒惰习惯，所以把写作修好，检测这件事自然就顺了。
 - **误判是会发生的。** 检测器在非英语母语者的英文上会误报（[Liang 等人](https://arxiv.org/abs/2304.02819)），而句长变化小本来就是有些人的写作习惯。误判防护会保护真实的细节和有意为之的不完美。

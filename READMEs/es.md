@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../.github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="../.github/assets/hero-light.svg">
-  <img alt="humanizer. Humanizador y detector de escritura con IA. Se lee como si lo hubiera escrito una persona. 55 patrones, 5 voces, cero configuración, y nada sale de tu máquina." src="../.github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer. Humanizador de escritura con IA. ¿Suena a IA? Mira exactamente por qué. 55 patrones con nombre, una puntuación de 0 a 100, una reescritura en la voz que elijas. Sin llamadas de red propias." src="../.github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,7 +14,7 @@
   <a href="../README.md">English</a> · <a href="zh-CN.md">简体中文</a> · <a href="ja.md">日本語</a> · <b>Español</b> · <a href="fr.md">Français</a>
 </p>
 
-<p align="center"><b>Humanizer es un humanizador y detector de escritura con IA, gratuito y de código abierto.</b></p>
+<p align="center"><b>Descubre qué hace que tu borrador suene a IA. Arréglalo.</b></p>
 
 <p align="center">
   <a href="#qué-hace">Qué hace</a> · <a href="#instalación">Instalación</a> · <a href="#cómo-usarlo">Cómo usarlo</a> · <a href="#funciona-en-tu-editor">Funciona en tu editor</a> · <a href="#más-información">Más información</a>
@@ -24,6 +24,20 @@
 claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
+
+Humanizer encuentra las costumbres que hacen que un texto se lea como escrito por una IA, y luego lo reescribe en la voz que elijas.
+
+Después escribe `/humanizer --file draft.md` en tu editor. La skill reescribe el archivo. La reescritura se ejecuta en el modelo de tu editor.
+
+Tu README suena a chatbot, y no sabes señalar qué palabras fallan. Las frases hechas se acumulan, y todas las frases miden más o menos lo mismo. Humanizer nombra cada costumbre y puntúa el borrador de 0 a 100. Luego lo reescribe.
+
+## Por qué usarlo
+
+- **Saber qué cambiar.** 55 patrones numerados, y una lista "Fix first" que cita las palabras que restan puntos.
+- **Conservar tus datos.** `compare --check-facts` falla si una reescritura pierde un número, una fecha, una versión o una URL. El ejemplo incluido conserva sus 7 datos.
+- **Bloquear en CI.** `scan --fail-above 40` sale con código 1 si un borrador puntúa demasiado alto. Un [hook de pre-commit](../docs/pre-commit.md) revisa solo los archivos preparados.
+
+No es un detector y no intenta burlar uno. Arregla la escritura.
 
 ## Qué hace
 
@@ -151,7 +165,7 @@ La skill es Markdown, así que corre sobre el modelo al que apunte tu editor.
 ## Conviene saber
 
 > [!IMPORTANT]
-> Nada sale de tu máquina. La skill es un archivo Markdown que tu editor lee en local, y el CLI de métricas opcional es Node puro, sin dependencias ni llamadas de red. Sin telemetría, sin cuenta, sin clave de API.
+> Humanizer no hace llamadas de red propias. La skill es un archivo Markdown que tu editor lee en local, y el CLI de métricas opcional es Node puro, sin dependencias ni llamadas de red. Sin telemetría, sin cuenta, sin clave de API. La reescritura se ejecuta en el modelo de tu editor: si ese modelo está alojado en la nube, tu texto va a él, como cualquier prompt.
 
 - **El objetivo es escribir mejor**, no burlar a un detector. La prosa limpia ya no trae las costumbres perezosas que buscan los detectores, así que al arreglar la escritura la detección se resuelve sola.
 - **Los falsos positivos ocurren.** Los detectores fallan con la escritura en inglés de personas no nativas ([Liang et al.](https://arxiv.org/abs/2304.02819)), y escribir frases de longitud parecida es simplemente la costumbre de algunas personas. Una guarda contra falsos positivos protege el detalle vivido y la imperfección deliberada.

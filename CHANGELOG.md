@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.2] - 2026-11-17
+
+The first screen now says why to use it, and two claims are now true. No behaviour change.
+
+### Changed
+
+- **README first screen.** A tagline, the situation it fixes, and a "Why use it" block with three
+  benefits, each with its proof. The same change is in the four translations.
+- **"Nothing leaves your machine" is gone.** The skill and the CLI make no network call of their own,
+  but the rewrite runs on your editor's model. The README, FAQ, comparison page, docs site, hero and
+  logo images now say exactly that.
+- **"Your voice" now reads "a voice you pick".** Humanizer rewrites in one of five preset voices. It
+  does not learn your own voice.
+- **New listing text** in the three `plugin.json` files and the marketplace entry, a new GitHub
+  description, and a new social preview with the `/humanizer --file draft.md` command.
+- The `description` in `skills/humanizer/SKILL.md` is unchanged, so skill matching works as before.
+
 ## [0.8.1] - 2026-11-17
 
 The plugin listing now reads as a sentence for a person.

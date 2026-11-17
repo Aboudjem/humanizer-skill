@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset=".github/assets/hero-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset=".github/assets/hero-light.svg">
-  <img alt="humanizer. AI writing humanizer and detector. Reads like a person wrote it. 55 patterns, 5 voices, zero setup, and nothing leaves your machine." src=".github/assets/hero-light.svg" width="100%">
+  <img alt="humanizer. AI writing humanizer. Sounds like AI? See exactly why. 55 named patterns, a 0 to 100 score, a rewrite in a voice you pick. No network calls of its own." src=".github/assets/hero-light.svg" width="100%">
 </picture>
 
 <p align="center">
@@ -14,6 +14,8 @@
   <b>English</b> · <a href="READMEs/zh-CN.md">简体中文</a> · <a href="READMEs/ja.md">日本語</a> · <a href="READMEs/es.md">Español</a> · <a href="READMEs/fr.md">Français</a>
 </p>
 
+**Find what makes your draft sound like AI. Fix it.**
+
 Humanizer finds the habits that make text read as AI-written, then rewrites it in a voice you pick.
 
 ```bash
@@ -21,7 +23,7 @@ claude plugin marketplace add Aboudjem/10x
 claude plugin install humanizer@10x
 ```
 
-Then type `/humanizer --file draft.md` in your editor, where `draft.md` is any Markdown file of yours. The skill rewrites the file.
+Then type `/humanizer --file draft.md` in your editor, where `draft.md` is any Markdown file of yours. The skill rewrites the file. The rewrite runs on your editor's model.
 
 Here is the bundled example, before and after, scored by the CLI:
 
@@ -38,7 +40,15 @@ Fact check: OK. All 7 fact(s) in the original survive the rewrite.
 
 Lower is more human. Both lines open [the example pair](examples/blog-post/README.md), and [Proof](#proof) names the command that prints the numbers.
 
-It does not try to beat an AI detector. It fixes the writing.
+Your README reads like a chatbot wrote it, and you cannot point at the words. Stock phrases pile up, and every sentence runs about the same length. Humanizer names each habit and scores the draft from 0 to 100. Then it rewrites the draft.
+
+## Why use it
+
+- **Know what to change.** 55 numbered patterns, and a "Fix first" list that quotes the words costing points. [What you get](#what-you-get) shows one.
+- **Keep your facts.** `compare --check-facts` fails a rewrite that lost a number, date, version or URL. The example above keeps all 7.
+- **Gate it in CI.** `scan --fail-above 40` exits 1 on a draft that scores too high. A [pre-commit hook](docs/pre-commit.md) checks staged files only.
+
+It does not try to beat an AI detector, and it is not one. It fixes the writing.
 
 ## What you get
 
@@ -224,7 +234,9 @@ Every number on this page comes from a command you can run in a clone.
 
 ### Does anything leave my machine?
 
-No. The skill is a Markdown file your editor reads locally. The CLI is plain Node with no dependency and no network call. There is no telemetry, no account and no API key.
+Not from Humanizer itself. The skill and the CLI make no network call of their own. There is no telemetry, no account and no API key.
+
+The rewrite runs on your editor's model. If that model is hosted, your text goes to it, as with any prompt. The CLI score runs on your machine only.
 
 ### Will it make my text pass an AI detector?
 
