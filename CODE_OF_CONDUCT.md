@@ -30,8 +30,10 @@ Examples of unacceptable behavior:
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to **adam@integralayer.com**. All complaints will be reviewed and
-investigated promptly and fairly.
+reported privately through the repository's private reporting form at
+https://github.com/Aboudjem/humanizer-skill/security/advisories/new (only the maintainer can read it).
+You can also reach the maintainer at https://github.com/Aboudjem.
+All complaints will be reviewed and investigated promptly and fairly.
 
 ## Attribution
 

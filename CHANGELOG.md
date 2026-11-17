@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.3] - 2026-11-17
+
+The score scale no longer promises a detector outcome, and the maintainer contact is now a private GitHub form.
+
+### Changed
+
+- **Score band 0 to 20.** The skill used to say "No detector should flag it." It now describes the
+  writing: few or no AI tells remain in the prose. This matches the README, which does not promise to
+  pass a detector.
+- **Private reporting.** `SECURITY.md` and `CODE_OF_CONDUCT.md` now point to the GitHub private
+  vulnerability reporting form instead of an email address.
+- **Manifests.** The plugin and marketplace manifests list the maintainer's GitHub profile instead of
+  an email address.
+- The `description` in `skills/humanizer/SKILL.md` is unchanged, so skill matching works as before.
+
 ## [0.8.2] - 2026-11-17
 
 The first screen now says why to use it, and two claims are now true. No behaviour change.

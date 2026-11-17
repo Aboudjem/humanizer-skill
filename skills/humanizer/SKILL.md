@@ -416,7 +416,7 @@ Compute a 0-100 AI-tell density score. Lower is more human.
 
 | Range | Verdict | What it means |
 |:------|:--------|:--------------|
-| 0-20 | Pristine | Reads like a specific human wrote it. No detector should flag it. |
+| 0-20 | Pristine | Reads like a specific human wrote it. Few or no AI tells remain in the prose. |
 | 21-40 | Mostly human | One or two minor tells, easy to clean. |
 | 41-60 | Mixed | Half-AI half-human; partial editing likely. |
 | 61-80 | AI-leaning | Multiple structural tells; detectors will probably catch it. |

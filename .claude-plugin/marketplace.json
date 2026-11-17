@@ -2,7 +2,7 @@
   "name": "humanizer",
   "owner": {
     "name": "Adam Boudjemaa",
-    "email": "boudjemaa.adam@gmail.com"
+    "url": "https://github.com/Aboudjem"
   },
   "metadata": {
     "description": "Names the 55 habits that make text read as AI-written and rewrites it in one of five voices you pick, with an optional 0 to 100 score. No network calls of its own."

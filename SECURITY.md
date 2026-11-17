@@ -6,7 +6,7 @@ If you discover a security vulnerability, please report it responsibly.
 
 **Do NOT open a public GitHub issue for security vulnerabilities.**
 
-Instead, email **adam@integralayer.com** with:
+Instead, report it privately through GitHub at https://github.com/Aboudjem/humanizer-skill/security/advisories/new with:
 
 1. Description of the vulnerability
 2. Steps to reproduce
