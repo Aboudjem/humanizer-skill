@@ -194,7 +194,7 @@ The core catalog (P1-P30) draws on [Wikipedia: Signs of AI writing](https://en.w
 
 | Agent               | Install                                                 | Check that ran                                                         | Tested     |
 | :------------------ | :------------------------------------------------------ | :--------------------------------------------------------------------- | :--------- |
-| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | Installed at 0.8.0 and validated in strict mode                        | 2026-11-17 |
+| Claude Code 2.1.326 | `claude plugin install humanizer@10x`                   | Installed from the 10x marketplace and validated in strict mode       | 2026-11-17 |
 | Codex CLI 0.169.0   | `npx skills add Aboudjem/humanizer-skill -a codex`      | Installed, and the skill rewrote a sentence                            | 2026-11-17 |
 | Gemini CLI          | `npx skills add Aboudjem/humanizer-skill -a gemini-cli` | Install only. The skill file landed in `.agents/skills/`               | 2026-11-17 |
 | Cursor              | `npx skills add Aboudjem/humanizer-skill -a cursor`     | Install only. The skill file landed in `.agents/skills/`               | 2026-11-17 |

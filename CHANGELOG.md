@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.1] - 2026-11-17
+
+The plugin listing now reads as a sentence for a person.
+
+### Changed
+
+- **Plugin description is one plain sentence.** `plugin.json` for Claude Code, Cursor and Copilot,
+  and the marketplace entry, now say what the tool does in 162 characters. Plugin browsers, such
+  as the 10x marketplace, showed the long trigger text meant for the model.
+- **The skill trigger text is unchanged.** The `description` in `skills/humanizer/SKILL.md` still
+  carries the trigger phrases, so skill matching works as before.
+- The README "Works with" row for Claude Code no longer names a version, so it does not go stale.
+
 ## [0.8.0] - 2026-11-17
 
 The score report now says what to fix, and the repo passes its own checks.

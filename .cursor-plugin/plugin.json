@@ -1,7 +1,7 @@
 {
   "name": "humanizer",
-  "version": "0.8.0",
-  "description": "Detects 55 AI writing patterns and rewrites text in five voice profiles with a 0-100 AI-tell score, entirely on your machine.",
+  "version": "0.8.1",
+  "description": "Names 55 AI writing patterns and rewrites text in the voice you pick from five profiles, with an optional 0 to 100 AI-tell score. Pure Markdown, no network calls.",
   "author": {
     "name": "Adam Boudjemaa",
     "url": "https://github.com/Aboudjem/humanizer-skill"
